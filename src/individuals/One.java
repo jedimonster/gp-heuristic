@@ -1,4 +1,4 @@
-package individuals.tmp;
+package individuals;
 
 /**
  * Created By Itay Azaria
