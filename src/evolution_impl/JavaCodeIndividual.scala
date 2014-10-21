@@ -26,7 +26,7 @@ class JavaCodeIndividual(
     val packageName = ast.getPackage.getName
     val className = ast.getTypes.get(0).getName
     val cmd = "java -cp src " + packageName + "/" + className + " " + input
-
+    print("CLASSLOADER")
     val resultText = new String(cmd !!).trim
     resultText.toInt
   }

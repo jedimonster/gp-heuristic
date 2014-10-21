@@ -2,62 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84e80e13-962c-4b61-bd24-d6d72aa3c339" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/individuals/Five.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/individuals/Four.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/individuals/One.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/individuals/tmp/One.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/individuals/Six.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/individuals/Three.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/individuals/Two.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gvgai" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ea/lib/javaparser-1.0.8.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/evolution_impl/mutators/ASTVisitor.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ea/src/evolution_engine/evolution/BaseEvolutionStrategy.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ea/src/evolution_engine/algorithm/Config.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/evolution_impl/mutators/ConstantVisitor.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ea/src/evolution_engine/mutators/Crossover.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/evolution_impl/DumbFitnessResult.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/evolution_impl/mutators/DumbMutator.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/evolution_impl/EquationFitnessCalculator.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ea/src/evolution_engine/evolution/EvolutionParameters.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ea/src/evolution_engine/evolution/EvolutionStrategy.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ea/src/evolution_engine/fitness/FitnessCalculator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ea/src/evolution_engine/fitness/FitnessResult.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/individuals/Five.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/individuals/Four.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ea/src/evolution_engine/evolution/Individual.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/evolution_impl/JavaCodeCrossover.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/evolution_impl/JavaCodeIndividual.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/evolution_impl/LoadDirectoryInitializer.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ea/src/Main.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ea/src/evolution_engine/mutators/Mutator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/individuals/tmp/One.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ea/src/evolution_engine/evolution/ParentSelectionEvolutionStrategy.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ea/src/evolution_engine/evolution/PopulationInitializer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ea/src/evolution_engine/selection/RankSelectionStrategy.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ea/src/evolution_engine/evolution/Run.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ea/src/tests/SampleVisitor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ea/src/evolution_engine/selection/SelectionStrategy.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/individuals/Six.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/evolution_impl/SymbolsGenerator.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/evolution_impl/Temp.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/individuals/Test.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/individuals/Three.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/individuals/Two.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gp-heuristic.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/scala_compiler.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/scala_library.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gvgai" afterPath="$PROJECT_DIR$/gvgai" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_impl/JavaCodeIndividual.scala" afterPath="$PROJECT_DIR$/src/evolution_impl/JavaCodeIndividual.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="gp-heuristic.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -103,8 +50,8 @@
       <file leaf-file-name="JavaCodeIndividual.scala" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/evolution_impl/JavaCodeIndividual.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.17836593" vertical-offset="151" max-vertical-offset="1020">
-              <caret line="26" column="47" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
+            <state vertical-scroll-proportion="0.21749137" vertical-offset="151" max-vertical-offset="1020">
+              <caret line="28" column="22" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -139,6 +86,11 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
@@ -200,6 +152,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="gp-heuristic" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gp-heuristic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gp-heuristic" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gvgai" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -562,16 +528,21 @@
       <updated>1413880390076</updated>
       <workItem from="1413880392309" duration="27000" />
       <workItem from="1413880455136" duration="53000" />
-      <workItem from="1413880510173" duration="3125000" />
+      <workItem from="1413880510173" duration="3510000" />
     </task>
+    <task id="LOCAL-00001" summary="initial">
+      <created>1413883643621</created>
+      <updated>1413883643621</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3205000" />
+    <option name="totallyTimeSpent" value="3590000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -592,7 +563,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24969475" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24969475" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960895" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -613,9 +584,13 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
+    <MESSAGE value="initial" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -701,8 +676,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/evolution_impl/JavaCodeIndividual.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17836593" vertical-offset="151" max-vertical-offset="1020">
-          <caret line="26" column="47" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
+        <state vertical-scroll-proportion="0.21749137" vertical-offset="151" max-vertical-offset="1020">
+          <caret line="28" column="22" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="22" />
           <folding />
         </state>
       </provider>
