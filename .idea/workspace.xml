@@ -2,12 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84e80e13-962c-4b61-bd24-d6d72aa3c339" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/evolution_impl/util/JavaSourceFromString.java" />
-      <change type="DELETED" beforePath="C:\Users\itayaza\Idea Projects\gp-heuristic\src\individuals\tmp\One.class" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\itayaza\Idea Projects\gp-heuristic\src\individuals\tmp\One.java" afterPath="$PROJECT_DIR$/src/individuals/One.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/evolution_impl/GPProgram.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/individuals/Two.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/useful.txt" />
+      <change type="DELETED" beforePath="C:\Users\itayaza\Idea Projects\gp-heuristic\src\individuals\Five.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\itayaza\Idea Projects\gp-heuristic\src\individuals\Four.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\itayaza\Idea Projects\gp-heuristic\src\individuals\Six.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\itayaza\Idea Projects\gp-heuristic\src\individuals\Three.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\itayaza\Idea Projects\gp-heuristic\src\individuals\Two.java" afterPath="" />
+      <change type="MOVED" beforePath="C:\Users\itayaza\Idea Projects\gp-heuristic\src\individuals\Five.class" afterPath="$PROJECT_DIR$/individuals/Five.class" />
+      <change type="MOVED" beforePath="C:\Users\itayaza\Idea Projects\gp-heuristic\src\individuals\Four.class" afterPath="$PROJECT_DIR$/individuals/Four.class" />
+      <change type="MOVED" beforePath="C:\Users\itayaza\Idea Projects\gp-heuristic\src\individuals\One.class" afterPath="$PROJECT_DIR$/individuals/One.class" />
+      <change type="MOVED" beforePath="C:\Users\itayaza\Idea Projects\gp-heuristic\src\individuals\One.java" afterPath="$PROJECT_DIR$/individuals/One.java" />
+      <change type="MOVED" beforePath="C:\Users\itayaza\Idea Projects\gp-heuristic\src\individuals\Six.class" afterPath="$PROJECT_DIR$/individuals/Six.class" />
+      <change type="MOVED" beforePath="C:\Users\itayaza\Idea Projects\gp-heuristic\src\individuals\Test.scala" afterPath="$PROJECT_DIR$/individuals/Test.scala" />
+      <change type="MOVED" beforePath="C:\Users\itayaza\Idea Projects\gp-heuristic\src\individuals\Three.class" afterPath="$PROJECT_DIR$/individuals/Three.class" />
+      <change type="MOVED" beforePath="C:\Users\itayaza\Idea Projects\gp-heuristic\src\individuals\Two.class" afterPath="$PROJECT_DIR$/individuals/Two.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gvgai" afterPath="$PROJECT_DIR$/gvgai" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_impl/mutators/ASTVisitor.scala" afterPath="$PROJECT_DIR$/src/evolution_impl/mutators/ASTVisitor.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_impl/EquationFitnessCalculator.scala" afterPath="$PROJECT_DIR$/src/evolution_impl/EquationFitnessCalculator.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_impl/JavaCodeCrossover.scala" afterPath="$PROJECT_DIR$/src/evolution_impl/JavaCodeCrossover.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_impl/JavaCodeIndividual.scala" afterPath="$PROJECT_DIR$/src/evolution_impl/JavaCodeIndividual.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_impl/LoadDirectoryInitializer.scala" afterPath="$PROJECT_DIR$/src/evolution_impl/LoadDirectoryInitializer.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ea/src/evolution_engine/evolution/Run.java" afterPath="$PROJECT_DIR$/ea/src/evolution_engine/evolution/Run.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="gp-heuristic.iws" />
@@ -30,84 +47,78 @@
     <favorites_list name="gp-heuristic" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="Test.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/individuals/Test.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
-              <caret line="24" column="42" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EquationFitnessCalculator.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/evolution_impl/EquationFitnessCalculator.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
-              <caret line="21" column="44" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JavaCodeIndividual.scala" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/evolution_impl/JavaCodeIndividual.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5662021" vertical-offset="610" max-vertical-offset="1479">
-              <caret line="55" column="57" selection-start-line="55" selection-start-column="57" selection-end-line="55" selection-end-column="57" />
-              <folding>
-                <element signature="e#24#40#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JavaSourceFromString.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/evolution_impl/util/JavaSourceFromString.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
-              <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#505#506#0" expanded="true" />
-                <element signature="e#532#533#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RankSelectionStrategy.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ea/src/evolution_engine/selection/RankSelectionStrategy.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1173">
-              <caret line="44" column="49" selection-start-line="44" selection-start-column="49" selection-end-line="44" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoadDirectoryInitializer.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/evolution_impl/LoadDirectoryInitializer.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
-              <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SymbolsGenerator.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/evolution_impl/SymbolsGenerator.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
-              <caret line="6" column="27" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.67934376">
+      <split-first>
+        <leaf>
+          <file leaf-file-name="Test.scala" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/individuals/Test.scala">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
+                  <caret line="24" column="42" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="JavaCodeIndividual.scala" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/evolution_impl/JavaCodeIndividual.scala">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.5151515" vertical-offset="731" max-vertical-offset="1683">
+                  <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#24#40#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="useful.txt" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/docs/useful.txt">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="153">
+                  <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="LoadDirectoryInitializer.scala" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/evolution_impl/LoadDirectoryInitializer.scala">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
+                  <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="One.java" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/individuals/One.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.5151515" vertical-offset="0" max-vertical-offset="561">
+                  <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ASTVisitor.scala" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/evolution_impl/mutators/ASTVisitor.scala">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323">
+                  <caret line="11" column="59" selection-start-line="11" selection-start-column="59" selection-end-line="11" selection-end-column="59" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -129,7 +140,16 @@
         <option value="$PROJECT_DIR$/src/evolution_impl/SymbolsGenerator.scala" />
         <option value="$PROJECT_DIR$/src/individuals/Three.java" />
         <option value="$PROJECT_DIR$/src/evolution_impl/util/JavaSourceFromString.java" />
+        <option value="$PROJECT_DIR$/src/evolution_impl/GPProgram.scala" />
+        <option value="$PROJECT_DIR$/src/individuals/One.java" />
+        <option value="$PROJECT_DIR$/src/evolution_impl/GPProgram.java" />
+        <option value="$PROJECT_DIR$/src/evolution_impl/EquationFitnessCalculator.scala" />
+        <option value="$PROJECT_DIR$/src/evolution_impl/JavaCodeCrossover.scala" />
         <option value="$PROJECT_DIR$/src/evolution_impl/LoadDirectoryInitializer.scala" />
+        <option value="$PROJECT_DIR$/src/evolution_impl/mutators/ASTVisitor.scala" />
+        <option value="$PROJECT_DIR$/src/individuals/Two.java" />
+        <option value="$PROJECT_DIR$/ea/src/evolution_engine/evolution/Run.java" />
+        <option value="$PROJECT_DIR$/docs/useful.txt" />
         <option value="$PROJECT_DIR$/src/evolution_impl/JavaCodeIndividual.scala" />
       </list>
     </option>
@@ -147,11 +167,11 @@
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="2" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
-    <option name="STATE" value="2" />
+    <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -167,7 +187,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -199,6 +218,16 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gp-heuristic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gp-heuristic" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="individuals" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
@@ -214,16 +243,13 @@
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="evolution_impl" />
+              <option name="myItemId" value="docs" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -245,6 +271,16 @@
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="recentsLimit" value="5" />
     <property name="dynamic.classpath" value="false" />
+    <property name="OverrideImplement.combined" value="true" />
+    <property name="OverrideImplement.overriding.sorted" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="individuals" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\itayaza\Idea Projects\gp-heuristic" />
+    </key>
   </component>
   <component name="RunManager" selected="Application.Test">
     <configuration default="false" name="Temp" type="Application" factoryName="Application" temporary="true">
@@ -520,21 +556,6 @@
       <setting name="showProgressMessages" value="true" />
       <method />
     </configuration>
-    <configuration default="true" type="ScalaTestRunConfiguration" factoryName="ScalaTest">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <extension name="scalaCoverage" />
-      <module name="" />
-      <setting name="path" value="" />
-      <setting name="package" value="" />
-      <setting name="vmparams" value="" />
-      <setting name="params" value="" />
-      <setting name="workingDirectory" value="$PROJECT_DIR$" />
-      <setting name="searchForTest" value="Across module dependencies" />
-      <setting name="testName" value="" />
-      <setting name="testKind" value="Class" />
-      <setting name="showProgressMessages" value="true" />
-      <method />
-    </configuration>
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
       <option name="ACTIVITY_CLASS" value="" />
@@ -553,6 +574,21 @@
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="ScalaTestRunConfiguration" factoryName="ScalaTest">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <extension name="scalaCoverage" />
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="package" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workingDirectory" value="$PROJECT_DIR$" />
+      <setting name="searchForTest" value="Across module dependencies" />
+      <setting name="testName" value="" />
+      <setting name="testKind" value="Class" />
+      <setting name="showProgressMessages" value="true" />
       <method />
     </configuration>
     <list size="2">
@@ -581,7 +617,8 @@
       <updated>1413880390076</updated>
       <workItem from="1413880392309" duration="27000" />
       <workItem from="1413880455136" duration="53000" />
-      <workItem from="1413880510173" duration="6329000" />
+      <workItem from="1413880510173" duration="7368000" />
+      <workItem from="1413892434882" duration="4022000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <created>1413883643621</created>
@@ -591,15 +628,19 @@
       <created>1413884033705</created>
       <updated>1413884033705</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="in memory compiler">
+      <created>1413891387052</created>
+      <updated>1413891387052</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6409000" />
+    <option name="totallyTimeSpent" value="11470000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -621,7 +662,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24969475" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18131869" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32960895" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -648,11 +689,26 @@
     </option>
     <MESSAGE value="initial" />
     <MESSAGE value="branch test" />
-    <option name="LAST_COMMIT_MESSAGE" value="branch test" />
+    <MESSAGE value="in memory compiler" />
+    <option name="LAST_COMMIT_MESSAGE" value="in memory compiler" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/evolution_impl/mutators/ASTVisitor.scala</url>
+          <line>12</line>
+          <properties />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/ea/src/evolution_engine/evolution/Run.java</url>
+          <line>10</line>
+          <properties />
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="7" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -660,25 +716,9 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/evolution_impl/Temp.scala">
+    <entry file="file://$PROJECT_DIR$/individuals/Test.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1184669" vertical-offset="0" max-vertical-offset="574">
-          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ea/src/evolution_engine/evolution/Run.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2369338" vertical-offset="0" max-vertical-offset="574">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/individuals/Test.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
+        <state vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="612">
           <caret line="24" column="42" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
           <folding />
         </state>
@@ -686,9 +726,76 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/evolution_impl/EquationFitnessCalculator.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
+        <state vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="612">
           <caret line="21" column="44" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
+          <folding>
+            <element signature="e#25#69#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/evolution_impl/JavaCodeIndividual.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="1598">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+          <folding>
+            <element signature="e#24#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/evolution_impl/GPProgram.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="272">
+          <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/evolution_impl/util/JavaSourceFromString.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="442">
+          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ea/src/evolution_engine/selection/RankSelectionStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="748" max-vertical-offset="1292">
+          <caret line="44" column="49" selection-start-line="44" selection-start-column="49" selection-end-line="44" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/evolution_impl/LoadDirectoryInitializer.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="476">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/evolution_impl/SymbolsGenerator.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="306">
+          <caret line="6" column="27" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/individuals/One.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
+          <caret line="10" column="27" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/evolution_impl/Temp.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1184669" vertical-offset="0" max-vertical-offset="574">
+          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -696,22 +803,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2369338" vertical-offset="0" max-vertical-offset="574">
           <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/individuals/Three.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23734729" vertical-offset="0" max-vertical-offset="573">
-          <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/individuals/One.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19960861" vertical-offset="0" max-vertical-offset="511">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -724,38 +815,150 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/evolution_impl/mutators/ASTVisitor.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323">
+          <caret line="11" column="59" selection-start-line="11" selection-start-column="59" selection-end-line="11" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/individuals/One.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5151515" vertical-offset="0" max-vertical-offset="561">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ea/src/evolution_engine/evolution/BaseEvolutionStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40350878" vertical-offset="3" max-vertical-offset="459">
+          <caret line="16" column="27" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ea/src/evolution_engine/evolution/ParentSelectionEvolutionStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36622807" vertical-offset="241" max-vertical-offset="697">
+          <caret line="30" column="36" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/individuals/Two.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2851153" vertical-offset="0" max-vertical-offset="477">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ea/src/evolution_engine/selection/RankSelectionStrategy.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1173">
-          <caret line="44" column="49" selection-start-line="44" selection-start-column="49" selection-end-line="44" selection-end-column="49" />
+        <state vertical-scroll-proportion="-0.662963" vertical-offset="545" max-vertical-offset="1173">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/evolution_impl/GPProgram.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24593128" vertical-offset="0" max-vertical-offset="553">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/evolution_impl/JavaCodeCrossover.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3148148" vertical-offset="0" max-vertical-offset="540">
+          <caret line="10" column="83" selection-start-line="10" selection-start-column="83" selection-end-line="10" selection-end-column="83" />
+          <folding>
+            <element signature="e#24#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ea/src/evolution_engine/evolution/EvolutionStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3074141" vertical-offset="0" max-vertical-offset="553">
+          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/evolution_impl/mutators/ConstantVisitor.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24593128" vertical-offset="0" max-vertical-offset="553">
+          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ea/src/evolution_engine/evolution/Run.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
+          <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/individuals/Test.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
+          <caret line="24" column="42" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/evolution_impl/EquationFitnessCalculator.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding>
+            <element signature="e#25#69#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/evolution_impl/util/JavaSourceFromString.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
+        <state vertical-scroll-proportion="0.29616725" vertical-offset="0" max-vertical-offset="574">
           <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#505#506#0" expanded="true" />
-            <element signature="e#532#533#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/evolution_impl/LoadDirectoryInitializer.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
-          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.7.0_45/src.zip!/javax/tools/JavaCompiler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.72727275" vertical-offset="4760" max-vertical-offset="5321">
+          <caret line="332" column="16" selection-start-line="332" selection-start-column="16" selection-end-line="332" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/useful.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="153">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/evolution_impl/JavaCodeIndividual.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5662021" vertical-offset="610" max-vertical-offset="1479">
-          <caret line="55" column="57" selection-start-line="55" selection-start-column="57" selection-end-line="55" selection-end-column="57" />
+        <state vertical-scroll-proportion="0.5151515" vertical-offset="731" max-vertical-offset="1683">
+          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
           <folding>
             <element signature="e#24#40#0" expanded="true" />
           </folding>

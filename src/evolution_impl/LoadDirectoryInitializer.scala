@@ -1,7 +1,6 @@
 package evolution_impl
 
 import java.io.{FilenameFilter, File}
-import java.util
 
 import evolution_engine.evolution.PopulationInitializer
 import japa.parser.JavaParser
