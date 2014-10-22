@@ -1,0 +1,3 @@
+About dynamically reloading classes
+http://tutorials.jenkov.com/java-reflection/dynamic-class-loading-reloading.html
+

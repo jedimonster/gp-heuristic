@@ -9,7 +9,7 @@ import java.util.List;
 public class Run<I extends Individual> {
     public void run(EvolutionParameters<I> parameters, EvolutionStrategy<I> evolutionStrategy) {
         List<I> initialPopulation = parameters.getPopulationInitializer().getInitialPopulation();
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 2; i++) {
             initialPopulation = evolutionStrategy.evolve(initialPopulation);
         }
 

@@ -9,6 +9,6 @@ import japa.parser.ast.visitor.VoidVisitorAdapter
  */
 class ASTVisitor[A] extends VoidVisitorAdapter[A] {
   override def visit(n: MethodDeclaration, arg: A): Unit =
-    if (!n.getName.equals("main"))
+    if (!n.getName.equals("main") && !n.getName.equals("run"))
       super.visit(n, arg)
 }

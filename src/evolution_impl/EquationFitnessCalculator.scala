@@ -1,6 +1,5 @@
 package evolution_impl
 
-import java.util
 
 import evolution_engine.evolution.Individual
 import evolution_engine.fitness.{FitnessResult, FitnessCalculator}
@@ -12,7 +11,7 @@ import collection.JavaConversions._
  */
 class EquationFitnessCalculator() extends FitnessCalculator[JavaCodeIndividual] {
 
-  override def calculateFitness(individuals: util.List[JavaCodeIndividual]): FitnessResult[_ <: Individual] = {
+  override def calculateFitness(individuals: java.util.List[JavaCodeIndividual]): FitnessResult[_ <: Individual] = {
     val fitnessValues = for (i <- individuals) yield (i, getIndividualFitness(i))
     new DumbFitnessResult[JavaCodeIndividual](fitnessValues.toMap)
   }
