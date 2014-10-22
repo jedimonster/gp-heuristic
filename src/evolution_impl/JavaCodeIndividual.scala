@@ -36,9 +36,9 @@ class JavaCodeIndividual(
   }
 
   def run(input: Int): Int = {
-    val packageName = ast.getPackage.getName
+    //    val packageName = ast.getPackage.getName
     val className = ast.getTypes.get(0).getName
-    var loadedClass: Class[_] = Class.forName(packageName + "." + className)
+    var loadedClass: Class[_] = Class.forName(className)
     loadedClass = ClassLoader.getSystemClassLoader.loadClass(loadedClass.getName)
     val instance: GPProgram[Integer] = loadedClass.newInstance().asInstanceOf[GPProgram[Integer]]
 
@@ -48,26 +48,28 @@ class JavaCodeIndividual(
   }
 
   def compile() = {
-    val packageName = ast.getPackage.getName
+//        val packageName = ast.getPackage.getName
     val className = ast.getTypes.get(0).getName
-    val fullClassName: String = packageName + "." + className
-    val originalClass: Class[_] = Class.forName(fullClassName)
+//        val fullClassName: String = packageName + "." + className
+    //    val originalClass: Class[_] = Class.forName(className)
 
-    val srcFile: JavaSourceFromString = new JavaSourceFromString(fullClassName, ast.toString)
+    val srcFile: JavaSourceFromString = new JavaSourceFromString(className, ast.toString)
     val compilationUnits = java.util.Arrays.asList(srcFile)
     val diagnostics = new DiagnosticCollector[JavaFileObject]()
 
     val task = javaCompiler.getTask(null, null, diagnostics, null, null, compilationUnits)
 
-    printf("original class hash = %s\n", originalClass.hashCode())
+    //    printf("original class hash = %s\n", originalClass.hashCode())
 
     val success = task.call()
+
     if (!success)
       print("Failed compiling")
     else
       printf("Compiled class %s successfully\n", className)
     // todo if failed log errors
 
+    Class.forName(className)
     // reload the newly compiled class:
 
   }
