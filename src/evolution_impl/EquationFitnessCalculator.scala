@@ -2,8 +2,10 @@ package evolution_impl
 
 
 import evolution_engine.evolution.Individual
-import evolution_engine.fitness.{FitnessResult, FitnessCalculator}
-import collection.JavaConversions._
+import evolution_engine.fitness.{FitnessCalculator, FitnessResult}
+import evolution_impl.gpprograms.{CompilationException, JavaCodeIndividual}
+
+import scala.collection.JavaConversions._
 
 /**
  * Created By Itay Azaria
@@ -17,11 +19,16 @@ class EquationFitnessCalculator() extends FitnessCalculator[JavaCodeIndividual] 
   }
 
   def getIndividualFitness(individual: JavaCodeIndividual): Double = {
-    val samples: List[Int] = (-2 to 5).toList
-    val values = samples zip individual.getValues(samples)
-    val diffs = for ((sample, value) <- values) yield Math.abs(value - getFunctionValue(sample)).toInt
-    printf("fitness calculation, difference in values = %s\n", diffs)
-    diffs.sum
+    try {
+      val samples: List[Int] = (-2 to 5).toList
+      val values = samples zip individual.getValues(samples)
+      val diffs = for ((sample, value) <- values) yield Math.abs(value - getFunctionValue(sample)).toInt
+      printf("fitness calculation, difference in values = %s\n", diffs)
+      diffs.sum
+    } catch {
+      case e: CompilationException => return Double.NegativeInfinity
+    }
+
   }
 
 

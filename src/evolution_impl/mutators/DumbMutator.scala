@@ -2,12 +2,11 @@ package evolution_impl.mutators
 
 import java.util
 
-import scala.collection.JavaConverters._
-import scala.collection.JavaConversions._
 import evolution_engine.mutators.Mutator
-import evolution_impl.JavaCodeIndividual
-import tests.SampleVisitor
-import japa.parser.ast.visitor.VoidVisitorAdapter
+import evolution_impl.gpprograms.JavaCodeIndividual
+
+import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 
 /**
  * Created By Itay Azaria

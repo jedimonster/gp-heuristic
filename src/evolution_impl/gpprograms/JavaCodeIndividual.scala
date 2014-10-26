@@ -1,35 +1,29 @@
-package evolution_impl
+package evolution_impl.gpprograms
 
 import java.io._
-import java.net.{URL, URLClassLoader}
 import java.nio.charset.StandardCharsets
-import java.nio.file.{Path, Files, Paths}
+import java.nio.file.{Files, Paths}
+import javax.tools.{DiagnosticCollector, JavaCompiler, JavaFileObject, ToolProvider}
 
 import evolution_engine.evolution.Individual
+import evolution_impl.GPProgram
 import evolution_impl.util.JavaSourceFromString
 import japa.parser.JavaParser
 import japa.parser.ast.CompilationUnit
-import javax.tools.Diagnostic;
-import javax.tools.DiagnosticCollector;
-import javax.tools.JavaCompiler;
-import javax.tools.JavaFileObject;
-import javax.tools.SimpleJavaFileObject;
-import javax.tools.ToolProvider;
-import javax.tools.JavaCompiler.CompilationTask;
-import javax.tools.JavaFileObject.Kind;
-import scala.collection.mutable.ListBuffer
-import scala.sys.process._
 
 /**
  * Created By Itay Azaria
  * Date: 9/17/2014
  */
 class JavaCodeIndividual(
-                          val ast: CompilationUnit, val originalFile: File
+                          val ast: CompilationUnit, val originalFile: File, val className: ClassName
                           ) extends Individual {
 
   val javaCompiler: JavaCompiler = ToolProvider.getSystemJavaCompiler()
 
+  def this(ast: CompilationUnit, originalFile: File) = this(ast, originalFile, new ClassName(ast.getTypes.get(0).getName, 0))
+
+  @throws[CompilationException]("if the individual couldn't be compiled")
   def getValues(values: List[Int]) = {
     compile()
     for (x <- values) yield run(x)
@@ -47,10 +41,11 @@ class JavaCodeIndividual(
     instance.run(params)
   }
 
+  @throws[CompilationException]("if the individual couldn't be compiled")
   def compile() = {
-//        val packageName = ast.getPackage.getName
+    //        val packageName = ast.getPackage.getName
     val className = ast.getTypes.get(0).getName
-//        val fullClassName: String = packageName + "." + className
+    //        val fullClassName: String = packageName + "." + className
     //    val originalClass: Class[_] = Class.forName(className)
 
     val srcFile: JavaSourceFromString = new JavaSourceFromString(className, ast.toString)
@@ -63,9 +58,10 @@ class JavaCodeIndividual(
 
     val success = task.call()
 
-    if (!success)
+    if (!success) {
       print("Failed compiling")
-    else
+      throw new CompilationException
+    } else
       printf("Compiled class %s successfully\n", className)
     // todo if failed log errors
 
@@ -85,10 +81,12 @@ class JavaCodeIndividual(
    */
   override def duplicate(): Individual = {
     val oldClassName: String = ast.getTypes.get(0).getName
-    val newClassName = oldClassName + "_"
+    //    val newClassName = incrementNumber(oldClassName)
     val oldSrc = new ByteArrayInputStream(ast.toString.getBytes(StandardCharsets.UTF_8))
-    val newGuy = JavaParser.parse(oldSrc)
-    new JavaCodeIndividual(newGuy, originalFile)
+    val newAST: CompilationUnit = JavaParser.parse(oldSrc)
+    val newName: ClassName = new ClassName(className.name, className.id + 1)
+    newAST.getTypes.get(0).setName(String.valueOf(newName.toString()))
+    new JavaCodeIndividual(newAST, originalFile, newName)
   }
 }
 

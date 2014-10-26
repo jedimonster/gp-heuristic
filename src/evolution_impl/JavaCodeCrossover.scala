@@ -1,7 +1,9 @@
 package evolution_impl
 
-import scala.collection.JavaConverters._
 import evolution_engine.mutators.Crossover
+import evolution_impl.gpprograms.JavaCodeIndividual
+
+import scala.collection.JavaConverters._
 
 /**
  * Created By Itay Azaria

@@ -1,12 +1,12 @@
 package evolution_impl
 
-import java.io.{FilenameFilter, File}
+import java.io.File
 
 import evolution_engine.evolution.PopulationInitializer
+import evolution_impl.gpprograms.JavaCodeIndividual
 import japa.parser.JavaParser
-import scala.collection.JavaConversions._
 
-import scala.collection.JavaConverters._
+import scala.collection.JavaConversions._
 
 /**
  * Created By Itay Azaria
