@@ -20,7 +20,7 @@ class EquationFitnessCalculator() extends FitnessCalculator[JavaCodeIndividual] 
 
   def getIndividualFitness(individual: JavaCodeIndividual): Double = {
     try {
-      val samples: List[Int] = (-2 to 5).toList
+      val samples: List[Double] = List(-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5)
       val values = samples zip individual.getValues(samples)
       val diffs = for ((sample, value) <- values) yield Math.abs(value - getFunctionValue(sample)).toInt
       printf("fitness calculation, difference in values = %s\n", diffs)

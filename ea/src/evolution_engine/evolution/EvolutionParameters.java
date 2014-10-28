@@ -1,5 +1,6 @@
 package evolution_engine.evolution;
 
+import evolution_engine.EvolutionLogger;
 import evolution_engine.fitness.FitnessCalculator;
 import evolution_engine.mutators.Crossover;
 import evolution_engine.mutators.Mutator;
@@ -13,6 +14,7 @@ public class EvolutionParameters<I extends Individual> {
     private final Crossover<I> crossover;
     private final List<? extends Mutator> mutators;
     private final PopulationInitializer<I> populationInitializer;
+    private EvolutionLogger logger = null;
 
     public EvolutionParameters(FitnessCalculator fitnessCalculator, SelectionStrategy selectionStrategy, Crossover<I> crossover, List<? extends Mutator> mutators, PopulationInitializer<I> populationInitializer) {
         this.fitnessCalculator = fitnessCalculator;
@@ -42,4 +44,16 @@ public class EvolutionParameters<I extends Individual> {
         return populationInitializer;
     }
 
+    public boolean isLoggingEnable() {
+        return logger != null;
+    }
+
+    public EvolutionLogger getLogger() {
+
+        return logger;
+    }
+
+    public void setLogger(EvolutionLogger logger) {
+        this.logger = logger;
+    }
 }

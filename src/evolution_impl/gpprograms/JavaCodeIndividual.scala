@@ -7,6 +7,7 @@ import javax.tools.{DiagnosticCollector, JavaCompiler, JavaFileObject, ToolProvi
 
 import evolution_engine.evolution.Individual
 import evolution_impl.GPProgram
+import evolution_impl.log.GPEvolutionLogger
 import evolution_impl.util.JavaSourceFromString
 import japa.parser.JavaParser
 import japa.parser.ast.CompilationUnit
@@ -24,20 +25,20 @@ class JavaCodeIndividual(
   def this(ast: CompilationUnit, originalFile: File) = this(ast, originalFile, new ClassName(ast.getTypes.get(0).getName, 0))
 
   @throws[CompilationException]("if the individual couldn't be compiled")
-  def getValues(values: List[Int]) = {
+  def getValues(values: List[Double]) = {
     compile()
     for (x <- values) yield run(x)
   }
 
-  def run(input: Int): Int = {
+  def run(input: Double): Double = {
     //    val packageName = ast.getPackage.getName
     val className = ast.getTypes.get(0).getName
     var loadedClass: Class[_] = Class.forName(className)
     loadedClass = ClassLoader.getSystemClassLoader.loadClass(loadedClass.getName)
-    val instance: GPProgram[Integer] = loadedClass.newInstance().asInstanceOf[GPProgram[Integer]]
+    val instance: GPProgram[java.lang.Double] = loadedClass.newInstance().asInstanceOf[GPProgram[java.lang.Double]]
 
     val params = new java.util.ArrayList[Object]
-    params.add(new Integer(input))
+    params.add(new java.lang.Double(input))
     instance.run(params)
   }
 
@@ -59,7 +60,8 @@ class JavaCodeIndividual(
     val success = task.call()
 
     if (!success) {
-      print("Failed compiling")
+      print("Failed compiling\n")
+      GPEvolutionLogger.saveBadIndividual(this)
       throw new CompilationException
     } else
       printf("Compiled class %s successfully\n", className)

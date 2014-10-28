@@ -18,7 +18,7 @@ class DumbMutator(probability: Double) extends Mutator[JavaCodeIndividual] {
 
   override def mutate(individuals: util.List[JavaCodeIndividual]): util.List[JavaCodeIndividual] = {
     val inds: List[JavaCodeIndividual] = individuals.toList
-    for (x: JavaCodeIndividual <- inds if Math.random() > 0.2) {
+    for (x: JavaCodeIndividual <- inds if Math.random() > 0.5) {
       //      new ConstantVisitor().visit(x.ast, null)
       val visitor: ConstantVisitor[Object] = new ConstantVisitor[Object]()
       visitor.visit(x.ast, new Object)

@@ -1,7 +1,6 @@
 package evolution_impl.mutators
 
-import japa.parser.ast.expr.{NameExpr, IntegerLiteralExpr}
-import japa.parser.ast.visitor.VoidVisitorAdapter
+import japa.parser.ast.expr.DoubleLiteralExpr
 
 /**
  * Created By Itay Azaria
@@ -9,8 +8,8 @@ import japa.parser.ast.visitor.VoidVisitorAdapter
  */
 class ConstantVisitor[A] extends ASTVisitor[A] {
 
-  override def visit(n: IntegerLiteralExpr, arg: A): Unit = {
-    val diff: Long = Math.round(Math.random() * 10 - 5)
-    n.setValue((n.getValue.toInt + diff).toString)
+  override def visit(n: DoubleLiteralExpr, arg: A): Unit = {
+    val diff: Long = Math.round(Math.random() * 5) // keep the sign, another mutator will change that
+    n.setValue((n.getValue.toDouble + diff).toString)
   }
 }
