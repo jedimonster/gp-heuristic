@@ -1,15 +1,26 @@
-package evolution_impl.gpprograms
+package evolution_impl.gpprograms.scope
 
+import evolution_impl.gpprograms.TreeGrowingException
 import japa.parser.ast.Node
+import japa.parser.ast.`type`.{ClassOrInterfaceType, Type}
 import japa.parser.ast.body.{MethodDeclaration, Parameter}
-import japa.parser.ast.expr.{Expression, MethodCallExpr}
+import japa.parser.ast.expr._
 
 import scalaj.collection.Imports._
 
 /**
- * Created by itayaza on 28/10/2014.
+ * Created by itayaza on 03/11/2014.
  */
-class CallableNode(node: Node) {
+class CallableNode(val node: Node) {
+  val referenceType: Type = {
+    node match {
+      case c: MethodDeclaration => c.getType
+      case v: VariableDeclarationExpr => v.getType
+      case p: Parameter => p.getType
+      case e: Expression => new ClassOrInterfaceType("java.lang.Double")
+      case _ => throw new TreeGrowingException("Tried to create callable node of unknown type")
+    }
+  }
   var assignments: Map[Parameter, Expression] = Map()
   var parameters: Seq[Parameter] = {
     node match {
@@ -22,7 +33,7 @@ class CallableNode(node: Node) {
   def setParameter(parameter: Parameter, cu: CallableNode) = {
     if (parameters.contains(parameter)) {
       // assign or reassign the parameter
-      assignments += (parameter -> cu)
+      assignments += (parameter -> cu.getCallStatement)
     } else {
       // can't find that parameter anywhere in the dependency lists
       throw new TreeGrowingException("Parameter" + parameter + " not found in node's dependency list")
@@ -39,7 +50,11 @@ class CallableNode(node: Node) {
           case None => throw new TreeGrowingException("Tried to call method without assigning all paramaters")
         }
         new MethodCallExpr(null, m.getName, params.asJava)
-      // todo variables etc?
+      case v: VariableDeclarationExpr => v.getVars.get(0).getInit // we assume there's only one var defined at a time!
+      case p: Parameter => new NameExpr(p.getId.getName)
+      case e: Expression => e
     }
   }
+
+  //    override def toString() = getCallStatement.toString
 }

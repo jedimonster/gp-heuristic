@@ -19,8 +19,9 @@ import japa.parser.ast.CompilationUnit
 class JavaCodeIndividual(
                           val ast: CompilationUnit, val originalFile: File, val className: ClassName
                           ) extends Individual {
-
   val javaCompiler: JavaCompiler = ToolProvider.getSystemJavaCompiler()
+
+  def setName(s: String) = ast.getTypes.get(0).setName(s)
 
   def this(ast: CompilationUnit, originalFile: File) = this(ast, originalFile, new ClassName(ast.getTypes.get(0).getName, 0))
 
