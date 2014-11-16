@@ -18,7 +18,8 @@ import scala.collection.mutable.ListBuffer
 import scala.util.Random
 
 /**
- * Created by itayaza on 28/10/2014.
+ * Created by itayaza on 28/10/2014
+ * Also known as "The Gardener"
  * Randomly grows methodCount methods that randomly use parameters from the given list of parameters
  * Combines into a linear combination of resulting numbers.
  */
@@ -119,7 +120,7 @@ class RandomGrowInitializer(params: List[Any], methodCount: Int) extends Populat
         val assignment = potentialAssignments.get(Random.nextInt(potentialAssignments.size))
         n.setParameter(up, assignment)
       }
-      // if it's now satisfied, move it!
+      // if it's now satisfied, move it. todo probably shouldn't happen in the 'flat' satisfier.
 
       if (n.getUnsatisfiedParameters.size == 0)
         satisfied.add(n)
