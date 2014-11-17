@@ -23,10 +23,12 @@ class EquationFitnessCalculator() extends FitnessCalculator[JavaCodeIndividual] 
       val samples: List[Double] = List(-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5)
       val values = samples zip individual.getValues(samples)
       val diffs = for ((sample, value) <- values) yield Math.abs(value - getFunctionValue(sample)).toInt
-      printf("fitness calculation, difference in values = %s\n", diffs)
-      diffs.sum
+//      printf("fitness calculation, difference in values = %s\n", diffs)
+      val fitness: Double = diffs.sum
+//      println("fitness = " + fitness)
+      fitness
     } catch {
-      case e: CompilationException => return Double.NegativeInfinity
+      case e: CompilationException => Double.NegativeInfinity
     }
 
   }

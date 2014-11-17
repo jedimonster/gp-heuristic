@@ -3,7 +3,7 @@ package evolution_impl.gpprograms
 import java.io.File
 import java.util
 
-import evolution_engine.evolution.PopulationInitializer
+import evolution_engine.evolution.{EvolutionParameters, PopulationInitializer}
 import evolution_impl.gpprograms.scope.{CallableNode, Scope, ScopeManager}
 import japa.parser.JavaParser
 import japa.parser.ast.`type`.{ClassOrInterfaceType, ReferenceType}
@@ -11,6 +11,7 @@ import japa.parser.ast.body._
 import japa.parser.ast.expr.{BinaryExpr, DoubleLiteralExpr}
 import japa.parser.ast.stmt.{BlockStmt, ReturnStmt, Statement}
 import japa.parser.ast.{CompilationUnit, Node}
+import org.apache.commons.math3.distribution.NormalDistribution
 
 import scala.collection.JavaConversions._
 import scala.collection.immutable.IndexedSeq
@@ -23,7 +24,10 @@ import scala.util.Random
  * Randomly grows methodCount methods that randomly use parameters from the given list of parameters
  * Combines into a linear combination of resulting numbers.
  */
-class RandomGrowInitializer(params: List[Any], methodCount: Int) extends PopulationInitializer[JavaCodeIndividual] {
+class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends PopulationInitializer[JavaCodeIndividual] {
+
+  val distribution = new NormalDistribution(0, 50)
+
   val paramTypes: List[Parameter] = {
     var i = -1
     for (p <- params) yield {
@@ -37,8 +41,8 @@ class RandomGrowInitializer(params: List[Any], methodCount: Int) extends Populat
     new JavaCodeIndividual(ast, prototypeFile)
   }
 
-  override def getInitialPopulation: java.util.List[JavaCodeIndividual] = {
-    val individuals: Seq[JavaCodeIndividual] = for (i <- 0 to 100) yield growIndividual(i)
+  override def getInitialPopulation(n: Int): java.util.List[JavaCodeIndividual] = {
+    val individuals: Seq[JavaCodeIndividual] = for (i <- 0 to n) yield growIndividual(i)
     ListBuffer(individuals: _*) // convert to java list
   }
 
@@ -70,7 +74,7 @@ class RandomGrowInitializer(params: List[Any], methodCount: Int) extends Populat
     // use those methods in the main return statement
     val scopeManager: ScopeManager = new ScopeManager()
     scopeManager.visit(classDeceleration, null)
-    createReturnStatement(runMethod, scopeManager)
+    createReturnStatement(runMethod, scopeManager, n => n.node != runMethod) // create a return statement not which does not include recursive calls.
 
     individual
   }
@@ -81,9 +85,15 @@ class RandomGrowInitializer(params: List[Any], methodCount: Int) extends Populat
     val name = "ADF" + id
     val parameters: List[Parameter] = Random.shuffle(paramTypes).slice(0, paramCount) // todo select paramCount params from the list in the field.
     val method = new MethodDeclaration(modifiers, methodType, name, ListBuffer(parameters: _*))
+    val scopeManager = new ScopeManager()
+    method.setBody(new BlockStmt(new util.ArrayList[Statement]())) // create an empty body to avoid nulls in the future.
+    scopeManager.visit(method, null)
+
+    createReturnStatement(method, scopeManager)
 
     method
   }
+
 
   /**
    * create or overwrite the return statement in @param{method} with a new statement that uses all available local vars.
@@ -105,7 +115,7 @@ class RandomGrowInitializer(params: List[Any], methodCount: Int) extends Populat
     flatSatisfyCallables(satisfied, unsatisfied)
 
     // create return statements from callables
-    val retExp: CallableNode = callables.foldLeft(new CallableNode(new DoubleLiteralExpr((0.0).toString))) { (l: CallableNode, r: CallableNode) =>
+    val retExp: CallableNode = callables.foldLeft(new CallableNode(new DoubleLiteralExpr((distribution.sample()).toString))) { (l: CallableNode, r: CallableNode) =>
       new CallableNode(new BinaryExpr(l.getCallStatement, r.getCallStatement, BinaryExpr.Operator.plus))
     }
     // add created return statement

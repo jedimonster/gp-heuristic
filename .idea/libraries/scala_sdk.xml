@@ -1,6 +1,7 @@
 <component name="libraryTable">
   <library name="scala-sdk" type="Scala">
     <properties>
+      <option name="languageLevel" value="Scala_2_10" />
       <compiler-classpath>
         <root url="file://$USER_HOME$/Scala/scala-2.10.4/lib/scala-compiler.jar" />
         <root url="file://$USER_HOME$/Scala/scala-2.10.4/lib/scala-library.jar" />
@@ -12,9 +13,7 @@
       <root url="jar://$USER_HOME$/Scala/scala-2.10.4/lib/scala-swing.jar!/" />
       <root url="jar://$USER_HOME$/Scala/scala-2.10.4/lib/scala-actors.jar!/" />
     </CLASSES>
-    <JAVADOC>
-      <root url="file://$USER_HOME$/Scala/scala-2.10.4/doc/scala-devel-docs/api" />
-    </JAVADOC>
+    <JAVADOC />
     <SOURCES>
       <root url="jar://$USER_HOME$/Scala/scala-2.10.4/src/scala-library-src.jar!/" />
       <root url="jar://$USER_HOME$/Scala/scala-2.10.4/src/scala-swing-src.jar!/" />

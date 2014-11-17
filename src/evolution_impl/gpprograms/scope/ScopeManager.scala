@@ -24,9 +24,9 @@ class ScopeManager extends VoidVisitorAdapter[scope.Scope] {
   }
 
   override def visit(n: MethodDeclaration, parentScope: scope.Scope): Unit = {
-    //      if (parentScope != null) {
-    parentScope.addCallable(new gpprograms.scope.CallableNode(n))
-    //      }
+    if (parentScope != null) {
+      parentScope.addCallable(new gpprograms.scope.CallableNode(n))
+    }
     // create a new scope for the method
     val scope = new gpprograms.scope.Scope(n, parentScope)
 

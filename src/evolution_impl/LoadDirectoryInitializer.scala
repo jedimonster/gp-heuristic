@@ -13,7 +13,7 @@ import scala.collection.JavaConversions._
  * Date: 9/17/2014
  */
 object LoadDirectoryInitializer extends PopulationInitializer[JavaCodeIndividual] {
-  override def getInitialPopulation: java.util.List[JavaCodeIndividual] = {
+  override def getInitialPopulation(n: Int): java.util.List[JavaCodeIndividual] = {
     val files: List[File] = new File("individuals").listFiles.filter(f => f.getName.endsWith(".java")).toList
     val individuals: List[JavaCodeIndividual] = for (file <- files) yield new JavaCodeIndividual(JavaParser.parse(file), file)
     new java.util.ArrayList[JavaCodeIndividual](individuals)

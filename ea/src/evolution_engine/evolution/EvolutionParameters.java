@@ -14,6 +14,9 @@ public class EvolutionParameters<I extends Individual> {
     private final Crossover<I> crossover;
     private final List<? extends Mutator> mutators;
     private final PopulationInitializer<I> populationInitializer;
+    private final int populationSize = 100;
+
+
     private EvolutionLogger logger = null;
 
     public EvolutionParameters(FitnessCalculator fitnessCalculator, SelectionStrategy selectionStrategy, Crossover<I> crossover, List<? extends Mutator> mutators, PopulationInitializer<I> populationInitializer) {

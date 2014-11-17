@@ -38,9 +38,9 @@ class JavaCodeIndividual(
     loadedClass = ClassLoader.getSystemClassLoader.loadClass(loadedClass.getName)
     val instance: GPProgram[java.lang.Double] = loadedClass.newInstance().asInstanceOf[GPProgram[java.lang.Double]]
 
-    val params = new java.util.ArrayList[Object]
-    params.add(new java.lang.Double(input))
-    instance.run(params)
+    //    val params = new java.util.ArrayList[Object]
+    //    params.add(new java.lang.Double(input))
+    instance.run(input)
   }
 
   @throws[CompilationException]("if the individual couldn't be compiled")
@@ -87,10 +87,18 @@ class JavaCodeIndividual(
     //    val newClassName = incrementNumber(oldClassName)
     val oldSrc = new ByteArrayInputStream(ast.toString.getBytes(StandardCharsets.UTF_8))
     val newAST: CompilationUnit = JavaParser.parse(oldSrc)
-    val newName: ClassName = new ClassName(className.name, className.id + 1)
+    val newName: ClassName = new ClassName(className.name, NameCounter.getNext())
     newAST.getTypes.get(0).setName(String.valueOf(newName.toString()))
     new JavaCodeIndividual(newAST, originalFile, newName)
   }
 }
 
+object NameCounter {
+  var next = 1
+
+  def getNext() = {
+    next = next + 1
+    next
+  }
+}
 

@@ -7,5 +7,5 @@ import java.util.List;
  * Date: 9/17/2014
  */
 public interface PopulationInitializer<I extends Individual> {
-    public List<I> getInitialPopulation();
+    public List<I> getInitialPopulation(int n);
 }
