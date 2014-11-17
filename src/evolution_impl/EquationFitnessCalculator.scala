@@ -6,6 +6,7 @@ import evolution_engine.fitness.{FitnessCalculator, FitnessResult}
 import evolution_impl.gpprograms.{CompilationException, JavaCodeIndividual}
 
 import scala.collection.JavaConversions._
+import scala.util.Random
 
 /**
  * Created By Itay Azaria
@@ -20,12 +21,12 @@ class EquationFitnessCalculator() extends FitnessCalculator[JavaCodeIndividual] 
 
   def getIndividualFitness(individual: JavaCodeIndividual): Double = {
     try {
-      val samples: List[Double] = List(-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5)
+      val samples: List[Double] = (for (i <- 0 until 20) yield Random.nextDouble()).toList
       val values = samples zip individual.getValues(samples)
       val diffs = for ((sample, value) <- values) yield Math.abs(value - getFunctionValue(sample)).toInt
-//      printf("fitness calculation, difference in values = %s\n", diffs)
+      //      printf("fitness calculation, difference in values = %s\n", diffs)
       val fitness: Double = diffs.sum
-//      println("fitness = " + fitness)
+      //      println("fitness = " + fitness)
       fitness
     } catch {
       case e: CompilationException => Double.NegativeInfinity
@@ -34,5 +35,5 @@ class EquationFitnessCalculator() extends FitnessCalculator[JavaCodeIndividual] 
   }
 
 
-  def getFunctionValue(x: Double): Double = 3 * x - 5
+  def getFunctionValue(x: Double): Double = 3 * x *x  - 5 *x + 78
 }

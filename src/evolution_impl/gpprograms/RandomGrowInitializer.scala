@@ -24,7 +24,7 @@ import scala.util.Random
  * Randomly grows methodCount methods that randomly use parameters from the given list of parameters
  * Combines into a linear combination of resulting numbers.
  */
-class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends PopulationInitializer[JavaCodeIndividual] {
+class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends PopulationInitializer[JavaCodeIndividual] with JavaIndividualActions {
 
   val distribution = new NormalDistribution(0, 50)
 
@@ -94,7 +94,6 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
     method
   }
 
-
   /**
    * create or overwrite the return statement in @param{method} with a new statement that uses all available local vars.
    * @param method
@@ -102,8 +101,8 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
    */
   def createReturnStatement(method: MethodDeclaration, scopeManager: ScopeManager, callableFilter: (CallableNode => Boolean) = (_ => true)) = {
     val node: Node = method.getBody.getStmts.size() match {
-      case 0 => method
-      case _ => method.getBody.getStmts.last
+      case 0 => method // if it's empty it's new
+      case _ => method.getBody.getStmts.last // otherwise it must have a return statement.
     }
     // find innermost scope
     val scope: Scope = scopeManager.getScopeByNode(node)
@@ -136,4 +135,5 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
         satisfied.add(n)
     }
   }
+
 }

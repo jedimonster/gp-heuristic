@@ -14,17 +14,20 @@ public class EvolutionParameters<I extends Individual> {
     private final Crossover<I> crossover;
     private final List<? extends Mutator> mutators;
     private final PopulationInitializer<I> populationInitializer;
-    private final int populationSize = 100;
+    private int populationSize;
 
 
     private EvolutionLogger logger = null;
+    private int generations;
 
-    public EvolutionParameters(FitnessCalculator fitnessCalculator, SelectionStrategy selectionStrategy, Crossover<I> crossover, List<? extends Mutator> mutators, PopulationInitializer<I> populationInitializer) {
+    public EvolutionParameters(FitnessCalculator fitnessCalculator, SelectionStrategy selectionStrategy, Crossover<I> crossover, List<? extends Mutator> mutators, PopulationInitializer<I> populationInitializer, int generations, int populationSize) {
         this.fitnessCalculator = fitnessCalculator;
         this.selectionStrategy = selectionStrategy;
         this.crossover = crossover;
         this.mutators = mutators;
         this.populationInitializer = populationInitializer;
+        this.generations = generations;
+        this.populationSize = populationSize;
     }
 
     public FitnessCalculator getFitnessCalculator() {
@@ -58,5 +61,21 @@ public class EvolutionParameters<I extends Individual> {
 
     public void setLogger(EvolutionLogger logger) {
         this.logger = logger;
+    }
+
+    public int getPopulationSize() {
+        return populationSize;
+    }
+
+    public void setPopulationSize(int populationSize) {
+        this.populationSize = populationSize;
+    }
+
+    public int getGenerations() {
+        return generations;
+    }
+
+    public void setGenerations(int generations) {
+        this.generations = generations;
     }
 }

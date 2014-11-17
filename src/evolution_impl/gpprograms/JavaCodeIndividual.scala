@@ -65,7 +65,7 @@ class JavaCodeIndividual(
       GPEvolutionLogger.saveBadIndividual(this)
       throw new CompilationException
     } else
-      printf("Compiled class %s successfully\n", className)
+//      printf("Compiled class %s successfully\n", className)
     // todo if failed log errors
 
     Class.forName(className)

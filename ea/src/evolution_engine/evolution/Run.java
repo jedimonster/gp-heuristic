@@ -8,9 +8,10 @@ import java.util.List;
  */
 public class Run<I extends Individual> {
     public void run(EvolutionParameters<I> parameters, EvolutionStrategy<I> evolutionStrategy) {
-        List<I> initialPopulation = parameters.getPopulationInitializer().getInitialPopulation(100);
-        for (int i = 0; i < 50; i++) {
+        List<I> initialPopulation = parameters.getPopulationInitializer().getInitialPopulation(parameters.getPopulationSize());
+        for (int i = 0; i < parameters.getGenerations(); i++) {
             initialPopulation = evolutionStrategy.evolve(initialPopulation);
+            System.out.printf("Finished Generation %d\n", i);
         }
     }
 }

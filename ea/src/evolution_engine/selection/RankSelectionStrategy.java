@@ -60,9 +60,9 @@ public class RankSelectionStrategy<I extends Individual> implements SelectionStr
                 return (int) (1000 * (fitnessResult.getFitness(o1) - fitnessResult.getFitness(o2))); // minimize
             }
         });
-        for (int i = 0; i < features.size(); i++) {
-            System.out. printf("feature %d = %f\n", i, fitnessResult.getFitness(features.get(i)));
-        }
+//        for (int i = 0; i < features.size(); i++) {
+//            System.out. printf("feature %d = %f\n", i, fitnessResult.getFitness(features.get(i)));
+//        }
         return features;
     }
 
