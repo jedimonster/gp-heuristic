@@ -26,7 +26,7 @@ import scala.util.Random
  */
 class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends PopulationInitializer[JavaCodeIndividual] with JavaIndividualActions {
 
-  val distribution = new NormalDistribution(0, 50)
+  val distribution = new NormalDistribution(0, 10)
 
   val paramTypes: List[Parameter] = {
     var i = -1
@@ -114,8 +114,8 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
     flatSatisfyCallables(satisfied, unsatisfied)
 
     // create return statements from callables
-    val retExp: CallableNode = callables.foldLeft(new CallableNode(new DoubleLiteralExpr((distribution.sample()).toString))) { (l: CallableNode, r: CallableNode) =>
-      new CallableNode(new BinaryExpr(l.getCallStatement, r.getCallStatement, BinaryExpr.Operator.plus))
+    val retExp: CallableNode = callables.foldRight(new CallableNode(new DoubleLiteralExpr(distribution.sample.toString))) { (l: CallableNode, r: CallableNode) =>
+      new CallableNode(new BinaryExpr(new BinaryExpr(new DoubleLiteralExpr(distribution.sample.toString), l.getCallStatement, BinaryExpr.Operator.times), r.getCallStatement, BinaryExpr.Operator.plus))
     }
     // add created return statement
 

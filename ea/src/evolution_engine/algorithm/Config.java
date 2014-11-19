@@ -15,7 +15,7 @@ import java.awt.*;
  */
 public class Config {
     public static final int NUMBER_OF_CLUSTERS = 8;
-    public static final double SELECTION_PRESSURE = 1.5;
+    public static final double SELECTION_PRESSURE = 1.8;
     public static int FRAME_WIDTH = 96;
     public static int FRAME_HEIGHT = 96;
     public static final int SCALE_METHOD = Image.SCALE_SMOOTH;

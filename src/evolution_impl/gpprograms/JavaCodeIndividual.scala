@@ -91,6 +91,10 @@ class JavaCodeIndividual(
     newAST.getTypes.get(0).setName(String.valueOf(newName.toString()))
     new JavaCodeIndividual(newAST, originalFile, newName)
   }
+
+  override def getName: java.lang.String = ast.getTypes.get(0).getName
+
+  override def toString: String = ast.toString
 }
 
 object NameCounter {

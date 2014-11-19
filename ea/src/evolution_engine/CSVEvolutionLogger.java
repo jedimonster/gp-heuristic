@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 import static java.nio.file.StandardOpenOption.APPEND;
+import static java.nio.file.StandardOpenOption.CREATE;
 
 /**
  * Created by itayaza on 27/10/2014.
@@ -21,6 +22,7 @@ public class CSVEvolutionLogger implements EvolutionLogger {
     private final Path logDir;
     private final Path fitnessFile;
     private final Path statsFile;
+    protected int generation = 0;
 
     private CSVEvolutionLogger(Path logDir, Path fitnessFile, Path statsFile) {
         this.logDir = logDir;
@@ -30,6 +32,7 @@ public class CSVEvolutionLogger implements EvolutionLogger {
 
     public static CSVEvolutionLogger createCSVEvolutionLogger(Path logDir) throws IOException {
         Files.createDirectories(logDir);
+        Files.createDirectories(logDir.resolve("individuals/"));
         File fitnessFile = new File(logDir.toFile(), "fitness.csv");
         File statsFile = new File(logDir.toFile(), "stats.csv");
         fitnessFile.createNewFile();
@@ -44,6 +47,7 @@ public class CSVEvolutionLogger implements EvolutionLogger {
     @Override
     public void addGeneration(List<? extends Individual> individuals, FitnessResult fitness) {
         addGenerationStatistics(individuals, fitness);
+        writeIndividualToDisk(individuals);
         try {
             StringBuilder line = new StringBuilder();
             OpenOption[] options = new OpenOption[]{APPEND};
@@ -57,8 +61,21 @@ public class CSVEvolutionLogger implements EvolutionLogger {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        generation++;
+    }
 
-
+    private void writeIndividualToDisk(List<? extends Individual> individuals) {
+        try {
+            Path generationDir = logDir.resolve("individuals/" + generation + "/");
+            Files.createDirectories(generationDir);
+            for (Individual individual : individuals) {
+                String name = individual.getName();
+                Path individualPath = generationDir.resolve(name + ".java");
+                Files.write(individualPath, individual.toString().getBytes(StandardCharsets.UTF_8), CREATE);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void addGenerationStatistics(List<? extends Individual> individuals, FitnessResult fitness) {
@@ -71,7 +88,8 @@ public class CSVEvolutionLogger implements EvolutionLogger {
 
         try {
             OpenOption[] options = new OpenOption[]{APPEND};
-            String line = String.format("%f,%f,%f,%f\n", stats.getMean(), stats.getMin(), stats.getMax(), stats.getStandardDeviation());
+            String line = String.format("Average = %f, Minimum = %f, Maximum = %f, Std. dev. = %f\n", stats.getMean(), stats.getMin(), stats.getMax(), stats.getStandardDeviation());
+            System.out.println(line);
 
             Files.write(statsFile, line.toString().getBytes(StandardCharsets.UTF_8), options);
         } catch (IOException e) {
