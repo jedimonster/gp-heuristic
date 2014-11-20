@@ -15,10 +15,11 @@ import scala.util.Random
 class EquationFitnessCalculator() extends FitnessCalculator[JavaCodeIndividual] {
   val samples: List[Double] = (for (i <- 0 until 20) yield (Random.nextDouble())*100-50).toList
 
-  override def calculateFitness(individuals: java.util.List[JavaCodeIndividual]): FitnessResult[_ <: Individual] = {
+  override def calculateFitness(individuals: List[JavaCodeIndividual]): FitnessResult[JavaCodeIndividual] = {
     val fitnessValues = for (i <- individuals) yield (i, getIndividualFitness(i))
     new DumbFitnessResult[JavaCodeIndividual](fitnessValues.toMap)
   }
+
 
   def getIndividualFitness(individual: JavaCodeIndividual): Double = {
     try {

@@ -1,6 +1,6 @@
 package evolution_engine.selection;
 
-import evolution_engine.algorithm.Config;
+import evolution_engine.Config;
 import evolution_engine.evolution.Individual;
 import evolution_engine.fitness.FitnessResult;
 

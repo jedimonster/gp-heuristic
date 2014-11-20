@@ -1,7 +1,6 @@
 package evolution_impl.gpprograms
 
 import java.io.File
-import java.util
 
 import evolution_engine.evolution.{EvolutionParameters, PopulationInitializer}
 import evolution_impl.gpprograms.scope.{CallableNode, Scope, ScopeManager}
@@ -41,9 +40,9 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
     new JavaCodeIndividual(ast, prototypeFile)
   }
 
-  override def getInitialPopulation(n: Int): java.util.List[JavaCodeIndividual] = {
+  override def getInitialPopulation(n: Int): List[JavaCodeIndividual] = {
     val individuals: Seq[JavaCodeIndividual] = for (i <- 0 to n) yield growIndividual(i)
-    ListBuffer(individuals: _*) // convert to java list
+    individuals.toList // convert to java list
   }
 
   def growIndividual(id: Int): JavaCodeIndividual = {
@@ -67,7 +66,7 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
 
     // grow a run method (entry point for our gp)
     val runMethod = new MethodDeclaration(1, new ReferenceType(returnType), "run", ListBuffer(paramTypes: _*))
-    runMethod.setBody(new BlockStmt(new util.ArrayList[Statement]()))
+    runMethod.setBody(new BlockStmt(new java.util.ArrayList[Statement]()))
     // add it
     classDeceleration.getMembers.add(runMethod)
 
@@ -86,7 +85,7 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
     val parameters: List[Parameter] = Random.shuffle(paramTypes).slice(0, paramCount) // todo select paramCount params from the list in the field.
     val method = new MethodDeclaration(modifiers, methodType, name, ListBuffer(parameters: _*))
     val scopeManager = new ScopeManager()
-    method.setBody(new BlockStmt(new util.ArrayList[Statement]())) // create an empty body to avoid nulls in the future.
+    method.setBody(new BlockStmt(new java.util.ArrayList[Statement]())) // create an empty body to avoid nulls in the future.
     scopeManager.visit(method, null)
 
     createReturnStatement(method, scopeManager)
