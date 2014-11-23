@@ -19,9 +19,9 @@ class ConstantsMutator(probability: Double) extends Mutator[JavaCodeIndividual] 
 
   override def mutate(individuals: util.List[JavaCodeIndividual]): util.List[JavaCodeIndividual] = {
     val inds: List[JavaCodeIndividual] = individuals.toList
-    for (x: JavaCodeIndividual <- inds if Math.random() < probability) {
+    for (x: JavaCodeIndividual <- inds) {
       //      new ConstantVisitor().visit(x.ast, null)
-      val visitor: ConstantVisitor[Object] = new ConstantVisitor[Object]()
+      val visitor: ConstantVisitor[Object] = new ConstantVisitor[Object](probability)
       val signVisitor: SignVisitor[Object] = new SignVisitor[Object]()
       visitor.visit(x.ast, new Object)
     }
@@ -29,11 +29,10 @@ class ConstantsMutator(probability: Double) extends Mutator[JavaCodeIndividual] 
   }
 }
 
-class ConstantVisitor[A] extends ASTVisitor[A] {
-
+class ConstantVisitor[A](probability : Double) extends ASTVisitor[A] {
   override def visit(n: DoubleLiteralExpr, arg: A): Unit = {
-    val diff: Long = Math.round(Math.random() * 5) // keep the sign, another mutator will change that
-    if (math.random < 0.3)
+    val diff: Double = Math.round(Math.random() * 5) // keep the sign, another mutator will change that
+    if (math.random < this.probability)
       n.setValue((n.getValue.toDouble + diff).toString)
     super.visit(n, arg)
   }

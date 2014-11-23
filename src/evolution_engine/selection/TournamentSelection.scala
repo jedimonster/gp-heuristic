@@ -5,6 +5,7 @@ import evolution_engine.evolution.Individual
 import evolution_engine.fitness.FitnessResult
 
 import scala.collection.JavaConversions._
+import scala.collection.mutable.ListBuffer
 import scala.util.Random
 
 /**
@@ -12,14 +13,14 @@ import scala.util.Random
  */
 
 class TournamentSelection[T <: Individual](minimize: Boolean) extends SelectionStrategy[T] {
-  val subsetSize = 16
+  val subsetSize = 22
 
   def optimal(list: List[T], value: FitnessResult[T]): T = {
     var optFitness = if (minimize) Double.MaxValue else Double.MinValue
     var opt: Option[T] = None
 
 
-    for (i <- 0 to list.size) {
+    for (i <- 0 to list.size - 1) {
       val individual: T = list.get(i)
       if (minimize && value.getFitness(individual) < optFitness
         || value.getFitness(individual) > optFitness) {
@@ -36,7 +37,7 @@ class TournamentSelection[T <: Individual](minimize: Boolean) extends SelectionS
 
   def select(previousGeneration: List[T], fitness: FitnessResult[T]): List[T] = {
     val n = previousGeneration.size
-    val selected: List[T] = List()
+    var selected: ListBuffer[T] = ListBuffer()
 
     while (selected.size < n) {
       // get a random n sized subset
@@ -47,9 +48,9 @@ class TournamentSelection[T <: Individual](minimize: Boolean) extends SelectionS
       val subList = for (i <- 0 to subsetSize) yield previousGeneration(Random.nextInt(n))
 
       // pick highest fitness
-      selected.add(optimal(subList.toList, fitness))
+      selected :+= optimal(subList.toList, fitness)
     }
 
-    selected
+    selected.toList
   }
 }

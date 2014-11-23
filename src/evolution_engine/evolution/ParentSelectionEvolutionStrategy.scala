@@ -22,8 +22,6 @@ class ParentSelectionEvolutionStrategy[I <: Individual](evolutionParameters: Evo
     val parents: IndexedSeq[I] = selectionStrategy.select(individuals, fitnessResult).toIndexedSeq
     var i: Int = 0
 
-
-
     while (i + 1 < parents.size) {
       val cross: List[I] = crossover.cross(parents(i), parents(i + 1))
       children ++= cross

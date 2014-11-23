@@ -24,8 +24,8 @@ import scala.util.Random
  * Combines into a linear combination of resulting numbers.
  */
 class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends PopulationInitializer[JavaCodeIndividual] with JavaIndividualActions {
+  val distribution = new NormalDistribution(0, 5)
 
-  val distribution = new NormalDistribution(0, 10)
 
   val paramTypes: List[Parameter] = {
     var i = -1
@@ -34,6 +34,7 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
       new Parameter(new ClassOrInterfaceType(p.getClass.getName), new VariableDeclaratorId(("arg" + i).toString))
     }
   }
+
   val prototype: JavaCodeIndividual = {
     val prototypeFile: File = new File("individuals/Prototype.java")
     val ast: CompilationUnit = JavaParser.parse(prototypeFile)
@@ -46,7 +47,6 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
   }
 
   def growIndividual(id: Int): JavaCodeIndividual = {
-    val returnType: ClassOrInterfaceType = new ClassOrInterfaceType("java.lang.Double")
 
     // get a copy of the prototype
     val individual: JavaCodeIndividual = prototype.duplicate() match {
@@ -55,6 +55,7 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
     }
     // change its name
     individual.setName("Ind" + id.toString)
+    individual.gardener = Some(this)
 
     // randomly grow methods
     val methods: IndexedSeq[MethodDeclaration] = for (i <- 0 to methodCount) yield growMethod(i, 1)
@@ -65,17 +66,45 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
     classDeceleration.getMembers.addAll(methods)
 
     // grow a run method (entry point for our gp)
+    growRunMethod(individual)
+    //    val runMethod = new MethodDeclaration(1, new ReferenceType(returnType), "run", ListBuffer(paramTypes: _*))
+    //    runMethod.setBody(new BlockStmt(new java.util.ArrayList[Statement]()))
+    //    // add it
+    //    classDeceleration.getMembers.add(runMethod)
+
+
+    individual
+  }
+
+  def removeRunMethod(individual: JavaCodeIndividual) = {
+    val classDeceleration = individual.ast.getTypes.get(0)
+
+    classDeceleration.setMembers(classDeceleration.getMembers.filter {
+      case m: MethodDeclaration => !m.getName.equals("run")
+      case _ => true
+    })
+  }
+
+  def growRunMethod(individual: JavaCodeIndividual): Unit = {
+    val returnType: ClassOrInterfaceType = new ClassOrInterfaceType("java.lang.Double")
+
+    val classDeceleration: ClassOrInterfaceDeclaration = individual.ast.getTypes.get(0) match {
+      case e: ClassOrInterfaceDeclaration => e
+      case _ => throw new TreeGrowingException("Can't find main class")
+    }
+
+    // drop any existing run methods.
+    removeRunMethod(individual)
+
+    // grow new one.
     val runMethod = new MethodDeclaration(1, new ReferenceType(returnType), "run", ListBuffer(paramTypes: _*))
     runMethod.setBody(new BlockStmt(new java.util.ArrayList[Statement]()))
     // add it
     classDeceleration.getMembers.add(runMethod)
 
-    // use those methods in the main return statement
     val scopeManager: ScopeManager = new ScopeManager()
     scopeManager.visit(classDeceleration, null)
-    createReturnStatement(runMethod, scopeManager, n => n.node != runMethod) // create a return statement not which does not include recursive calls.
-
-    individual
+    createReturnStatement(runMethod, scopeManager, n => (n.node != runMethod), randomFactor = false) // create a return statement not which does not include recursive calls.
   }
 
   def growMethod(id: Int, paramCount: Int): MethodDeclaration = {
@@ -98,7 +127,7 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
    * @param method
    * @return
    */
-  def createReturnStatement(method: MethodDeclaration, scopeManager: ScopeManager, callableFilter: (CallableNode => Boolean) = (_ => true)) = {
+  def createReturnStatement(method: MethodDeclaration, scopeManager: ScopeManager, callableFilter: (CallableNode => Boolean) = (_ => true), randomFactor: Boolean = true) = {
     val node: Node = method.getBody.getStmts.size() match {
       case 0 => method // if it's empty it's new
       case _ => method.getBody.getStmts.last // otherwise it must have a return statement.
@@ -113,9 +142,39 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
     flatSatisfyCallables(satisfied, unsatisfied)
 
     // create return statements from callables
-    val retExp: CallableNode = callables.foldRight(new CallableNode(new DoubleLiteralExpr(distribution.sample.toString))) { (l: CallableNode, r: CallableNode) =>
-      new CallableNode(new BinaryExpr(new BinaryExpr(new DoubleLiteralExpr(distribution.sample.toString), l.getCallStatement, BinaryExpr.Operator.times), r.getCallStatement, BinaryExpr.Operator.plus))
+    //    val retExp: CallableNode = callables.foldRight(new CallableNode(new DoubleLiteralExpr(distribution.sample.toString))) { (l: CallableNode, r: CallableNode) =>
+    //      new CallableNode(new BinaryExpr(
+    //        new BinaryExpr(new DoubleLiteralExpr(distribution.sample.toString),
+    //          l.getCallStatement,
+    //          BinaryExpr.Operator.times),
+    //        r.getCallStatement,
+    //        BinaryExpr.Operator.plus))
+    //    }
+
+    // future me: I'm sorry. this folds the list into one big recursive binary expression, do not try to debug this. it works.
+    // if you decide to debug this anyway, first make sure the list of satisfied callables is what you think it is.
+    // then note bigExpr is the recursive BinaryExpr with the list items encoured so far
+    // and currentNode is the current list item to be folded into the big binary expression.
+    val retExp: CallableNode = callables.foldLeft(new CallableNode(new DoubleLiteralExpr(distribution.sample.toString))) { (bigExpr: CallableNode, currentNode: CallableNode) =>
+      if (randomFactor) {
+        new CallableNode(new BinaryExpr(
+          new BinaryExpr(
+            new DoubleLiteralExpr(distribution.sample.toString),
+            currentNode.getCallStatement,
+            BinaryExpr.Operator.times),
+          bigExpr.getCallStatement,
+          BinaryExpr.Operator.plus))
+      } else {
+        new CallableNode(
+          new BinaryExpr(
+            currentNode.getCallStatement,
+            bigExpr.getCallStatement,
+            BinaryExpr.Operator.plus
+          )
+        )
+      }
     }
+
     // add created return statement
 
     method.getBody.getStmts.add(new ReturnStmt(retExp.getCallStatement))
@@ -124,12 +183,12 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
   protected def flatSatisfyCallables(satisfied: ListBuffer[CallableNode], unsatisfied: ListBuffer[CallableNode]) {
     for (n: CallableNode <- unsatisfied) {
       for (up <- n.getUnsatisfiedParameters) {
-        val potentialAssignments: ListBuffer[CallableNode] = satisfied.filter(p => p.referenceType.equals(up.getType))
+        val potentialAssignments: ListBuffer[CallableNode] = satisfied.filter(p => p.referenceType.toString.equals(up.getType.toString))
         val assignment = potentialAssignments.get(Random.nextInt(potentialAssignments.size))
         n.setParameter(up, assignment)
       }
-      // if it's now satisfied, move it. todo probably shouldn't happen in the 'flat' satisfier.
-
+    }
+    for (n: CallableNode <- unsatisfied) {
       if (n.getUnsatisfiedParameters.size == 0)
         satisfied.add(n)
     }

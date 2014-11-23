@@ -12,6 +12,7 @@ class Run[I <: Individual] {
     for (i <- 0 to parameters.getGenerations) {
       initialPopulation = evolutionStrategy.evolve(initialPopulation)
       System.out.print("Finished Generation %d\n".format(i))
+
     }
   }
 }

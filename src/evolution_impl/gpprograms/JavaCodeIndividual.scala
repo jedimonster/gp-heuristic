@@ -20,6 +20,7 @@ class JavaCodeIndividual(
                           val ast: CompilationUnit, val originalFile: File, val className: ClassName
                           ) extends Individual {
   val javaCompiler: JavaCompiler = ToolProvider.getSystemJavaCompiler()
+  var gardener: Option[RandomGrowInitializer] = None
 
   def setName(s: String) = ast.getTypes.get(0).setName(s)
 
@@ -40,7 +41,15 @@ class JavaCodeIndividual(
 
     //    val params = new java.util.ArrayList[Object]
     //    params.add(new java.lang.Double(input))
-    instance.run(input)
+    try {
+      instance.run(input)
+    } catch {
+      case e: StackOverflowError => {
+        println("Exception " + e.toString + "while running:")
+        println(ast.toString)
+        Double.PositiveInfinity
+      }
+    }
   }
 
   @throws[CompilationException]("if the individual couldn't be compiled")
@@ -65,11 +74,10 @@ class JavaCodeIndividual(
       GPEvolutionLogger.saveBadIndividual(this)
       throw new CompilationException
     } else
-//      printf("Compiled class %s successfully\n", className)
-    // todo if failed log errors
+    //      printf("Compiled class %s successfully\n", className)
+    // todo if failed log errors and catch expeption
 
-    Class.forName(className)
-    // reload the newly compiled class:
+      Class.forName(className)
 
   }
 
@@ -89,7 +97,10 @@ class JavaCodeIndividual(
     val newAST: CompilationUnit = JavaParser.parse(oldSrc)
     val newName: ClassName = new ClassName(className.name, NameCounter.getNext())
     newAST.getTypes.get(0).setName(String.valueOf(newName.toString()))
-    new JavaCodeIndividual(newAST, originalFile, newName)
+    val individual: JavaCodeIndividual = new JavaCodeIndividual(newAST, originalFile, newName)
+    individual.gardener = gardener
+
+    individual
   }
 
   override def getName: java.lang.String = ast.getTypes.get(0).getName
