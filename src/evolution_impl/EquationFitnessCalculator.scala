@@ -4,6 +4,7 @@ package evolution_impl
 import evolution_engine.evolution.Individual
 import evolution_engine.fitness.{FitnessCalculator, FitnessResult}
 import evolution_impl.gpprograms.{CompilationException, JavaCodeIndividual}
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics
 
 import scala.collection.JavaConversions._
 import scala.util.Random
@@ -32,7 +33,9 @@ class EquationFitnessCalculator() extends FitnessCalculator[JavaCodeIndividual] 
       val values = samples zip individual.getValues(samples)
       val diffs = for ((sample, value) <- values) yield Math.abs(value - getFunctionValue(sample)).toInt
       //      printf("fitness calculation, difference in values = %s\n", diffs)
-      var fitness: Double = diffs.sum
+      val diffPerc: List[Double] = for ((sample, value) <- values) yield Math.abs(getFunctionValue(sample) - value)/Math.max(value, getFunctionValue(sample))
+      var fitness: Double = new DescriptiveStatistics(diffPerc.toArray).getMean
+//      var fitness: Double = diffs.sum
       if (fitness < 0) // overflow.
         fitness = Double.MaxValue
       //      println("fitness = " + fitness)
@@ -48,5 +51,5 @@ class EquationFitnessCalculator() extends FitnessCalculator[JavaCodeIndividual] 
   }
 
 
-  def getFunctionValue(x: Double): Double = 3 * x - 5 * x + 78
+  def getFunctionValue(x: Double): Double = 5.34 * x + 92
 }
