@@ -23,8 +23,14 @@ public class ParentSelectionEvolutionStrategy<I extends Individual> extends Base
         // calculate fitness
         FitnessResult<I> fitnessResult = fitnessCalculator.calculateFitness(individuals);
 
+        if (evolutionParameters.isLoggingEnable()) {
+            evolutionParameters.getLogger().addGeneration(individuals, fitnessResult);
+        }
+
         // select parents
         List<I> parents = selectionStrategy.select(individuals, fitnessResult);
+
+        // todo pairing strategy
 
         // be fruitful and multiply
         for (int i = 0; i + 1 < parents.size(); i += 2) {

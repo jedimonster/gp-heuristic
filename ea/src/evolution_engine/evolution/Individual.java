@@ -6,4 +6,6 @@ package evolution_engine.evolution;
  */
 public interface Individual {
     public Individual duplicate();
+
+    String getName();
 }

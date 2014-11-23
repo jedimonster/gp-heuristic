@@ -1,6 +1,6 @@
 package evolution_engine.selection;
 
-import evolution_engine.algorithm.Config;
+import evolution_engine.Config;
 import evolution_engine.evolution.Individual;
 import evolution_engine.fitness.FitnessResult;
 
@@ -60,9 +60,9 @@ public class RankSelectionStrategy<I extends Individual> implements SelectionStr
                 return (int) (1000 * (fitnessResult.getFitness(o1) - fitnessResult.getFitness(o2))); // minimize
             }
         });
-        for (int i = 0; i < features.size(); i++) {
-            System.out. printf("feature %d = %f\n", i, fitnessResult.getFitness(features.get(i)));
-        }
+//        for (int i = 0; i < features.size(); i++) {
+//            System.out. printf("feature %d = %f\n", i, fitnessResult.getFitness(features.get(i)));
+//        }
         return features;
     }
 

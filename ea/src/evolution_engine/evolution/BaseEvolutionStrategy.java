@@ -12,12 +12,14 @@ import java.util.List;
  * Date: 9/16/2014
  */
 public abstract class BaseEvolutionStrategy<I extends Individual> implements EvolutionStrategy<I> {
+    protected final EvolutionParameters evolutionParameters;
     protected FitnessCalculator fitnessCalculator;
     protected SelectionStrategy selectionStrategy;
     protected Crossover<I> crossover;
     protected List<? extends Mutator> mutators;
 
     protected BaseEvolutionStrategy(EvolutionParameters evolutionParameters) {
+        this.evolutionParameters = evolutionParameters;
         this.fitnessCalculator = evolutionParameters.getFitnessCalculator();
         this.selectionStrategy = evolutionParameters.getSelectionStrategy();
         this.crossover = evolutionParameters.getCrossover();
