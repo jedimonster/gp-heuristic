@@ -4,6 +4,9 @@ import evolution_engine.EvolutionLogger
 import evolution_engine.fitness.FitnessCalculator
 import evolution_engine.mutators.{Crossover, Mutator}
 import evolution_engine.selection.SelectionStrategy
+import evolution_impl.gpprograms.JavaCodeIndividual
+
+import scala.actors.Future
 
 class EvolutionParameters[I <: Individual] {
   private final var fitnessCalculator: FitnessCalculator[I] = null
@@ -14,6 +17,7 @@ class EvolutionParameters[I <: Individual] {
   private var populationSize: Int = 0
   private var logger: EvolutionLogger[I] = null
   private var generations: Int = 0
+  var bestIndividual: Option[Individual] = None
 
   def this(fitnessCalculator: FitnessCalculator[I], selectionStrategy: SelectionStrategy[I], crossover: Crossover[I], mutators: List[_ <: Mutator[I]], populationInitializer: PopulationInitializer[I], generations: Int, populationSize: Int) {
     this()
@@ -27,31 +31,31 @@ class EvolutionParameters[I <: Individual] {
   }
 
   def getFitnessCalculator: FitnessCalculator[I] = {
-     fitnessCalculator
+    fitnessCalculator
   }
 
   def getSelectionStrategy: SelectionStrategy[I] = {
-     selectionStrategy
+    selectionStrategy
   }
 
   def getCrossover: Crossover[I] = {
-     crossover
+    crossover
   }
 
   def getMutators: List[Mutator[I]] = {
-     mutators
+    mutators
   }
 
   def getPopulationInitializer: PopulationInitializer[I] = {
-     populationInitializer
+    populationInitializer
   }
 
   def isLoggingEnable: Boolean = {
-     logger != null
+    logger != null
   }
 
   def getLogger: EvolutionLogger[I] = {
-     logger
+    logger
   }
 
   def setLogger(logger: EvolutionLogger[I]) {
@@ -59,7 +63,7 @@ class EvolutionParameters[I <: Individual] {
   }
 
   def getPopulationSize: Int = {
-     populationSize
+    populationSize
   }
 
   def setPopulationSize(populationSize: Int) {
@@ -67,7 +71,7 @@ class EvolutionParameters[I <: Individual] {
   }
 
   def getGenerations: Int = {
-     generations
+    generations
   }
 
   def setGenerations(generations: Int) {

@@ -13,9 +13,13 @@ class ParentSelectionEvolutionStrategy[I <: Individual](evolutionParameters: Evo
 
   def evolve(individuals: List[I]): List[I] = {
     var children: IndexedSeq[I] = Vector.empty
-
     val fitnessResult: FitnessResult[I] = fitnessCalculator.calculateFitness(individuals)
 
+    val bestIndividual: I = individuals.maxBy(i => fitnessResult.getFitness(i))
+    evolutionParameters.synchronized {
+      evolutionParameters.bestIndividual = Option(bestIndividual)
+      evolutionParameters.notifyAll() // if anyone was waiting..
+    }
     if (evolutionParameters.isLoggingEnable) {
       evolutionParameters.getLogger.addGeneration(individuals, fitnessResult)
     }

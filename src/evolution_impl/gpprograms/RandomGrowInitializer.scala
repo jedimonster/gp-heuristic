@@ -1,6 +1,7 @@
 package evolution_impl.gpprograms
 
 import java.io.File
+import java.lang.reflect.Method
 
 import evolution_engine.evolution.{EvolutionParameters, PopulationInitializer}
 import evolution_impl.gpprograms.scope.{CallableNode, Scope, ScopeManager}
@@ -31,7 +32,13 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
     var i = -1
     for (p <- params) yield {
       i += 1
-      new Parameter(new ClassOrInterfaceType(p.getClass.getName), new VariableDeclaratorId(("arg" + i).toString))
+      val parameter: Parameter = new Parameter(new ClassOrInterfaceType(p.getClass.getName), new VariableDeclaratorId(("arg" + i).toString))
+      for(method: Method <- p.getClass.getMethods) {
+        // we want to add any objects accessible in any depth.
+        // we also want to stop at any iterables and add them as a parameter.
+        method.getReturnType.isInstanceOf[java.util.List[Any]]
+      }
+      parameter
     }
   }
 
