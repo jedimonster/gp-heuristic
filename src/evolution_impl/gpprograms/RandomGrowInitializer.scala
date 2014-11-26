@@ -1,10 +1,12 @@
 package evolution_impl.gpprograms
 
 import java.io.File
-import java.lang.reflect.Method
+import java.lang.reflect.{ParameterizedType, Type, Method}
+import java.util
 
 import evolution_engine.evolution.{EvolutionParameters, PopulationInitializer}
 import evolution_impl.gpprograms.scope.{CallableNode, Scope, ScopeManager}
+import evolution_impl.gpprograms.util.ClassUtil
 import japa.parser.JavaParser
 import japa.parser.ast.`type`.{ClassOrInterfaceType, ReferenceType}
 import japa.parser.ast.body._
@@ -12,6 +14,7 @@ import japa.parser.ast.expr.{BinaryExpr, DoubleLiteralExpr}
 import japa.parser.ast.stmt.{BlockStmt, ReturnStmt, Statement}
 import japa.parser.ast.{CompilationUnit, Node}
 import org.apache.commons.math3.distribution.NormalDistribution
+import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl
 
 import scala.collection.JavaConversions._
 import scala.collection.immutable.IndexedSeq
@@ -30,17 +33,30 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
 
   val paramTypes: List[Parameter] = {
     var i = -1
+    var types: ListBuffer[Parameter] = ListBuffer()
     for (p <- params) yield {
       i += 1
       val parameter: Parameter = new Parameter(new ClassOrInterfaceType(p.getClass.getName), new VariableDeclaratorId(("arg" + i).toString))
-      for(method: Method <- p.getClass.getMethods) {
+      for (method: Method <- p.getClass.getMethods) {
         // we want to add any objects accessible in any depth.
         // we also want to stop at any iterables and add them as a parameter.
-        method.getReturnType.isInstanceOf[java.util.List[Any]]
+        val returnType: Type = method.getGenericReturnType
+        returnType match {
+          case returnType: ParameterizedTypeImpl =>
+            if (Class.forName("java.lang.Iterable").isAssignableFrom(returnType.getClass)) {
+              types +:= new Parameter(new ClassOrInterfaceType(returnType.getClass.getName), new VariableDeclaratorId(("arg" + i).toString))
+              i += 1
+            }
+          case t: Any =>
+            println(t)
+        }
+        //        ClassUtil.implements(method.getGenericReturnType, null)
       }
       parameter
     }
   }
+
+  // todo define an extractCallables method, that gets an AnyRef object, and adds Callables for each of the methods, recursively. this will as a side effect extract the type.
 
   val prototype: JavaCodeIndividual = {
     val prototypeFile: File = new File("individuals/Prototype.java")
