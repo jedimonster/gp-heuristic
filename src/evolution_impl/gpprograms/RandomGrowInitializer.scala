@@ -56,7 +56,7 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
     }
   }
 
-  // todo define an extractCallables method, that gets an AnyRef object, and adds Callables for each of the methods, recursively. this will as a side effect extract the type.
+  // todo define an extractCallables method, that gets an AnyRef parameter, and adds Callables for each of its methods, recursively. this will as a side effect extract the type.
 
   val prototype: JavaCodeIndividual = {
     val prototypeFile: File = new File("individuals/Prototype.java")
