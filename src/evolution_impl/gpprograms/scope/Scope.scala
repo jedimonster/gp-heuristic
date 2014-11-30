@@ -1,6 +1,8 @@
 package evolution_impl.gpprograms.scope
 
+import evolution_impl.gpprograms.util.{ClassUtil, ClassUtil$}
 import japa.parser.ast.Node
+import japa.parser.ast.body.VariableDeclaratorId
 
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
@@ -24,9 +26,24 @@ class Scope(val node: Node, parentScope: Scope = null) {
     childScopes = childScopes :+ scope
   }
 
+  //  def getCallablesByType(t: String): ListBuffer[CallableNode] = {
+  //    val parentCallables = if (parentScope == null) ListBuffer() else parentScope.getCallablesByType(t)
+  //    callables.filter(c => c.referenceType.toString.equals(t)) ++ parentCallables
+  //  }
+
   def getCallablesByType(t: String): ListBuffer[CallableNode] = {
     val parentCallables = if (parentScope == null) ListBuffer() else parentScope.getCallablesByType(t)
-    callables.filter(c => c.referenceType.toString.equals(t)) ++ parentCallables
+    var res = ListBuffer[CallableNode]()
+    for (c <- callables) {
+      if (c.referenceType.toString.equals(t)) {
+        res +:= c
+      }
+      else if(!c.referenceType.toString.equals("int") && !c.referenceType.toString.equals("double") && !c.referenceType.toString.equals("boolean")) {
+        val expandedCallables: Seq[CallableNode] = ClassUtil.extractCallables(Class.forName(c.referenceType.toString), c.getCallStatement)
+        res ++= expandedCallables.filter(c => c.referenceType.toString.equals(t))
+      }
+    }
+    res
   }
 
 }

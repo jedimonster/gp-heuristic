@@ -12,6 +12,7 @@ import evolution_impl.util.JavaSourceFromString
 import japa.parser.JavaParser
 import japa.parser.ast.CompilationUnit
 
+import scalaj.collection.Imports
 /**
  * Created By Itay Azaria
  * Date: 9/17/2014
@@ -70,7 +71,11 @@ class JavaCodeIndividual(
     val success = task.call()
 
     if (!success) {
-      print("Failed compiling\n")
+      println("Failed compiling\n")
+      println(diagnostics.getDiagnostics.get(0).toString)
+//      for(d <- diagnostics.getDiagnostics) {
+//        print(d.toString)
+//      }
       GPEvolutionLogger.saveBadIndividual(this)
       throw new CompilationException
     } else

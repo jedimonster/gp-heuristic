@@ -11,14 +11,18 @@ import scalaj.collection.Imports._
 /**
  * Created by itayaza on 03/11/2014.
  */
-class CallableNode(val node: Node) {
+class CallableNode(val node: Node, val refType: Type = null) {
   val referenceType: Type = {
-    node match {
-      case c: MethodDeclaration => c.getType
-      case v: VariableDeclarationExpr => v.getType
-      case p: Parameter => p.getType
-      case e: Expression => new ClassOrInterfaceType("java.lang.Double")
-      case _ => throw new TreeGrowingException("Tried to create callable node of unknown type")
+    if (refType == null) {
+      node match {
+        case c: MethodDeclaration => c.getType
+        case v: VariableDeclarationExpr => v.getType
+        case p: Parameter => p.getType
+        case e: Expression => new ClassOrInterfaceType("double")
+        case _ => throw new TreeGrowingException("Tried to create callable node of unknown type")
+      }
+    } else {
+      refType
     }
   }
   var assignments: Map[Parameter, Expression] = Map()

@@ -6,5 +6,5 @@ import java.util.List;
  * Created by itayaza on 21/10/2014.
  */
 public interface GPProgram<T> {
-    public T run(java.lang.Double arg0);
+    public T run(double arg0);
 }

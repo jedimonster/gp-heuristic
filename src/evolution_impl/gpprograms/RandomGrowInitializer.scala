@@ -2,8 +2,6 @@ package evolution_impl.gpprograms
 
 import java.io.File
 import java.lang.reflect.{ParameterizedType, Type, Method}
-import java.util
-
 import evolution_engine.evolution.{EvolutionParameters, PopulationInitializer}
 import evolution_impl.gpprograms.scope.{CallableNode, Scope, ScopeManager}
 import evolution_impl.gpprograms.util.ClassUtil
@@ -33,30 +31,21 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
 
   val paramTypes: List[Parameter] = {
     var i = -1
-    var types: ListBuffer[Parameter] = ListBuffer()
+    //    var types: ListBuffer[Parameter] = ListBuffer()
+    //    for (callable <- ClassUtil.extractCallables(params, null)) {
+    //      yield new Parameter(callable.referenceType, )
+    //      ???
+    //    }
+
+    //    types.toList
     for (p <- params) yield {
       i += 1
-      val parameter: Parameter = new Parameter(new ClassOrInterfaceType(p.getClass.getName), new VariableDeclaratorId(("arg" + i).toString))
-      for (method: Method <- p.getClass.getMethods) {
-        // we want to add any objects accessible in any depth.
-        // we also want to stop at any iterables and add them as a parameter.
-        val returnType: Type = method.getGenericReturnType
-        returnType match {
-          case returnType: ParameterizedTypeImpl =>
-            if (Class.forName("java.lang.Iterable").isAssignableFrom(returnType.getClass)) {
-              types +:= new Parameter(new ClassOrInterfaceType(returnType.getClass.getName), new VariableDeclaratorId(("arg" + i).toString))
-              i += 1
-            }
-          case t: Any =>
-            println(t)
-        }
-        //        ClassUtil.implements(method.getGenericReturnType, null)
-      }
-      parameter
+      new Parameter(new ClassOrInterfaceType(p.getClass.getName), new VariableDeclaratorId(("arg" + i).toString))
     }
   }
 
-  // todo define an extractCallables method, that gets an AnyRef parameter, and adds Callables for each of its methods, recursively. this will as a side effect extract the type.
+  val expandedParams: Seq[CallableNode] = ClassUtil.extractCallables(params, null)
+  //  }
 
   val prototype: JavaCodeIndividual = {
     val prototypeFile: File = new File("individuals/Prototype.java")
@@ -68,6 +57,7 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
     val individuals: Seq[JavaCodeIndividual] = for (i <- 0 to n) yield growIndividual(i)
     individuals.toList // convert to java list
   }
+
 
   def growIndividual(id: Int): JavaCodeIndividual = {
 
@@ -81,7 +71,7 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
     individual.gardener = Some(this)
 
     // randomly grow methods
-    val methods: IndexedSeq[MethodDeclaration] = for (i <- 0 to methodCount) yield growMethod(i, 1)
+    val methods: IndexedSeq[MethodDeclaration] = for (i <- 0 to methodCount) yield growMethod(i, 3)
     val classDeceleration: ClassOrInterfaceDeclaration = individual.ast.getTypes.get(0) match {
       case e: ClassOrInterfaceDeclaration => e
       case _ => throw new TreeGrowingException("Can't find main class")
@@ -132,9 +122,14 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
 
   def growMethod(id: Int, paramCount: Int): MethodDeclaration = {
     val modifiers = 1
-    val methodType = new ReferenceType(new ClassOrInterfaceType("java.lang.Double"))
+    val methodType = new ReferenceType(new ClassOrInterfaceType("double"))
     val name = "ADF" + id
-    val parameters: List[Parameter] = Random.shuffle(paramTypes).slice(0, paramCount) // todo select paramCount params from the list in the field.
+    //    var parameters: List[Parameter] = Random.shuffle(paramTypes).slice(0, paramCount) // todo select paramCount params from the list in the field.
+    var i = -1
+    var parameters = Random.shuffle(expandedParams).slice(0, paramCount).map(ca => {
+      i += 1
+      new Parameter(ca.referenceType, new VariableDeclaratorId("arg" + i))
+    })
     val method = new MethodDeclaration(modifiers, methodType, name, ListBuffer(parameters: _*))
     val scopeManager = new ScopeManager()
     method.setBody(new BlockStmt(new java.util.ArrayList[Statement]())) // create an empty body to avoid nulls in the future.
@@ -159,7 +154,8 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
     val scope: Scope = scopeManager.getScopeByNode(node)
 
     // get callables relevant according to filter if any
-    val callables: ListBuffer[CallableNode] = scope.getCallablesByType("java.lang.Double").filter(callableFilter)
+    val callables: ListBuffer[CallableNode] = scope.getCallablesByType("double").filter(callableFilter)
+    callables ++= scope.getCallablesByType("int").filter(callableFilter)
 
     val (satisfied, unsatisfied): (ListBuffer[CallableNode], ListBuffer[CallableNode]) = callables.partition(n => n.getUnsatisfiedParameters.size == 0)
     flatSatisfyCallables(satisfied, unsatisfied)

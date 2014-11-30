@@ -36,7 +36,7 @@ class MathExpVisitor extends ASTVisitor[ScopeManager] {
     val scope: Scope = scopeManager.getScopeByNode(n)
 
     // we need 3 callables of numeric type
-    val callableDoubles: Any = scope.getCallablesByType("java.lang.Double")
+    val callableDoubles: Any = scope.getCallablesByType("double")
 
 
     // continue traversing
