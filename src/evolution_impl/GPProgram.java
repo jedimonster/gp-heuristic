@@ -5,6 +5,6 @@ import java.util.List;
 /**
  * Created by itayaza on 21/10/2014.
  */
-public interface GPProgram<T> {
-    public T run(double arg0);
+public interface GPProgram {
+    public java.lang.Double run(core.game.StateObservation arg0);
 }

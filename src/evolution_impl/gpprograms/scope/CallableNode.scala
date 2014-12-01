@@ -1,6 +1,7 @@
 package evolution_impl.gpprograms.scope
 
 import evolution_impl.gpprograms.TreeGrowingException
+import evolution_impl.gpprograms.util.{TypesConversionStrategy}
 import japa.parser.ast.Node
 import japa.parser.ast.`type`.{ClassOrInterfaceType, Type}
 import japa.parser.ast.body.{MethodDeclaration, Parameter}
@@ -37,7 +38,10 @@ class CallableNode(val node: Node, val refType: Type = null) {
   def setParameter(parameter: Parameter, cu: CallableNode) = {
     if (parameters.contains(parameter)) {
       // assign or reassign the parameter
-      assignments += (parameter -> cu.getCallStatement)
+      if (!parameter.getType.toString.equals(cu.referenceType.toString))
+        assignments += (parameter -> TypesConversionStrategy.convertTo(parameter.getType.toString, cu).getCallStatement)
+      else
+        assignments += (parameter -> cu.getCallStatement)
     } else {
       // can't find that parameter anywhere in the dependency lists
       throw new TreeGrowingException("Parameter" + parameter + " not found in node's dependency list")

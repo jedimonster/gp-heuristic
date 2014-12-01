@@ -47,19 +47,22 @@ object ClassUtil {
     callables
   }
 
-  def extractCallables(method: Method, scope: Expression): Seq[CallableNode] = {
-    val returnType = method.getGenericReturnType
+  def extractCallables(method: Method, scope:  Expression): Seq[CallableNode] = {
+    val returnType: Type = method.getGenericReturnType
     var callables = Seq[CallableNode]()
     val methodReturnType: Class[_] = method.getReturnType
     if ((methodReturnType.isPrimitive)
       && !methodReturnType.getName.equalsIgnoreCase("void")) {
       callables :+= new CallableNode(new MethodCallExpr(scope, method.getName), refType = new PrimitiveType(PrimitiveType.Primitive.valueOf(methodReturnType.getName.capitalize)))
     } else if (isIterable(method.getGenericReturnType)) {
-//      callables :+= new CallableNode(new MethodCallExpr(scope, method.getName), refType = new ClassOrInterfaceType(method.getGenericReturnType.toString))
+      //      callables :+= new CallableNode(new MethodCallExpr(scope, method.getName), refType = new ClassOrInterfaceType(method.getGenericReturnType.toString))
     } else if (methodReturnType.isEnum) {
       // todo
     } else {
-      // todo recursively scan
+      // todo add the object itself?
+
+      // recursively scan:
+      callables ++= extractCallables(returnType, new CallableNode(new MethodCallExpr(scope, method.getName)))
     }
 
     callables
@@ -69,7 +72,7 @@ object ClassUtil {
     ???
   }
 
-  def extractCallables(returnType: Class[_], scope: Expression): Seq[CallableNode] = {
+  def extractCallables(returnType: Class[_], scope: => Expression): Seq[CallableNode] = {
     // if returnType is primitive or iterable, return a callable node for it.
     if (returnType.isPrimitive || Class.forName("java.lang.Iterable").isAssignableFrom(returnType.getClass)) {
       //      return new CallableNode(new Call)
@@ -87,9 +90,9 @@ object ClassUtil {
     return Seq()
   }
 
-  def isIterable(t:Type) : Boolean = {
+  def isIterable(t: Type): Boolean = {
     t match {
-      case t : GenericArrayType => true
+      case t: GenericArrayType => true
       case _ => false
     }
   }

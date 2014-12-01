@@ -32,7 +32,7 @@ class GPHeuristic(individual: JavaCodeIndividual = null) extends StateHeuristic 
       bestIndividual = this.individual
     }
 
-    bestIndividual.run(stateObs.getAvatarPosition.theta())
+    bestIndividual.run(stateObs)
   }
 }
 

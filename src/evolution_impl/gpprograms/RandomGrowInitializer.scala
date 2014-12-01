@@ -4,7 +4,7 @@ import java.io.File
 import java.lang.reflect.{ParameterizedType, Type, Method}
 import evolution_engine.evolution.{EvolutionParameters, PopulationInitializer}
 import evolution_impl.gpprograms.scope.{CallableNode, Scope, ScopeManager}
-import evolution_impl.gpprograms.util.ClassUtil
+import evolution_impl.gpprograms.util.{TypesConversionStrategy, ClassUtil}
 import japa.parser.JavaParser
 import japa.parser.ast.`type`.{ClassOrInterfaceType, ReferenceType}
 import japa.parser.ast.body._
@@ -122,7 +122,7 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
 
   def growMethod(id: Int, paramCount: Int): MethodDeclaration = {
     val modifiers = 1
-    val methodType = new ReferenceType(new ClassOrInterfaceType("double"))
+    val methodType = new ReferenceType(new ClassOrInterfaceType("java.lang.Double"))
     val name = "ADF" + id
     //    var parameters: List[Parameter] = Random.shuffle(paramTypes).slice(0, paramCount) // todo select paramCount params from the list in the field.
     var i = -1
@@ -154,25 +154,15 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
     val scope: Scope = scopeManager.getScopeByNode(node)
 
     // get callables relevant according to filter if any
-    val callables: ListBuffer[CallableNode] = scope.getCallablesByType("double").filter(callableFilter)
-    callables ++= scope.getCallablesByType("int").filter(callableFilter)
+    val callables: ListBuffer[CallableNode] = scope.getCallablesByType("java.lang.Double", callableFilter)
+    callables ++= scope.getCallablesByType("int", callableFilter)
 
     val (satisfied, unsatisfied): (ListBuffer[CallableNode], ListBuffer[CallableNode]) = callables.partition(n => n.getUnsatisfiedParameters.size == 0)
     flatSatisfyCallables(satisfied, unsatisfied)
 
-    // create return statements from callables
-    //    val retExp: CallableNode = callables.foldRight(new CallableNode(new DoubleLiteralExpr(distribution.sample.toString))) { (l: CallableNode, r: CallableNode) =>
-    //      new CallableNode(new BinaryExpr(
-    //        new BinaryExpr(new DoubleLiteralExpr(distribution.sample.toString),
-    //          l.getCallStatement,
-    //          BinaryExpr.Operator.times),
-    //        r.getCallStatement,
-    //        BinaryExpr.Operator.plus))
-    //    }
-
     // future me: I'm sorry. this folds the list into one big recursive binary expression, do not try to debug this. it works.
     // if you decide to debug this anyway, first make sure the list of satisfied callables is what you think it is.
-    // then note bigExpr is the recursive BinaryExpr with the list items encoured so far
+    // then note bigExpr is the recursive BinaryExpr with the list items encored so far
     // and currentNode is the current list item to be folded into the big binary expression.
     val retExp: CallableNode = callables.foldLeft(new CallableNode(new DoubleLiteralExpr(distribution.sample.toString))) { (bigExpr: CallableNode, currentNode: CallableNode) =>
       if (randomFactor) {
@@ -202,7 +192,8 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
   protected def flatSatisfyCallables(satisfied: ListBuffer[CallableNode], unsatisfied: ListBuffer[CallableNode]) {
     for (n: CallableNode <- unsatisfied) {
       for (up <- n.getUnsatisfiedParameters) {
-        val potentialAssignments: ListBuffer[CallableNode] = satisfied.filter(p => p.referenceType.toString.equals(up.getType.toString))
+        //        val potentialAssignments: ListBuffer[CallableNode] = satisfied.filter(p => p.referenceType.toString.equals(up.getType.toString))
+        val potentialAssignments: ListBuffer[CallableNode] = satisfied.filter(p => TypesConversionStrategy.canConvertTo(p.referenceType.toString, up.getType.toString))
         val assignment = potentialAssignments.get(Random.nextInt(potentialAssignments.size))
         n.setParameter(up, assignment)
       }

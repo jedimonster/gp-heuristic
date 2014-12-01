@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets
 import java.nio.file.{Files, Paths}
 import javax.tools.{DiagnosticCollector, JavaCompiler, JavaFileObject, ToolProvider}
 
+import core.game.StateObservation
 import evolution_engine.evolution.Individual
 import evolution_impl.GPProgram
 import evolution_impl.log.GPEvolutionLogger
@@ -28,26 +29,27 @@ class JavaCodeIndividual(
   def this(ast: CompilationUnit, originalFile: File) = this(ast, originalFile, new ClassName(ast.getTypes.get(0).getName, 0))
 
   @throws[CompilationException]("if the individual couldn't be compiled")
-  def getValues(values: List[Double]) = {
+  def getValues(values: List[StateObservation]) = {
     compile()
     for (x <- values) yield run(x)
   }
 
-  def run(input: Double): Double = {
+  def run(input: core.game.StateObservation): Double = {
     //    val packageName = ast.getPackage.getName
     val className = ast.getTypes.get(0).getName
     var loadedClass: Class[_] = Class.forName(className)
     loadedClass = ClassLoader.getSystemClassLoader.loadClass(loadedClass.getName)
-    val instance: GPProgram[java.lang.Double] = loadedClass.newInstance().asInstanceOf[GPProgram[java.lang.Double]]
+    val instance: GPProgram = loadedClass.newInstance().asInstanceOf[GPProgram]
 
     //    val params = new java.util.ArrayList[Object]
     //    params.add(new java.lang.Double(input))
     try {
       instance.run(input)
     } catch {
-      case e: StackOverflowError => {
+      case e: Exception => {
         println("Exception " + e.toString + "while running:")
         println(ast.toString)
+        System.exit(-1)
         Double.PositiveInfinity
       }
     }
@@ -73,10 +75,11 @@ class JavaCodeIndividual(
     if (!success) {
       println("Failed compiling\n")
       println(diagnostics.getDiagnostics.get(0).toString)
+      println(this.ast.toString)
 //      for(d <- diagnostics.getDiagnostics) {
 //        print(d.toString)
 //      }
-      GPEvolutionLogger.saveBadIndividual(this)
+//      GPEvolutionLogger.saveBadIndividual(this)
       throw new CompilationException
     } else
     //      printf("Compiled class %s successfully\n", className)
