@@ -11,23 +11,6 @@ import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl
  * Created by itayaza on 26/11/2014.
  */
 object ClassUtil {
-  def implements[T](clazz: AnyRef, interface: Class[_]): Boolean = {
-    clazz match {
-      case t: ParameterizedTypeImpl => {
-        implements(t.getRawType, interface)
-      }
-      case c: Class[_] => {
-        if (c eq interface)
-          return true
-        for (i: Type <- c.getGenericInterfaces) {
-          if (implements(i, interface))
-            return true
-        }
-      }
-    }
-    false
-  }
-
   /**
    * assumes @params are going to be named arg0,...argn and creates callables for each of their members
    * stops at iterables and primitives
@@ -48,30 +31,37 @@ object ClassUtil {
   }
 
   def extractCallables(method: Method, scope:  Expression): Seq[CallableNode] = {
-    val returnType: Type = method.getGenericReturnType
+    val genericReturnType: Type = method.getGenericReturnType
     var callables = Seq[CallableNode]()
     val methodReturnType: Class[_] = method.getReturnType
-    if ((methodReturnType.isPrimitive)
+    if (methodReturnType.isPrimitive
       && !methodReturnType.getName.equalsIgnoreCase("void")) {
       callables :+= new CallableNode(new MethodCallExpr(scope, method.getName), refType = new PrimitiveType(PrimitiveType.Primitive.valueOf(methodReturnType.getName.capitalize)))
-    } else if (isIterable(method.getGenericReturnType)) {
+    } else if (Class.forName("java.lang.Iterable").isAssignableFrom(methodReturnType)) {
       //      callables :+= new CallableNode(new MethodCallExpr(scope, method.getName), refType = new ClassOrInterfaceType(method.getGenericReturnType.toString))
     } else if (methodReturnType.isEnum) {
       // todo
     } else {
       // todo add the object itself?
+      val i = 1
 
-      // recursively scan:
-      callables ++= extractCallables(returnType, new CallableNode(new MethodCallExpr(scope, method.getName)))
+      // todo recursively scan:
+      genericReturnType match {
+        case t : ParameterizedTypeImpl =>callables ++= extractCallables(t, new MethodCallExpr(scope, method.getName))
+        case  _ =>  callables ++= extractCallables(methodReturnType, new MethodCallExpr(scope, method.getName))
+      }
+
     }
 
     callables
   }
 
-  def extractCallables(returnType: Type, scope: Expression): Seq[CallableNode] = {
-    ???
+  def extractCallables(returnType: ParameterizedTypeImpl, scope: Expression): Seq[CallableNode] = {
+    // todo
+    Seq[CallableNode]()
   }
 
+//  def extractCallables(returnType: Class[_], scope: => Expression): Seq[CallableNode] = {
   def extractCallables(returnType: Class[_], scope: => Expression): Seq[CallableNode] = {
     // if returnType is primitive or iterable, return a callable node for it.
     if (returnType.isPrimitive || Class.forName("java.lang.Iterable").isAssignableFrom(returnType.getClass)) {
@@ -80,7 +70,7 @@ object ClassUtil {
       // else recursively search its members
       var callables: Seq[CallableNode] = Seq[CallableNode]()
       for (method <- returnType.getMethods) {
-        if (method.getReturnType != returnType) {
+        if (!method.getReturnType.toString.equals(returnType.toString)) { // todo we should allow some recursion
           callables ++= extractCallables(method, scope)
         }
       }
