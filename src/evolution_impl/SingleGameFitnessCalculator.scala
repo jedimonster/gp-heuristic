@@ -12,6 +12,7 @@ import evolution_impl.gpprograms.JavaCodeIndividual
 class SingleGameFitnessCalculator(game: String) extends FitnessCalculator[JavaCodeIndividual] {
   override def calculateFitness(individuals: List[JavaCodeIndividual]): FitnessResult[JavaCodeIndividual] = {
     val fitnessValues = for (i <- individuals) yield (i, getIndividualFitness(i))
+
     new DumbFitnessResult[JavaCodeIndividual](fitnessValues.toMap)
   }
 
@@ -21,12 +22,14 @@ class SingleGameFitnessCalculator(game: String) extends FitnessCalculator[JavaCo
     // run the machine using the dummy agent here
     val gpHeuristic: String = "evolution_impl.fitness.dummyagent.Agent"
 
-    //Available games:
+    // todo take game/lvl from fields.
+
+    //Available games:1
     val gamesPath: String = "gvgai/examples/gridphysics/"
 
     //CIG 2014 Training Set Games
-    //String games[] = new String[]{"aliens", "boulderdash", "butterflies", "chase", "frogs",
-    //        "missilecommand", "portals", "sokoban", "survivezombies", "zelda"};
+    //    val games = Array[String]("aliens", "boulderdash", "butterflies", "chase", "frogs",
+    //      "missilecommand", "portals", "sokoban", "survivezombies", "zelda")
     //CIG 2014 Validation Set Games
     val games = Array[String]("camelRace", "digdug", "firestorms", "infection", "firecaster", "overload", "pacman", "seaquest", "whackamole", "eggomania")
 

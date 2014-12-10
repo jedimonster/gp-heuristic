@@ -64,5 +64,5 @@ class CallableNode(val node: Node, val refType: Type = null) {
     }
   }
 
-  //    override def toString() = getCallStatement.toString
+  override def toString: String = getCallStatement.toString
 }

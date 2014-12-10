@@ -1,11 +1,11 @@
 package evolution_impl.gpprograms.util
 
-import java.lang.reflect.{GenericArrayType, Method, Type}
+import java.lang.reflect.{Modifier, GenericArrayType, Method, Type}
 
 import evolution_impl.gpprograms.scope.CallableNode
 import japa.parser.ast.`type`.{ClassOrInterfaceType, PrimitiveType}
 import japa.parser.ast.expr.{NameExpr, Expression, MethodCallExpr}
-import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl
+import sun.reflect.generics.reflectiveObjects.{GenericArrayTypeImpl, ParameterizedTypeImpl}
 
 /**
  * Created by itayaza on 26/11/2014.
@@ -30,11 +30,11 @@ object ClassUtil {
     callables
   }
 
-  def extractCallables(method: Method, scope:  Expression): Seq[CallableNode] = {
+  def extractCallables(method: Method, scope: Expression): Seq[CallableNode] = {
     val genericReturnType: Type = method.getGenericReturnType
     var callables = Seq[CallableNode]()
     val methodReturnType: Class[_] = method.getReturnType
-    if (methodReturnType.isPrimitive
+    if ((methodReturnType.isPrimitive || methodReturnType.getName.equals("java.lang.String"))
       && !methodReturnType.getName.equalsIgnoreCase("void")) {
       callables :+= new CallableNode(new MethodCallExpr(scope, method.getName), refType = new PrimitiveType(PrimitiveType.Primitive.valueOf(methodReturnType.getName.capitalize)))
     } else if (Class.forName("java.lang.Iterable").isAssignableFrom(methodReturnType)) {
@@ -47,8 +47,10 @@ object ClassUtil {
 
       // todo recursively scan:
       genericReturnType match {
-        case t : ParameterizedTypeImpl =>callables ++= extractCallables(t, new MethodCallExpr(scope, method.getName))
-        case  _ =>  callables ++= extractCallables(methodReturnType, new MethodCallExpr(scope, method.getName))
+        case t: ParameterizedTypeImpl => None // todo something
+        case et: GenericArrayTypeImpl => None
+        //          callables ++= extractCallables(t, new MethodCallExpr(scope, method.getName))
+        case _ => callables ++= extractCallables(methodReturnType, new MethodCallExpr(scope, method.getName))
       }
 
     }
@@ -61,7 +63,7 @@ object ClassUtil {
     Seq[CallableNode]()
   }
 
-//  def extractCallables(returnType: Class[_], scope: => Expression): Seq[CallableNode] = {
+  //  def extractCallables(returnType: Class[_], scope: => Expression): Seq[CallableNode] = {
   def extractCallables(returnType: Class[_], scope: => Expression): Seq[CallableNode] = {
     // if returnType is primitive or iterable, return a callable node for it.
     if (returnType.isPrimitive || Class.forName("java.lang.Iterable").isAssignableFrom(returnType.getClass)) {
@@ -69,8 +71,11 @@ object ClassUtil {
     } else {
       // else recursively search its members
       var callables: Seq[CallableNode] = Seq[CallableNode]()
-      for (method <- returnType.getMethods) {
-        if (!method.getReturnType.toString.equals(returnType.toString)) { // todo we should allow some recursion
+      for (method <- returnType.getDeclaredMethods) {
+        if (!method.getReturnType.toString.equals(returnType.toString)
+          && !Modifier.isStatic(method.getModifiers)
+        && !method.getReturnType.getName.equals("java.lang.String")) {
+          // todo we should allow some recursion
           callables ++= extractCallables(method, scope)
         }
       }

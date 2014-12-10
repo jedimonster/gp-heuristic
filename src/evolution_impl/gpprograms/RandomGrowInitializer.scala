@@ -45,6 +45,7 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
   }
 
   val expandedParams: Seq[CallableNode] = ClassUtil.extractCallables(params, null)
+  //  println("Callables = " + expandedParams.toString)
   //  }
 
   val prototype: JavaCodeIndividual = {

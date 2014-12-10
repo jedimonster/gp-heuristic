@@ -26,12 +26,13 @@ class GPHeuristic(individual: JavaCodeIndividual = null) extends StateHeuristic 
 
   override def evaluateState(stateObs: StateObservation): Double = {
     var bestIndividual: JavaCodeIndividual = null
-    if (individual == null) {
+    //
+    if (CurrentIndividualHolder.individual == null) {
       bestIndividual = gpRun.getBestIndividual
     } else {
-      bestIndividual = this.individual
+      bestIndividual = CurrentIndividualHolder.individual
     }
-
+//    bestIndividual = gpRun.getBestIndividual
     bestIndividual.run(stateObs)
   }
 }
@@ -47,7 +48,7 @@ class ThreadedGPRun() extends Runnable {
 
   val methodCount = 2
   val fitnessCalculator = new SingleGameFitnessCalculator("gvgai/examples/gridphysics/camelRace.txt")
-  val selection= new TournamentSelection[JavaCodeIndividual](false)
+  val selection = new TournamentSelection[JavaCodeIndividual](false)
   val params = new EvolutionParameters[JavaCodeIndividual](fitnessCalculator, selection,
     crossovers, mutators, new RandomGrowInitializer(paramTypes, methodCount), generations, popSize)
 
@@ -89,7 +90,8 @@ object ThreadedGPRun {
     thread.start()
     run
   }
-  def main(args : Array[String]) : Unit = {
+
+  def main(args: Array[String]): Unit = {
     GPRunHolder.gpRun = ThreadedGPRun.newInstance
   }
 }
