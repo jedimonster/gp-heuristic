@@ -118,6 +118,7 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
 
     val scopeManager: ScopeManager = new ScopeManager()
     scopeManager.visit(classDeceleration, null)
+    // todo create return statements from methods only (use callables to feed methods).
     createReturnStatement(runMethod, scopeManager, n => (n.node != runMethod), randomFactor = false) // create a return statement not which does not include recursive calls.
   }
 
