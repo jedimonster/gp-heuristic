@@ -4,7 +4,7 @@ import evolution_impl.gpprograms.TreeGrowingException
 import evolution_impl.gpprograms.util.{TypesConversionStrategy}
 import japa.parser.ast.Node
 import japa.parser.ast.`type`.{ClassOrInterfaceType, Type}
-import japa.parser.ast.body.{MethodDeclaration, Parameter}
+import japa.parser.ast.body.{VariableDeclaratorId, MethodDeclaration, Parameter}
 import japa.parser.ast.expr._
 
 import scalaj.collection.Imports._
@@ -12,7 +12,7 @@ import scalaj.collection.Imports._
 /**
  * Created by itayaza on 03/11/2014.
  */
-class CallableNode(val node: Node, val refType: Type = null) {
+class CallableNode(val node: AnyRef, val refType: Type = null) {
   val referenceType: Type = {
     if (refType == null) {
       node match {
@@ -20,6 +20,7 @@ class CallableNode(val node: Node, val refType: Type = null) {
         case v: VariableDeclarationExpr => v.getType
         case p: Parameter => p.getType
         case e: Expression => new ClassOrInterfaceType("double")
+        case im: InnerMethod => im.methodDeclaration.getType
         case _ => throw new TreeGrowingException("Tried to create callable node of unknown type")
       }
     } else {
@@ -30,6 +31,12 @@ class CallableNode(val node: Node, val refType: Type = null) {
   var parameters: Seq[Parameter] = {
     node match {
       case c: MethodDeclaration => c.getParameters.asScala
+      case c: MethodCallExpr =>
+        if (c.getTypeArgs != null)
+          for (ta <- c.getTypeArgs.asScala) yield new Parameter(ta, new VariableDeclaratorId("dontcare"))
+        else
+          Seq()
+      case im: InnerMethod => im.methodDeclaration.getParameters.asScalaMutable
       case _ => List()
     }
   }
@@ -58,6 +65,12 @@ class CallableNode(val node: Node, val refType: Type = null) {
           case None => throw new TreeGrowingException("Tried to call method without assigning all paramaters")
         }
         new MethodCallExpr(null, m.getName, params.asJava)
+      case im : InnerMethod =>
+        val params: Seq[Expression] = for (param <- parameters) yield assignments.get(param) match {
+          case Some(e: Expression) => e
+          case None => throw new TreeGrowingException("Tried to call method without assigning all paramaters")
+        }
+        new MethodCallExpr(im.scope, im.methodDeclaration.getName, params.asJava)
       case v: VariableDeclarationExpr => v.getVars.get(0).getInit // we assume there's only one var defined at a time!
       case p: Parameter => new NameExpr(p.getId.getName)
       case e: Expression => e

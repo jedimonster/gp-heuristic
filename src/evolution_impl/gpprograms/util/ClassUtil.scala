@@ -4,8 +4,10 @@ import java.lang.reflect.{Modifier, GenericArrayType, Method, Type}
 
 import evolution_impl.gpprograms.scope.CallableNode
 import japa.parser.ast.`type`.{ClassOrInterfaceType, PrimitiveType}
-import japa.parser.ast.expr.{NameExpr, Expression, MethodCallExpr}
+import japa.parser.ast.body.{MethodDeclaration, VariableDeclaratorId, Parameter}
+import japa.parser.ast.expr.{InnerMethod, NameExpr, Expression, MethodCallExpr}
 import sun.reflect.generics.reflectiveObjects.{GenericArrayTypeImpl, ParameterizedTypeImpl}
+import scalaj.collection.Imports._
 
 /**
  * Created by itayaza on 26/11/2014.
@@ -36,7 +38,12 @@ object ClassUtil {
     val methodReturnType: Class[_] = method.getReturnType
     if ((methodReturnType.isPrimitive || methodReturnType.getName.equals("java.lang.String"))
       && !methodReturnType.getName.equalsIgnoreCase("void")) {
-      callables :+= new CallableNode(new MethodCallExpr(scope, method.getName), refType = new PrimitiveType(PrimitiveType.Primitive.valueOf(methodReturnType.getName.capitalize)))
+      val methodParams = null
+      //      val methodParams = for (c <- method.getParameterTypes) yield new Parameter(new ClassOrInterfaceType(c.getName), new VariableDeclaratorId("dontcare"))
+      //      val methodExpr: MethodCallExpr = new MethodCallExpr(scope, method.getName, methodParams)
+      val parameters: java.util.List[Parameter] = (for (p <- method.getParameterTypes.toSeq) yield new Parameter(new ClassOrInterfaceType(p.getName), null)).asJava
+      val methodNode = new InnerMethod(scope, new MethodDeclaration(0, new ClassOrInterfaceType(method.getReturnType.toString), method.getName, parameters))
+      callables :+= new CallableNode(methodNode, refType = new PrimitiveType(PrimitiveType.Primitive.valueOf(methodReturnType.getName.capitalize)))
     } else if (Class.forName("java.lang.Iterable").isAssignableFrom(methodReturnType)) {
       //      callables :+= new CallableNode(new MethodCallExpr(scope, method.getName), refType = new ClassOrInterfaceType(method.getGenericReturnType.toString))
     } else if (methodReturnType.isEnum) {
@@ -74,7 +81,7 @@ object ClassUtil {
       for (method <- returnType.getDeclaredMethods) {
         if (!method.getReturnType.toString.equals(returnType.toString)
           && !Modifier.isStatic(method.getModifiers)
-        && !method.getReturnType.getName.equals("java.lang.String")) {
+          && !method.getReturnType.getName.equals("java.lang.String")) {
           // todo we should allow some recursion
           callables ++= extractCallables(method, scope)
         }

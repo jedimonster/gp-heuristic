@@ -113,13 +113,19 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
     // grow new one.
     val runMethod = new MethodDeclaration(1, new ReferenceType(returnType), "run", ListBuffer(paramTypes: _*))
     runMethod.setBody(new BlockStmt(new java.util.ArrayList[Statement]()))
-    // add it
+
+    // add the new run method
     classDeceleration.getMembers.add(runMethod)
 
     val scopeManager: ScopeManager = new ScopeManager()
     scopeManager.visit(classDeceleration, null)
-    // todo create return statements from methods only (use callables to feed methods).
-    createReturnStatement(runMethod, scopeManager, n => (n.node != runMethod), randomFactor = false) // create a return statement not which does not include recursive calls.
+
+    val adfs = scopeManager.getScopeByNode(runMethod).getCallables.filter(callableNode => callableNode.node != runMethod && classDeceleration.getMembers.contains(callableNode.node))
+
+
+    createReturnStatement(runMethod, adfs.toList, expandedParams.toList, addRandomMultiplier = false) // create a return statement not which does not include recursive calls.
+
+
   }
 
   def growMethod(id: Int, paramCount: Int): MethodDeclaration = {
@@ -137,37 +143,60 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
     method.setBody(new BlockStmt(new java.util.ArrayList[Statement]())) // create an empty body to avoid nulls in the future.
     scopeManager.visit(method, null)
 
-    createReturnStatement(method, scopeManager)
-
+    //    createReturnStatement(method, scopeManager)
+//    val nodesToReturn = scopeManager.getScopeByNode(method).getCallables() // todo actually last statement in method
+    var nodesToReturn = scopeManager.getScopeByNode(method).getCallablesByType("double") // todo actually last statement in method
+    // todo nodesToReturn now include parameters that can be converted to double.
+    nodesToReturn = nodesToReturn.filter(n=>n.referenceType.toString.equals("double"))
+    val availableNodes = List()
+    createReturnStatement(method, nodesToReturn.toList, availableNodes, addRandomMultiplier = true)
     method
   }
 
-  /**
-   * create or overwrite the return statement in @param{method} with a new statement that uses all available local vars.
-   * @param method
-   * @return
-   */
-  def createReturnStatement(method: MethodDeclaration, scopeManager: ScopeManager, callableFilter: (CallableNode => Boolean) = (_ => true), randomFactor: Boolean = true) = {
+  def createReturnStatement(method: MethodDeclaration, nodesToReturn: List[CallableNode], availableNodes: List[CallableNode], addRandomMultiplier: Boolean) = {
     val node: Node = method.getBody.getStmts.size() match {
       case 0 => method // if it's empty it's new
-      case _ => method.getBody.getStmts.last // otherwise it must have a return statement.
+      case _ => // otherwise it must have a return statement - drop it
+        val stm = method.getBody.getStmts.last
+        method.getBody.getStmts.remove(stm)
+        stm
     }
     // find innermost scope
-    val scope: Scope = scopeManager.getScopeByNode(node)
+    //    val scope: Scope = scopeManager.getScopeByNode(node)
+    val nodesToReallyReturn = satisfyCallables(nodesToReturn, availableNodes) // tries to satisfy the nodes we need to return, and use those we could.
+    val returnStatement = compactCallables(nodesToReallyReturn, addRandomMultiplier)
 
-    // get callables relevant according to filter if any
-    val callables: ListBuffer[CallableNode] = scope.getCallablesByType("java.lang.Double", callableFilter)
-    callables ++= scope.getCallablesByType("int", callableFilter)
+    method.getBody.getStmts.add(new ReturnStmt(returnStatement.getCallStatement))
+  }
 
-    val (satisfied, unsatisfied): (ListBuffer[CallableNode], ListBuffer[CallableNode]) = callables.partition(n => n.getUnsatisfiedParameters.size == 0)
-    flatSatisfyCallables(satisfied, unsatisfied)
+  /**
+   * tries to satisfy @nodesToSatisfy with @availableNodes and returns those that could be satisfied.
+   * @param nodesToSatisfy
+   * @param availableNodes
+   */
+  def satisfyCallables(nodesToSatisfy: List[CallableNode], availableNodes: List[CallableNode]): List[CallableNode] = {
+    for (node <- nodesToSatisfy) {
+      for (up <- node.getUnsatisfiedParameters) {
+        var potentialAssignments: List[CallableNode] = availableNodes.filter(p => TypesConversionStrategy.canConvertTo(p.referenceType.toString, up.getType.toString))
+        // todo those assignments need to be satisfied themselves..
+        potentialAssignments = potentialAssignments.filter(n => n.getUnsatisfiedParameters.isEmpty)
+        val assignment = potentialAssignments.get(Random.nextInt(potentialAssignments.size))
+        node.setParameter(up, assignment)
+      }
+    }
 
-    // future me: I'm sorry. this folds the list into one big recursive binary expression, do not try to debug this. it works.
-    // if you decide to debug this anyway, first make sure the list of satisfied callables is what you think it is.
-    // then note bigExpr is the recursive BinaryExpr with the list items encored so far
-    // and currentNode is the current list item to be folded into the big binary expression.
+    val (satisfied, unsatisfied): (List[CallableNode], List[CallableNode]) = nodesToSatisfy.partition(n => n.getUnsatisfiedParameters.size == 0)
+
+    satisfied
+  }
+
+  // future me: I'm sorry. this folds the list into one big recursive binary expression, do not try to debug this. it works.
+  // if you decide to debug this anyway, first make sure the list of satisfied callables is what you think it is.
+  // then note bigExpr is the recursive BinaryExpr with the list items encored so far
+  // and currentNode is the current list item to be folded into the big binary expression.
+  def compactCallables(callables: List[CallableNode], addRandomMultiplier: Boolean): CallableNode = {
     val retExp: CallableNode = callables.foldLeft(new CallableNode(new DoubleLiteralExpr(distribution.sample.toString))) { (bigExpr: CallableNode, currentNode: CallableNode) =>
-      if (randomFactor) {
+      if (addRandomMultiplier) {
         new CallableNode(new BinaryExpr(
           new BinaryExpr(
             new DoubleLiteralExpr(distribution.sample.toString),
@@ -186,24 +215,49 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
       }
     }
 
-    // add created return statement
-
-    method.getBody.getStmts.add(new ReturnStmt(retExp.getCallStatement))
+    retExp
   }
 
-  protected def flatSatisfyCallables(satisfied: ListBuffer[CallableNode], unsatisfied: ListBuffer[CallableNode]) {
-    for (n: CallableNode <- unsatisfied) {
-      for (up <- n.getUnsatisfiedParameters) {
-        //        val potentialAssignments: ListBuffer[CallableNode] = satisfied.filter(p => p.referenceType.toString.equals(up.getType.toString))
-        val potentialAssignments: ListBuffer[CallableNode] = satisfied.filter(p => TypesConversionStrategy.canConvertTo(p.referenceType.toString, up.getType.toString))
-        val assignment = potentialAssignments.get(Random.nextInt(potentialAssignments.size))
-        n.setParameter(up, assignment)
-      }
-    }
-    for (n: CallableNode <- unsatisfied) {
-      if (n.getUnsatisfiedParameters.size == 0)
-        satisfied.add(n)
-    }
-  }
+  /**
+   * create or overwrite the return statement in @param{method} with a new statement that uses all available local vars.
+   * @param method
+   * @return
+   */
+  //  def createReturnStatement(method: MethodDeclaration, scopeManager: ScopeManager, callableFilter: (CallableNode => Boolean) = (_ => true), randomFactor: Boolean = true) = {
+  //    val node: Node = method.getBody.getStmts.size() match {
+  //      case 0 => method // if it's empty it's new
+  //      case _ => method.getBody.getStmts.last // otherwise it must have a return statement.
+  //    }
+  //    // find innermost scope
+  //    val scope: Scope = scopeManager.getScopeByNode(node)
+  //
+  //    // get callables relevant according to filter if any
+  //    val callables: ListBuffer[CallableNode] = scope.getCallablesByType("java.lang.Double", callableFilter)
+  //    callables ++= scope.getCallablesByType("int", callableFilter)
+  //
+  //    val (satisfied, unsatisfied): (ListBuffer[CallableNode], ListBuffer[CallableNode]) = callables.partition(n => n.getUnsatisfiedParameters.size == 0)
+  //    flatSatisfyCallables(satisfied, unsatisfied)
+  //
+  //
+  //
+  //    // add created return statement
+  //
+  //    method.getBody.getStmts.add(new ReturnStmt(retExp.getCallStatement))
+  //  }
+
+  //  protected def flatSatisfyCallables(satisfied: ListBuffer[CallableNode], unsatisfied: ListBuffer[CallableNode]) {
+  //    for (n: CallableNode <- unsatisfied) {
+  //      for (up <- n.getUnsatisfiedParameters) {
+  //        //        val potentialAssignments: ListBuffer[CallableNode] = satisfied.filter(p => p.referenceType.toString.equals(up.getType.toString))
+  //        val potentialAssignments: ListBuffer[CallableNode] = satisfied.filter(p => TypesConversionStrategy.canConvertTo(p.referenceType.toString, up.getType.toString))
+  //        val assignment = potentialAssignments.get(Random.nextInt(potentialAssignments.size))
+  //        n.setParameter(up, assignment)
+  //      }
+  //    }
+  //    for (n: CallableNode <- unsatisfied) {
+  //      if (n.getUnsatisfiedParameters.size == 0)
+  //        satisfied.add(n)
+  //    }
+  //  }
 
 }

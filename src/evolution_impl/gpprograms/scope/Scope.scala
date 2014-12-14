@@ -14,6 +14,11 @@ class Scope(val node: Node, parentScope: Scope = null) {
   var callables: ListBuffer[CallableNode] = ListBuffer()
   var childScopes: ListBuffer[Scope] = ListBuffer()
 
+  def getCallables(): ListBuffer[CallableNode] = {
+    val more: ListBuffer[CallableNode] = if (parentScope != null) parentScope.getCallables else ListBuffer()
+    callables ++ more
+  }
+
   def addCallable(callable: CallableNode) = {
     callables = callables :+ callable
   }
@@ -25,6 +30,7 @@ class Scope(val node: Node, parentScope: Scope = null) {
   def addChildScope(scope: Scope) = {
     childScopes = childScopes :+ scope
   }
+
 
   //  def getCallablesByType(t: String): ListBuffer[CallableNode] = {
   //    val parentCallables = if (parentScope == null) ListBuffer() else parentScope.getCallablesByType(t)

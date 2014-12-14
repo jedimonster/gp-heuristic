@@ -28,10 +28,10 @@ class SingleGameFitnessCalculator(game: String) extends FitnessCalculator[JavaCo
     val gamesPath: String = "gvgai/examples/gridphysics/"
 
     //CIG 2014 Training Set Games
-    //    val games = Array[String]("aliens", "boulderdash", "butterflies", "chase", "frogs",
-    //      "missilecommand", "portals", "sokoban", "survivezombies", "zelda")
+    val games = Array[String]("aliens", "boulderdash", "butterflies", "chase", "frogs",
+      "missilecommand", "portals", "sokoban", "survivezombies", "zelda")
     //CIG 2014 Validation Set Games
-    val games = Array[String]("camelRace", "digdug", "firestorms", "infection", "firecaster", "overload", "pacman", "seaquest", "whackamole", "eggomania")
+    //    val games = Array[String]("camelRace", "digdug", "firestorms", "infection", "firecaster", "overload", "pacman", "seaquest", "whackamole", "eggomania")
 
 
     //Other settings
@@ -41,13 +41,15 @@ class SingleGameFitnessCalculator(game: String) extends FitnessCalculator[JavaCo
 
     //Game and level to play
     val gameIdx: Int = 0
-    val levelIdx: Int = 0
+    val levelIdx: Int = 3
     val game: String = gamesPath + games(gameIdx) + ".txt"
 
     val level1: String = gamesPath + games(gameIdx) + "_lvl" + levelIdx + ".txt"
 
     val score: Double = ArcadeMachine.runOneGame(game, level1, visuals, gpHeuristic, recordActionsFile, seed)
-    score
+    val score2: Double = ArcadeMachine.runOneGame(game, level1, visuals, gpHeuristic, recordActionsFile, seed)
+
+    (score + score2) / 2
   }
 }
 
