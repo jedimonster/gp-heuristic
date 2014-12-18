@@ -41,7 +41,7 @@ class SingleGameFitnessCalculator(game: String) extends FitnessCalculator[JavaCo
 
     //Game and level to play
     val gameIdx: Int = 0
-    val levelIdx: Int = 3
+    val levelIdx: Int = 0
     val game: String = gamesPath + games(gameIdx) + ".txt"
 
     val level1: String = gamesPath + games(gameIdx) + "_lvl" + levelIdx + ".txt"
