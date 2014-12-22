@@ -8,12 +8,14 @@ import javax.tools.{DiagnosticCollector, JavaCompiler, JavaFileObject, ToolProvi
 import core.game.StateObservation
 import evolution_engine.evolution.Individual
 import evolution_impl.GPProgram
+import evolution_impl.fitness.dummyagent.StateObservationWrapper
 import evolution_impl.log.GPEvolutionLogger
 import evolution_impl.util.JavaSourceFromString
 import japa.parser.JavaParser
 import japa.parser.ast.CompilationUnit
 
 import scalaj.collection.Imports
+
 /**
  * Created By Itay Azaria
  * Date: 9/17/2014
@@ -28,13 +30,13 @@ class JavaCodeIndividual(
 
   def this(ast: CompilationUnit, originalFile: File) = this(ast, originalFile, new ClassName(ast.getTypes.get(0).getName, 0))
 
-  @throws[CompilationException]("if the individual couldn't be compiled")
-  def getValues(values: List[StateObservation]) = {
-    compile()
-    for (x <- values) yield run(x)
-  }
+//  @throws[CompilationException]("if the individual couldn't be compiled")
+//  def getValues(values: List[StateObservation]) = {
+//    compile()
+//    for (x <- values) yield run(x)
+//  }
 
-  def run(input: core.game.StateObservation): Double = {
+  def run(input: StateObservationWrapper): Double = {
     //    val packageName = ast.getPackage.getName
     val className = ast.getTypes.get(0).getName
     var loadedClass: Class[_] = Class.forName(className)
@@ -76,10 +78,10 @@ class JavaCodeIndividual(
       println("Failed compiling\n")
       println(diagnostics.getDiagnostics.get(0).toString)
       println(this.ast.toString)
-//      for(d <- diagnostics.getDiagnostics) {
-//        print(d.toString)
-//      }
-//      GPEvolutionLogger.saveBadIndividual(this)
+      //      for(d <- diagnostics.getDiagnostics) {
+      //        print(d.toString)
+      //      }
+      //      GPEvolutionLogger.saveBadIndividual(this)
       throw new CompilationException
     } else
     //      printf("Compiled class %s successfully\n", className)

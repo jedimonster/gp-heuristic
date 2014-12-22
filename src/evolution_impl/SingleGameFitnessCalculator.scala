@@ -46,6 +46,8 @@ class SingleGameFitnessCalculator(game: String) extends FitnessCalculator[JavaCo
 
     val level1: String = gamesPath + games(gameIdx) + "_lvl" + levelIdx + ".txt"
 
+    println("Playing 2 game with " + individual.getName  )
+
     val score: Double = ArcadeMachine.runOneGame(game, level1, visuals, gpHeuristic, recordActionsFile, seed)
     val score2: Double = ArcadeMachine.runOneGame(game, level1, visuals, gpHeuristic, recordActionsFile, seed)
 

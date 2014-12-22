@@ -144,10 +144,10 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
     scopeManager.visit(method, null)
 
     //    createReturnStatement(method, scopeManager)
-//    val nodesToReturn = scopeManager.getScopeByNode(method).getCallables() // todo actually last statement in method
+    //    val nodesToReturn = scopeManager.getScopeByNode(method).getCallables() // todo actually last statement in method
     var nodesToReturn = scopeManager.getScopeByNode(method).getCallablesByType("double") // todo actually last statement in method
     // todo nodesToReturn now include parameters that can be converted to double.
-    nodesToReturn = nodesToReturn.filter(n=>n.referenceType.toString.equals("double"))
+    nodesToReturn = nodesToReturn.filter(n => n.referenceType.toString.equals("double"))
     val availableNodes = List()
     createReturnStatement(method, nodesToReturn.toList, availableNodes, addRandomMultiplier = true)
     method
@@ -180,8 +180,10 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
         var potentialAssignments: List[CallableNode] = availableNodes.filter(p => TypesConversionStrategy.canConvertTo(p.referenceType.toString, up.getType.toString))
         // todo those assignments need to be satisfied themselves..
         potentialAssignments = potentialAssignments.filter(n => n.getUnsatisfiedParameters.isEmpty)
-        val assignment = potentialAssignments.get(Random.nextInt(potentialAssignments.size))
-        node.setParameter(up, assignment)
+        if (!potentialAssignments.isEmpty) {
+          val assignment = potentialAssignments.get(Random.nextInt(potentialAssignments.size))
+          node.setParameter(up, assignment)
+        }
       }
     }
 

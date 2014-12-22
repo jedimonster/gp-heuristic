@@ -8,6 +8,7 @@ import core.game.StateObservation
 import evolution_engine.selection.TournamentSelection
 import evolution_engine.{CSVEvolutionLogger, Run}
 import evolution_engine.evolution.{EvolutionParameters, ParentSelectionEvolutionStrategy}
+import evolution_impl.fitness.dummyagent.StateObservationWrapper
 import evolution_impl.gpprograms.{RandomGrowInitializer, JavaCodeIndividual}
 import evolution_impl.mutators.ConstantsMutator
 
@@ -33,7 +34,8 @@ class GPHeuristic(individual: JavaCodeIndividual = null) extends StateHeuristic 
       bestIndividual = CurrentIndividualHolder.individual
     }
 //    bestIndividual = gpRun.getBestIndividual
-    bestIndividual.run(stateObs)
+    val wrappedObservation = new StateObservationWrapper(stateObs)
+    bestIndividual.run(wrappedObservation)
   }
 }
 
@@ -44,7 +46,7 @@ class ThreadedGPRun() extends Runnable {
   val mutators = List(new ConstantsMutator(0.05))
   val generations = 20
   val popSize = 64
-  val paramTypes = List(new StateObservation(null))
+  val paramTypes = List(new StateObservationWrapper(null))
 
   val methodCount = 2
   val fitnessCalculator = new SingleGameFitnessCalculator("gvgai/examples/gridphysics/camelRace.txt")
