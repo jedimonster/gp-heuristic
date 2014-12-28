@@ -1,5 +1,8 @@
 package evolution_impl.gpprograms.scope
 
+import java.lang.annotation.Annotation
+
+import evolution_impl.fitness.dummyagent.AllowedValues
 import evolution_impl.gpprograms.TreeGrowingException
 import evolution_impl.gpprograms.util.{TypesConversionStrategy}
 import japa.parser.ast.Node
@@ -41,6 +44,30 @@ class CallableNode(val node: AnyRef, val refType: Type = null) {
     }
   }
 
+  def getParametersAnnotations: Option[Array[Array[Annotation]]] = {
+    node match {
+      case im: InnerMethod => im.parameterAnnotations
+      case _ => None
+    }
+  }
+
+  def getParameterPossibleValues(parameter: Parameter): Option[Array[String]] = {
+    getParametersAnnotations match {
+      case Some(annotations)=>
+        val parameterIndex = parameters.indexOf(parameter)
+//        var annotations: Array[Array[Annotation]] = annotations.get
+        val valuesAnnotations: Array[Annotation] = annotations(parameterIndex).filter(a => a match {
+          case p: AllowedValues => true
+          case _ => false
+        })
+        if (valuesAnnotations.length > 0) {
+          return Some(valuesAnnotations(0).asInstanceOf[AllowedValues].values())
+        }
+        return None
+      case _ => None
+    }
+  }
+
   @throws[TreeGrowingException]("if trying to set a none-existing parameter")
   def setParameter(parameter: Parameter, cu: CallableNode) = {
     if (parameters.contains(parameter)) {
@@ -65,7 +92,7 @@ class CallableNode(val node: AnyRef, val refType: Type = null) {
           case None => throw new TreeGrowingException("Tried to call method without assigning all paramaters")
         }
         new MethodCallExpr(null, m.getName, params.asJava)
-      case im : InnerMethod =>
+      case im: InnerMethod =>
         val params: Seq[Expression] = for (param <- parameters) yield assignments.get(param) match {
           case Some(e: Expression) => e
           case None => throw new TreeGrowingException("Tried to call method without assigning all paramaters")

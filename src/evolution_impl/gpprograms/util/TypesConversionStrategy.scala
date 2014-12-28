@@ -3,7 +3,8 @@ package evolution_impl.gpprograms.util
 import evolution_impl.gpprograms.TreeGrowingException
 import evolution_impl.gpprograms.scope.CallableNode
 import japa.parser.ast.`type`.ClassOrInterfaceType
-import japa.parser.ast.expr.{IntegerLiteralExpr, ConditionalExpr, CastExpr}
+import japa.parser.ast.expr._
+import scalaj.collection.Imports._
 
 /**
  * Created by itayaza on 01/12/2014.
@@ -20,6 +21,12 @@ object TypesConversionStrategy {
         toType match {
           case "double" | "int" | "java.lang.Double" => new CallableNode(new ConditionalExpr(n.getCallStatement, new IntegerLiteralExpr("1"), new IntegerLiteralExpr("0")))
           case _ => throw new TreeGrowingException("dunno how to convert " + n.referenceType.toString + " to " + toType)
+        }
+      case "String" =>
+        toType match {
+          case "int" | "Integer" =>
+            val list: List[Expression] = List(n.node.asInstanceOf[Expression])
+            new CallableNode(new MethodCallExpr(new NameExpr("Integer"), new java.lang.String("valueOf"), list.asJava))
         }
     }
 

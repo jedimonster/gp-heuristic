@@ -42,11 +42,13 @@ class Scope(val node: Node, parentScope: Scope = null) {
     var res = ListBuffer[CallableNode]()
     for (c <- callables if filter(c)) {
       //      if (c.referenceType.toString.equals(t)) {
-      if (TypesConversionStrategy.canConvertTo(c.referenceType.toString, t)) {
+      var callableType: String = c.referenceType.toString
+      if (TypesConversionStrategy.canConvertTo(callableType, t)) {
         res +:= c
       }
-      else if (!c.referenceType.toString.equals("int") && !c.referenceType.toString.equals("double") && !c.referenceType.toString.equals("boolean")) {
-        val expandedCallables: Seq[CallableNode] = ClassUtil.extractCallables(Class.forName(c.referenceType.toString), c.getCallStatement)
+      else if (!callableType.equals("int") && !callableType.equals("double") && !callableType.equals("boolean")) {
+        callableType = callableType.replaceAll("<.*>", "") // nasty, nasty way to remove type information
+        val expandedCallables: Seq[CallableNode] = ClassUtil.extractCallables(Class.forName(callableType), c.getCallStatement)
         // todo apparently at this point ^ c might not have its parameters satisfied.
         res ++= expandedCallables.filter(c => c.referenceType.toString.equals(t))
       }

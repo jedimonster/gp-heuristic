@@ -44,8 +44,8 @@ class ThreadedGPRun() extends Runnable {
 
   val crossovers = new JavaCodeCrossover(1.0)
   val mutators = List(new ConstantsMutator(0.05))
-  val generations = 20
-  val popSize = 64
+  val generations = 2
+  val popSize = 8
   val paramTypes = List(new StateObservationWrapper(null))
 
   val methodCount = 2

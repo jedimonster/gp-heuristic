@@ -1,5 +1,6 @@
 package evolution_impl.gpprograms.util
 
+import java.lang.annotation.Annotation
 import java.lang.reflect.{Modifier, GenericArrayType, Method, Type}
 
 import evolution_impl.gpprograms.scope.CallableNode
@@ -37,15 +38,31 @@ object ClassUtil {
     var callables = Seq[CallableNode]()
     val methodReturnType: Class[_] = method.getReturnType
     if ((methodReturnType.isPrimitive || methodReturnType.getName.equals("java.lang.String"))
-      && !methodReturnType.getName.equalsIgnoreCase("void")) {
+      && !methodReturnType.getName.equalsIgnoreCase("void")
+      || Class.forName("java.lang.Iterable").isAssignableFrom(methodReturnType)) {
       val methodParams = null
       //      val methodParams = for (c <- method.getParameterTypes) yield new Parameter(new ClassOrInterfaceType(c.getName), new VariableDeclaratorId("dontcare"))
       //      val methodExpr: MethodCallExpr = new MethodCallExpr(scope, method.getName, methodParams)
       val parameters: java.util.List[Parameter] = (for (p <- method.getParameterTypes.toSeq) yield new Parameter(new ClassOrInterfaceType(p.getName), null)).asJava
-      val methodNode = new InnerMethod(scope, new MethodDeclaration(0, new ClassOrInterfaceType(method.getReturnType.toString), method.getName, parameters))
-      callables :+= new CallableNode(methodNode, refType = new PrimitiveType(PrimitiveType.Primitive.valueOf(methodReturnType.getName.capitalize)))
-    } else if (Class.forName("java.lang.Iterable").isAssignableFrom(methodReturnType)) {
-      //      callables :+= new CallableNode(new MethodCallExpr(scope, method.getName), refType = new ClassOrInterfaceType(method.getGenericReturnType.toString))
+      val parameterAnnotations: Array[Array[Annotation]] = method.getParameterAnnotations
+
+      val methodNode = new InnerMethod(
+        scope, new MethodDeclaration(
+          0,
+          new ClassOrInterfaceType(
+            method.getReturnType.toString),
+          method.getName,
+          parameters),
+        parameterAnnotations = Some(parameterAnnotations))
+
+      if (Class.forName("java.lang.Iterable").isAssignableFrom(methodReturnType)) {
+        callables :+= new CallableNode(methodNode, refType = new ClassOrInterfaceType(method.getGenericReturnType.toString))
+
+      } else {
+        callables :+= new CallableNode(methodNode, refType = new PrimitiveType(PrimitiveType.Primitive.valueOf(methodReturnType.getName.capitalize)))
+      }
+//    } else if (Class.forName("java.lang.Iterable").isAssignableFrom(methodReturnType)) {
+//      callables :+= new CallableNode(new MethodCallExpr(scope, method.getName), refType = new ClassOrInterfaceType(method.getGenericReturnType.toString))
     } else if (methodReturnType.isEnum) {
       // todo
     } else {

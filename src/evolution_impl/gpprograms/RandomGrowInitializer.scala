@@ -2,13 +2,14 @@ package evolution_impl.gpprograms
 
 import java.io.File
 import java.lang.reflect.{ParameterizedType, Type, Method}
+import java.util
 import evolution_engine.evolution.{EvolutionParameters, PopulationInitializer}
 import evolution_impl.gpprograms.scope.{CallableNode, Scope, ScopeManager}
 import evolution_impl.gpprograms.util.{TypesConversionStrategy, ClassUtil}
 import japa.parser.JavaParser
 import japa.parser.ast.`type`.{ClassOrInterfaceType, ReferenceType}
 import japa.parser.ast.body._
-import japa.parser.ast.expr.{BinaryExpr, DoubleLiteralExpr}
+import japa.parser.ast.expr.{StringLiteralExpr, BinaryExpr, DoubleLiteralExpr}
 import japa.parser.ast.stmt.{BlockStmt, ReturnStmt, Statement}
 import japa.parser.ast.{CompilationUnit, Node}
 import org.apache.commons.math3.distribution.NormalDistribution
@@ -132,9 +133,8 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
     val modifiers = 1
     val methodType = new ReferenceType(new ClassOrInterfaceType("java.lang.Double"))
     val name = "ADF" + id
-    //    var parameters: List[Parameter] = Random.shuffle(paramTypes).slice(0, paramCount) // todo select paramCount params from the list in the field.
     var i = -1
-    var parameters = Random.shuffle(expandedParams).slice(0, paramCount).map(ca => {
+    val parameters = Random.shuffle(expandedParams).slice(0, paramCount).map(ca => {
       i += 1
       new Parameter(ca.referenceType, new VariableDeclaratorId("arg" + i))
     })
@@ -176,14 +176,29 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
    */
   def satisfyCallables(nodesToSatisfy: List[CallableNode], availableNodes: List[CallableNode]): List[CallableNode] = {
     for (node <- nodesToSatisfy) {
-      for (up <- node.getUnsatisfiedParameters) {
-        var potentialAssignments: List[CallableNode] = availableNodes.filter(p => TypesConversionStrategy.canConvertTo(p.referenceType.toString, up.getType.toString))
-        // todo those assignments need to be satisfied themselves..
-        potentialAssignments = potentialAssignments.filter(n => n.getUnsatisfiedParameters.isEmpty)
-        if (!potentialAssignments.isEmpty) {
-          val assignment = potentialAssignments.get(Random.nextInt(potentialAssignments.size))
-          node.setParameter(up, assignment)
+      for (up: Parameter <- node.getUnsatisfiedParameters) {
+        // we have to consider separately the case the method was annotated with possible values:
+        node.getParameterPossibleValues(up) match {
+          case Some(values) =>
+            // pick a random value from possible ones.
+            val assignment = values(Random.nextInt(values.size))
+            node.setParameter(up, new CallableNode(new StringLiteralExpr(assignment), refType = new ClassOrInterfaceType("String")))
+          case None =>
+            // pick a random value from the scope.
+            var potentialAssignments: List[CallableNode] = availableNodes.filter(p => TypesConversionStrategy.canConvertTo(p.referenceType.toString, up.getType.toString))
+            // todo those assignments need to be satisfied themselves..
+            potentialAssignments = satisfyCallables(potentialAssignments, availableNodes.filter(n => n.getUnsatisfiedParameters.isEmpty))
+
+            potentialAssignments = potentialAssignments.filter(n => n.getUnsatisfiedParameters.isEmpty)
+            if (!potentialAssignments.isEmpty) {
+              val assignment = potentialAssignments.get(Random.nextInt(potentialAssignments.size))
+              node.setParameter(up, assignment)
+            } else {
+              throw new TreeGrowingException("Can't satisfy parameters for a method call.")
+            }
         }
+
+
       }
     }
 
