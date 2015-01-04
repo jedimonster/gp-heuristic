@@ -1,12 +1,12 @@
 package evolution_impl.gpprograms.util
 
 import java.lang.annotation.Annotation
-import java.lang.reflect.{Modifier, GenericArrayType, Method, Type}
+import java.lang.reflect.{Method, Type, Modifier, Field, GenericArrayType}
 
 import evolution_impl.gpprograms.scope.CallableNode
 import japa.parser.ast.`type`.{ClassOrInterfaceType, PrimitiveType}
 import japa.parser.ast.body.{MethodDeclaration, VariableDeclaratorId, Parameter}
-import japa.parser.ast.expr.{InnerMethod, NameExpr, Expression, MethodCallExpr}
+import japa.parser.ast.expr._
 import sun.reflect.generics.reflectiveObjects.{GenericArrayTypeImpl, ParameterizedTypeImpl}
 import scalaj.collection.Imports._
 
@@ -61,12 +61,13 @@ object ClassUtil {
       } else {
         callables :+= new CallableNode(methodNode, refType = new PrimitiveType(PrimitiveType.Primitive.valueOf(methodReturnType.getName.capitalize)))
       }
-//    } else if (Class.forName("java.lang.Iterable").isAssignableFrom(methodReturnType)) {
-//      callables :+= new CallableNode(new MethodCallExpr(scope, method.getName), refType = new ClassOrInterfaceType(method.getGenericReturnType.toString))
+      //    } else if (Class.forName("java.lang.Iterable").isAssignableFrom(methodReturnType)) {
+      //      callables :+= new CallableNode(new MethodCallExpr(scope, method.getName), refType = new ClassOrInterfaceType(method.getGenericReturnType.toString))
     } else if (methodReturnType.isEnum) {
       // todo
     } else {
-      // todo add the object itself?
+      // add the object itself:
+      //      callables = callables :+ new CallableNode(scope)
       val i = 1
 
       // todo recursively scan:
@@ -82,19 +83,27 @@ object ClassUtil {
     callables
   }
 
-  def extractCallables(returnType: ParameterizedTypeImpl, scope: Expression): Seq[CallableNode] = {
-    // todo
-    Seq[CallableNode]()
-  }
+  //  def extractCallables(returnType: ParameterizedTypeImpl, scope: Expression): Seq[CallableNode] = {
+  //    // todo
+  //    Seq[CallableNode]()
+  //  }
 
   //  def extractCallables(returnType: Class[_], scope: => Expression): Seq[CallableNode] = {
   def extractCallables(returnType: Class[_], scope: => Expression): Seq[CallableNode] = {
     // if returnType is primitive or iterable, return a callable node for it.
-    if (returnType.isPrimitive || Class.forName("java.lang.Iterable").isAssignableFrom(returnType.getClass)) {
-      //      return new CallableNode(new Call)
+    if (returnType.isPrimitive
+    //      || Class.forName("java.lang.Iterable").isAssignableFrom(returnType.getClass)
+    ) {
+      // todo note this might break the world:
+      return Seq[CallableNode](new CallableNode(scope, new ClassOrInterfaceType(returnType.toString)))
     } else {
-      // else recursively search its members
+      // else add it and recursively search its members
       var callables: Seq[CallableNode] = Seq[CallableNode]()
+
+      //add it:
+      callables :+= new CallableNode(scope, new ClassOrInterfaceType(returnType.getName))
+
+      // recursively search its members:
       for (method <- returnType.getDeclaredMethods) {
         if (!method.getReturnType.toString.equals(returnType.toString)
           && !Modifier.isStatic(method.getModifiers)
@@ -102,6 +111,11 @@ object ClassUtil {
           // todo we should allow some recursion
           callables ++= extractCallables(method, scope)
         }
+      }
+
+      for (field: Field <- returnType.getDeclaredFields) {
+        if (Modifier.isPublic(field.getModifiers) && !Modifier.isStatic(field.getModifiers))
+          callables ++= extractCallables(field.getType, new FieldAccessExpr(scope, field.getName))
       }
 
       return callables

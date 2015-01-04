@@ -132,23 +132,28 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
   def growMethod(id: Int, paramCount: Int): MethodDeclaration = {
     val modifiers = 1
     val methodType = new ReferenceType(new ClassOrInterfaceType("java.lang.Double"))
-    val name = "ADF" + id
+    val name = "heuristic" + id
     var i = -1
-    val parameters = Random.shuffle(expandedParams).slice(0, paramCount).map(ca => {
-      i += 1
-      new Parameter(ca.referenceType, new VariableDeclaratorId("arg" + i))
-    })
+    val parameters = Random.shuffle(paramTypes).slice(0, Math.min(paramCount, paramTypes.size))
+    //    val parameters = Random.shuffle(expandedParams).slice(0, paramCount).map(ca => {
+    //      i += 1
+    //      new Parameter(ca.referenceType, new VariableDeclaratorId("arg" + i))
+    //    })
+    //
     val method = new MethodDeclaration(modifiers, methodType, name, ListBuffer(parameters: _*))
     val scopeManager = new ScopeManager()
     method.setBody(new BlockStmt(new java.util.ArrayList[Statement]())) // create an empty body to avoid nulls in the future.
     scopeManager.visit(method, null)
 
     //    createReturnStatement(method, scopeManager)
-    //    val nodesToReturn = scopeManager.getScopeByNode(method).getCallables() // todo actually last statement in method
-    var nodesToReturn = scopeManager.getScopeByNode(method).getCallablesByType("double") // todo actually last statement in method
-    // todo nodesToReturn now include parameters that can be converted to double.
-    nodesToReturn = nodesToReturn.filter(n => n.referenceType.toString.equals("double"))
-    val availableNodes = List()
+    //    val nodesToReturn = scopeManager.getScopeByNode(method).getCallables()
+    //    var nodesToReturn = scopeManager.getScopeByNode(method).getCallablesByType("double")
+    //    todo nodesToReturn now include parameters that can be converted to double.
+    //    nodesToReturn = nodesToReturn.filter(n => n.referenceType.toString.equals("double"))
+    //    var nodesToReturn: ListBuffer[CallableNode] = scopeManager.getScopeByNode(method).getCallables()
+    var nodesToReturn = expandedParams.slice(0, Math.min(expandedParams.length, paramCount))
+    nodesToReturn = nodesToReturn.filter(can => can.referenceType.toString.equals("double"))
+    val availableNodes = expandedParams.toList
     createReturnStatement(method, nodesToReturn.toList, availableNodes, addRandomMultiplier = true)
     method
   }

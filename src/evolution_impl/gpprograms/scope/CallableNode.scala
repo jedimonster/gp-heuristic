@@ -53,9 +53,9 @@ class CallableNode(val node: AnyRef, val refType: Type = null) {
 
   def getParameterPossibleValues(parameter: Parameter): Option[Array[String]] = {
     getParametersAnnotations match {
-      case Some(annotations)=>
+      case Some(annotations) =>
         val parameterIndex = parameters.indexOf(parameter)
-//        var annotations: Array[Array[Annotation]] = annotations.get
+        //        var annotations: Array[Array[Annotation]] = annotations.get
         val valuesAnnotations: Array[Annotation] = annotations(parameterIndex).filter(a => a match {
           case p: AllowedValues => true
           case _ => false
@@ -83,6 +83,8 @@ class CallableNode(val node: AnyRef, val refType: Type = null) {
   }
 
   def getUnsatisfiedParameters: Seq[Parameter] = parameters.filterNot((p: Parameter) => assignments.contains(p))
+
+  def parametersSatisfied: Boolean = getUnsatisfiedParameters.size == 0
 
   def getCallStatement: Expression = {
     node match {

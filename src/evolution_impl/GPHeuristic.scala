@@ -10,7 +10,7 @@ import evolution_engine.{CSVEvolutionLogger, Run}
 import evolution_engine.evolution.{EvolutionParameters, ParentSelectionEvolutionStrategy}
 import evolution_impl.fitness.dummyagent.StateObservationWrapper
 import evolution_impl.gpprograms.{RandomGrowInitializer, JavaCodeIndividual}
-import evolution_impl.mutators.ConstantsMutator
+import evolution_impl.mutators.{ForLoopsMutator, ConstantsMutator}
 
 import scala.actors.Future
 
@@ -43,7 +43,7 @@ class GPHeuristic(individual: JavaCodeIndividual = null) extends StateHeuristic 
 class ThreadedGPRun() extends Runnable {
 
   val crossovers = new JavaCodeCrossover(1.0)
-  val mutators = List(new ConstantsMutator(0.05))
+  val mutators = List(new ConstantsMutator(0.05), new ForLoopsMutator(1.0))
   val generations = 2
   val popSize = 8
   val paramTypes = List(new StateObservationWrapper(null))
