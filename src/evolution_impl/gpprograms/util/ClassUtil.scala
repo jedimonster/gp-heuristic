@@ -43,7 +43,10 @@ object ClassUtil {
       val methodParams = null
       //      val methodParams = for (c <- method.getParameterTypes) yield new Parameter(new ClassOrInterfaceType(c.getName), new VariableDeclaratorId("dontcare"))
       //      val methodExpr: MethodCallExpr = new MethodCallExpr(scope, method.getName, methodParams)
-      val parameters: java.util.List[Parameter] = (for (p <- method.getParameterTypes.toSeq) yield new Parameter(new ClassOrInterfaceType(p.getName), null)).asJava
+      var i = 0;
+      val parameters: java.util.List[Parameter] = (for (p <- method.getParameterTypes.toSeq) yield new Parameter(new ClassOrInterfaceType(p.getName), new VariableDeclaratorId(({
+        i += 1; i.toString
+      })))).asJava
       val parameterAnnotations: Array[Array[Annotation]] = method.getParameterAnnotations
 
       val methodNode = new InnerMethod(

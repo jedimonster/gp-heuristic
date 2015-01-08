@@ -10,7 +10,7 @@ import evolution_engine.{CSVEvolutionLogger, Run}
 import evolution_engine.evolution.{EvolutionParameters, ParentSelectionEvolutionStrategy}
 import evolution_impl.fitness.dummyagent.StateObservationWrapper
 import evolution_impl.gpprograms.{RandomGrowInitializer, JavaCodeIndividual}
-import evolution_impl.mutators.{ForLoopsMutator, ConstantsMutator}
+import evolution_impl.mutators.{RegrowMethodMutator, ForLoopsMutator, ConstantsMutator}
 
 import scala.actors.Future
 
@@ -33,7 +33,7 @@ class GPHeuristic(individual: JavaCodeIndividual = null) extends StateHeuristic 
     } else {
       bestIndividual = CurrentIndividualHolder.individual
     }
-//    bestIndividual = gpRun.getBestIndividual
+    //    bestIndividual = gpRun.getBestIndividual
     val wrappedObservation = new StateObservationWrapper(stateObs)
     bestIndividual.run(wrappedObservation)
   }
@@ -43,12 +43,12 @@ class GPHeuristic(individual: JavaCodeIndividual = null) extends StateHeuristic 
 class ThreadedGPRun() extends Runnable {
 
   val crossovers = new JavaCodeCrossover(1.0)
-  val mutators = List(new ConstantsMutator(0.05), new ForLoopsMutator(1.0))
-  val generations = 2
-  val popSize = 8
+  val mutators = List(new ConstantsMutator(0.05), new ForLoopsMutator(0.15), new RegrowMethodMutator(0.15))
+  val generations = 100
+  val popSize = 32
   val paramTypes = List(new StateObservationWrapper(null))
 
-  val methodCount = 2
+  val methodCount = 6
   val fitnessCalculator = new SingleGameFitnessCalculator("gvgai/examples/gridphysics/camelRace.txt")
   val selection = new TournamentSelection[JavaCodeIndividual](false)
   val params = new EvolutionParameters[JavaCodeIndividual](fitnessCalculator, selection,

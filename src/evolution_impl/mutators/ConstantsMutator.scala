@@ -4,10 +4,11 @@ import java.util
 
 import evolution_engine.mutators.Mutator
 import evolution_impl.gpprograms.JavaCodeIndividual
-import japa.parser.ast.expr.DoubleLiteralExpr
+import japa.parser.ast.expr.{BinaryExpr, DoubleLiteralExpr}
 
 import scala.collection.JavaConversions._
 import scala.collection.JavaConverters._
+import scala.util.Random
 
 /**
  * Created By Itay Azaria
@@ -29,9 +30,9 @@ class ConstantsMutator(probability: Double) extends Mutator[JavaCodeIndividual] 
   }
 }
 
-class ConstantVisitor[A](probability : Double) extends ASTVisitor[A] {
+class ConstantVisitor[A](probability: Double) extends ASTVisitor[A] {
   override def visit(n: DoubleLiteralExpr, arg: A): Unit = {
-    val diff: Double = Math.round(Math.random() * 5) // keep the sign, another mutator will change that
+    val diff: Double = Math.round(Math.random()) // keep the sign, another mutator will change that
     if (math.random < this.probability)
       n.setValue((n.getValue.toDouble + diff).toString)
     super.visit(n, arg)
@@ -43,6 +44,14 @@ class SignVisitor[T]() extends ASTVisitor[T] {
   override def visit(n: DoubleLiteralExpr, arg: T): Unit = {
     if (Math.random() < 0.05)
       n.setValue((-1 * n.getValue.toDouble).toString)
+    super.visit(n, arg)
+  }
+
+  override def visit(n: BinaryExpr, arg: T): Unit = {
+    if (Random.nextBoolean)
+      n.setOperator(BinaryExpr.Operator.times)
+    else
+      n.setOperator(BinaryExpr.Operator.divide)
     super.visit(n, arg)
   }
 }

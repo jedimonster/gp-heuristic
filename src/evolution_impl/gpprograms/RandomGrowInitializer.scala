@@ -2,7 +2,6 @@ package evolution_impl.gpprograms
 
 import java.io.File
 import java.lang.reflect.{ParameterizedType, Type, Method}
-import java.util
 import evolution_engine.evolution.{EvolutionParameters, PopulationInitializer}
 import evolution_impl.gpprograms.scope.{CallableNode, Scope, ScopeManager}
 import evolution_impl.gpprograms.util.{TypesConversionStrategy, ClassUtil}
@@ -61,6 +60,8 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
   }
 
 
+  val ParamCount: Int = 2
+
   def growIndividual(id: Int): JavaCodeIndividual = {
 
     // get a copy of the prototype
@@ -73,7 +74,7 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
     individual.gardener = Some(this)
 
     // randomly grow methods
-    val methods: IndexedSeq[MethodDeclaration] = for (i <- 0 to methodCount) yield growMethod(i, 3)
+    val methods: IndexedSeq[MethodDeclaration] = for (i <- 0 to methodCount) yield growMethod(HeuristicsNumbers.getNext, ParamCount)
     val classDeceleration: ClassOrInterfaceDeclaration = individual.ast.getTypes.get(0) match {
       case e: ClassOrInterfaceDeclaration => e
       case _ => throw new TreeGrowingException("Can't find main class")
@@ -151,24 +152,19 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
     //    todo nodesToReturn now include parameters that can be converted to double.
     //    nodesToReturn = nodesToReturn.filter(n => n.referenceType.toString.equals("double"))
     //    var nodesToReturn: ListBuffer[CallableNode] = scopeManager.getScopeByNode(method).getCallables()
-    var nodesToReturn = expandedParams.slice(0, Math.min(expandedParams.length, paramCount))
-    nodesToReturn = nodesToReturn.filter(can => can.referenceType.toString.equals("double"))
+    var nodesToReturn = expandedParams.filter(can => can.referenceType.toString.equals("double"))
+
     val availableNodes = expandedParams.toList
-    createReturnStatement(method, nodesToReturn.toList, availableNodes, addRandomMultiplier = true)
+    createReturnStatement(method, nodesToReturn.toList, availableNodes, addRandomMultiplier = true, paramCount)
     method
   }
 
-  def createReturnStatement(method: MethodDeclaration, nodesToReturn: List[CallableNode], availableNodes: List[CallableNode], addRandomMultiplier: Boolean) = {
-    val node: Node = method.getBody.getStmts.size() match {
-      case 0 => method // if it's empty it's new
-      case _ => // otherwise it must have a return statement - drop it
-        val stm = method.getBody.getStmts.last
-        method.getBody.getStmts.remove(stm)
-        stm
-    }
+  def createReturnStatement(method: MethodDeclaration, nodesToReturn: List[CallableNode], availableNodes: List[CallableNode], addRandomMultiplier: Boolean, paramCount: Integer = Int.MaxValue) = {
+    method.getBody.setStmts(method.getBody.getStmts.filterNot(s => s.isInstanceOf[ReturnStmt]))
     // find innermost scope
     //    val scope: Scope = scopeManager.getScopeByNode(node)
-    val nodesToReallyReturn = satisfyCallables(nodesToReturn, availableNodes) // tries to satisfy the nodes we need to return, and use those we could.
+    var nodesToReallyReturn = satisfyCallables(nodesToReturn, availableNodes) // tries to satisfy the nodes we need to return, and use those we could.
+    nodesToReallyReturn = Random.shuffle(nodesToReallyReturn).slice(0, Math.min(nodesToReallyReturn.size, paramCount))
     val returnStatement = compactCallables(nodesToReallyReturn, addRandomMultiplier)
 
     method.getBody.getStmts.add(new ReturnStmt(returnStatement.getCallStatement))
@@ -199,7 +195,7 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
               val assignment = potentialAssignments.get(Random.nextInt(potentialAssignments.size))
               node.setParameter(up, assignment)
             } else {
-              throw new TreeGrowingException("Can't satisfy parameters for a method call.")
+              //              throw new TreeGrowingException("Can't satisfy parameters for a method call.")
             }
         }
 
@@ -282,4 +278,13 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
   //    }
   //  }
 
+}
+
+object HeuristicsNumbers {
+  var i = 0
+
+  def getNext : Int= {
+    i += 1
+    i
+  }
 }

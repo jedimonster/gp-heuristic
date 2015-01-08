@@ -37,7 +37,8 @@ class JavaCodeCrossover(probability: Double) extends Crossover[JavaCodeIndividua
     for (method <- methods) {
       method match {
         case declaration: MethodDeclaration =>
-          declaration.setName("ADF" + i.toString)
+          // no need since names are now unique.
+//          declaration.setName("heuristic" + i.toString)
           i += 1
         case _ =>
           print("frak")

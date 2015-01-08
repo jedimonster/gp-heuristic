@@ -2,6 +2,7 @@ package evolution_impl.fitness.dummyagent;
 
 import core.game.Observation;
 import core.game.StateObservation;
+import ontology.Types;
 import tools.Vector2d;
 
 import java.util.ArrayList;
@@ -18,30 +19,39 @@ public class StateObservationWrapper {
         this.so = so;
     }
 
-//    public double getGameScore() {
-//        return so.getGameScore();
+//    public double getScoreInMoves(@AllowedValues(values = {"1","2","","4","8","12","16"}) int moves) {
+//        StateObservation copy = so.copy();
+//        for (int i = 0; i < moves; i++) {
+//            copy.advance(Types.ACTIONS.ACTION_NIL);
+//        }
+//
+//        return copy.getGameScore();
 //    }
+//
+    public double getGameScore() {
+        return so.getGameScore();
+    }
 //
 //    public int getGameTick() {
 //        return so.getGameTick();
 //    }
-//
+
 //    public int getBlockSize() {
 //        return so.getBlockSize();
 //    }
-//
-//    public Vector2d getAvatarPosition() {
-//        return so.getAvatarPosition();
-//    }
-//
+
+    public Vector2d getAvatarPosition() {
+        return so.getAvatarPosition();
+    }
+
 //    public double getAvatarSpeed() {
 //        return so.getAvatarSpeed();
 //    }
-//
+
 //    public Vector2d getAvatarOrientation() {
 //        return so.getAvatarOrientation();
 //    }
-//
+
 //    public double getResourcesCount() {
 //        HashMap<Integer, Integer> idCountMap = so.getAvatarResources();
 //        double sum = 0;
@@ -52,7 +62,7 @@ public class StateObservationWrapper {
 //
 //        return sum;
 //    }
-//
+
 //    public double getNPCCount() {
 //        double sum = 0;
 //        for (ArrayList<Observation> observations : so.getNPCPositions()) {
@@ -61,6 +71,24 @@ public class StateObservationWrapper {
 //
 //        return sum;
 //    }
+
+//    public Iterable<Observation> getNPCsPositions(
+//            @AllowedValues(values = {"3"}) int category,
+//            @AllowedValues(values = {"4","9"}) int itype) {
+//        Vector2d avatarPosition = so.getAvatarPosition();
+//        List<Observation> result = new ArrayList<>();
+//
+//        for (ArrayList<Observation> observations : so.getNPCPositions(avatarPosition)) {
+//            for (Observation observation : observations) {
+//                if (observation.category == category && observation.itype == itype)
+//                    result.add(observation);
+//            }
+//        }
+//
+//        return result;
+//    }
+
+
 
     public Iterable<Observation> getImmovablePositions(
             @AllowedValues(values = {"4"}) int category,
@@ -77,5 +105,7 @@ public class StateObservationWrapper {
 
         return result;
     }
+
+
 
 }

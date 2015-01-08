@@ -23,7 +23,7 @@ class Scope(val node: Node, parentScope: Scope = null) {
     callables = callables :+ callable
   }
 
-  def addCallables(toadd: mutable.Iterable[CallableNode]) = {
+  def addCallables(toadd: Iterable[CallableNode]) = {
     callables = callables ++ toadd
   }
 

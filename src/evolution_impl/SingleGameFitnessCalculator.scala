@@ -11,15 +11,30 @@ import evolution_impl.gpprograms.JavaCodeIndividual
  */
 class SingleGameFitnessCalculator(game: String) extends FitnessCalculator[JavaCodeIndividual] {
   override def calculateFitness(individuals: List[JavaCodeIndividual]): FitnessResult[JavaCodeIndividual] = {
-    val fitnessValues = for (i <- individuals) yield (i, getIndividualFitness(i))
-
+    val fitnessValues: List[(JavaCodeIndividual, Double)] = for (i <- individuals) yield (i, getIndividualFitness(i))
+    val best = fitnessValues.maxBy(x => x._2)
+    CurrentIndividualHolder.indLock.synchronized {
+      CurrentIndividualHolder.individual = best._1
+      println("Best fitness - " + best._2)
+      if (best._2 > 76) {
+        val in = readLine("Show best individuals game(Y/N)?")
+        if (in.equalsIgnoreCase("y"))
+          playGame(best._1, visuals = true)
+      }
+    }
     new DumbFitnessResult[JavaCodeIndividual](fitnessValues.toMap)
   }
 
   def getIndividualFitness(individual: JavaCodeIndividual) = {
-    CurrentIndividualHolder.individual = individual
-    individual.compile()
-    // run the machine using the dummy agent here
+    CurrentIndividualHolder.indLock.synchronized {
+      CurrentIndividualHolder.individual = individual
+      individual.compile()
+      // run the machine using the dummy agent here
+      playGame(individual)
+    }
+  }
+
+  def playGame(individual: JavaCodeIndividual, visuals: Boolean = false) = {
     val gpHeuristic: String = "evolution_impl.fitness.dummyagent.Agent"
 
     // todo take game/lvl from fields.
@@ -35,7 +50,6 @@ class SingleGameFitnessCalculator(game: String) extends FitnessCalculator[JavaCo
 
 
     //Other settings
-    val visuals: Boolean = false
     val recordActionsFile: String = null
     val seed: Int = new Random().nextInt
 
@@ -46,16 +60,18 @@ class SingleGameFitnessCalculator(game: String) extends FitnessCalculator[JavaCo
 
     val level1: String = gamesPath + games(gameIdx) + "_lvl" + levelIdx + ".txt"
 
-    println("Playing 2 game with " + individual.getName  )
+    println("---\nPlaying a game with " + individual.getName)
 
     val score: Double = ArcadeMachine.runOneGame(game, level1, visuals, gpHeuristic, recordActionsFile, seed)
-    val score2: Double = ArcadeMachine.runOneGame(game, level1, visuals, gpHeuristic, recordActionsFile, seed)
-
-    (score + score2) / 2
+//    val score2: Double = ArcadeMachine.runOneGame(game, level1, false, gpHeuristic, recordActionsFile, seed)
+//
+//    (score + score2) / 2
+    score
   }
 }
 
 object CurrentIndividualHolder {
+  val indLock = None
   var individual: JavaCodeIndividual = null
 }
 

@@ -1,9 +1,10 @@
 package evolution_impl.gpprograms.scope
 
+import scalaj.collection.Imports._
 import evolution_impl.gpprograms
 import evolution_impl.gpprograms.scope
 import japa.parser.ast.Node
-import japa.parser.ast.body.{ClassOrInterfaceDeclaration, MethodDeclaration, Parameter}
+import japa.parser.ast.body.{VariableDeclarator, ClassOrInterfaceDeclaration, MethodDeclaration, Parameter}
 import japa.parser.ast.expr.{ConditionalExpr, MethodCallExpr, NameExpr, VariableDeclarationExpr}
 import japa.parser.ast.stmt._
 import japa.parser.ast.visitor.VoidVisitorAdapter
@@ -64,14 +65,15 @@ class ScopeManager extends VoidVisitorAdapter[scope.Scope] {
     super.visit(n, arg)
   }
 
+
   override def visit(n: ForeachStmt, arg: Scope): Unit = {
-    createBindNewScope(n, arg)
-    super.visit(n, arg)
+    val scope = createBindNewScope(n, arg)
+    super.visit(n, scope)
   }
 
   override def visit(n: ForStmt, arg: Scope): Unit = {
-    createBindNewScope(n, arg)
-    super.visit(n, arg)
+    val scope = createBindNewScope(n, arg)
+    super.visit(n, scope)
   }
 
   override def visit(n: IfStmt, arg: Scope): Unit = {
@@ -79,9 +81,10 @@ class ScopeManager extends VoidVisitorAdapter[scope.Scope] {
     super.visit(n, arg)
   }
 
-  protected def createBindNewScope(n: Node, arg: Scope) {
+  protected def createBindNewScope(n: Node, arg: Scope): Scope = {
     val newScope = new Scope(n, arg)
     scopeByNode.put(n, arg)
+    newScope
   }
 
   override def visit(n: MethodCallExpr, arg: Scope): Unit = {
@@ -94,9 +97,20 @@ class ScopeManager extends VoidVisitorAdapter[scope.Scope] {
     super.visit(n, arg)
   }
 
-  override def visit(n: VariableDeclarationExpr, arg: Scope): Unit = {
-    createBindNewScope(n, arg)
-    super.visit(n, arg)
+  override def visit(n: VariableDeclarationExpr, parentScope: Scope): Unit = {
+    // create a new scope for the variable
+    //    val scope = new gpprograms.scope.Scope(n, parentScope)
+
+    // add method's parameters to the scope
+    //      val value: Any = for (p <- n.getParameters) yield new CallableNode(p)
+    //      scope.addCallables(value)
+
+    // bind the scope to the method
+    val callables = for (v: VariableDeclarator <- n.getVars.asScala) yield new CallableNode(new NameExpr(v.getId.toString), n.getType)
+    parentScope.addCallables(callables)
+    // continue traversing
+    //    scopeByNode.put(n, scope)
+    super.visit(n, parentScope)
   }
 }
 
