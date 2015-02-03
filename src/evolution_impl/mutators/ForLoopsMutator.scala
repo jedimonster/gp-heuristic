@@ -73,7 +73,12 @@ class ForLoopsVisitor(probability: Double) extends ASTVisitor[JavaCodeIndividual
     val accVar: VariableDeclarator = new VariableDeclarator(new VariableDeclaratorId("acc"), new DoubleLiteralExpr("0.0"))
     statements.append(new ExpressionStmt(new VariableDeclarationExpr(new ClassOrInterfaceType("double"), List(accVar))))
     val allowedOperators = List(Operator.plus, Operator.minus, Operator.star, Operator.slash)
-    innerStatements.append(new ExpressionStmt(new AssignExpr(new NameExpr("acc"), innerScope(Random.nextInt(innerScope.length)).getCallStatement, allowedOperators(Random.nextInt(allowedOperators.size)))))
+    if (Math.random() > 0.5)
+      innerStatements.append(new ExpressionStmt(new AssignExpr(new NameExpr("acc"), innerScope(Random.nextInt(innerScope.length)).getCallStatement, allowedOperators(Random.nextInt(allowedOperators.size)))))
+    else {
+      val minExpr: MethodCallExpr = new MethodCallExpr(new NameExpr("Math"), "max", List(innerScope(Random.nextInt(innerScope.length)).getCallStatement, new NameExpr("acc")).asJava)
+      innerStatements.append(new ExpressionStmt(new AssignExpr(new NameExpr("acc"), minExpr, Operator.assign)))
+    }
 
     val bodyStatements = new BlockStmt(innerStatements.asJava)
     val forStatement = new ForeachStmt(

@@ -4,7 +4,8 @@ package evolution_impl.fitness.dummyagent
 import controllers.Heuristics.SimpleStateHeuristic
 import core.game.StateObservation
 import core.player.AbstractPlayer
-import evolution_impl.{CurrentIndividualHolder, GPHeuristic}
+import evolution_impl.GPHeuristic
+import evolution_impl.fitness.CurrentIndividualHolder
 import ontology.Types
 import ontology.Types.ACTIONS
 import tools.ElapsedCpuTimer

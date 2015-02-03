@@ -13,7 +13,7 @@ import scala.util.Random
  */
 
 class TournamentSelection[T <: Individual](minimize: Boolean) extends SelectionStrategy[T] {
-  val subsetSize = 12
+  val subsetSize = 10
 
   def optimal(list: List[T], value: FitnessResult[T]): T = {
     var optFitness = if (minimize) Double.MaxValue else Double.MinValue

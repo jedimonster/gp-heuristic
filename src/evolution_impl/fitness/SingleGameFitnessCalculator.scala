@@ -1,9 +1,10 @@
-package evolution_impl
+package evolution_impl.fitness
 
 import java.util.Random
 
 import core.ArcadeMachine
-import evolution_engine.fitness.{FitnessResult, FitnessCalculator}
+import evolution_engine.fitness.{FitnessCalculator, FitnessResult}
+import evolution_impl.DumbFitnessResult
 import evolution_impl.gpprograms.JavaCodeIndividual
 
 /**
@@ -16,11 +17,11 @@ class SingleGameFitnessCalculator(game: String) extends FitnessCalculator[JavaCo
     CurrentIndividualHolder.indLock.synchronized {
       CurrentIndividualHolder.individual = best._1
       println("Best fitness - " + best._2)
-      if (best._2 > 76) {
-        val in = readLine("Show best individuals game(Y/N)?")
-        if (in.equalsIgnoreCase("y"))
-          playGame(best._1, visuals = true)
-      }
+//      if (best._2 > 76) {
+//        val in = readLine("Show best individuals game(Y/N)?")
+//        if (in.equalsIgnoreCase("y"))
+//          playGame(best._1, visuals = true)
+//      }
     }
     new DumbFitnessResult[JavaCodeIndividual](fitnessValues.toMap)
   }
@@ -63,9 +64,9 @@ class SingleGameFitnessCalculator(game: String) extends FitnessCalculator[JavaCo
     println("---\nPlaying a game with " + individual.getName)
 
     val score: Double = ArcadeMachine.runOneGame(game, level1, visuals, gpHeuristic, recordActionsFile, seed)
-//    val score2: Double = ArcadeMachine.runOneGame(game, level1, false, gpHeuristic, recordActionsFile, seed)
-//
-//    (score + score2) / 2
+    //    val score2: Double = ArcadeMachine.runOneGame(game, level1, false, gpHeuristic, recordActionsFile, seed)
+    //
+    //    (score + score2) / 2
     score
   }
 }

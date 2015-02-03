@@ -8,6 +8,7 @@ import core.game.StateObservation
 import evolution_engine.selection.TournamentSelection
 import evolution_engine.{CSVEvolutionLogger, Run}
 import evolution_engine.evolution.{EvolutionParameters, ParentSelectionEvolutionStrategy}
+import evolution_impl.fitness.{MultiGameFitnessCalculator, SingleGameFitnessCalculator}
 import evolution_impl.fitness.dummyagent.StateObservationWrapper
 import evolution_impl.gpprograms.{RandomGrowInitializer, JavaCodeIndividual}
 import evolution_impl.mutators.{RegrowMethodMutator, ForLoopsMutator, ConstantsMutator}
@@ -28,10 +29,10 @@ class GPHeuristic(individual: JavaCodeIndividual = null) extends StateHeuristic 
   override def evaluateState(stateObs: StateObservation): Double = {
     var bestIndividual: JavaCodeIndividual = null
     //
-    if (CurrentIndividualHolder.individual == null) {
+    if (fitness.CurrentIndividualHolder.individual == null) {
       bestIndividual = gpRun.getBestIndividual
     } else {
-      bestIndividual = CurrentIndividualHolder.individual
+      bestIndividual = fitness.CurrentIndividualHolder.individual
     }
     //    bestIndividual = gpRun.getBestIndividual
     val wrappedObservation = new StateObservationWrapper(stateObs)
@@ -43,13 +44,14 @@ class GPHeuristic(individual: JavaCodeIndividual = null) extends StateHeuristic 
 class ThreadedGPRun() extends Runnable {
 
   val crossovers = new JavaCodeCrossover(1.0)
-  val mutators = List(new ConstantsMutator(0.05), new ForLoopsMutator(0.15), new RegrowMethodMutator(0.15))
+  val mutators = List(new ConstantsMutator(0.05), new ForLoopsMutator(0.25), new RegrowMethodMutator(0.25))
   val generations = 100
   val popSize = 32
   val paramTypes = List(new StateObservationWrapper(null))
 
   val methodCount = 6
-  val fitnessCalculator = new SingleGameFitnessCalculator("gvgai/examples/gridphysics/camelRace.txt")
+  val fitnessCalculator = new SingleGameFitnessCalculator("gvgai/examples/gridphysics/aliens.txt")
+//  val fitnessCalculator = new MultiGameFitnessCalculator()
   val selection = new TournamentSelection[JavaCodeIndividual](false)
   val params = new EvolutionParameters[JavaCodeIndividual](fitnessCalculator, selection,
     crossovers, mutators, new RandomGrowInitializer(paramTypes, methodCount), generations, popSize)

@@ -3,6 +3,7 @@ package evolution_engine.evolution
 import evolution_engine.fitness.FitnessCalculator
 import evolution_engine.mutators.{Crossover, Mutator}
 import evolution_engine.selection.SelectionStrategy
+import evolution_impl.fitness.dummyagent.StateObservationWrapper
 
 /**
  * Created By Itay Azaria
