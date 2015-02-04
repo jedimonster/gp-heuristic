@@ -76,7 +76,8 @@ class ForLoopsVisitor(probability: Double) extends ASTVisitor[JavaCodeIndividual
     if (Math.random() > 0.5)
       innerStatements.append(new ExpressionStmt(new AssignExpr(new NameExpr("acc"), innerScope(Random.nextInt(innerScope.length)).getCallStatement, allowedOperators(Random.nextInt(allowedOperators.size)))))
     else {
-      val minExpr: MethodCallExpr = new MethodCallExpr(new NameExpr("Math"), "max", List(innerScope(Random.nextInt(innerScope.length)).getCallStatement, new NameExpr("acc")).asJava)
+      val randomMathBinrayOperator: String = if(Random.nextBoolean()) "max" else "min"
+      val minExpr: MethodCallExpr = new MethodCallExpr(new NameExpr("Math"), randomMathBinrayOperator, List(innerScope(Random.nextInt(innerScope.length)).getCallStatement, new NameExpr("acc")).asJava)
       innerStatements.append(new ExpressionStmt(new AssignExpr(new NameExpr("acc"), minExpr, Operator.assign)))
     }
 

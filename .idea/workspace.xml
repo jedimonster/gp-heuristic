@@ -5,19 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="719a2b7b-e7d5-44e2-8910-1b2c90982fb0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/evolution_impl/fitness/dummyagent/GPIgnore.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/evolution_impl/fitness/MultiGameFitnessCalculator.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/evolution_impl/fitness/PlayoutCalculator.scala" />
-      <change type="MOVED" beforePath="C:\Users\itayaza\Idea Projects\gp-heuristic\src\evolution_impl\SingleGameFitnessCalculator.scala" afterPath="$PROJECT_DIR$/src/evolution_impl/fitness/SingleGameFitnessCalculator.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gvgai" afterPath="$PROJECT_DIR$/gvgai" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_impl/fitness/dummyagent/Agent.scala" afterPath="$PROJECT_DIR$/src/evolution_impl/fitness/dummyagent/Agent.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_engine/evolution/BaseEvolutionStrategy.scala" afterPath="$PROJECT_DIR$/src/evolution_engine/evolution/BaseEvolutionStrategy.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_impl/mutators/ForLoopsMutator.scala" afterPath="$PROJECT_DIR$/src/evolution_impl/mutators/ForLoopsMutator.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_impl/GPHeuristic.scala" afterPath="$PROJECT_DIR$/src/evolution_impl/GPHeuristic.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_impl/GPProgram.java" afterPath="$PROJECT_DIR$/src/evolution_impl/GPProgram.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_impl/fitness/dummyagent/StateObservationWrapper.java" afterPath="$PROJECT_DIR$/src/evolution_impl/fitness/dummyagent/StateObservationWrapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gvgai/src/Test.java" afterPath="$PROJECT_DIR$/gvgai/src/Test.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_engine/selection/TournamentSelection.scala" afterPath="$PROJECT_DIR$/src/evolution_engine/selection/TournamentSelection.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="gp-heuristic.iws" />
@@ -43,7 +34,7 @@
     <favorites_list name="gp-heuristic" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.28817365">
+    <splitter split-orientation="horizontal" split-proportion="0.46856287">
       <split-first>
         <leaf>
           <file leaf-file-name="FitnessCalculator.scala" pinned="false" current-in-tab="false">
@@ -61,11 +52,9 @@
           <file leaf-file-name="MultiGameFitnessCalculator.scala" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/evolution_impl/fitness/MultiGameFitnessCalculator.scala">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.4773218" vertical-offset="255" max-vertical-offset="1734">
-                  <caret line="28" column="31" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
-                  <folding>
-                    <element signature="e#32#83#0" expanded="true" />
-                  </folding>
+                <state vertical-scroll-proportion="0.2937365" vertical-offset="0" max-vertical-offset="1734">
+                  <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -86,11 +75,11 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="GPHeuristic.scala" pinned="false" current-in-tab="true">
+          <file leaf-file-name="GPHeuristic.scala" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/evolution_impl/GPHeuristic.scala">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.12184874" vertical-offset="724" max-vertical-offset="1819">
-                  <caret line="46" column="104" selection-start-line="46" selection-start-column="104" selection-end-line="46" selection-end-column="104" />
+                <state vertical-scroll-proportion="0.0" vertical-offset="642" max-vertical-offset="1819">
+                  <caret line="46" column="46" selection-start-line="46" selection-start-column="46" selection-end-line="46" selection-end-column="46" />
                   <folding>
                     <element signature="e#24#43#0" expanded="true" />
                   </folding>
@@ -98,26 +87,50 @@
               </provider>
             </entry>
           </file>
+          <file leaf-file-name="ArcadeMachine.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/gvgai/src/core/ArcadeMachine.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6664">
+                  <caret line="21" column="14" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="14" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file leaf-file-name="SingleGameFitnessCalculator.scala" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/evolution_impl/fitness/SingleGameFitnessCalculator.scala">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="1360">
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1360">
                   <caret line="57" column="24" selection-start-line="57" selection-start-column="24" selection-end-line="57" selection-end-column="24" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="StateObservationWrapper.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="StateObservationWrapper.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/evolution_impl/fitness/dummyagent/StateObservationWrapper.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="169" max-vertical-offset="2074">
-                  <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+                <state vertical-scroll-proportion="0.44924405" vertical-offset="1271" max-vertical-offset="2210">
+                  <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="e#430#431#0" expanded="true" />
                     <element signature="e#458#459#0" expanded="true" />
+                    <element signature="e#921#922#0" expanded="true" />
+                    <element signature="e#961#962#0" expanded="true" />
+                    <element signature="e#1000#1001#0" expanded="true" />
+                    <element signature="e#1039#1040#0" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Game.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/gvgai/src/core/game/Game.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="10455" max-vertical-offset="19227">
+                  <caret line="565" column="22" selection-start-line="565" selection-start-column="22" selection-end-line="565" selection-end-column="22" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -125,8 +138,8 @@
           <file leaf-file-name="ForLoopsMutator.scala" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/evolution_impl/mutators/ForLoopsMutator.scala">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="808" max-vertical-offset="1683">
-                  <caret line="78" column="81" selection-start-line="78" selection-start-column="81" selection-end-line="78" selection-end-column="81" />
+                <state vertical-scroll-proportion="0.0" vertical-offset="825" max-vertical-offset="1700">
+                  <caret line="78" column="85" selection-start-line="78" selection-start-column="85" selection-end-line="78" selection-end-column="85" />
                   <folding />
                 </state>
               </provider>
@@ -137,6 +150,16 @@
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
                   <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="TournamentSelection.scala" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/evolution_engine/selection/TournamentSelection.scala">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="26" max-vertical-offset="969">
+                  <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
                   <folding />
                 </state>
               </provider>
@@ -185,7 +208,6 @@
         <option value="$PROJECT_DIR$/src/evolution_impl/mutators/RegrowMethodMutator.scala" />
         <option value="$PROJECT_DIR$/src/evolution_impl/JavaCodeCrossover.scala" />
         <option value="$PROJECT_DIR$/gvgai/src/core/ArcadeMachine.java" />
-        <option value="$PROJECT_DIR$/gvgai/src/core/game/Game.java" />
         <option value="$PROJECT_DIR$/src/evolution_engine/selection/TournamentSelection.scala" />
         <option value="$PROJECT_DIR$/src/evolution_impl/SingleGameFitnessCalculator.scala" />
         <option value="$PROJECT_DIR$/src/evolution_impl/fitness/dummyagent/GPIgnore.java" />
@@ -198,11 +220,12 @@
         <option value="$PROJECT_DIR$/src/evolution_impl/GPProgram.java" />
         <option value="$PROJECT_DIR$/src/evolution_impl/fitness/PlayoutCalculator.scala" />
         <option value="$PROJECT_DIR$/gvgai/src/Test.java" />
-        <option value="$PROJECT_DIR$/src/evolution_impl/fitness/dummyagent/StateObservationWrapper.java" />
         <option value="$PROJECT_DIR$/src/evolution_impl/fitness/MultiGameFitnessCalculator.scala" />
-        <option value="$PROJECT_DIR$/src/evolution_impl/mutators/ForLoopsMutator.scala" />
         <option value="$PROJECT_DIR$/src/evolution_impl/fitness/SingleGameFitnessCalculator.scala" />
+        <option value="$PROJECT_DIR$/src/evolution_impl/mutators/ForLoopsMutator.scala" />
         <option value="$PROJECT_DIR$/src/evolution_impl/GPHeuristic.scala" />
+        <option value="$PROJECT_DIR$/gvgai/src/core/game/Game.java" />
+        <option value="$PROJECT_DIR$/src/evolution_impl/fitness/dummyagent/StateObservationWrapper.java" />
       </list>
     </option>
   </component>
@@ -325,7 +348,145 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="evolution_impl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gp-heuristic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; 1.7 &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gp-heuristic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="evolution_impl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GPHeuristic.scala" />
+              <option name="myItemType" value="org.jetbrains.plugins.scala.components.ScalaDefsProjectViewProvider$ScalaFileTreeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gp-heuristic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; 1.7 &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gp-heuristic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="evolution_impl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fitness" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gp-heuristic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; 1.7 &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gp-heuristic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="gvgai" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gp-heuristic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; 1.7 &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gp-heuristic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gvgai" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gp-heuristic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; 1.7 &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gp-heuristic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gvgai" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sprites" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -369,6 +530,28 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="evolution_impl" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gp-heuristic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gp-heuristic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="evolution_impl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GPHeuristic.scala" />
+              <option name="myItemType" value="org.jetbrains.plugins.scala.components.ScalaDefsProjectViewProvider$ScalaFileTreeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -462,7 +645,7 @@
     <property name="FullScreen" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="dynamic.classpath" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="playout&#9;null&#9;null&#10;StringLiteralExp&#9;PSI&#9;JAVA://japa.parser.ast.expr.StringLiteralExpr&#10;expandP&#9;null&#9;null&#10;getAvaO&#9;PSI&#9;JAVA://core.game.ForwardModel#getAvatarOrientation&#10;getGameWinner&#9;PSI&#9;JAVA://core.game.StateObservation#getGameWinner&#10;flatSatisf&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="handleRe&#9;PSI&#9;JAVA://core.game.Game#handleResult&#10;handleResult&#9;PSI&#9;JAVA://core.game.Game#handleResult&#10;runGame&#9;PSI&#9;JAVA://core.ArcadeMachine#runGames&#10;playout&#9;null&#9;null&#10;StringLiteralExp&#9;PSI&#9;JAVA://japa.parser.ast.expr.StringLiteralExpr&#10;expandP&#9;null&#9;null&#10;getAvaO&#9;PSI&#9;JAVA://core.game.ForwardModel#getAvatarOrientation&#10;getGameWinner&#9;PSI&#9;JAVA://core.game.StateObservation#getGameWinner&#10;flatSatisf&#9;null&#9;null" />
     <property name="options.lastSelected" value="preferences.intentionPowerPack" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
@@ -913,7 +1096,7 @@
       <workItem from="1419774758051" duration="4219000" />
       <workItem from="1419779432284" duration="51362000" />
       <workItem from="1422952540387" duration="99000" />
-      <workItem from="1422952775965" duration="8485000" />
+      <workItem from="1422952775965" duration="18548000" />
     </task>
     <task id="LOCAL-00001" summary="fixed idea project">
       <created>1416215606444</created>
@@ -1029,11 +1212,17 @@
       <option name="project" value="LOCAL" />
       <updated>1420725480154</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="MultiGame fitness calculator">
+      <created>1422961278333</created>
+      <option name="number" value="00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1422961278333</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="218227000" />
+    <option name="totallyTimeSpent" value="228290000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1067,7 +1256,7 @@
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32849163" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.43910614" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960895" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1171,7 +1360,8 @@
     <MESSAGE value="working on type extraction" />
     <MESSAGE value="working on utilizing iterables" />
     <MESSAGE value="moar mutators" />
-    <option name="LAST_COMMIT_MESSAGE" value="moar mutators" />
+    <MESSAGE value="MultiGame fitness calculator" />
+    <option name="LAST_COMMIT_MESSAGE" value="MultiGame fitness calculator" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1229,28 +1419,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://D:/logs/278/individuals/1/Ind36.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.58266455" vertical-offset="363" max-vertical-offset="986">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gvgai/src/core/game/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="9904" max-vertical-offset="20213">
-          <caret line="599" column="30" selection-start-line="599" selection-start-column="30" selection-end-line="599" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/javaparser-1.0.8.jar!/japa/parser/ast/expr/NameExpr.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19502868" vertical-offset="0" max-vertical-offset="561">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/javaparser-1.0.8.jar!/japa/parser/ast/expr/MethodCallExpr.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.19502868" vertical-offset="0" max-vertical-offset="1020">
@@ -1276,39 +1444,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/logs/280/individuals/1/Ind15.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="367" max-vertical-offset="850">
-          <caret line="39" column="104" selection-start-line="39" selection-start-column="104" selection-end-line="39" selection-end-column="104" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/logs/280/individuals/1/Ind16.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="850">
-          <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/logs/280/individuals/1/Ind17.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="850">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/evolution_impl/fitness/dummyagent/GPIgnore.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.1551095" vertical-offset="0" max-vertical-offset="548">
           <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/evolution_engine/selection/TournamentSelection.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.310219" vertical-offset="0" max-vertical-offset="969">
-          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
           <folding />
         </state>
       </provider>
@@ -1388,14 +1527,6 @@
           <folding>
             <element signature="e#32#65#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gvgai/src/core/ArcadeMachine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="6664">
-          <caret line="38" column="5" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1593,14 +1724,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/evolution_impl/mutators/ForLoopsMutator.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="808" max-vertical-offset="1683">
-          <caret line="78" column="81" selection-start-line="78" selection-start-column="81" selection-end-line="78" selection-end-column="81" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gvgai/sprites/base.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -1614,42 +1737,100 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://D:/logs/317/individuals/31/Ind996.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.863931" vertical-offset="863" max-vertical-offset="1326">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/evolution_impl/mutators/ForLoopsMutator.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="825" max-vertical-offset="1700">
+          <caret line="78" column="85" selection-start-line="78" selection-start-column="85" selection-end-line="78" selection-end-column="85" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/logs/Interesting runs/Initial success with single game/287/individuals/0/Ind0.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1187905" vertical-offset="319" max-vertical-offset="782">
+          <caret line="25" column="5" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/evolution_engine/selection/TournamentSelection.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="26" max-vertical-offset="969">
+          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/logs/317/individuals/0/Ind0.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.66090715" vertical-offset="306" max-vertical-offset="782">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/evolution_impl/fitness/MultiGameFitnessCalculator.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2937365" vertical-offset="0" max-vertical-offset="1734">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/evolution_impl/fitness/SingleGameFitnessCalculator.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="1360">
+        <state vertical-scroll-proportion="0.0" vertical-offset="795" max-vertical-offset="1360">
           <caret line="57" column="24" selection-start-line="57" selection-start-column="24" selection-end-line="57" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/evolution_impl/fitness/dummyagent/StateObservationWrapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="169" max-vertical-offset="2074">
-          <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#430#431#0" expanded="true" />
-            <element signature="e#458#459#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/evolution_impl/GPHeuristic.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12184874" vertical-offset="724" max-vertical-offset="1819">
-          <caret line="46" column="104" selection-start-line="46" selection-start-column="104" selection-end-line="46" selection-end-column="104" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="642" max-vertical-offset="1819">
+          <caret line="46" column="46" selection-start-line="46" selection-start-column="46" selection-end-line="46" selection-end-column="46" />
           <folding>
             <element signature="e#24#43#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/evolution_impl/fitness/MultiGameFitnessCalculator.scala">
+    <entry file="file://$PROJECT_DIR$/gvgai/src/core/ArcadeMachine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4773218" vertical-offset="255" max-vertical-offset="1734">
-          <caret line="28" column="31" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6664">
+          <caret line="21" column="14" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gvgai/src/core/game/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="10455" max-vertical-offset="19227">
+          <caret line="565" column="22" selection-start-line="565" selection-start-column="22" selection-end-line="565" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/evolution_impl/fitness/dummyagent/StateObservationWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44924405" vertical-offset="1271" max-vertical-offset="2210">
+          <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
           <folding>
-            <element signature="e#32#83#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#430#431#0" expanded="true" />
+            <element signature="e#458#459#0" expanded="true" />
+            <element signature="e#921#922#0" expanded="true" />
+            <element signature="e#961#962#0" expanded="true" />
+            <element signature="e#1000#1001#0" expanded="true" />
+            <element signature="e#1039#1040#0" expanded="true" />
           </folding>
         </state>
       </provider>

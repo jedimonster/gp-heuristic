@@ -23,7 +23,7 @@ public class StateObservationWrapper {
 //    public core.game.StateObservation getState() {
 //        return so.copy();
 //    }
-
+//
 //    public double getScoreInMoves(@AllowedValues(values = {"1", "2", "4", "8", "12", "16"}) int moves) {
 //        StateObservation copy = so.copy();
 //        for (int i = 0; i < moves; i++) {
@@ -37,10 +37,11 @@ public class StateObservationWrapper {
     public double getGameScore() {
         return so.getGameScore();
     }
-//
-//    public int getGameTick() {
-//        return so.getGameTick();
-//    }
+
+    //
+    public int getGameTick() {
+        return so.getGameTick();
+    }
 
 //    public int getBlockSize() {
 //        return so.getBlockSize();
@@ -84,6 +85,8 @@ public class StateObservationWrapper {
     public Iterable<Observation> getNPCsPositions(
             @AllowedValues(values = {"0", "1", "2", "3", "4", "5"}) int category,
             @AllowedValues(values = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}) int itype) {
+//            @AllowedValues(values = {"3"}) int category,
+//            @AllowedValues(values = {"4", "9"}) int itype) {
         Vector2d avatarPosition = so.getAvatarPosition();
         List<Observation> result = new ArrayList<>();
 
@@ -101,8 +104,11 @@ public class StateObservationWrapper {
     // game 1 immovables: category = 4,4, type = 0,3
     // game 2 immovables: category = 4,4, type = 0,2
     public Iterable<Observation> getImmovablePositions(
+
             @AllowedValues(values = {"0", "1", "2", "3", "4", "5"}) int category,
-            @AllowedValues(values = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"})int itype) {
+            @AllowedValues(values = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}) int itype) {
+//            @AllowedValues(values = {"4"}) int category,
+//            @AllowedValues(values = {"2"})int itype) {
         Vector2d avatarPosition = so.getAvatarPosition();
         List<Observation> result = new ArrayList<>();
 

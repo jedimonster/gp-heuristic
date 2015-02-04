@@ -43,9 +43,9 @@ class GPHeuristic(individual: JavaCodeIndividual = null) extends StateHeuristic 
 
 class ThreadedGPRun() extends Runnable {
 
-  val crossovers = new JavaCodeCrossover(1.0)
-  val mutators = List(new ConstantsMutator(0.05), new ForLoopsMutator(0.25), new RegrowMethodMutator(0.25))
-  val generations = 100
+  val crossovers = new JavaCodeCrossover(0.5)
+  val mutators = List(new ConstantsMutator(0.05), new ForLoopsMutator(0.15), new RegrowMethodMutator(0.15))
+  val generations = 50
   val popSize = 32
   val paramTypes = List(new StateObservationWrapper(null))
 
