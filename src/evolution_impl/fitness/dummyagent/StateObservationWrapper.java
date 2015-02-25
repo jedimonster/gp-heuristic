@@ -14,7 +14,10 @@ import java.util.List;
  */
 public class StateObservationWrapper {
     protected core.game.StateObservation so;
-
+    // todo add manhattan distance from stuff.
+    // todo fitness<->individual mapping in logs
+    // todo search the game tree using heuristics up to cutoff.
+    // todo give up and use heuristics in MCTS?
     public StateObservationWrapper(core.game.StateObservation so) {
         this.so = so;
     }
@@ -83,10 +86,10 @@ public class StateObservationWrapper {
     // game 1 NPCs: category = 3,3 itype = 9,10
     // game 2 NPCs: category = 3 itype = 4
     public Iterable<Observation> getNPCsPositions(
-            @AllowedValues(values = {"0", "1", "2", "3", "4", "5"}) int category,
-            @AllowedValues(values = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}) int itype) {
-//            @AllowedValues(values = {"3"}) int category,
-//            @AllowedValues(values = {"4", "9"}) int itype) {
+//            @AllowedValues(values = {"0", "1", "2", "3", "4", "5"}) int category,
+//            @AllowedValues(values = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}) int itype) {
+            @AllowedValues(values = {"3"}) int category,
+            @AllowedValues(values = {"4", "9"}) int itype) {
         Vector2d avatarPosition = so.getAvatarPosition();
         List<Observation> result = new ArrayList<>();
 
@@ -105,10 +108,10 @@ public class StateObservationWrapper {
     // game 2 immovables: category = 4,4, type = 0,2
     public Iterable<Observation> getImmovablePositions(
 
-            @AllowedValues(values = {"0", "1", "2", "3", "4", "5"}) int category,
-            @AllowedValues(values = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}) int itype) {
-//            @AllowedValues(values = {"4"}) int category,
-//            @AllowedValues(values = {"2"}) int itype) {
+//            @AllowedValues(values = {"0", "1", "2", "3", "4", "5"}) int category,
+//            @AllowedValues(values = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}) int itype) {
+            @AllowedValues(values = {"4"}) int category,
+            @AllowedValues(values = {"2"}) int itype) {
         Vector2d avatarPosition = so.getAvatarPosition();
         List<Observation> result = new ArrayList<>();
 
