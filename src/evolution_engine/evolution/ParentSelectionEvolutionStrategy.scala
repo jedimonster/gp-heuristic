@@ -32,7 +32,7 @@ class ParentSelectionEvolutionStrategy[I <: Individual](evolutionParameters: Evo
         val cross: List[I] = crossover.cross(parents(i), parents(i + 1))
         children ++= cross
       } else {
-        children ++= IndexedSeq(parents(i), parents(i + 1))
+        children ++= IndexedSeq(parents(i).duplicate.asInstanceOf[I], parents(i + 1).duplicate.asInstanceOf[I])
       }
 
       i += 2

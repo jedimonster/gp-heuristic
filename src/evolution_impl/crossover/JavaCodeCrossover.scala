@@ -1,20 +1,17 @@
-package evolution_impl
+package evolution_impl.crossover
 
-
-import java.util
 import java.util.{ArrayList, LinkedList}
 
 import evolution_engine.mutators.Crossover
-import evolution_impl.gpprograms.{TreeGrowingException, RandomGrowInitializer, JavaCodeIndividual}
+import evolution_impl.gpprograms.{JavaCodeIndividual, RandomGrowInitializer, TreeGrowingException}
 import japa.parser.ast.TypeParameter
 import japa.parser.ast.`type`.ClassOrInterfaceType
-import japa.parser.ast.body.{Parameter, MethodDeclaration, BodyDeclaration}
+import japa.parser.ast.body.{BodyDeclaration, MethodDeclaration, Parameter}
 import japa.parser.ast.expr.NameExpr
-import japa.parser.ast.stmt.{Statement, BlockStmt}
+import japa.parser.ast.stmt.{BlockStmt, Statement}
 
-import scala.collection.JavaConverters._
 import scala.collection.JavaConversions._
-
+import scala.collection.JavaConverters._
 import scala.util.Random
 
 /**

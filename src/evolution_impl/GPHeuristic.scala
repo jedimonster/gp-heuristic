@@ -8,6 +8,7 @@ import core.game.StateObservation
 import evolution_engine.selection.TournamentSelection
 import evolution_engine.{CSVEvolutionLogger, Run}
 import evolution_engine.evolution.{EvolutionParameters, ParentSelectionEvolutionStrategy}
+import evolution_impl.crossover.JavaCodeCrossover
 import evolution_impl.fitness.{MultiGameFitnessCalculator, SingleGameFitnessCalculator}
 import evolution_impl.fitness.dummyagent.StateObservationWrapper
 import evolution_impl.gpprograms.{RandomGrowInitializer, JavaCodeIndividual}

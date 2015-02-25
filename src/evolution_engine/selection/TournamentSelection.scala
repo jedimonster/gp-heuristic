@@ -13,18 +13,18 @@ import scala.util.Random
  */
 
 class TournamentSelection[T <: Individual](minimize: Boolean) extends SelectionStrategy[T] {
-  val subsetSize = 10
+  val subsetSize = 4
 
-  def optimal(list: List[T], value: FitnessResult[T]): T = {
+  def optimal(list: List[T], fitnessResult: FitnessResult[T]): T = {
     var optFitness = if (minimize) Double.MaxValue else Double.MinValue
     var opt: Option[T] = None
 
 
     for (i <- 0 to list.size - 1) {
       val individual: T = list.get(i)
-      if (minimize && value.getFitness(individual) < optFitness
-        || value.getFitness(individual) > optFitness) {
-        optFitness = value.getFitness(individual)
+      if (minimize && fitnessResult.getFitness(individual) < optFitness
+        || fitnessResult.getFitness(individual) > optFitness) {
+        optFitness = fitnessResult.getFitness(individual)
         opt = Option(individual)
       }
     }
