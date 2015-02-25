@@ -34,9 +34,9 @@ public class StateObservationWrapper {
 //    }
 
     //
-    public double getGameScore() {
-        return so.getGameScore();
-    }
+//    public double getGameScore() {
+//        return so.getGameScore();
+//    }
 
     //
     public int getGameTick() {
@@ -56,7 +56,7 @@ public class StateObservationWrapper {
     }
 
 //    public Vector2d getAvatarOrientation() {
-//        return so.getAvatarOrientation();
+//        return so.getAvatarOrientati  on();
 //    }
 
 //    public double getResourcesCount() {
@@ -108,7 +108,7 @@ public class StateObservationWrapper {
             @AllowedValues(values = {"0", "1", "2", "3", "4", "5"}) int category,
             @AllowedValues(values = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}) int itype) {
 //            @AllowedValues(values = {"4"}) int category,
-//            @AllowedValues(values = {"2"})int itype) {
+//            @AllowedValues(values = {"2"}) int itype) {
         Vector2d avatarPosition = so.getAvatarPosition();
         List<Observation> result = new ArrayList<>();
 

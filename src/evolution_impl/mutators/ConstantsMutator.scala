@@ -25,6 +25,7 @@ class ConstantsMutator(probability: Double) extends Mutator[JavaCodeIndividual] 
       val visitor: ConstantVisitor[Object] = new ConstantVisitor[Object](probability)
       val signVisitor: SignVisitor[Object] = new SignVisitor[Object]()
       visitor.visit(x.ast, new Object)
+//      signVisitor.visit(x.ast, new Object)
     }
     inds.asJava
   }

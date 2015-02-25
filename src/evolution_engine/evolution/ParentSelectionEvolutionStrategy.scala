@@ -3,6 +3,7 @@ package evolution_engine.evolution
 import evolution_engine.fitness.FitnessResult
 
 import scala.collection.mutable.ListBuffer
+import scala.util.Random
 
 /**
  * Created By Itay Azaria
@@ -27,8 +28,12 @@ class ParentSelectionEvolutionStrategy[I <: Individual](evolutionParameters: Evo
     var i: Int = 0
 
     while (i + 1 < parents.size) {
-      val cross: List[I] = crossover.cross(parents(i), parents(i + 1))
-      children ++= cross
+      if (Math.random() < crossover.getProbability) {
+        val cross: List[I] = crossover.cross(parents(i), parents(i + 1))
+        children ++= cross
+      } else {
+        children ++= IndexedSeq(parents(i), parents(i + 1))
+      }
 
       i += 2
     }

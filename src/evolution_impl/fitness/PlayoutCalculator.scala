@@ -9,7 +9,6 @@ import scalaj.collection.Imports._
  * Created by itayaza on 03/02/2015.
  */
 trait PlayoutCalculator {
-
   def playout(individual: JavaCodeIndividual, stateObservation: StateObservation, cutoff: Int): Double = {
     var state = stateObservation.copy
     var bestState = state

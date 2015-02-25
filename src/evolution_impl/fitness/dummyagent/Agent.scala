@@ -5,14 +5,14 @@ import controllers.Heuristics.SimpleStateHeuristic
 import core.game.StateObservation
 import core.player.AbstractPlayer
 import evolution_impl.GPHeuristic
-import evolution_impl.fitness.CurrentIndividualHolder
+import evolution_impl.fitness.{PlayoutCalculator, CurrentIndividualHolder}
 import ontology.Types
 import ontology.Types.ACTIONS
 import tools.ElapsedCpuTimer
 import java.util.concurrent.TimeoutException
 import scala.collection.JavaConversions._
 
-class Agent extends AbstractPlayer {
+class Agent extends AbstractPlayer with PlayoutCalculator {
   def this(stateObs: StateObservation, elapsedTimer: ElapsedCpuTimer) {
     this()
   }
