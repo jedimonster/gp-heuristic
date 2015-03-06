@@ -14,9 +14,12 @@ import java.util.List;
  */
 public class StateObservationWrapper {
     protected core.game.StateObservation so;
+
     // todo add manhattan distance from stuff.
     // todo fitness<->individual mapping in logs
+    // todo add random loops to gen 0
     // todo search the game tree using heuristics up to cutoff.
+    // perhaps look at top x, or all until there's actually variance/cutoff time.
     // todo give up and use heuristics in MCTS?
     public StateObservationWrapper(core.game.StateObservation so) {
         this.so = so;
@@ -93,13 +96,15 @@ public class StateObservationWrapper {
         Vector2d avatarPosition = so.getAvatarPosition();
         List<Observation> result = new ArrayList<>();
 
-        for (ArrayList<Observation> observations : so.getNPCPositions(avatarPosition)) {
-            for (Observation observation : observations) {
-                if (observation.category == category && observation.itype == itype)
+        ArrayList<Observation>[] npcPositions = so.getNPCPositions(avatarPosition);
+        if (npcPositions != null) {
+            for (ArrayList<Observation> observations : npcPositions) {
+                for (Observation observation : observations) {
+//                if (observation.category == category && observation.itype == itype)
                     result.add(observation);
+                }
             }
         }
-
         return result;
     }
 
@@ -115,10 +120,13 @@ public class StateObservationWrapper {
         Vector2d avatarPosition = so.getAvatarPosition();
         List<Observation> result = new ArrayList<>();
 
-        for (ArrayList<Observation> observations : so.getImmovablePositions(avatarPosition)) {
-            for (Observation observation : observations) {
-                if (observation.category == category && observation.itype == itype)
+        ArrayList<Observation>[] immovablePositions = so.getImmovablePositions(avatarPosition);
+        if (immovablePositions != null) {
+            for (ArrayList<Observation> observations : immovablePositions) {
+                for (Observation observation : observations) {
+//                if (observation.category == category && observation.itype == itype)
                     result.add(observation);
+                }
             }
         }
 

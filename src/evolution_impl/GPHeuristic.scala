@@ -14,8 +14,6 @@ import evolution_impl.fitness.dummyagent.StateObservationWrapper
 import evolution_impl.gpprograms.{RandomGrowInitializer, JavaCodeIndividual}
 import evolution_impl.mutators.{RegrowMethodMutator, ForLoopsMutator, ConstantsMutator}
 
-import scala.actors.Future
-
 /**
  * Created by itayaza on 24/11/2014.
  */
@@ -44,15 +42,15 @@ class GPHeuristic(individual: JavaCodeIndividual = null) extends StateHeuristic 
 
 class ThreadedGPRun() extends Runnable {
 
-  val crossovers = new JavaCodeCrossover(0.5)
-  val mutators = List(new ConstantsMutator(0.15), new ForLoopsMutator(0.45), new RegrowMethodMutator(0.15))
-  val generations = 200
-  val popSize = 32
+  val crossovers = new JavaCodeCrossover(0.3)
+  val mutators = List(new ConstantsMutator(0.15), new ForLoopsMutator(0.25), new RegrowMethodMutator(0.15))
+  val generations = 100
+  val popSize = 64
   val paramTypes = List(new StateObservationWrapper(null))
 
   val methodCount = 6
-  val fitnessCalculator = new SingleGameFitnessCalculator("gvgai/examples/gridphysics/aliens.txt")
-  //  val fitnessCalculator = new MultiGameFitnessCalculator()
+  //  val fitnessCalculator = new SingleGameFitnessCalculator("aliens")
+  val fitnessCalculator = new MultiGameFitnessCalculator(cutoff = 2000)
   val selection = new TournamentSelection[JavaCodeIndividual](false)
   val params = new EvolutionParameters[JavaCodeIndividual](fitnessCalculator, selection,
     crossovers, mutators, new RandomGrowInitializer(paramTypes, methodCount), generations, popSize)

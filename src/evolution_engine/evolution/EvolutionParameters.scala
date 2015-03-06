@@ -6,8 +6,6 @@ import evolution_engine.mutators.{Crossover, Mutator}
 import evolution_engine.selection.SelectionStrategy
 import evolution_impl.gpprograms.JavaCodeIndividual
 
-import scala.actors.Future
-
 class EvolutionParameters[I <: Individual] {
   private final var fitnessCalculator: FitnessCalculator[I] = null
   private final var selectionStrategy: SelectionStrategy[I] = null

@@ -13,7 +13,7 @@ import scalaj.collection.Imports._
 /**
  * Created by itayaza on 03/02/2015.
  */
-class MultiGameFitnessCalculator(cutoff: Int = 100) extends FitnessCalculator[JavaCodeIndividual] with PlayoutCalculator {
+class MultiGameFitnessCalculator(cutoff: Int = Int.MaxValue) extends FitnessCalculator[JavaCodeIndividual] with PlayoutCalculator {
 
   def calculateFitness(individuals: List[JavaCodeIndividual]): FitnessResult[JavaCodeIndividual] = {
     val fitnessValues: List[(JavaCodeIndividual, Double)] = for (i <- individuals) yield (i, getIndividualFitness(i))
@@ -30,6 +30,7 @@ class MultiGameFitnessCalculator(cutoff: Int = 100) extends FitnessCalculator[Ja
 
     val levelId = 0
     val scores: ListBuffer[Double] = ListBuffer()
+
 
     for (gameId <- 0 to 9) {
       val gameStr: String = gamesPath + games(gameId) + ".txt"
@@ -58,6 +59,8 @@ class MultiGameFitnessCalculator(cutoff: Int = 100) extends FitnessCalculator[Ja
 
 
   def getIndividualFitness(individual: JavaCodeIndividual): Double = {
+    println("Evaluating " + individual.getName)
+
     //CIG 2014 Training Set Games
     val games = Array[String]("aliens", "boulderdash", "butterflies", "chase", "frogs", "missilecommand", "portals", "sokoban", "survivezombies", "zelda")
     val gamesPath: String = "gvgai/examples/gridphysics/"
@@ -90,7 +93,7 @@ class MultiGameFitnessCalculator(cutoff: Int = 100) extends FitnessCalculator[Ja
     toPlay.buildLevel(levelStr)
     val state = toPlay.getObservation
 
-    val playoutScore: Double = playout(individual, state, cutoff)
-    playoutScore
+    playout(individual, state, cutoff)
+
   }
 }
