@@ -7,6 +7,7 @@ import core.{VGDLParser, VGDLRegistry, VGDLFactory, ArcadeMachine}
 import evolution_engine.fitness.{FitnessCalculator, FitnessResult}
 import evolution_impl.DumbFitnessResult
 import evolution_impl.gpprograms.JavaCodeIndividual
+import tools.ElapsedCpuTimer
 
 /**
  * Created by itayaza on 24/11/2014.
@@ -24,7 +25,8 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
       CurrentIndividualHolder.individual = best._1
       println("Best fitness - " + best._2)
       val realScore = playGame(best._1)
-      println("score with it " + realScore)
+      println("real score with it " + realScore)
+      println("playout score with it " + getIndividualFitness(best._1))
       //      if (best._2 > 76) {
       //        val in = readLine("Show best individuals game(Y/N)?")
       //        if (in.equalsIgnoreCase("y"))
@@ -39,7 +41,9 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
     //      CurrentIndividualHolder.individual = individual
     individual.compile()
     // run the machine using the dummy agent here
-    simulateGame(individual, cutoff = Int.MaxValue)
+    val s1 = simulateGame(individual, cutoff = Int.MaxValue)
+    val s2 = simulateGame(individual, cutoff = Int.MaxValue)
+    (s1+s2)/2
     //    }
   }
 
@@ -52,7 +56,11 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
 
     //    val playoutState = playout(individual, state, cutoff)
     //    playoutState.getGameScore
-    playout(individual, state, cutoff)
+    val timer = new ElapsedCpuTimer()
+    timer.setMaxTimeMillis(Int.MaxValue)
+    val score = rec_playout(individual, state, timer)._1
+    //    printf("played out in %dms \n", timer.elapsedMillis())
+    score
   }
 
   def playGame(individual: JavaCodeIndividual, visuals: Boolean = false) = {
@@ -64,11 +72,14 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
 
     //Game and level to play
     println("---\nPlaying a game with " + individual.getName)
-    val score: Double = ArcadeMachine.runOneGame(gamePath, levelPath, visuals, gpHeuristic, recordActionsFile, seed)
+    val scores = for (i <- 0.to(4)) yield {
+      val levelPath = gamesPath + gameName + "_lvl" + i + ".txt"
+      ArcadeMachine.runOneGame(gamePath, levelPath, visuals, gpHeuristic, recordActionsFile, seed)
+    }
     //    val score2: Double = ArcadeMachine.runOneGame(game, level1, false, gpHeuristic, recordActionsFile, seed)
     //
     //    (score + score2) / 2
-    score
+    scores.sum / scores.size
   }
 }
 

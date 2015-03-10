@@ -3,6 +3,9 @@ package evolution_impl.fitness
 import core.game.StateObservation
 import evolution_impl.fitness.dummyagent.StateObservationWrapper
 import evolution_impl.gpprograms.JavaCodeIndividual
+import ontology.Types
+import tools.ElapsedCpuTimer
+import scala.annotation.tailrec
 import scalaj.collection.Imports._
 
 /**
@@ -44,5 +47,32 @@ trait PlayoutCalculator {
     } while (state.getGameTick < cutoff && !state.isGameOver)
 
     bestStateScore
+  }
+
+  /** *
+    *
+    * @param individual
+    * @param stateObservation
+    * @param depth
+    * @return (Score, Heuristic Val) best values that can be reached from the given state.
+    */
+  @tailrec final def rec_playout(individual: JavaCodeIndividual, stateObservation: StateObservation, timeLeft: ElapsedCpuTimer):
+  (Double, Double) = {
+    if (timeLeft.exceededMaxTime() || stateObservation.isGameOver) {
+      val heuristicVal: Double = individual.run(new StateObservationWrapper(stateObservation))
+      val gameScore: Double = stateObservation.getGameScore
+      if (stateObservation.getGameWinner == Types.WINNER.PLAYER_WINS)
+        return (gameScore, heuristicVal)
+      else
+        return (-1, heuristicVal)
+    }
+    val scores = for (nextAction <- stateObservation.getAvailableActions.asScala) yield {
+      val nextState = stateObservation.copy()
+      nextState.advance(nextAction)
+      (nextState, individual.run(new StateObservationWrapper(nextState)))
+    }
+    // at this point we can follow up the best heuristic value, or  - if time permits - more.
+    val bestScore = scores.maxBy(x => x._2)
+    rec_playout(individual, bestScore._1, timeLeft)
   }
 }
