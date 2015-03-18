@@ -49,8 +49,8 @@ class ThreadedGPRun() extends Runnable {
   val paramTypes = List(new StateObservationWrapper(null))
 
   val methodCount = 6
-//    val fitnessCalculator = new SingleGameFitnessCalculator("aliens")
-    val fitnessCalculator = new SingleGameFitnessCalculator("butterflies")
+    val fitnessCalculator = new SingleGameFitnessCalculator("aliens")
+//    val fitnessCalculator = new SingleGameFitnessCalculator("frogs")
 //  val fitnessCalculator = new MultiGameFitnessCalculator(cutoff = 2000)
   val selection = new TournamentSelection[JavaCodeIndividual](false)
   val params = new EvolutionParameters[JavaCodeIndividual](fitnessCalculator, selection,

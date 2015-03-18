@@ -7,6 +7,7 @@ import tools.Vector2d;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -131,6 +132,52 @@ public class StateObservationWrapper {
         }
 
         return result;
+    }
+
+    public Iterable<Double> getNPCHeursticDistance() {
+        Vector2d avatarPosition = so.getAvatarPosition();
+        List<Double> result = new ArrayList<>();
+
+        ArrayList<Observation>[] npcPositions = so.getNPCPositions(avatarPosition);
+        if (npcPositions != null) {
+            for (ArrayList<Observation> observations : npcPositions) {
+                for (Observation observation : observations) {
+//                if (observation.category == category && observation.itype == itype)
+                    double distance = observation.sqDist + countBlockingWalls(so, observation);
+
+                    result.add(distance);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    @GPIgnore
+    private double countBlockingWalls(StateObservation stateObservation, Observation dstObservation) {
+        int walls = 0;
+        ArrayList<Observation>[][] observationGrid = stateObservation.getObservationGrid();
+        int currentX = (int) stateObservation.getAvatarPosition().x / stateObservation.getBlockSize(),
+                currentY = (int) stateObservation.getAvatarPosition().y / stateObservation.getBlockSize();
+
+        int dstX = (int) (dstObservation.position.x / stateObservation.getBlockSize());
+        int dstY = (int) (dstObservation.position.y / stateObservation.getBlockSize());
+        while (currentX != dstX || currentY != dstY) {
+            if (!observationGrid[currentX][currentY].isEmpty()) // something is there
+                walls++;
+            if (dstX > currentX)
+                currentX++;
+            else if (dstX < currentX)
+                currentX--;
+
+            if (dstY > currentY)
+                currentY++;
+            else if (dstY < currentY)
+                currentY--;
+        }
+
+
+        return walls;
     }
 
 
