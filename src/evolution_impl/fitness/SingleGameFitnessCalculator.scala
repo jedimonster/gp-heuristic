@@ -18,8 +18,8 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
   val gamePath = gamesPath + gameName + ".txt"
   val levelPath = gamesPath + gameName + "_lvl" + levelId + ".txt"
 
-  override def calculateFitness(individuals: List[JavaCodeIndividual]): FitnessResult[JavaCodeIndividual] = {
-    val fitnessValues: List[(JavaCodeIndividual, Double)] = for (i <- individuals) yield (i, getIndividualFitness(i))
+  override def processResult(result: FitnessResult[JavaCodeIndividual]): Unit = {
+    val fitnessValues = result.getMap
     val best = fitnessValues.maxBy(x => x._2)
     CurrentIndividualHolder.indLock.synchronized {
       CurrentIndividualHolder.individual = best._1
@@ -28,13 +28,13 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
       println("real score with it " + realScore)
       println("playout score with it " + getIndividualFitness(best._1))
       //      if (best._2 > 76) {
-      //        val in = readLine("Show best individuals game(Y/N)?")
-      //        if (in.equalsIgnoreCase("y"))
-      //          playGame(best._1, visuals = true)
-      //      }
+      val in = readLine("Show best individuals game(Y/N)?")
+      if (in.equalsIgnoreCase("y"))
+        playGame(best._1, visuals = true)
     }
-    new DumbFitnessResult[JavaCodeIndividual](fitnessValues.toMap)
+    //    }
   }
+
 
   def getIndividualFitness(individual: JavaCodeIndividual) = {
     //    CurrentIndividualHolder.indLock.synchronized {
@@ -43,21 +43,28 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
     // run the machine using the dummy agent here
     val s1 = simulateGame(individual, cutoff = Int.MaxValue)
     val s2 = simulateGame(individual, cutoff = Int.MaxValue)
-    (s1+s2)/2
+    (s1 + s2) / 2
     //    }
   }
 
+  val intitialState = {
+    this.synchronized {
+      VGDLFactory.GetInstance.init
+      VGDLRegistry.GetInstance.init
+      val toPlay: Game = new VGDLParser().parseGame(gamePath)
+      toPlay.buildLevel(levelPath)
+      toPlay.getObservation
+    }
+  }
+
   def simulateGame(individual: JavaCodeIndividual, cutoff: Int): Double = {
-    VGDLFactory.GetInstance.init
-    VGDLRegistry.GetInstance.init
-    val toPlay: Game = new VGDLParser().parseGame(gamePath)
-    toPlay.buildLevel(levelPath)
-    val state = toPlay.getObservation
 
     //    val playoutState = playout(individual, state, cutoff)
     //    playoutState.getGameScore
+    val state = intitialState.copy
     val timer = new ElapsedCpuTimer()
     timer.setMaxTimeMillis(Int.MaxValue)
+    //    timer.setMaxTimeMillis(250)
     val score = rec_playout(individual, state, timer)._1
     //    printf("played out in %dms \n", timer.elapsedMillis())
     score

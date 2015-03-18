@@ -15,13 +15,14 @@ import scalaj.collection.Imports._
  */
 class MultiGameFitnessCalculator(cutoff: Int = Int.MaxValue) extends FitnessCalculator[JavaCodeIndividual] with PlayoutCalculator {
 
-  def calculateFitness(individuals: List[JavaCodeIndividual]): FitnessResult[JavaCodeIndividual] = {
-    val fitnessValues: List[(JavaCodeIndividual, Double)] = for (i <- individuals) yield (i, getIndividualFitness(i))
-    val best = fitnessValues.maxBy(x => x._2)
-    fullEvaluate(best._1)
-
-    new DumbFitnessResult[JavaCodeIndividual](fitnessValues.toMap)
-  }
+  //  def calculateFitness(individuals: List[JavaCodeIndividual]): FitnessResult[JavaCodeIndividual] = {
+  //    val fitnessValues: List[(JavaCodeIndividual, Double)] = for (i <- individuals) yield (i, getIndividualFitness(i))
+  //    val best = fitnessValues.maxBy(x => x._2)
+  //    fullEvaluate(best._1)
+  //
+  //    new DumbFitnessResult[JavaCodeIndividual](fitnessValues.toMap)
+  //  }
+  override def processResult(result: FitnessResult[JavaCodeIndividual]): Unit = {}
 
   def fullEvaluate(individual: JavaCodeIndividual) = {
     //CIG 2014 Training Set Games

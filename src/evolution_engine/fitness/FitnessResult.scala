@@ -8,4 +8,6 @@ import evolution_engine.evolution.Individual
  */
 trait FitnessResult[I <: Individual] {
   def getFitness(individual: I): Double
+
+  def getMap: Map[I, Double]
 }

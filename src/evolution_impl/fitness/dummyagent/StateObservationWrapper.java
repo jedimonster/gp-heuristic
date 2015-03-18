@@ -40,18 +40,18 @@ public class StateObservationWrapper {
 //    }
 
     //
-//    public double getGameScore() {
-//        return so.getGameScore();
-//    }
+    public double getGameScore() {
+        return so.getGameScore();
+    }
 
     //
     public int getGameTick() {
         return so.getGameTick();
     }
 
-//    public int getBlockSize() {
-//        return so.getBlockSize();
-//    }
+    public int getBlockSize() {
+        return so.getBlockSize();
+    }
 
 //    public Vector2d getAvatarPosition() {
 //        return so.getAvatarPosition();
@@ -65,16 +65,16 @@ public class StateObservationWrapper {
 //        return so.getAvatarOrientati  on();
 //    }
 
-//    public double getResourcesCount() {
-//        HashMap<Integer, Integer> idCountMap = so.getAvatarResources();
-//        double sum = 0;
-//
-//        for (Integer v : idCountMap.values()) {
-//            sum += v;
-//        }
-//
-//        return sum;
-//    }
+    public double getResourcesCount() {
+        HashMap<Integer, Integer> idCountMap = so.getAvatarResources();
+        double sum = 0;
+
+        for (Integer v : idCountMap.values()) {
+            sum += v;
+        }
+
+        return sum;
+    }
 
 //    public double getNPCCount() {
 //        double sum = 0;

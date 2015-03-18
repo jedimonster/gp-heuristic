@@ -30,11 +30,11 @@ class JavaCodeIndividual(
 
   def this(ast: CompilationUnit, originalFile: File) = this(ast, originalFile, new ClassName(ast.getTypes.get(0).getName, 0))
 
-//  @throws[CompilationException]("if the individual couldn't be compiled")
-//  def getValues(values: List[StateObservation]) = {
-//    compile()
-//    for (x <- values) yield run(x)
-//  }
+  //  @throws[CompilationException]("if the individual couldn't be compiled")
+  //  def getValues(values: List[StateObservation]) = {
+  //    compile()
+  //    for (x <- values) yield run(x)
+  //  }
 
   def run(input: StateObservationWrapper): Double = {
     //    val packageName = ast.getPackage.getName
@@ -122,8 +122,10 @@ object NameCounter {
   var next = 1
 
   def getNext() = {
-    next = next + 1
-    next
+    this.synchronized {
+      next = next + 1
+      next
+    }
   }
 }
 
