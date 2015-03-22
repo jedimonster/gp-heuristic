@@ -2,8 +2,10 @@ package evolution_impl
 
 import java.io.File
 import java.nio.file.Path
+import java.util.Random
 
 import controllers.Heuristics.StateHeuristic
+import core.ArcadeMachine
 import core.game.StateObservation
 import evolution_engine.selection.TournamentSelection
 import evolution_engine.{CSVEvolutionLogger, Run}
@@ -97,5 +99,21 @@ object ThreadedGPRun {
 
   def main(args: Array[String]): Unit = {
     GPRunHolder.gpRun = ThreadedGPRun.newInstance
+
+    runNewGame()
+  }
+  def runNewGame() = {
+    val gpHeuristic: String = "evolution_impl.fitness.dummyagent.Agent"
+
+    //Other settings
+    val recordActionsFile: String = null
+    val seed: Int = new Random().nextInt
+
+    //Game and level to play
+    println("---\nPlaying a game with " + individual.getName)
+    val scores = for (i <- 0.to(4)) yield {
+      val levelPath = gamesPath + gameName + "_lvl" + i + ".txt"
+      ArcadeMachine.runOneGame(gamePath, levelPath, visuals, gpHeuristic, recordActionsFile, seed)
+    }
   }
 }

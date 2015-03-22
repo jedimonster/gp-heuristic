@@ -40,17 +40,17 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
     CurrentIndividualHolder.indLock.synchronized {
       CurrentIndividualHolder.individual = best._1
       println("Best fitness - " + best._2)
-      val realScore = playGame(best._1)
-      println("real score with it " + realScore)
-      println("playout score with it " + getIndividualFitness(best._1))
+      //      val realScore = playGame(best._1)
+      //      println("real score with it " + realScore)
+      //      println("playout score with it " + getIndividualFitness(best._1))
       //      if (best._2 > 76) {
       //      val in = readLine("Show best individuals game(Y/N)?")
       gen += 1
 
-      if (gen % 5 == 0)
-        playGame(best._1, visuals = true)
+      //      if (gen % 5 == 0)
+      //        playGame(best._1, visuals = true)
     }
-    //    }
+    //        }
   }
 
   def getIndividualFitness(individual: JavaCodeIndividual) = {
@@ -60,7 +60,7 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
 
     val n = 1
     val scores = for (i <- 0 to n)
-      yield simulateGame(individual, cutoff = Int.MinValue)
+    yield simulateGame(individual, cutoff = Int.MinValue)
 
     // run the machine using the dummy agent here
     //    val s1 = simulateGame(individual, cutoff = Int.MaxValue)
