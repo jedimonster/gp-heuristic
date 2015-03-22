@@ -11,8 +11,7 @@ import java.util.TreeMap;
  * Time: 12:22
  * This is a Java port from Tom Schaul's VGDL - https://github.com/schaul/py-vgdl
  */
-public class VGDLRegistry
-{
+public class VGDLRegistry {
     /**
      * Singleton instance of this class.
      */
@@ -27,24 +26,23 @@ public class VGDLRegistry
     /**
      * Private constructor.
      */
-    private VGDLRegistry(){}
+    private VGDLRegistry() {
+    }
 
     /**
      * Initializes the registry of sprites for games.
      */
-    public void init()
-    {
+    public void init() {
         sprite_mapping = new TreeMap<String, Integer>();
     }
 
     /**
      * Returns the unique instance of this class.
+     *
      * @return the unique instance of this class.
      */
-    public static VGDLRegistry GetInstance()
-    {
-        if(registry == null)
-        {
+    public static VGDLRegistry GetInstance() {
+        if (registry == null) {
             registry = new VGDLRegistry();
             registry.init();
         }
@@ -53,13 +51,13 @@ public class VGDLRegistry
 
     /**
      * Register a new sprite string.
+     *
      * @param key key in the hashmap.
      * @return Returns its new index, or a new one if it was already registered.
      */
-    public int registerSprite(String key)
-    {
+    public int registerSprite(String key) {
         int index = getRegisteredSpriteValue(key);
-        if(index != -1)
+        if (index != -1)
             return index;
 
         //otherwise, insert.
@@ -70,12 +68,12 @@ public class VGDLRegistry
 
     /**
      * Returns the index (value in map) of a given key, for sprites.
+     *
      * @param key key to check
      * @return the value in map, -1 if it does not exist.
      */
-    public int getRegisteredSpriteValue(String key)
-    {
-        if(sprite_mapping.containsKey(key))
+    public int getRegisteredSpriteValue(String key) {
+        if (sprite_mapping.containsKey(key))
             return sprite_mapping.get(key);
         return -1;
     }
@@ -83,19 +81,17 @@ public class VGDLRegistry
     /**
      * Returns the String associated with the first (and in theory, unique) sprite value passed.
      * This method is for <b>debug purposes only</b>, should not be used for game execution.
+     *
      * @param value value whose key is returned.
      * @return the String associated with the value passed.
      */
-    public String getRegisteredSpriteKey(int value)
-    {
+    public String getRegisteredSpriteKey(int value) {
         //This method should not be used.
         System.out.println("This method is deprecated, should not be used (other than debug).");
-        if(sprite_mapping.containsValue(value))
-        {
+        if (sprite_mapping.containsValue(value)) {
             Set<Map.Entry<String, Integer>> entries = sprite_mapping.entrySet();
-            for(Map.Entry<String, Integer> entry : entries)
-            {
-                if(entry.getValue() == value)
+            for (Map.Entry<String, Integer> entry : entries) {
+                if (entry.getValue() == value)
                     return entry.getKey();
             }
         }
@@ -104,10 +100,10 @@ public class VGDLRegistry
 
     /**
      * Returns the -number of elements in the sprite_mapping array.
+     *
      * @return number of elements in the sprite_mapping array.
      */
-    public int numSpriteTypes()
-    {
+    public int numSpriteTypes() {
         return sprite_mapping.size();
     }
 

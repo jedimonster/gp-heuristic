@@ -11,7 +11,7 @@ import evolution_engine.selection.TournamentSelection
 import evolution_engine.{CSVEvolutionLogger, Run}
 import evolution_engine.evolution.{EvolutionParameters, ParentSelectionEvolutionStrategy}
 import evolution_impl.crossover.JavaCodeCrossover
-import evolution_impl.fitness.{MultiGameFitnessCalculator, SingleGameFitnessCalculator}
+import evolution_impl.fitness.{IndividualHolder, MultiGameFitnessCalculator, SingleGameFitnessCalculator}
 import evolution_impl.fitness.dummyagent.StateObservationWrapper
 import evolution_impl.gpprograms.{RandomGrowInitializer, JavaCodeIndividual}
 import evolution_impl.mutators.{RegrowMethodMutator, ForLoopsMutator, ConstantsMutator}
@@ -26,17 +26,30 @@ object GPRunHolder {
 
 class GPHeuristic(individual: JavaCodeIndividual = null) extends StateHeuristic {
   val gpRun: ThreadedGPRun = GPRunHolder.gpRun
+  // if we weren't given an individual, we have to hope the GP run will set one eventually.
+
+  def waitForFirstIndividual() = {
+    fitness.IndividualHolder.synchronized {
+      while (individual == null && fitness.IndividualHolder.currentIndividual == null)
+        fitness.IndividualHolder.wait()
+    }
+  }
 
   override def evaluateState(stateObs: StateObservation): Double = {
-    var bestIndividual: JavaCodeIndividual = null
-    //
-    Thread.sleep(40) // because we're allowed 40ms.
-    if (gpRun.isBestIndividualReady) {
-      bestIndividual = gpRun.getBestIndividual
-//      System.out.println("GPHeuristic - using best individual " + bestIndividual.getName)
-    } else {
-      bestIndividual = fitness.CurrentIndividualHolder.individual
-//      System.out.println("GPHeuristic - using pretty random individual " + bestIndividual.getName)
+    var bestIndividual = individual
+    if (bestIndividual == null) {
+      // otherwise we're just calculating fitness.
+      if (gpRun.isBestIndividualReady) {
+        // at least one generation ended, we can use a proper individual.
+        bestIndividual = gpRun.getBestIndividual
+//        System.out.println("GPHeuristic - using best individual " + bestIndividual.getName)
+      } else {
+        // we have to apply some strategy for selecting the best ind from gen0, right now - random
+        fitness.IndividualHolder.synchronized {
+          bestIndividual = fitness.IndividualHolder.currentIndividual
+        }
+//        System.out.println("GPHeuristic - using pretty random individual " + bestIndividual.getName)
+      }
     }
     //    bestIndividual = gpRun.getBestIndividual
     val wrappedObservation = new StateObservationWrapper(stateObs)
@@ -53,7 +66,7 @@ class ThreadedGPRun() extends Runnable {
   val popSize = 64
   val paramTypes = List(new StateObservationWrapper(null))
 
-  val methodCount = 6
+  val methodCount = 3
   val fitnessCalculator = new SingleGameFitnessCalculator("aliens")
   //    val fitnessCalculator = new SingleGameFitnessCalculator("frogs")
   //  val fitnessCalculator = new MultiGameFitnessCalculator(cutoff = 2000)
@@ -74,13 +87,12 @@ class ThreadedGPRun() extends Runnable {
   }
 
   def getBestIndividual: JavaCodeIndividual = {
-    params.synchronized {
-      while (params.bestIndividual.isEmpty) {
-        params.wait()
+    IndividualHolder.bestIndividual.synchronized {
+      while (IndividualHolder.bestIndividual == null) {
+        IndividualHolder.bestIndividual.wait()
       }
-      params.bestIndividual.get.asInstanceOf[JavaCodeIndividual]
+      IndividualHolder.bestIndividual
     }
-
   }
 
   def getNextLogDirectory(logDirectory: String): Path = {
@@ -126,11 +138,12 @@ object ThreadedGPRun {
     val recordActionsFile: String = null
     val seed: Int = new Random().nextInt
 
+    Thread.sleep(200) // for the initial bug.
     //Game and level to play
     println("---\nPlaying a game with evolving heuristic")
     val scores = for (i <- 0.to(4)) yield {
       val levelPath = gamesPath + gameName + "_lvl" + i + ".txt"
-      ArcadeMachine.runOneGame(gamePath, levelPath, false, gpHeuristic, recordActionsFile, seed)
+      ArcadeMachine.runOneGame(gamePath, levelPath, true, gpHeuristic, recordActionsFile, seed)
     }
   }
 }

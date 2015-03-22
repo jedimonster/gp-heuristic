@@ -16,13 +16,11 @@ import tools.ElapsedCpuTimer;
  */
 public class Agent extends AbstractPlayer {
 
-    protected GPHeuristic heuristic = new GPHeuristic(null);
+    protected GPHeuristic heuristic;
+
     public Agent(StateObservation stateObs, ElapsedCpuTimer elapsedTimer) {
-        try {
-            Thread.sleep(200); // because we're allowed to
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        heuristic = new GPHeuristic(null);
+        heuristic.waitForFirstIndividual(); // this will wait until we have an individual
     }
 
     /**
@@ -48,12 +46,12 @@ public class Agent extends AbstractPlayer {
                 maxQ = Q;
                 bestAction = action;
             }
-
-
+        }
+        while (elapsedTimer.remainingTimeMillis() > 15) {
         }
 
-        // System.out.println("====================");
-//        System.out.printf("chose action %s\n", bestAction);
+//        System.out.println("====================");
+//        System.out.printf("chose action %s in %dms\n", bestAction, elapsedTimer.elapsedMillis());
         return bestAction;
 
 

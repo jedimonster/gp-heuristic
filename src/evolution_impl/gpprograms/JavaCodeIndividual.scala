@@ -25,6 +25,7 @@ class JavaCodeIndividual(
                           ) extends Individual {
   val javaCompiler: JavaCompiler = ToolProvider.getSystemJavaCompiler()
   var gardener: Option[RandomGrowInitializer] = None
+  var compiled = false
 
   def setName(s: String) = ast.getTypes.get(0).setName(s)
 
@@ -38,6 +39,9 @@ class JavaCodeIndividual(
 
   def run(input: StateObservationWrapper): Double = {
     //    val packageName = ast.getPackage.getName
+//    if(!compiled)
+//      compile()
+
     val className = ast.getTypes.get(0).getName
     var loadedClass: Class[_] = Class.forName(className)
     loadedClass = ClassLoader.getSystemClassLoader.loadClass(loadedClass.getName)
@@ -86,7 +90,7 @@ class JavaCodeIndividual(
     } else
     //      printf("Compiled class %s successfully\n", className)
     // todo if failed log errors and catch expeption
-
+      compiled = true
       Class.forName(className)
 
   }

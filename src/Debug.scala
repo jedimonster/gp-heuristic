@@ -17,14 +17,14 @@ object Debug {
 
 
   def main(args: Array[String]): Unit = {
-    val ind = new Ind68()
-    val f = new SingleGameFitnessCalculator(gameName)
-    VGDLFactory.GetInstance.init
-    VGDLRegistry.GetInstance.init
-    val toPlay: Game = new VGDLParser().parseGame(gamePath)
-    toPlay.buildLevel(levelPath)
-    val state = toPlay.getObservation
-
-    ind.run(new StateObservationWrapper(state))
+//    val ind = new Ind68()
+//    val f = new SingleGameFitnessCalculator(gameName)
+//    VGDLFactory.GetInstance.init
+//    VGDLRegistry.GetInstance.init
+//    val toPlay: Game = new VGDLParser().parseGame(gamePath)
+//    toPlay.buildLevel(levelPath)
+//    val state = toPlay.getObservation
+//
+//    ind.run(new StateObservationWrapper(state))
   }
 }
