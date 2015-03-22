@@ -37,7 +37,9 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
   override def processResult(result: FitnessResult[JavaCodeIndividual]): Unit = {
     val fitnessValues = result.getMap
     val best = fitnessValues.maxBy(x => x._2)
-    CurrentIndividualHolder.indLock.synchronized {
+
+    // update the best individual for the evolving heuristic agent.
+    CurrentIndividualHolder.synchronized {
       CurrentIndividualHolder.individual = best._1
       println("Best fitness - " + best._2)
       //      val realScore = playGame(best._1)
@@ -54,20 +56,21 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
   }
 
   def getIndividualFitness(individual: JavaCodeIndividual) = {
-    //    CurrentIndividualHolder.indLock.synchronized {
-    //      CurrentIndividualHolder.individual = individual
+    CurrentIndividualHolder.synchronized {
+      CurrentIndividualHolder.individual = individual
+    }
     individual.compile()
 
-    val n = 1
+    val n = 0
     val scores = for (i <- 0 to n)
-    yield simulateGame(individual, cutoff = Int.MinValue)
+      yield simulateGame(individual, cutoff = Int.MinValue)
 
     // run the machine using the dummy agent here
     //    val s1 = simulateGame(individual, cutoff = Int.MaxValue)
     //    val s2 = simulateGame(individual, cutoff = Int.MaxValue)
     //    (s1 + s2) / 2
     //    }
-    scores.sum / n
+    scores.sum / (n + 1)
   }
 
   def simulateGame(individual: JavaCodeIndividual, cutoff: Int): Double = {
@@ -106,7 +109,6 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
 }
 
 object CurrentIndividualHolder {
-  val indLock = None
   var individual: JavaCodeIndividual = null
 }
 

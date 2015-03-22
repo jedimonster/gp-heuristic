@@ -18,7 +18,11 @@ public class Agent extends AbstractPlayer {
 
     protected GPHeuristic heuristic = new GPHeuristic(null);
     public Agent(StateObservation stateObs, ElapsedCpuTimer elapsedTimer) {
-
+        try {
+            Thread.sleep(200); // because we're allowed to
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -49,7 +53,7 @@ public class Agent extends AbstractPlayer {
         }
 
         // System.out.println("====================");
-        System.out.printf("chose action %s\n", bestAction);
+//        System.out.printf("chose action %s\n", bestAction);
         return bestAction;
 
 
