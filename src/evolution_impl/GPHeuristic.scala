@@ -87,7 +87,7 @@ class ThreadedGPRun() extends Runnable {
   }
 
   def getBestIndividual: JavaCodeIndividual = {
-    IndividualHolder.bestIndividual.synchronized {
+    IndividualHolder.synchronized {
       while (IndividualHolder.bestIndividual == null) {
         IndividualHolder.bestIndividual.wait()
       }
