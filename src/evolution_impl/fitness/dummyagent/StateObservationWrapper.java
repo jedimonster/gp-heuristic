@@ -153,6 +153,26 @@ public class StateObservationWrapper {
         return result;
     }
 
+
+    public Iterable<Double> getPortalsHeuristicDistance() {
+        Vector2d avatarPosition = so.getAvatarPosition();
+        List<Double> result = new ArrayList<>();
+
+        ArrayList<Observation>[] portalsPositions = so.getPortalsPositions(avatarPosition);
+        if (portalsPositions != null) {
+            for (ArrayList<Observation> observations : portalsPositions) {
+                for (Observation observation : observations) {
+//                if (observation.category == category && observation.itype == itype)
+                    double distance = observation.sqDist + countBlockingWalls(so, observation);
+
+                    result.add(distance);
+                }
+            }
+        }
+
+        return result;
+    }
+
     public Iterable<Double> getNPCHeursticDistance() {
         Vector2d avatarPosition = so.getAvatarPosition();
         List<Double> result = new ArrayList<>();
