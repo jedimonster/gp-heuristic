@@ -2,7 +2,7 @@ package evolution_impl.fitness
 
 import java.util.Random
 
-import core.game.Game
+import core.game.{StateObservation, Game}
 import core.{VGDLParser, VGDLRegistry, VGDLFactory, ArcadeMachine}
 import evolution_engine.fitness.{FitnessCalculator, FitnessResult}
 import evolution_impl.DumbFitnessResult
@@ -78,11 +78,15 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
   }
 
   def simulateGame(individual: JavaCodeIndividual, cutoff: Int): Double = {
-
+    var state : StateObservation = null
     //    val playoutState = playout(individual, state, cutoff)
     //    playoutState.getGameScore
 
-    val state = intitialState.copy
+    //    val state = intitialState.copy
+    IndividualHolder.synchronized {
+      while (IndividualHolder.currentState == null) {}
+      state = IndividualHolder.currentState
+    }
     val timer = new ElapsedCpuTimer()
     timer.setMaxTimeMillis(Int.MaxValue)
     //    timer.setMaxTimeMillis(250)
@@ -115,6 +119,7 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
 object IndividualHolder {
   var currentIndividual: JavaCodeIndividual = null
   var bestIndividual: JavaCodeIndividual = null
+  var currentState: StateObservation = null
 }
 
 
