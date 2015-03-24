@@ -37,7 +37,7 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
   override def processResult(result: FitnessResult[JavaCodeIndividual]): Unit = {
     val fitnessValues = result.getMap
     val best = fitnessValues.maxBy(x => x._2)
-    printf("Best fitness - %s - %s", best._2, best._1.getName)
+    printf("Best fitness - %s - %s\n", best._2, best._1.getName)
 
     // update the best individual for the evolving heuristic agent.
 
@@ -84,7 +84,9 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
 
     //    val state = intitialState.copy
     IndividualHolder.synchronized {
-      while (IndividualHolder.currentState == null) {}
+      while (IndividualHolder.currentState == null) {
+        IndividualHolder.wait()
+      }
       state = IndividualHolder.currentState
     }
     val timer = new ElapsedCpuTimer()

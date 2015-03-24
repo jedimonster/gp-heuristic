@@ -39,7 +39,7 @@ class Agent extends AbstractPlayer {
   def act(stateObs: StateObservation, elapsedTimer: ElapsedCpuTimer): Types.ACTIONS = {
     var bestAction: Types.ACTIONS = null
     var maxQ: Double = Double.NegativeInfinity
-
+    var ended = false
     IndividualHolder.currentState = stateObs.copy
 
     for (action <- stateObs.getAvailableActions) {
@@ -49,10 +49,18 @@ class Agent extends AbstractPlayer {
       if (Q > maxQ) {
         maxQ = Q
         bestAction = action
+        ended = stCopy.isGameOver
       }
+    }
+    if(ended) { // we need to stop looking at it so the framework doesn't break. todo stop all working threads?
+      IndividualHolder.synchronized {
+        IndividualHolder.currentState = null
+      }
+
     }
     while (elapsedTimer.remainingTimeMillis > 10) {
     }
+
     return bestAction
   }
 }
