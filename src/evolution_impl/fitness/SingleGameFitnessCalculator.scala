@@ -58,7 +58,7 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
     //        }
   }
 
-  def getIndividualFitness(individual: JavaCodeIndividual) = {
+  def getIndividualFitness(individual: JavaCodeIndividual): Double = {
     IndividualHolder.synchronized {
       IndividualHolder.currentIndividual = individual
       IndividualHolder.notifyAll()
@@ -66,19 +66,21 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
     individual.compile()
 
     val n = 0
-    val scores = for (i <- 0 to n)
-      yield simulateGame(individual, cutoff = Int.MinValue)
+    try {
+      // this can fail due to concurrency issues, since it means the old score is no longer relevent, and it's rare, we just try again.
+      val scores = for (i <- 0 to n)
+        yield simulateGame(individual, cutoff = Int.MinValue)
 
-    // run the machine using the dummy agent here
-    //    val s1 = simulateGame(individual, cutoff = Int.MaxValue)
-    //    val s2 = simulateGame(individual, cutoff = Int.MaxValue)
-    //    (s1 + s2) / 2
-    //    }
-    scores.sum / (n + 1)
+      scores.sum / (n + 1)
+    } catch {
+      case e: Exception =>
+        println("FAILED FITNESS EVALUATION - RETRYING")
+        getIndividualFitness(individual)
+    }
   }
 
   def simulateGame(individual: JavaCodeIndividual, cutoff: Int): Double = {
-    var state : StateObservation = null
+    var state: StateObservation = null
     //    val playoutState = playout(individual, state, cutoff)
     //    playoutState.getGameScore
 
