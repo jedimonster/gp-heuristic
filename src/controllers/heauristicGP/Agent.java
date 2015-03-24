@@ -47,7 +47,7 @@ public class Agent extends AbstractPlayer {
                 bestAction = action;
             }
         }
-        while (elapsedTimer.remainingTimeMillis() > 15) {
+        while (elapsedTimer.remainingTimeMillis() > 10) { // todo this will be replaced by a proper search.
         }
 
 //        System.out.println("====================");

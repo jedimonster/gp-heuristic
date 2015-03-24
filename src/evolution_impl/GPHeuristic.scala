@@ -128,7 +128,7 @@ object ThreadedGPRun {
     GPRunHolder.gpRun = ThreadedGPRun.newInstance
 
     // run a game using the best individual know at each step
-    runNewGame()
+//    runNewGame()
   }
 
   def runNewGame() = {
