@@ -72,7 +72,7 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
         yield simulateGame(individual, cutoff = Int.MinValue)
 
       scores.sum / (n + 1)
-    } catch {
+    } catch { // todo case compilation error drop it
       case e: Exception =>
         println("FAILED FITNESS EVALUATION - RETRYING")
         getIndividualFitness(individual)

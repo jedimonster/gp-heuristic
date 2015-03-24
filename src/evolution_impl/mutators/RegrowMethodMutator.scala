@@ -37,7 +37,7 @@ class RegrowMethodVisitor extends ASTVisitor[JavaCodeIndividual] {
     n.getMembers.remove(Random.nextInt(n.getMembers.size))
     // add a new one:
     val gardener: RandomGrowInitializer = individual.gardener.get
-    val method: MethodDeclaration = gardener.growMethod(HeuristicsNumbers.getNext, gardener.ParamCount)
+    val method: MethodDeclaration = gardener.growMethod(HeuristicsNumbers.getNext, gardener.ParamCount, individual)
     n.getMembers.add(method)
     gardener.growRunMethod(individual)
   }

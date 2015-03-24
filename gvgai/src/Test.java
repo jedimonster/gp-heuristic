@@ -26,16 +26,16 @@ public class Test
         String gamesPath = "examples/gridphysics/";
 
         //CIG 2014 Training Set Games
-        //String games[] = new String[]{"aliens", "boulderdash", "butterflies", "chase", "frogs",
-        //        "missilecommand", "portals", "sokoban", "survivezombies", "zelda"};
+        String games[] = new String[]{"aliens", "boulderdash", "butterflies", "chase", "frogs",
+                "missilecommand", "portals", "sokoban", "survivezombies", "zelda"};
 
         //CIG 2014 Validation Set Games
         //String games[] = new String[]{"camelRace", "digdug", "firestorms", "infection", "firecaster",
         //      "overload", "pacman", "seaquest", "whackamole", "eggomania"};
 
         //CIG 2015 New Training Set Games
-        String games[] = new String[]{"bait", "boloadventures", "brainman", "chipschallenge",  "modality",
-                                      "painter", "realportals", "realsokoban", "thecitadel", "zenpuzzle"};
+//        String games[] = new String[]{"bait", "boloadventures", "brainman", "chipschallenge",  "modality",
+//                                      "painter", "realportals", "realsokoban", "thecitadel", "zenpuzzle"};
 
         //EXTRA GAMES:
         //String games[] = new String[]{ "solarfox", "bombuzal" };
