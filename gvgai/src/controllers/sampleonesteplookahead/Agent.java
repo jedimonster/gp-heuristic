@@ -1,6 +1,7 @@
 package controllers.sampleonesteplookahead;
 
 
+import controllers.Heuristics.MinDistanceHeuristic;
 import controllers.Heuristics.SimpleStateHeuristic;
 import core.game.StateObservation;
 import core.player.AbstractPlayer;
@@ -20,16 +21,12 @@ public class Agent extends AbstractPlayer {
 
     public Agent(StateObservation stateObs, ElapsedCpuTimer elapsedTimer) {
 
-
-
-
     }
 
     /**
-     *
      * Very simple one step lookahead agent.
      *
-     * @param stateObs Observation of the current state.
+     * @param stateObs     Observation of the current state.
      * @param elapsedTimer Timer when the action returned is due.
      * @return An action for the current state
      */
@@ -37,11 +34,11 @@ public class Agent extends AbstractPlayer {
 
         Types.ACTIONS bestAction = null;
         double maxQ = Double.NEGATIVE_INFINITY;
-        SimpleStateHeuristic heuristic =  new SimpleStateHeuristic(stateObs);
+        MinDistanceHeuristic heuristic = new MinDistanceHeuristic(stateObs);
         for (Types.ACTIONS action : stateObs.getAvailableActions()) {
 
             StateObservation stCopy = stateObs.copy();
-            stCopy.advance(action);
+            stCopy.advance(action); // todo there appears to be a bug in the framework which makes the action do nothing!
             double Q = heuristic.evaluateState(stCopy);
 
 
@@ -54,9 +51,8 @@ public class Agent extends AbstractPlayer {
 
         }
 
-       // System.out.println("====================");
+        // System.out.println("====================");
         return bestAction;
-
 
 
     }

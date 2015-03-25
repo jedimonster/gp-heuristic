@@ -5,10 +5,7 @@ import core.game.StateObservation;
 import ontology.Types;
 import tools.Vector2d;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by itayaza on 22/12/2014.
@@ -143,7 +140,7 @@ public class StateObservationWrapper {
             for (ArrayList<Observation> observations : resourcesPositions) {
                 for (Observation observation : observations) {
 //                if (observation.category == category && observation.itype == itype)
-                    double distance = observation.sqDist + countBlockingWalls(so, observation);
+                    double distance = observation.sqDist + countBlockingWalls(observation);
 
                     result.add(distance);
                 }
@@ -157,14 +154,15 @@ public class StateObservationWrapper {
     public Iterable<Double> getPortalsHeuristicDistance() {
         Vector2d avatarPosition = so.getAvatarPosition();
         List<Double> result = new ArrayList<>();
+        final int blockSize = so.getBlockSize();
 
         ArrayList<Observation>[] portalsPositions = so.getPortalsPositions(avatarPosition);
         if (portalsPositions != null) {
             for (ArrayList<Observation> observations : portalsPositions) {
                 for (Observation observation : observations) {
 //                if (observation.category == category && observation.itype == itype)
-                    double distance = observation.sqDist + countBlockingWalls(so, observation);
-
+                    double distance = aStar(new Position((int) avatarPosition.x / blockSize, (int) avatarPosition.y / blockSize), new Position((int) observation.position.x / blockSize, (int) observation.position.y / blockSize)).size();
+//                    double distance=0;
                     result.add(distance);
                 }
             }
@@ -182,7 +180,7 @@ public class StateObservationWrapper {
             for (ArrayList<Observation> observations : npcPositions) {
                 for (Observation observation : observations) {
 //                if (observation.category == category && observation.itype == itype)
-                    double distance = observation.sqDist + countBlockingWalls(so, observation);
+                    double distance = observation.sqDist + countBlockingWalls(observation);
 
                     result.add(distance);
                 }
@@ -193,14 +191,14 @@ public class StateObservationWrapper {
     }
 
     @GPIgnore
-    private double countBlockingWalls(StateObservation stateObservation, Observation dstObservation) {
+    private double countBlockingWalls(Observation dstObservation) {
         int walls = 0;
-        ArrayList<Observation>[][] observationGrid = stateObservation.getObservationGrid();
-        int currentX = (int) stateObservation.getAvatarPosition().x / stateObservation.getBlockSize(),
-                currentY = (int) stateObservation.getAvatarPosition().y / stateObservation.getBlockSize();
+        ArrayList<Observation>[][] observationGrid = so.getObservationGrid();
+        int currentX = (int) so.getAvatarPosition().x / so.getBlockSize(),
+                currentY = (int) so.getAvatarPosition().y / so.getBlockSize();
 
-        int dstX = (int) (dstObservation.position.x / stateObservation.getBlockSize());
-        int dstY = (int) (dstObservation.position.y / stateObservation.getBlockSize());
+        int dstX = (int) (dstObservation.position.x / so.getBlockSize());
+        int dstY = (int) (dstObservation.position.y / so.getBlockSize());
         while (currentX != dstX || currentY != dstY) {
             if (!observationGrid[currentX][currentY].isEmpty()) // something is there
                 walls++;
@@ -219,5 +217,97 @@ public class StateObservationWrapper {
         return walls;
     }
 
+    @GPIgnore
+    private List<Position> aStar(Position start, Position goal) {
+        final ArrayList<Position> path = new ArrayList();
+        final HashSet<Position> closedSet = new HashSet<>();
+        final HashMap<Position, Double> fScore = new HashMap<>();
+        final SortedList<Position> openSet = new SortedList<Position>(new Comparator<Position>() {
+            @Override
+            public int compare(Position o1, Position o2) {
+                return fScore.get(o1).compareTo(fScore.get(o2));
+            }
+        });
+        final HashMap<Position, Position> cameFrom = new HashMap<>();
+        final HashMap<Position, Double> gScore = new HashMap<>();
+
+        openSet.add(start);
+        gScore.put(start, 0.0);
+        fScore.put(start, gScore.get(start) + heuristicDistance(start, goal));
+
+        while (!openSet.isEmpty()) {
+            Position current = openSet.get(0); // sorted list so first is min.
+            if (current.equals(goal))
+                return reconstructPath(cameFrom, goal);
+
+            openSet.remove(current);
+            closedSet.add(current);
+
+            for (Position neighbor : getNeighbors(current)) {
+                if (closedSet.contains(neighbor))
+                    continue;
+
+                double tentativeGScore = gScore.get(current) + 1; // distance is always one.
+
+                if (!openSet.contains(neighbor) || tentativeGScore < gScore.get(neighbor)) {
+                    cameFrom.put(neighbor, current);
+                    gScore.put(neighbor, tentativeGScore);
+                    fScore.put(neighbor, gScore.get(neighbor) + heuristicDistance(neighbor, goal));
+
+                    if (!openSet.contains(neighbor))
+                        openSet.add(neighbor);
+                }
+            }
+        }
+
+        throw new RuntimeException("A* Failed");
+    }
+
+    @GPIgnore
+    private List<Position> getNeighbors(Position current) {
+        List<Observation> immovablePositions = (List<Observation>) getImmovablePositions(0, 0);
+
+        int x = current.getX(), y = current.getY();
+        List<Position> candidates = Arrays.asList(new Position[]{new Position(x - 1, y), new Position(x + 1, y), new Position(x, y - 1), new Position(x, y + 1)});
+        ArrayList<Observation>[][] observationGrid = so.getObservationGrid();
+        ArrayList<Position> neighbors = new ArrayList<>();
+        boolean wall;
+
+        for (Position candidate : candidates) {
+            wall = false;
+            if (candidate.getX() >= observationGrid.length || candidate.getX() < 0 || candidate.getY() >= observationGrid[0].length || candidate.getY() < 0)
+                continue;
+
+//            if (observationGrid[candidate.getX()][candidate.getY()].isEmpty()) // nothing there
+            ArrayList<Observation> observations = observationGrid[candidate.getX()][candidate.getY()];
+            for (int i = 0; i < observations.size() && !wall; i++) {
+                Observation observation = observations.get(i);
+                wall = immovablePositions.contains(observation);
+            }
+            if (!wall)
+                neighbors.add(candidate);
+        }
+
+        return neighbors;
+    }
+
+    @GPIgnore
+    private List<Position> reconstructPath(HashMap<Position, Position> cameFrom, Position current) {
+        List<Position> path = new ArrayList<>();
+        path.add(current);
+
+        while (cameFrom.containsKey(current)) {
+            current = cameFrom.get(current);
+            path.add(0, current);
+        }
+
+        return path;
+    }
+
+    @GPIgnore
+    private Double heuristicDistance(Position start, Position goal) {
+//        return (double) (Math.abs(start.getX() - goal.getX()) + Math.abs(start.getY() - goal.getY()));
+        return 0.0;
+    }
 
 }

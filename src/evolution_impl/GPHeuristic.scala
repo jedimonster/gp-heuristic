@@ -109,7 +109,7 @@ class ThreadedGPRun() extends Runnable {
 }
 
 object ThreadedGPRun {
-  val gameName = "boulderdash"
+  val gameName = "aliens"
   val gamesPath: String = "gvgai/examples/gridphysics/"
   val levelId = 0
   val gamePath = gamesPath + gameName + ".txt"
