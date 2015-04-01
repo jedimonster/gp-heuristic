@@ -3,6 +3,7 @@ package evolution_impl.gpprograms.util
 import java.lang.annotation.Annotation
 import java.lang.reflect.{Method, Type, Modifier, Field, GenericArrayType}
 
+import evolution_impl.fitness.dummyagent.GPIgnore
 import evolution_impl.gpprograms.scope.CallableNode
 import japa.parser.ast.`type`.{ClassOrInterfaceType, PrimitiveType}
 import japa.parser.ast.body.{MethodDeclaration, VariableDeclaratorId, Parameter}
@@ -37,6 +38,12 @@ object ClassUtil {
     val genericReturnType: Type = method.getGenericReturnType
     var callables = Seq[CallableNode]()
     val methodReturnType: Class[_] = method.getReturnType
+
+    if (method.isAnnotationPresent(classOf[GPIgnore]) || !Modifier.isPublic(method.getModifiers)) {
+      return callables
+    }
+
+
     if ((methodReturnType.isPrimitive || methodReturnType.getName.equals("java.lang.String"))
       && !methodReturnType.getName.equalsIgnoreCase("void")
       || Class.forName("java.lang.Iterable").isAssignableFrom(methodReturnType)) {
@@ -45,7 +52,8 @@ object ClassUtil {
       //      val methodExpr: MethodCallExpr = new MethodCallExpr(scope, method.getName, methodParams)
       var i = 0;
       val parameters: java.util.List[Parameter] = (for (p <- method.getParameterTypes.toSeq) yield new Parameter(new ClassOrInterfaceType(p.getName), new VariableDeclaratorId(({
-        i += 1; i.toString
+        i += 1;
+        i.toString
       })))).asJava
       val parameterAnnotations: Array[Array[Annotation]] = method.getParameterAnnotations
 

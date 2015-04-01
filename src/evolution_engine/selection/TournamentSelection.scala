@@ -13,18 +13,18 @@ import scala.util.Random
  */
 
 class TournamentSelection[T <: Individual](minimize: Boolean) extends SelectionStrategy[T] {
-  val subsetSize = 4
+  val subsetSize = 3
 
-  def optimal(list: List[T], fitnessResult: FitnessResult[T]): T = {
-    var optFitness = if (minimize) Double.MaxValue else Double.MinValue
+  def optimal(individuals: List[T], fitnessResult: FitnessResult[T]): T = {
+    var optFitness = if (minimize) Double.PositiveInfinity else Double.NegativeInfinity
     var opt: Option[T] = None
 
 
-    for (i <- 0 to list.size - 1) {
-      val individual: T = list.get(i)
-      if (minimize && fitnessResult.getFitness(individual) < optFitness
-        || fitnessResult.getFitness(individual) > optFitness) {
-        optFitness = fitnessResult.getFitness(individual)
+    for (individual <- individuals) {
+      val individualFitness = fitnessResult.getFitness(individual)
+      if (minimize && individualFitness <= optFitness
+        || individualFitness >= optFitness) {
+        optFitness = individualFitness
         opt = Option(individual)
       }
     }
@@ -45,7 +45,7 @@ class TournamentSelection[T <: Individual](minimize: Boolean) extends SelectionS
       //      val subList: util.List[T] = shuffled.subList(0, subsetSize)
 
       // shuffle subsetSize individuals:
-      val subList = for (i <- 0 to subsetSize) yield previousGeneration(Random.nextInt(n))
+      val subList = for (i <- 0 to subsetSize - 1) yield previousGeneration(Random.nextInt(n))
 
       // pick highest fitness
       selected :+= optimal(subList.toList, fitness)

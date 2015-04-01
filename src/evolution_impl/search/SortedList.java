@@ -1,4 +1,4 @@
-package evolution_impl.fitness.dummyagent;
+package evolution_impl.search;
 
 import java.util.ArrayList;
 import java.util.Comparator;

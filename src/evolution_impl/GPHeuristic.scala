@@ -42,13 +42,13 @@ class GPHeuristic(individual: JavaCodeIndividual = null) extends StateHeuristic 
       if (gpRun.isBestIndividualReady) {
         // at least one generation ended, we can use a proper individual.
         bestIndividual = gpRun.getBestIndividual
-//        System.out.println("GPHeuristic - using best individual " + bestIndividual.getName)
+        //        System.out.println("GPHeuristic - using best individual " + bestIndividual.getName)
       } else {
         // we have to apply some strategy for selecting the best ind from gen0, right now - random
         fitness.IndividualHolder.synchronized {
           bestIndividual = fitness.IndividualHolder.currentIndividual
         }
-//        System.out.println("GPHeuristic - using pretty random individual " + bestIndividual.getName)
+        //        System.out.println("GPHeuristic - using pretty random individual " + bestIndividual.getName)
       }
     }
     //    bestIndividual = gpRun.getBestIndividual
@@ -63,12 +63,12 @@ class ThreadedGPRun() extends Runnable {
   val crossovers = new JavaCodeCrossover(0.3)
   val mutators = List(new ConstantsMutator(0.15), new ForLoopsMutator(0.25), new RegrowMethodMutator(0.15))
   val generations = 100
-  val popSize = 64
+  val popSize = 32
   val paramTypes = List(new StateObservationWrapper(null))
 
   val methodCount = 3
-  val fitnessCalculator = new SingleGameFitnessCalculator("aliens")
-  //    val fitnessCalculator = new SingleGameFitnessCalculator("frogs")
+  val fitnessCalculator = new SingleGameFitnessCalculator(ThreadedGPRun.gameName)
+  //      val fitnessCalculator = new SingleGameFitnessCalculator("zelda")
   //  val fitnessCalculator = new MultiGameFitnessCalculator(cutoff = 2000)
   val selection = new TournamentSelection[JavaCodeIndividual](false)
   val params = new EvolutionParameters[JavaCodeIndividual](fitnessCalculator, selection,
@@ -109,6 +109,16 @@ class ThreadedGPRun() extends Runnable {
 }
 
 object ThreadedGPRun {
+  // works on the fly:
+  // works with unlimited time: alians, boulderdash, butterflies, missilecommand, frogs, survivezombies, zelda
+  // fails: chase
+  // fails compilation/exception:
+  // neg infinity?? portals,sokoban
+
+  // cross validation set:
+  // works with unlimited time: camelRace, firestorms, infection
+  // pass but sucks with unlimited time: digdug, firecaster (but they all fail)
+  // fail with unlimited time: overload
   val gameName = "aliens"
   val gamesPath: String = "gvgai/examples/gridphysics/"
   val levelId = 0

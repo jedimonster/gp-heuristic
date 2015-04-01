@@ -8,6 +8,7 @@ import core.player.AbstractPlayer;
 import ontology.Types;
 import tools.ElapsedCpuTimer;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -35,6 +36,7 @@ public class Agent extends AbstractPlayer {
         Types.ACTIONS bestAction = null;
         double maxQ = Double.NEGATIVE_INFINITY;
         MinDistanceHeuristic heuristic = new MinDistanceHeuristic(stateObs);
+        ArrayList<Double> heursticVals = new ArrayList<>();
         for (Types.ACTIONS action : stateObs.getAvailableActions()) {
 
             StateObservation stCopy = stateObs.copy();
@@ -43,6 +45,7 @@ public class Agent extends AbstractPlayer {
 
 
             //System.out.println("Action:" + action + " score:" + Q);
+            heursticVals.add(Q);
             if (Q > maxQ) {
                 maxQ = Q;
                 bestAction = action;

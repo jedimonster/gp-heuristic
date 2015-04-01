@@ -5,9 +5,10 @@ import java.util.Random
 import core.game.{StateObservation, Game}
 import core.{VGDLParser, VGDLRegistry, VGDLFactory, ArcadeMachine}
 import evolution_engine.fitness.{FitnessCalculator, FitnessResult}
-import evolution_impl.DumbFitnessResult
 import evolution_impl.gpprograms.JavaCodeIndividual
+import evolution_impl.search.{AStarPathRequest, GraphNode}
 import tools.ElapsedCpuTimer
+
 
 /**
  * Created by itayaza on 24/11/2014.
@@ -45,7 +46,7 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
       IndividualHolder.bestIndividual = best._1
       IndividualHolder.notifyAll()
     }
-    //      val realScore = playGame(best._1)
+    //    val realScore = playGame(best._1)
     //      println("real score with it " + realScore)
     //      println("playout score with it " + getIndividualFitness(best._1))
     //      if (best._2 > 76) {
@@ -72,7 +73,8 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
         yield simulateGame(individual, cutoff = Int.MinValue)
 
       scores.sum / (n + 1)
-    } catch { // todo case compilation error drop it
+    } catch {
+      // todo case compilation error drop it
       case e: Exception =>
         println("FAILED FITNESS EVALUATION - RETRYING")
         getIndividualFitness(individual)
@@ -84,7 +86,7 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
     //    val playoutState = playout(individual, state, cutoff)
     //    playoutState.getGameScore
 
-    //    val state = intitialState.copy
+    //    state = intitialState.copy
     IndividualHolder.synchronized {
       while (IndividualHolder.currentState == null) {
         IndividualHolder.wait()
@@ -92,31 +94,34 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
       state = IndividualHolder.currentState
     }
     val timer = new ElapsedCpuTimer()
-    timer.setMaxTimeMillis(Int.MaxValue)
-    //    timer.setMaxTimeMillis(250)
+    //        timer.setMaxTimeMillis(Int.MaxValue)
+    timer.setMaxTimeMillis(100)
     val score = rec_playout(individual, state, timer)._1
-    //    printf("played out in %dms \n", timer.elapsedMillis())
+    //        printf("played out in %dms \n", timer.elapsedMillis())
 
     score
   }
 
   def playGame(individual: JavaCodeIndividual, visuals: Boolean = false) = {
-    //    val gpHeuristic: String = "evolution_impl.fitness.dummyagent.Agent"
+    val gpHeuristic: String = "evolution_impl.fitness.dummyagent.Agent"
+
+    //Other settings
+    val recordActionsFile: String = null
+    val seed: Int = new Random().nextInt
+
+    //Game and level to play
+    println("---\nPlaying a game with " + individual.getName)
+    val scores = for (i <- 0.to(0)) yield {
+      val levelPath = gamesPath + gameName + "_lvl" + i + ".txt"
+      IndividualHolder.synchronized {
+        IndividualHolder.currentIndividual = individual
+        ArcadeMachine.runOneGame(gamePath, levelPath, true, gpHeuristic, recordActionsFile, seed)
+      }
+    }
+    //    val score2: Double = ArcadeMachine.runOneGame(game, level1, false, gpHeuristic, recordActionsFile, seed)
     //
-    //    //Other settings
-    //    val recordActionsFile: String = null
-    //    val seed: Int = new Random().nextInt
-    //
-    //    //Game and level to play
-    //    println("---\nPlaying a game with " + individual.getName)
-    //    val scores = for (i <- 0.to(4)) yield {
-    //      val levelPath = gamesPath + gameName + "_lvl" + i + ".txt"
-    //      ArcadeMachine.runOneGame(gamePath, levelPath, visuals, gpHeuristic, recordActionsFile, seed)
-    //    }
-    //    //    val score2: Double = ArcadeMachine.runOneGame(game, level1, false, gpHeuristic, recordActionsFile, seed)
-    //    //
-    //    //    (score + score2) / 2
-    //    scores.sum / scores.size
+    //    (score + score2) / 2
+    scores.sum / scores.size
   }
 }
 

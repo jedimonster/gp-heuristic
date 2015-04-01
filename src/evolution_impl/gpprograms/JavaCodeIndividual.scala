@@ -52,12 +52,12 @@ class JavaCodeIndividual(
     try {
       instance.run(input)
     } catch {
-      case e: Exception => {
+      case e: Exception =>
         println("Exception " + e.toString + "while running:")
         println(ast.toString)
+        e.printStackTrace();
         System.exit(-1)
-        Double.PositiveInfinity
-      }
+        Double.NegativeInfinity
     }
   }
 

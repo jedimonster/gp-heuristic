@@ -11,15 +11,23 @@ class MinDistanceHeuristic(stateObservation: StateObservation) extends StateHeur
   override def evaluateState(stateObs: StateObservation): Double = {
     val start = System.nanoTime()
     val wrappedState = new StateObservationWrapper(stateObs)
-    val distances = wrappedState.getPortalsHeuristicDistance.asScala
 
     var acc = 0.0
 
-    for (d <- distances)
-      acc += d
+    if (stateObs.isGameOver)
+      return Double.MinValue
 
-    val end = System.nanoTime()
-//    printf("time took for heuristica eval = %fms\n", (end - start) * Math.pow(10, -9))
-    1 / acc
+    val distances = wrappedState.getPortalsHeuristicDistance.asScala
+
+    if (distances.size > 0)
+      1 / distances.min
+    else
+      0
+    //    for (d <- distances)
+    //      acc += d
+    //
+    //    val end = System.nanoTime()
+    ////    printf("time took for heuristica eval = %fms\n", (end - start) * Math.pow(10, -9))
+    //    1 / acc
   }
 }

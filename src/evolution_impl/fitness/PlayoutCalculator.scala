@@ -32,9 +32,16 @@ trait PlayoutCalculator {
       for (action <- state.getAvailableActions) {
         val stateCopy: StateObservation = state.copy()
         stateCopy.advance(action)
-
         val score: Double = stateCopy.getGameScore
-        val heuristicVal = individual.run(new StateObservationWrapper(stateCopy))
+        var heuristicVal = individual.run(new StateObservationWrapper(stateCopy))
+
+        if (stateCopy.getAvatarOrientation.eq(stateObservation.getAvatarOrientation)) {
+          // we only turned so it had no effect, move so it does and heuristics can update
+          // todo we might not want to move but only look at something.. but we really need to look past it, pick max, and follow through.
+          stateCopy.advance(action)
+          heuristicVal = individual.run(new StateObservationWrapper(stateCopy))
+        }
+
         if (heuristicVal > bestHeuristicScore) {
           bestHeuristicScore = heuristicVal
           bestState = stateCopy
@@ -64,8 +71,9 @@ trait PlayoutCalculator {
       if (stateObservation.getGameWinner == Types.WINNER.PLAYER_WINS)
         return (gameScore, heuristicVal)
       else
-        return (-1, heuristicVal)
+        return (-1 / Math.max(0.001, Math.abs(gameScore)), heuristicVal)
     }
+
     val scores = for (nextAction <- stateObservation.getAvailableActions.asScala) yield {
       val nextState = stateObservation.copy()
       nextState.advance(nextAction)
