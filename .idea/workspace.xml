@@ -5,26 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="719a2b7b-e7d5-44e2-8910-1b2c90982fb0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/evolution_impl/search/AStar.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/evolution_impl/search/AStarException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/evolution_impl/search/Position.scala" />
-      <change type="DELETED" beforePath="C:\Users\Itay\IDEA Projects\gp-heuristic\src\evolution_impl\fitness\dummyagent\Position.java" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\Itay\IDEA Projects\gp-heuristic\src\evolution_impl\fitness\dummyagent\SortedList.java" afterPath="$PROJECT_DIR$/src/evolution_impl/search/SortedList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gvgai/src/controllers/sampleonesteplookahead/Agent.java" afterPath="$PROJECT_DIR$/gvgai/src/controllers/sampleonesteplookahead/Agent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controllers/heauristicGP/Agent.scala" afterPath="$PROJECT_DIR$/src/controllers/heauristicGP/Agent.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_impl/fitness/dummyagent/Agent.scala" afterPath="$PROJECT_DIR$/src/evolution_impl/fitness/dummyagent/Agent.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_engine/CSVEvolutionLogger.scala" afterPath="$PROJECT_DIR$/src/evolution_engine/CSVEvolutionLogger.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_impl/gpprograms/util/ClassUtil.scala" afterPath="$PROJECT_DIR$/src/evolution_impl/gpprograms/util/ClassUtil.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_engine/fitness/FitnessCalculator.scala" afterPath="$PROJECT_DIR$/src/evolution_engine/fitness/FitnessCalculator.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_impl/GPHeuristic.scala" afterPath="$PROJECT_DIR$/src/evolution_impl/GPHeuristic.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_impl/fitness/dummyagent/GPIgnore.java" afterPath="$PROJECT_DIR$/src/evolution_impl/fitness/dummyagent/GPIgnore.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_impl/gpprograms/JavaCodeIndividual.scala" afterPath="$PROJECT_DIR$/src/evolution_impl/gpprograms/JavaCodeIndividual.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gvgai/src/controllers/Heuristics/MinDistanceHeuristic.scala" afterPath="$PROJECT_DIR$/gvgai/src/controllers/Heuristics/MinDistanceHeuristic.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_impl/fitness/PlayoutCalculator.scala" afterPath="$PROJECT_DIR$/src/evolution_impl/fitness/PlayoutCalculator.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_impl/fitness/SingleGameFitnessCalculator.scala" afterPath="$PROJECT_DIR$/src/evolution_impl/fitness/SingleGameFitnessCalculator.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_impl/fitness/dummyagent/StateObservationWrapper.java" afterPath="$PROJECT_DIR$/src/evolution_impl/fitness/dummyagent/StateObservationWrapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gvgai/src/Test.java" afterPath="$PROJECT_DIR$/gvgai/src/Test.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_engine/selection/TournamentSelection.scala" afterPath="$PROJECT_DIR$/src/evolution_engine/selection/TournamentSelection.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="gp-heuristic.iws" />
@@ -934,7 +914,7 @@
       <workItem from="1427795559144" duration="17802000" />
       <workItem from="1427875232026" duration="7741000" />
       <workItem from="1427885215452" duration="7103000" />
-      <workItem from="1427896120075" duration="1613000" />
+      <workItem from="1427896120075" duration="1762000" />
     </task>
     <task id="LOCAL-00001" summary="fixed idea project">
       <created>1416215606444</created>
@@ -1074,11 +1054,17 @@
       <option name="project" value="LOCAL" />
       <updated>1427019139713</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="working astar, no cache, reasonable performance">
+      <created>1427897748057</created>
+      <option name="number" value="00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1427897748057</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="310183000" />
+    <option name="totallyTimeSpent" value="310332000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1220,7 +1206,8 @@
     <MESSAGE value="fixed printing" />
     <MESSAGE value="updating state observation to latest" />
     <MESSAGE value="optemistic try and fail for fitness evaluation" />
-    <option name="LAST_COMMIT_MESSAGE" value="optemistic try and fail for fitness evaluation" />
+    <MESSAGE value="working astar, no cache, reasonable performance" />
+    <option name="LAST_COMMIT_MESSAGE" value="working astar, no cache, reasonable performance" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
