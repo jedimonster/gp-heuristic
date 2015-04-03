@@ -28,5 +28,6 @@
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="glib" level="application" />
     <orderEntry type="library" name="scala-sdk-2.10.4" level="application" />
+    <orderEntry type="library" name="scala-sdk-2.10.4" level="application" />
   </component>
 </module>

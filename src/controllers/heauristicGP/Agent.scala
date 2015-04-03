@@ -12,6 +12,7 @@ import ontology.Types.ACTIONS
 import tools.ElapsedCpuTimer
 import scala.annotation.tailrec
 import scala.collection.JavaConversions._
+import scala.collection.mutable.ListBuffer
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,7 +23,9 @@ import scala.collection.JavaConversions._
  */
 class Agent extends AbstractPlayer {
   protected var heuristic: GPHeuristic = null
-  protected val aStar: AStar[Position] = new AStar[Position]() // each agent has his own AStar with cache, new game/level = new agent.
+  protected var statesEvaluated = 0
+  protected var statesEvaluatedCounts = ListBuffer[Int]()
+  protected var actions = 0
 
   def this(stateObs: StateObservation, elapsedTimer: ElapsedCpuTimer) {
     this()
@@ -37,11 +40,10 @@ class Agent extends AbstractPlayer {
     }
   }
 
-  var statesEvaluated = 0
-
   def act(stateObs: StateObservation, elapsedTimer: ElapsedCpuTimer): Types.ACTIONS = {
     IndividualHolder.currentState = stateObs.copy
     heuristic.useBestKnownIndividual()
+    statesEvaluated = 0
 
     val actionsScores = for (action <- stateObs.getAvailableActions) yield {
       val stateCopy: StateObservation = stateObs.copy
@@ -49,6 +51,13 @@ class Agent extends AbstractPlayer {
       val newTimer = new ElapsedCpuTimer()
       newTimer.setMaxTimeMillis((elapsedTimer.remainingTimeMillis - 10) / stateObs.getAvailableActions.size)
       (action, evaluateStates(stateCopy, newTimer))
+    }
+    statesEvaluatedCounts :+= statesEvaluated
+    actions += 1
+
+    if (actions % 500 == 0) {
+      printf("Average states evaluated %f\n", statesEvaluatedCounts.sum.toDouble / statesEvaluatedCounts.size)
+      statesEvaluatedCounts = ListBuffer[Int]()
     }
     actionsScores.maxBy(actionScore => actionScore._2)._1
   }
