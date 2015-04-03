@@ -60,18 +60,17 @@ trait PlayoutCalculator {
     *
     * @param individual
     * @param stateObservation
-    * @param depth
-    * @return (Score, Heuristic Val) best values that can be reached from the given state.
+    * @return (Score, Heuristic Val, depth_reached) best values that can be reached from the given state.
     */
-  @tailrec final def rec_playout(individual: JavaCodeIndividual, stateObservation: StateObservation, timeLeft: ElapsedCpuTimer):
-  (Double, Double) = {
+  @tailrec final def rec_playout(individual: JavaCodeIndividual, stateObservation: StateObservation, timeLeft: ElapsedCpuTimer, depthReached: Int = 0):
+  (Double, Double, Int) = {
     if (timeLeft.exceededMaxTime() || stateObservation.isGameOver) {
       val heuristicVal: Double = individual.run(new StateObservationWrapper(stateObservation))
       val gameScore: Double = stateObservation.getGameScore
       if (stateObservation.getGameWinner == Types.WINNER.PLAYER_WINS)
-        return (gameScore, heuristicVal)
+        return (gameScore, heuristicVal, depthReached)
       else
-        return (-1 / Math.max(0.001, Math.abs(gameScore)), heuristicVal)
+        return (-1 / Math.max(0.001, Math.abs(gameScore)), heuristicVal, depthReached)
     }
 
     val scores = for (nextAction <- stateObservation.getAvailableActions.asScala) yield {
@@ -81,6 +80,6 @@ trait PlayoutCalculator {
     }
     // at this point we can follow up the best heuristic value, or  - if time permits - more.
     val bestScore = scores.maxBy(x => x._2)
-    rec_playout(individual, bestScore._1, timeLeft)
+    rec_playout(individual, bestScore._1, timeLeft, depthReached + 1)
   }
 }

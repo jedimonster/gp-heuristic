@@ -9,6 +9,8 @@ import evolution_impl.gpprograms.JavaCodeIndividual
 import evolution_impl.search.{AStarPathRequest, GraphNode}
 import tools.ElapsedCpuTimer
 
+import scala.collection.mutable.ListBuffer
+
 
 /**
  * Created by itayaza on 24/11/2014.
@@ -18,7 +20,7 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
   val levelId = 0
   val gamePath = gamesPath + gameName + ".txt"
   val levelPath = gamesPath + gameName + "_lvl" + levelId + ".txt"
-
+  var depthsReached = ListBuffer[Double]()
   val vGDLFactory = VGDLFactory.GetInstance().init()
   val vGDLRegistry = VGDLRegistry.GetInstance().init()
 
@@ -38,12 +40,15 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
   override def processResult(result: FitnessResult[JavaCodeIndividual]): Unit = {
     val fitnessValues = result.getMap
     val best = fitnessValues.maxBy(x => x._2)
-    printf("Best fitness - %s - %s\n", best._2, best._1.getName)
+    val averageDepth: Double = depthsReached.sum / depthsReached.size
+
+    printf("Gen %d\nBest fitness - %s - %s\n", gen, best._2, best._1.getName)
+    printf("average depth reached %f\n", averageDepth)
 
     // update the best individual for the evolving heuristic agent.
 
     IndividualHolder.synchronized {
-      IndividualHolder.bestIndividual = best._1
+      IndividualHolder.bestIndividual = Some(best._1)
       IndividualHolder.notifyAll()
     }
     //    val realScore = playGame(best._1)
@@ -61,7 +66,7 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
 
   def getIndividualFitness(individual: JavaCodeIndividual): Double = {
     IndividualHolder.synchronized {
-      IndividualHolder.currentIndividual = individual
+      IndividualHolder.currentIndividual = Some(individual)
       IndividualHolder.notifyAll()
     }
     individual.compile()
@@ -81,6 +86,7 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
     }
   }
 
+
   def simulateGame(individual: JavaCodeIndividual, cutoff: Int): Double = {
     var state: StateObservation = null
     //    val playoutState = playout(individual, state, cutoff)
@@ -96,7 +102,9 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
     val timer = new ElapsedCpuTimer()
     //        timer.setMaxTimeMillis(Int.MaxValue)
     timer.setMaxTimeMillis(100)
-    val score = rec_playout(individual, state, timer)._1
+    val playoutResult: (Double, Double, Int) = rec_playout(individual, state, timer) // score, heuristic score, depth
+    val score = playoutResult._1
+    depthsReached.append(playoutResult._3)
     //        printf("played out in %dms \n", timer.elapsedMillis())
 
     score
@@ -114,7 +122,7 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
     val scores = for (i <- 0.to(0)) yield {
       val levelPath = gamesPath + gameName + "_lvl" + i + ".txt"
       IndividualHolder.synchronized {
-        IndividualHolder.currentIndividual = individual
+        IndividualHolder.currentIndividual = Some(individual)
         ArcadeMachine.runOneGame(gamePath, levelPath, true, gpHeuristic, recordActionsFile, seed)
       }
     }
@@ -126,8 +134,8 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
 }
 
 object IndividualHolder {
-  var currentIndividual: JavaCodeIndividual = null
-  var bestIndividual: JavaCodeIndividual = null
+  var currentIndividual: Option[JavaCodeIndividual] = None
+  var bestIndividual: Option[JavaCodeIndividual] = None
   var currentState: StateObservation = null
 }
 

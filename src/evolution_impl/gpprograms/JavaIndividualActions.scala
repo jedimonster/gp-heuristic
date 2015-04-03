@@ -1,5 +1,4 @@
 package evolution_impl.gpprograms
-import java.util
 
 import evolution_impl.gpprograms.scope.{Scope, CallableNode, ScopeManager}
 import japa.parser.ast.Node

@@ -24,10 +24,11 @@ object GPRunHolder {
   var gpRun: ThreadedGPRun = null
 }
 
-class GPHeuristic(individual: JavaCodeIndividual = null) extends StateHeuristic {
+class GPHeuristic() extends StateHeuristic {
   val gpRun: ThreadedGPRun = GPRunHolder.gpRun
-  // if we weren't given an individual, we have to hope the GP run will set one eventually.
+  var individual: Option[JavaCodeIndividual] = None
 
+  // if we weren't given an individual, we have to hope the GP run will set one eventually.
   def waitForFirstIndividual() = {
     fitness.IndividualHolder.synchronized {
       while (individual == null && fitness.IndividualHolder.currentIndividual == null)
@@ -35,25 +36,24 @@ class GPHeuristic(individual: JavaCodeIndividual = null) extends StateHeuristic 
     }
   }
 
-  override def evaluateState(stateObs: StateObservation): Double = {
-    var bestIndividual = individual
-    if (bestIndividual == null) {
-      // otherwise we're just calculating fitness.
-      if (gpRun.isBestIndividualReady) {
-        // at least one generation ended, we can use a proper individual.
-        bestIndividual = gpRun.getBestIndividual
-        //        System.out.println("GPHeuristic - using best individual " + bestIndividual.getName)
-      } else {
-        // we have to apply some strategy for selecting the best ind from gen0, right now - random
-        fitness.IndividualHolder.synchronized {
-          bestIndividual = fitness.IndividualHolder.currentIndividual
-        }
-        //        System.out.println("GPHeuristic - using pretty random individual " + bestIndividual.getName)
-      }
+  def useBestKnownIndividual() = {
+    if (gpRun.isBestIndividualReady) {
+      // at least one generation ended, we can use a proper individual.
+      individual = gpRun.getBestIndividual
+    } else {
+      // we have to apply some strategy for selecting the best ind from gen0, right now - random
+      individual = IndividualHolder.currentIndividual
     }
+  }
+
+  override def evaluateState(stateObs: StateObservation): Double = {
+
     //    bestIndividual = gpRun.getBestIndividual
     val wrappedObservation = new StateObservationWrapper(stateObs)
-    bestIndividual.run(wrappedObservation)
+    individual match {
+      case Some(heuristic) => heuristic.run(wrappedObservation)
+      case None => throw new RuntimeException("no individual to use for heuristic eval")
+    }
   }
 }
 
@@ -86,7 +86,7 @@ class ThreadedGPRun() extends Runnable {
     !params.bestIndividual.isEmpty
   }
 
-  def getBestIndividual: JavaCodeIndividual = {
+  def getBestIndividual: Option[JavaCodeIndividual] = {
     IndividualHolder.synchronized {
       while (IndividualHolder.bestIndividual == null) {
         IndividualHolder.bestIndividual.wait()

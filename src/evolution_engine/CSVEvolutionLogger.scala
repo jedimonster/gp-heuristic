@@ -78,7 +78,7 @@ class CSVEvolutionLogger[I <: Individual] extends EvolutionLogger[I] {
   }
 
   protected def addGenerationStatistics(individuals: List[I], fitness: FitnessResult[I]) {
-    val fitnessArray = for (i: I <- individuals) yield fitness.getFitness(i)
+    val fitnessArray = for (i <- individuals) yield fitness.getFitness(i)
     val stats: DescriptiveStatistics = new DescriptiveStatistics(fitnessArray.toArray)
     try {
       val line: String = "Average = %f, Minimum = %f, Maximum = %f, Std. dev. = %f\n".format(stats.getMean, stats.getMin, stats.getMax, stats.getStandardDeviation)

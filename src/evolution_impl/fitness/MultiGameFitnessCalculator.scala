@@ -4,7 +4,6 @@ import core.{VGDLParser, VGDLRegistry, VGDLFactory}
 import core.game.{Game, StateObservation}
 import evolution_engine.fitness.{FitnessResult, FitnessCalculator}
 import evolution_impl.DumbFitnessResult
-import evolution_impl.fitness.dummyagent.StateObservationWrapper
 import evolution_impl.gpprograms.JavaCodeIndividual
 
 import scala.collection.mutable.ListBuffer

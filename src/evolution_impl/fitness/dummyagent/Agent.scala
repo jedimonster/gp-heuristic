@@ -29,7 +29,7 @@ class Agent extends AbstractPlayer with PlayoutCalculator {
     // todo broken due to threads; we can't use CurentIndividualHolder
     var bestAction: Types.ACTIONS = null
     var maxQ: Double = Double.MinValue
-    val heuristic = new GPHeuristic(IndividualHolder.currentIndividual)
+    val heuristic = new GPHeuristic()
     val actions: java.util.ArrayList[ACTIONS] = stateObs.getAvailableActions
 
     for (action: ACTIONS <- actions.toSet) {

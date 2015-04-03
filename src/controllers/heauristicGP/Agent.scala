@@ -22,66 +22,26 @@ import scala.collection.JavaConversions._
  */
 class Agent extends AbstractPlayer {
   protected var heuristic: GPHeuristic = null
-  protected val aStar : AStar[Position] = new AStar[Position]() // each agent has his own AStar with cache, new game/level = new agent.
+  protected val aStar: AStar[Position] = new AStar[Position]() // each agent has his own AStar with cache, new game/level = new agent.
 
   def this(stateObs: StateObservation, elapsedTimer: ElapsedCpuTimer) {
     this()
-    heuristic = new GPHeuristic(null)
+    heuristic = new GPHeuristic()
     heuristic.waitForFirstIndividual()
 
 
     IndividualHolder.synchronized {
       IndividualHolder.currentState = stateObs
-//      IndividualHolder.aStarCache.clear()
+      //      IndividualHolder.aStarCache.clear()
       IndividualHolder.notifyAll() // wake up any threads waiting for a new state
     }
   }
 
-  /**
-   * Very simple one step lookahead agent.
-   *
-   * @param stateObs     Observation of the current state.
-   * @param elapsedTimer Timer when the action returned is due.
-   * @return An action for the current state
-   */
-  //  def act(stateObs: StateObservation, elapsedTimer: ElapsedCpuTimer): Types.ACTIONS = {
-  //    var bestAction: Types.ACTIONS = null
-  //    var maxQ: Double = Double.NegativeInfinity
-  //    var ended = false
-  //    IndividualHolder.currentState = stateObs.copy
-  //
-  //    for (action <- stateObs.getAvailableActions) {
-  //      val stCopy: StateObservation = stateObs.copy
-  //      stCopy.advance(action)
-  //      val Q: Double = heuristic.evaluateState(stCopy)
-  //      if (Q > maxQ) {
-  //        maxQ = Q
-  //        bestAction = action
-  //        ended = stCopy.isGameOver
-  //      }
-  //    }
-  //    if (ended) {
-  //      // we need to stop looking at it so the framework doesn't break. todo stop all working threads?
-  //      IndividualHolder.synchronized {
-  //        IndividualHolder.currentState = null
-  //      }
-  //
-  //    }
-  //
-  //    while (elapsedTimer.remainingTimeMillis > 10) {
-  //
-  //    }
-  //
-  //    return bestAction
-  //  }
   var statesEvaluated = 0
 
   def act(stateObs: StateObservation, elapsedTimer: ElapsedCpuTimer): Types.ACTIONS = {
-    var bestAction: Types.ACTIONS = null
-    var maxHeursticVal: Double = Double.NegativeInfinity
-    var ended = false
     IndividualHolder.currentState = stateObs.copy
-    statesEvaluated = 0
+    heuristic.useBestKnownIndividual()
 
     val actionsScores = for (action <- stateObs.getAvailableActions) yield {
       val stateCopy: StateObservation = stateObs.copy
@@ -90,17 +50,6 @@ class Agent extends AbstractPlayer {
       newTimer.setMaxTimeMillis((elapsedTimer.remainingTimeMillis - 10) / stateObs.getAvailableActions.size)
       (action, evaluateStates(stateCopy, newTimer))
     }
-    //    if (ended) {
-    //      // we need to stop looking at it so the framework doesn't break.
-    //      IndividualHolder.synchronized {
-    //        IndividualHolder.currentState = null
-    //      }
-    //    }
-
-    //    while (elapsedTimer.remainingTimeMillis > 10) {
-    //
-    //    }
-    //    printf("Evaluated %d states\n", statesEvaluated)
     actionsScores.maxBy(actionScore => actionScore._2)._1
   }
 
