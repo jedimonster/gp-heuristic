@@ -10,7 +10,7 @@ import scala.collection.mutable.ListBuffer
  * Date: 4/1/2015
  */
 class AStar[N <: GraphNode[N]] {
-  val aStarCache = new mutable.HashMap[AStarPathRequest[N], List[N]] with mutable.SynchronizedMap[AStarPathRequest[N], List[N]]
+  val aStarCache: mutable.HashMap[AStarPathRequest[N], List[N]] with mutable.SynchronizedMap[AStarPathRequest[N], List[N]] = new mutable.HashMap[AStarPathRequest[N], List[N]] with mutable.SynchronizedMap[AStarPathRequest[N], List[N]]
 
   def aStarLength(pathRequest: AStarPathRequest[N]): Int = {
     val path: List[N] = aStar(pathRequest)
@@ -19,7 +19,7 @@ class AStar[N <: GraphNode[N]] {
 
   def aStar(pathRequest: AStarPathRequest[N]): List[N] = {
     if (aStarCache.contains(pathRequest)) {
-//      println("Restoring path from cache") // todo we can fail between .contains and .get if this is shared...
+      //      println("Restoring path from cache") // todo we can fail between .contains and .get if this is shared...
       return aStarCache.get(pathRequest).get
     }
     val start = pathRequest.start
@@ -40,21 +40,30 @@ class AStar[N <: GraphNode[N]] {
       if (current equals goal)
         return reconstructPath(cameFrom, goal)
 
-      openSet.remove(current)
-      closedSet.add(current)
+      val tailToGoalRequest: AStarPathRequest[N] = new AStarPathRequest[N](current, goal)
+      aStarCache.get(tailToGoalRequest) match {
+        case Some(tail) => // if we have the rest of the path, we found our winner.
+          val fullPath: List[N] = reconstructPath(cameFrom, current) ::: tail.asInstanceOf[List[N]]
+          aStarCache.put(pathRequest, fullPath)
+          return fullPath
 
-      for (neighbor <- current.getNeighbors) {
-        if (closedSet.contains(neighbor)) {}
-        else {
-          val tentativeGScore: Double = gScore.get(current).get + 1
-          if (!openSet.contains(neighbor) || tentativeGScore < gScore.get(neighbor).get) {
-            cameFrom.put(neighbor, current)
-            gScore.put(neighbor, tentativeGScore)
-            fScore.put(neighbor, gScore.get(neighbor).get + neighbor.heuristicDistance(goal))
-            if (!openSet.contains(neighbor))
-              openSet.add(neighbor)
+        case None => // otherwise continue the search
+          openSet.remove(current)
+          closedSet.add(current)
+
+          for (neighbor <- current.getNeighbors) {
+            if (closedSet.contains(neighbor)) {}
+            else {
+              val tentativeGScore: Double = gScore.get(current).get + 1
+              if (!openSet.contains(neighbor) || tentativeGScore < gScore.get(neighbor).get) {
+                cameFrom.put(neighbor, current)
+                gScore.put(neighbor, tentativeGScore)
+                fScore.put(neighbor, gScore.get(neighbor).get + neighbor.heuristicDistance(goal))
+                if (!openSet.contains(neighbor))
+                  openSet.add(neighbor)
+              }
+            }
           }
-        }
       }
     }
 

@@ -162,26 +162,26 @@ public class StateObservationWrapper {
         ArrayList<Observation>[] npcPositions = so.getNPCPositions(avatarPosition);
         return getHeuristicDistances(npcPositions);
     }
-
-    public Iterable<Double> getPortalRealDistance() {
-        Vector2d avatarPosition = so.getAvatarPosition();
-
-        ArrayList<Observation>[] portalsPositions = so.getPortalsPositions();
-        return getAStarDistances(portalsPositions);
-    }
-
-    public Iterable<Double> getResourcesRealDistance() {
-        Vector2d avatarPosition = so.getAvatarPosition();
-
-        ArrayList<Observation>[] resourcesPositions = so.getResourcesPositions();
-        return getAStarDistances(resourcesPositions);
-    }
-
-    public Iterable<Double> getNPCRealDistance() {
-        Vector2d avatarPosition = so.getAvatarPosition();
-        ArrayList<Observation>[] npcPositions = so.getNPCPositions();
-        return getAStarDistances(npcPositions);
-    }
+//
+//    public Iterable<Double> getPortalRealDistance() {
+//        Vector2d avatarPosition = so.getAvatarPosition();
+//
+//        ArrayList<Observation>[] portalsPositions = so.getPortalsPositions();
+//        return getAStarDistances(portalsPositions);
+//    }
+//
+//    public Iterable<Double> getResourcesRealDistance() {
+//        Vector2d avatarPosition = so.getAvatarPosition();
+//
+//        ArrayList<Observation>[] resourcesPositions = so.getResourcesPositions();
+//        return getAStarDistances(resourcesPositions);
+//    }
+//
+//    public Iterable<Double> getNPCRealDistance() {
+//        Vector2d avatarPosition = so.getAvatarPosition();
+//        ArrayList<Observation>[] npcPositions = so.getNPCPositions();
+//        return getAStarDistances(npcPositions);
+//    }
 
     @GPIgnore
     protected List<Observation> flatObservations(List<Observation>[] observationsList) {

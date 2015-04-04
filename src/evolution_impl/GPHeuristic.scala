@@ -8,7 +8,7 @@ import controllers.Heuristics.StateHeuristic
 import core.ArcadeMachine
 import core.game.StateObservation
 import evolution_engine.selection.TournamentSelection
-import evolution_engine.{CSVEvolutionLogger, Run}
+import evolution_engine.{CSVEvolutionLogger, EvolutionRun}
 import evolution_engine.evolution.{EvolutionParameters, ParentSelectionEvolutionStrategy}
 import evolution_impl.crossover.JavaCodeCrossover
 import evolution_impl.fitness.{IndividualHolder, MultiGameFitnessCalculator, SingleGameFitnessCalculator}
@@ -31,7 +31,7 @@ class GPHeuristic() extends StateHeuristic {
   // if we weren't given an individual, we have to hope the GP run will set one eventually.
   def waitForFirstIndividual() = {
     fitness.IndividualHolder.synchronized {
-      while (individual == null && fitness.IndividualHolder.currentIndividual == null)
+      while (individual.isEmpty && fitness.IndividualHolder.currentIndividual.isEmpty)
         fitness.IndividualHolder.wait()
     }
   }
@@ -39,7 +39,8 @@ class GPHeuristic() extends StateHeuristic {
   def useBestKnownIndividual() = {
     if (gpRun.isBestIndividualReady) {
       // at least one generation ended, we can use a proper individual.
-      individual = gpRun.getBestIndividual
+      //      individual = gpRun.getBestIndividual
+      individual = IndividualHolder.bestIndividual
     } else {
       // we have to apply some strategy for selecting the best ind from gen0, right now - random
       individual = IndividualHolder.currentIndividual
@@ -59,7 +60,6 @@ class GPHeuristic() extends StateHeuristic {
 
 
 class ThreadedGPRun() extends Runnable {
-
   val crossovers = new JavaCodeCrossover(0.3)
   val mutators = List(new ConstantsMutator(0.15), new ForLoopsMutator(0.25), new RegrowMethodMutator(0.15))
   val generations = 100
@@ -73,13 +73,18 @@ class ThreadedGPRun() extends Runnable {
   val selection = new TournamentSelection[JavaCodeIndividual](false)
   val params = new EvolutionParameters[JavaCodeIndividual](fitnessCalculator, selection,
     crossovers, mutators, new RandomGrowInitializer(paramTypes, methodCount), generations, popSize)
+  var runningEvolution: EvolutionRun[JavaCodeIndividual] =  null
 
   def run() = {
-
     val logger = CSVEvolutionLogger.createCSVEvolutionLogger[JavaCodeIndividual](getNextLogDirectory("D:\\logs\\"))
     params.setLogger(logger)
 
-    new Run().run(params, new ParentSelectionEvolutionStrategy[JavaCodeIndividual](params))
+    runningEvolution = new EvolutionRun()
+    runningEvolution.run(params, new ParentSelectionEvolutionStrategy[JavaCodeIndividual](params))
+  }
+
+  def stop() = {
+    runningEvolution.stop()
   }
 
   def isBestIndividualReady: Boolean = {
@@ -109,7 +114,7 @@ class ThreadedGPRun() extends Runnable {
 }
 
 object ThreadedGPRun {
-  // works on the fly:
+  // works on the fly: aliens, butterflies, missilecommand (sort of), frogs (almost)
   // works with unlimited time: alians, boulderdash, butterflies, missilecommand, frogs, survivezombies, zelda
   // fails: chase
   // fails compilation/exception:
@@ -122,7 +127,7 @@ object ThreadedGPRun {
   val gameName = "butterflies"
   val gamesPath: String = "gvgai/examples/gridphysics/"
   val levelId = 0
-  val gamePath = gamesPath + gameName + ".txt"
+  //  val gamePath = gamesPath + gameName + ".txt"
   val levelPath = gamesPath + gameName + "_lvl" + levelId + ".txt"
 
 
@@ -139,11 +144,13 @@ object ThreadedGPRun {
 
     // run a game using the best individual know at each step
     runNewGame()
-    runNewGame("missilecommand")
+    println("finished playing, stopping evolution...")
+    GPRunHolder.gpRun.stop()
   }
 
   def runNewGame(gameToPlay: String = gameName) = {
     val gpHeuristic: String = "controllers.heauristicGP.Agent"
+    val gamePath = gamesPath + gameToPlay + ".txt"
 
     //Other settings
     val recordActionsFile: String = null

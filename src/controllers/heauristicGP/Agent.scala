@@ -25,6 +25,7 @@ class Agent extends AbstractPlayer {
   protected var statesEvaluated = 0
   protected var statesEvaluatedCounts = ListBuffer[Int]()
   protected var actions = 0
+  protected var heuristicEvalTime = 0.0
 
   def this(stateObs: StateObservation, elapsedTimer: ElapsedCpuTimer) {
     this()
@@ -42,7 +43,13 @@ class Agent extends AbstractPlayer {
   def act(stateObs: StateObservation, elapsedTimer: ElapsedCpuTimer): Types.ACTIONS = {
     IndividualHolder.currentState = stateObs.copy
     heuristic.useBestKnownIndividual()
+//    heuristic.individual = IndividualHolder.bestIndividual
     statesEvaluated = 0
+
+    // estimate amount of time available for each heurstic eval by evaluating the current state.
+    val timer = new ElapsedCpuTimer()
+    heuristic.evaluateState(stateObs)
+    heuristicEvalTime = timer.elapsedMillis()
 
     val actionsScores = for (action <- stateObs.getAvailableActions) yield {
       val stateCopy: StateObservation = stateObs.copy
@@ -54,8 +61,8 @@ class Agent extends AbstractPlayer {
     statesEvaluatedCounts :+= statesEvaluated
     actions += 1
 
-    if (actions % 500 == 0) {
-      printf("Average states evaluated %f\n", statesEvaluatedCounts.sum.toDouble / statesEvaluatedCounts.size)
+    if (actions % 10 == 0) {
+      printf("Average states evaluated by agent %f\n", statesEvaluatedCounts.sum.toDouble / statesEvaluatedCounts.size)
       statesEvaluatedCounts = ListBuffer[Int]()
     }
     actionsScores.maxBy(actionScore => actionScore._2)._1
@@ -67,7 +74,7 @@ class Agent extends AbstractPlayer {
    * @param elapsedCpuTimer the best (score, heuristic score) that can be reached from each state.
    */
   def evaluateStates(stateObservation: StateObservation, elapsedCpuTimer: ElapsedCpuTimer): Tuple2[Double, Double] = {
-    if (elapsedCpuTimer.remainingTimeMillis() < 1 || stateObservation.isGameOver) {
+    if (elapsedCpuTimer.remainingTimeMillis() <= heuristicEvalTime * 1.0 || stateObservation.isGameOver) {
       statesEvaluated += 1
       return (stateObservation.getGameScore, heuristic.evaluateState(stateObservation))
     }
