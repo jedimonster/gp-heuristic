@@ -2,8 +2,6 @@ package evolution_impl.search
 
 import java.util.Comparator
 
-import evolution_impl.fitness.IndividualHolder
-
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 
@@ -12,7 +10,7 @@ import scala.collection.mutable.ListBuffer
  * Date: 4/1/2015
  */
 class AStar[N <: GraphNode[N]] {
-//  val aStarCache = new mutable.HashMap[AStarPathRequest[GraphNode], List[GraphNode]] with mutable.SynchronizedMap[AStarPathRequest[N], List[GraphNode[N]]]
+  val aStarCache = new mutable.HashMap[AStarPathRequest[N], List[N]] with mutable.SynchronizedMap[AStarPathRequest[N], List[N]]
 
   def aStarLength(pathRequest: AStarPathRequest[N]): Int = {
     val path: List[N] = aStar(pathRequest)
@@ -20,10 +18,10 @@ class AStar[N <: GraphNode[N]] {
   }
 
   def aStar(pathRequest: AStarPathRequest[N]): List[N] = {
-//    if (IndividualHolder.aStarCache.contains(pathRequest)) {
-//      println("Restoring path from cache") // todo we can fail between .contains and .get
-//      return aStarCache.get(pathRequest).get
-//    }
+    if (aStarCache.contains(pathRequest)) {
+//      println("Restoring path from cache") // todo we can fail between .contains and .get if this is shared...
+      return aStarCache.get(pathRequest).get
+    }
     val start = pathRequest.start
     val goal = pathRequest.end
     val closedSet: mutable.HashSet[N] = new mutable.HashSet[N]
@@ -75,14 +73,28 @@ class AStar[N <: GraphNode[N]] {
         case _ => throw new AStarException("Can't reconstruct path")
       }
       path.prepend(currentNode)
-//      aStarCache.put(new AStarPathRequest[N](currentNode, goalNode), path.toList)
+      aStarCache.put(new AStarPathRequest[N](currentNode, goalNode), path.toList)
     }
 
     path.toList
   }
 }
 
-class AStarPathRequest[N <: GraphNode[N]](val start: N, val end: N)
+class AStarPathRequest[N <: GraphNode[N]](val start: N, val end: N) {
+  override def hashCode(): Int = {
+    var hash = 1
+    hash = hash * 17 + start.hashCode()
+    hash = hash * 31 + end.hashCode()
+    hash
+  }
+
+  override def equals(obj: scala.Any): Boolean = {
+    obj match {
+      case path: AStarPathRequest[N] => (path.start equals start) && (path.end equals end)
+      case _ => false
+    }
+  }
+}
 
 abstract class GraphNode[N <: GraphNode[N]] {
   def getNeighbors: List[N]

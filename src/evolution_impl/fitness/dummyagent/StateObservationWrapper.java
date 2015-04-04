@@ -2,6 +2,8 @@ package evolution_impl.fitness.dummyagent;
 
 import core.game.Observation;
 import core.game.StateObservation;
+import evolution_impl.fitness.IndividualHolder;
+import evolution_impl.fitness.IndividualHolder$;
 import evolution_impl.search.AStar;
 import evolution_impl.search.AStarException;
 import evolution_impl.search.AStarPathRequest;
@@ -24,7 +26,7 @@ public class StateObservationWrapper {
     // perhaps look at top x, or all until there's actually variance/cutoff time.
     // todo give up and use heuristics in MCTS?
     public StateObservationWrapper(core.game.StateObservation so) {
-        this(so, new AStar<Position>());
+        this(so, IndividualHolder.aStar());
     }
 
     public StateObservationWrapper(StateObservation so, AStar<Position> aStar) {
@@ -161,13 +163,13 @@ public class StateObservationWrapper {
         return getHeuristicDistances(npcPositions);
     }
 
-    //    public Iterable<Double> getPortalRealDistance() {
-//        Vector2d avatarPosition = so.getAvatarPosition();
-//
-//        ArrayList<Observation>[] portalsPositions = so.getPortalsPositions();
-//        return getAStarDistances(portalsPositions);
-//    }
-//
+    public Iterable<Double> getPortalRealDistance() {
+        Vector2d avatarPosition = so.getAvatarPosition();
+
+        ArrayList<Observation>[] portalsPositions = so.getPortalsPositions();
+        return getAStarDistances(portalsPositions);
+    }
+
     public Iterable<Double> getResourcesRealDistance() {
         Vector2d avatarPosition = so.getAvatarPosition();
 
@@ -217,12 +219,13 @@ public class StateObservationWrapper {
     @GPIgnore
     protected List<Double> getHeuristicDistances(List<Observation>[] observationsList) {
         List<Double> result = new ArrayList<>();
+        int blockSize = so.getBlockSize();
 
         if (observationsList != null) {
             for (List<Observation> observations : observationsList) {
                 for (Observation observation : observations) {
 //                if (observation.category == category && observation.itype == itype)
-                    double distance = observation.sqDist + countBlockingWalls(observation);
+                    double distance = observation.sqDist / blockSize + countBlockingWalls(observation);
 
                     result.add(distance);
                 }

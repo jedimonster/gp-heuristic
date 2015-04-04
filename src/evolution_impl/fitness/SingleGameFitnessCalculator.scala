@@ -6,7 +6,7 @@ import core.game.{StateObservation, Game}
 import core.{VGDLParser, VGDLRegistry, VGDLFactory, ArcadeMachine}
 import evolution_engine.fitness.{FitnessCalculator, FitnessResult}
 import evolution_impl.gpprograms.JavaCodeIndividual
-import evolution_impl.search.{AStarPathRequest, GraphNode}
+import evolution_impl.search.{Position, AStar, AStarPathRequest, GraphNode}
 import tools.ElapsedCpuTimer
 
 import scala.collection.mutable.ListBuffer
@@ -137,6 +137,7 @@ object IndividualHolder {
   var currentIndividual: Option[JavaCodeIndividual] = None
   var bestIndividual: Option[JavaCodeIndividual] = None
   var currentState: StateObservation = null
+  var aStar = new AStar[Position]()
 }
 
 

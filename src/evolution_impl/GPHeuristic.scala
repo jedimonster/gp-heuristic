@@ -119,7 +119,7 @@ object ThreadedGPRun {
   // works with unlimited time: camelRace, firestorms, infection
   // pass but sucks with unlimited time: digdug, firecaster (but they all fail)
   // fail with unlimited time: overload
-  val gameName = "missilecommand"
+  val gameName = "butterflies"
   val gamesPath: String = "gvgai/examples/gridphysics/"
   val levelId = 0
   val gamePath = gamesPath + gameName + ".txt"
@@ -139,9 +139,10 @@ object ThreadedGPRun {
 
     // run a game using the best individual know at each step
     runNewGame()
+    runNewGame("missilecommand")
   }
 
-  def runNewGame() = {
+  def runNewGame(gameToPlay: String = gameName) = {
     val gpHeuristic: String = "controllers.heauristicGP.Agent"
 
     //Other settings
@@ -152,7 +153,7 @@ object ThreadedGPRun {
     //Game and level to play
     println("---\nPlaying a game with evolving heuristic")
     val scores = for (i <- 0.to(4)) yield {
-      val levelPath = gamesPath + gameName + "_lvl" + i + ".txt"
+      val levelPath = gamesPath + gameToPlay + "_lvl" + i + ".txt"
       ArcadeMachine.runOneGame(gamePath, levelPath, true, gpHeuristic, recordActionsFile, seed)
     }
   }
