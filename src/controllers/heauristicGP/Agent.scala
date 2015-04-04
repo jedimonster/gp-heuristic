@@ -5,12 +5,11 @@ import java.util
 import core.game.StateObservation
 import core.player.AbstractPlayer
 import evolution_impl.GPHeuristic
-import evolution_impl.fitness.{IndividualHolder, IndividualHolder$}
-import evolution_impl.search.{Position, AStar}
+import evolution_impl.fitness.IndividualHolder
 import ontology.Types
 import ontology.Types.ACTIONS
 import tools.ElapsedCpuTimer
-import scala.annotation.tailrec
+
 import scala.collection.JavaConversions._
 import scala.collection.mutable.ListBuffer
 
