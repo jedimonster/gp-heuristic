@@ -162,7 +162,7 @@ public class StateObservationWrapper {
         ArrayList<Observation>[] npcPositions = so.getNPCPositions(avatarPosition);
         return getHeuristicDistances(npcPositions);
     }
-//
+
 //    public Iterable<Double> getPortalRealDistance() {
 //        Vector2d avatarPosition = so.getAvatarPosition();
 //
@@ -190,7 +190,7 @@ public class StateObservationWrapper {
         if (observationsList != null) {
             for (List<Observation> observations : observationsList) {
                 for (Observation observation : observations) {
-//                if (observation.category == category && observation.itype == itype)
+                if (observation.itype != 0)
                     result.add(observation);
                 }
             }

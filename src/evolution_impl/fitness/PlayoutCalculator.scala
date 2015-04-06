@@ -68,7 +68,7 @@ trait PlayoutCalculator {
       val heuristicVal: Double = individual.run(new StateObservationWrapper(stateObservation))
       val gameScore: Double = stateObservation.getGameScore
       if (stateObservation.getGameWinner == Types.WINNER.PLAYER_WINS)
-        return (gameScore, heuristicVal, depthReached)
+        return (100 * gameScore, heuristicVal, depthReached)
       else
         return (-1 / Math.max(0.001, Math.abs(gameScore)), heuristicVal, depthReached)
     }

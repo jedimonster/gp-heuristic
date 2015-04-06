@@ -61,7 +61,7 @@ class Agent extends AbstractPlayer {
     statesEvaluatedCounts :+= statesEvaluated
     actions += 1
 
-    if (actions % 10 == 0) {
+    if (actions % 500 == 0) {
       printf("Average states evaluated by agent %f\n", statesEvaluatedCounts.sum.toDouble / statesEvaluatedCounts.size)
       statesEvaluatedCounts = ListBuffer[Int]()
     }

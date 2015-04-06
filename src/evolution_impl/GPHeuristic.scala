@@ -73,7 +73,7 @@ class ThreadedGPRun() extends Runnable {
   val selection = new TournamentSelection[JavaCodeIndividual](false)
   val params = new EvolutionParameters[JavaCodeIndividual](fitnessCalculator, selection,
     crossovers, mutators, new RandomGrowInitializer(paramTypes, methodCount), generations, popSize)
-  var runningEvolution: EvolutionRun[JavaCodeIndividual] =  null
+  var runningEvolution: EvolutionRun[JavaCodeIndividual] = null
 
   def run() = {
     val logger = CSVEvolutionLogger.createCSVEvolutionLogger[JavaCodeIndividual](getNextLogDirectory("D:\\logs\\"))
@@ -124,7 +124,7 @@ object ThreadedGPRun {
   // works with unlimited time: camelRace, firestorms, infection
   // pass but sucks with unlimited time: digdug, firecaster (but they all fail)
   // fail with unlimited time: overload
-  val gameName = "butterflies"
+  val gameName = "aliens"
   val gamesPath: String = "gvgai/examples/gridphysics/"
   val levelId = 0
   //  val gamePath = gamesPath + gameName + ".txt"
@@ -163,5 +163,8 @@ object ThreadedGPRun {
       val levelPath = gamesPath + gameToPlay + "_lvl" + i + ".txt"
       ArcadeMachine.runOneGame(gamePath, levelPath, true, gpHeuristic, recordActionsFile, seed)
     }
+
+    printf("Scores for %s: %s\n", gameToPlay, scores.toString)
+    printf("Average for %s: %s\n", gameToPlay, scores.sum / scores.size)
   }
 }
