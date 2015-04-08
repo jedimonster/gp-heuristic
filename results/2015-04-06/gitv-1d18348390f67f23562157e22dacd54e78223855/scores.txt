@@ -1,0 +1,39 @@
+Scores for aliens: Vector(68.0, 56.0, 55.0, 40.0, 55.0)
+Average for aliens: 54.8
+100% win
+
+Scores for boulderdash: Vector(1.0, 1.0, 7.0, -1.0, 3.0)
+Average for boulderdash: 2.2
+0% win
+
+Scores for butterflies: Vector(26.0, 32.0, 48.0, 22.0, 14.0)
+Average for butterflies: 28.4
+100% win
+
+Scores for chase: Vector(5.0, 2.0, 1.0, 3.0, 6.0)
+Average for chase: 3.4
+20% win
+
+Scores for frogs: Vector(1.0, -2.0, -2.0, -2.0, 1.0)
+Average for frogs: -0.8
+40% win
+
+Scores for missilecommand: Vector(-3.0, 16.0, 5.0, 5.0, 11.0)
+Average for missilecommand: 6.8
+80% win
+
+Scores for portals: Vector(0.0, 0.0, 0.0, 0.0, 0.0)
+Average for portals: 0.0
+0% win
+
+Scores for sokoban: Vector(0.0, 0.0, 0.0, 0.0, 0.0)
+Average for sokoban: 0.0
+0% win
+
+Scores for survivezombies: Vector(14.0, 7.0, 8.0, 7.0, 1.0)
+Average for survivezombies: 7.4
+0%
+
+Scores for zelda: Vector(6.0, -1.0, 7.0, 1.0, 0.0)
+Average for zelda: 2.6
+0% sometimes gets close but doesn't exit (on some experiments with larger population he does..)

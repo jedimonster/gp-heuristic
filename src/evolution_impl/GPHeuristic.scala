@@ -43,7 +43,7 @@ class GPHeuristic() extends StateHeuristic {
       individual = IndividualHolder.bestIndividual
     } else {
       // we have to apply some strategy for selecting the best ind from gen0, right now - random
-      individual = IndividualHolder.currentIndividual
+      individual = IndividualHolder.readyIndividual
     }
   }
 
@@ -141,6 +141,7 @@ object ThreadedGPRun {
   def main(args: Array[String]): Unit = {
     // create a new threaded GP run, it will update the best individual each gen.
     GPRunHolder.gpRun = ThreadedGPRun.newInstance
+//    Thread.sleep(1000)
 
     // run a game using the best individual know at each step
     runNewGame()
@@ -156,7 +157,7 @@ object ThreadedGPRun {
     val recordActionsFile: String = null
     val seed: Int = new Random().nextInt
 
-    Thread.sleep(200) // for the initial bug.
+    Thread.sleep(1000) // for the initial bug.
     //Game and level to play
     println("---\nPlaying a game with evolving heuristic")
     val scores = for (i <- 0.to(4)) yield {

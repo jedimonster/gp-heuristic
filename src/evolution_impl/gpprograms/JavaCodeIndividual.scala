@@ -26,6 +26,7 @@ class JavaCodeIndividual(
   val javaCompiler: JavaCompiler = ToolProvider.getSystemJavaCompiler()
   var gardener: Option[RandomGrowInitializer] = None
   var compiled = false
+  var individualObject: Option[Any] = None
 
   def setName(s: String) = ast.getTypes.get(0).setName(s)
 
@@ -39,13 +40,16 @@ class JavaCodeIndividual(
 
   def run(input: StateObservationWrapper): Double = {
     //    val packageName = ast.getPackage.getName
-//    if(!compiled)
-//      compile()
+    if (!compiled) {
+      throw new RuntimeException("Individual not compiled before running")
+    }
+
+    val instance = individualObject match {
+      case Some(individual) => individual.asInstanceOf[GPProgram]
+      case None => throw new RuntimeException("Individual compiled but not instantiated (impossible?)")
+    }
 
     val className = ast.getTypes.get(0).getName
-    var loadedClass: Class[_] = Class.forName(className)
-    loadedClass = ClassLoader.getSystemClassLoader.loadClass(loadedClass.getName)
-    val instance: GPProgram = loadedClass.newInstance().asInstanceOf[GPProgram]
 
     //    val params = new java.util.ArrayList[Object]
     //    params.add(new java.lang.Double(input))
@@ -55,7 +59,7 @@ class JavaCodeIndividual(
       case e: Exception =>
         println("Exception " + e.toString + "while running:")
         println(ast.toString)
-        e.printStackTrace();
+        e.printStackTrace()
         System.exit(-1)
         Double.NegativeInfinity
     }
@@ -87,12 +91,16 @@ class JavaCodeIndividual(
       //      }
       //      GPEvolutionLogger.saveBadIndividual(this)
       throw new CompilationException
-    } else
+    } else {
+      compiled = true
+
+    }
     //      printf("Compiled class %s successfully\n", className)
     // todo if failed log errors and catch expeption
-      compiled = true
-      Class.forName(className)
-
+    var loadedClass: Class[_] = Class.forName(className)
+    loadedClass = ClassLoader.getSystemClassLoader.loadClass(loadedClass.getName)
+    val instance: GPProgram = loadedClass.newInstance().asInstanceOf[GPProgram]
+    individualObject = Some(instance)
   }
 
   def writeToFile(path: String) = {

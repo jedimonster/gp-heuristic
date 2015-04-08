@@ -70,7 +70,9 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
       IndividualHolder.notifyAll()
     }
     individual.compile()
-
+    IndividualHolder.synchronized {
+      IndividualHolder.readyIndividual = Some(individual)
+    }
     val n = 0
     try {
       // this can fail due to concurrency issues, since it means the old score is no longer relevent, and it's rare, we just try again.
@@ -134,6 +136,7 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
 }
 
 object IndividualHolder {
+  var readyIndividual: Option[JavaCodeIndividual] = None
   var currentIndividual: Option[JavaCodeIndividual] = None
   var bestIndividual: Option[JavaCodeIndividual] = None
   var currentState: StateObservation = null
