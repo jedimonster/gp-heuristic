@@ -209,21 +209,25 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
   // then note bigExpr is the recursive BinaryExpr with the list items encored so far
   // and currentNode is the current list item to be folded into the big binary expression.
   def compactCallables(callables: List[CallableNode], addRandomMultiplier: Boolean): CallableNode = {
+    val randomOp = () => {
+      val ops = List(BinaryExpr.Operator.plus, BinaryExpr.Operator.times, BinaryExpr.Operator.divide)
+      ops(Random.nextInt(ops.length))
+    }
     val retExp: CallableNode = callables.foldLeft(new CallableNode(new DoubleLiteralExpr(distribution.sample.toString))) { (bigExpr: CallableNode, currentNode: CallableNode) =>
       if (addRandomMultiplier) {
         new CallableNode(new BinaryExpr(
           new BinaryExpr(
             new DoubleLiteralExpr(distribution.sample.toString),
             currentNode.getCallStatement,
-            BinaryExpr.Operator.times),
+            randomOp()), // used to be times
           bigExpr.getCallStatement,
-          BinaryExpr.Operator.plus))
+          randomOp())) // used to be plus
       } else {
         new CallableNode(
           new BinaryExpr(
             currentNode.getCallStatement,
             bigExpr.getCallStatement,
-            BinaryExpr.Operator.plus
+            randomOp() // used to be plus
           )
         )
       }
