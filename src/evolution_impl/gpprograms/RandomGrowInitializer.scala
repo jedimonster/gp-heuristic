@@ -26,7 +26,7 @@ import scala.util.Random
  * Randomly grows methodCount methods that randomly use parameters from the given list of parameters
  * Combines into a linear combination of resulting numbers.
  */
-class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends PopulationInitializer[JavaCodeIndividual] with JavaIndividualActions {
+class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends PopulationInitializer[JavaCodeIndividual]  {
   val distribution = new NormalDistribution(0, 5)
 
 
@@ -219,15 +219,15 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
           new BinaryExpr(
             new DoubleLiteralExpr(distribution.sample.toString),
             currentNode.getCallStatement,
-            randomOp()), // used to be times
+            BinaryExpr.Operator.times),
           bigExpr.getCallStatement,
-          randomOp())) // used to be plus
+          BinaryExpr.Operator.plus))
       } else {
         new CallableNode(
           new BinaryExpr(
             currentNode.getCallStatement,
             bigExpr.getCallStatement,
-            randomOp() // used to be plus
+            BinaryExpr.Operator.plus
           )
         )
       }

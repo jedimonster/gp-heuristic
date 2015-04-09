@@ -5,16 +5,12 @@ import java.nio.charset.StandardCharsets
 import java.nio.file.{Files, Paths}
 import javax.tools.{DiagnosticCollector, JavaCompiler, JavaFileObject, ToolProvider}
 
-import core.game.StateObservation
 import evolution_engine.evolution.Individual
 import evolution_impl.GPProgram
 import evolution_impl.fitness.dummyagent.StateObservationWrapper
-import evolution_impl.log.GPEvolutionLogger
 import evolution_impl.util.JavaSourceFromString
 import japa.parser.JavaParser
 import japa.parser.ast.CompilationUnit
-
-import scalaj.collection.Imports
 
 /**
  * Created By Itay Azaria

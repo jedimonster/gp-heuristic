@@ -2,11 +2,11 @@ package evolution_impl.fitness
 
 import java.util.Random
 
-import core.game.{StateObservation, Game}
-import core.{VGDLParser, VGDLRegistry, VGDLFactory, ArcadeMachine}
+import core.game.{Game, StateObservation}
+import core.{ArcadeMachine, VGDLFactory, VGDLParser, VGDLRegistry}
 import evolution_engine.fitness.{FitnessCalculator, FitnessResult}
 import evolution_impl.gpprograms.JavaCodeIndividual
-import evolution_impl.search.{Position, AStar, AStarPathRequest, GraphNode}
+import evolution_impl.search.{AStar, Position}
 import tools.ElapsedCpuTimer
 
 import scala.collection.mutable.ListBuffer
