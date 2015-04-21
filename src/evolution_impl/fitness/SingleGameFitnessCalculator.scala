@@ -6,6 +6,7 @@ import core.game.{Game, StateObservation}
 import core.{ArcadeMachine, VGDLFactory, VGDLParser, VGDLRegistry}
 import evolution_engine.fitness.{FitnessCalculator, FitnessResult}
 import evolution_impl.gpprograms.base.{HeuristicIndividual, JavaCodeIndividual}
+import evolution_impl.gpprograms.trees.HeuristicTreeIndividual
 import evolution_impl.search.{AStar, Position}
 import tools.ElapsedCpuTimer
 
@@ -15,7 +16,7 @@ import scala.collection.mutable.ListBuffer
 /**
  * Created by itayaza on 24/11/2014.
  */
-class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[HeuristicIndividual] with PlayoutCalculator {
+class SingleGameFitnessCalculator[I <: HeuristicIndividual](gameName: String) extends FitnessCalculator[I] with PlayoutCalculator {
   val gamesPath: String = "gvgai/examples/gridphysics/"
   val levelId = 0
   val gamePath = gamesPath + gameName + ".txt"
@@ -37,7 +38,7 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[He
 
   var gen = 0
 
-  override def processResult(result: FitnessResult[HeuristicIndividual]): Unit = {
+  override def processResult(result: FitnessResult[I]): Unit = {
     val fitnessValues = result.getMap
     val best = fitnessValues.maxBy(x => x._2)
     val averageDepth: Double = depthsReached.sum / depthsReached.size
@@ -64,13 +65,13 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[He
     //        }
   }
 
-  def getIndividualFitness(individual: HeuristicIndividual): Double = {
+  def getIndividualFitness(individual: I): Double = {
     IndividualHolder.synchronized {
       IndividualHolder.currentIndividual = Some(individual)
       IndividualHolder.notifyAll()
     }
     // individuals compile themselves.
-//    individual.compile()
+    //    individual.compile()
     IndividualHolder.synchronized {
       IndividualHolder.readyIndividual = Some(individual)
     }
@@ -93,7 +94,7 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[He
   }
 
 
-  def simulateGame(individual: HeuristicIndividual, cutoff: Int): Double = {
+  def simulateGame(individual: I, cutoff: Int): Double = {
     var state: StateObservation = null
     //    val playoutState = playout(individual, state, cutoff)
     //    playoutState.getGameScore
@@ -116,7 +117,7 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[He
     score
   }
 
-  def playGame(individual: HeuristicIndividual, visuals: Boolean = false) = {
+  def playGame(individual: I, visuals: Boolean = false) = {
     val gpHeuristic: String = "evolution_impl.fitness.dummyagent.Agent"
 
     //Other settings

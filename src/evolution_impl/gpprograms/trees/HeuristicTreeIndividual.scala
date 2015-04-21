@@ -12,7 +12,7 @@ class HeuristicTreeIndividual(val root: TreeNode, name: String) extends Heuristi
 
   override def getName: String = name
 
-  override def duplicate: Individual = new HeuristicTreeIndividual(root.duplicate, NameCounter.next.toString)
+  override def duplicate: HeuristicTreeIndividual = new HeuristicTreeIndividual(root.duplicate, NameCounter.next.toString)
 
   protected def traverseTree(node: TreeNode, state: StateObservationWrapper): Double = {
     node match {

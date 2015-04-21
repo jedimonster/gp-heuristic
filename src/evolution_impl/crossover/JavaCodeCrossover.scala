@@ -60,8 +60,8 @@ class JavaCodeCrossover(probability: Double) extends Crossover[JavaCodeIndividua
   }
 
   override def cross(father: JavaCodeIndividual, mother: JavaCodeIndividual): List[JavaCodeIndividual] = {
-    val son: JavaCodeIndividual = father.duplicate.asInstanceOf[JavaCodeIndividual]
-    val daughter: JavaCodeIndividual = father.duplicate.asInstanceOf[JavaCodeIndividual]
+    val son: JavaCodeIndividual = father.duplicate
+    val daughter: JavaCodeIndividual = father.duplicate
     var sonMembers = son.ast.getTypes.get(0).getMembers.asScala
     var daughterMembers = son.ast.getTypes.get(0).getMembers.asScala
     val n = sonMembers.size()
