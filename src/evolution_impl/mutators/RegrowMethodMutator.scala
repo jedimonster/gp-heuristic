@@ -1,7 +1,7 @@
 package evolution_impl.mutators
 
 import evolution_engine.mutators.Mutator
-import evolution_impl.gpprograms.{RandomGrowInitializer, HeuristicsNumbers, JavaCodeIndividual}
+import evolution_impl.gpprograms.base.{HeuristicsNumbers, RandomGrowInitializer, JavaCodeIndividual}
 import japa.parser.ast.body.{MethodDeclaration, ClassOrInterfaceDeclaration}
 
 import scala.util.Random

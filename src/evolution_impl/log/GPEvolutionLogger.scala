@@ -3,7 +3,7 @@ package evolution_impl.log
 import java.nio.charset.StandardCharsets
 import java.nio.file.{Files, Paths}
 
-import evolution_impl.gpprograms.JavaCodeIndividual
+import evolution_impl.gpprograms.base.JavaCodeIndividual
 
 /**
  * Created by itayaza on 26/10/2014.

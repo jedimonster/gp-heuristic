@@ -4,7 +4,7 @@ import evolution_engine.EvolutionLogger
 import evolution_engine.fitness.FitnessCalculator
 import evolution_engine.mutators.{Crossover, Mutator}
 import evolution_engine.selection.SelectionStrategy
-import evolution_impl.gpprograms.JavaCodeIndividual
+import evolution_impl.gpprograms.base.JavaCodeIndividual
 
 class EvolutionParameters[I <: Individual] {
   private final var fitnessCalculator: FitnessCalculator[I] = null

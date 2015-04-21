@@ -3,7 +3,8 @@ package evolution_impl.crossover
 import java.util.{ArrayList, LinkedList}
 
 import evolution_engine.mutators.Crossover
-import evolution_impl.gpprograms.{JavaCodeIndividual, RandomGrowInitializer, TreeGrowingException}
+import evolution_impl.gpprograms.base.{RandomGrowInitializer, JavaCodeIndividual}
+import evolution_impl.gpprograms.TreeGrowingException
 import japa.parser.ast.TypeParameter
 import japa.parser.ast.`type`.ClassOrInterfaceType
 import japa.parser.ast.body.{BodyDeclaration, MethodDeclaration, Parameter}
@@ -59,8 +60,8 @@ class JavaCodeCrossover(probability: Double) extends Crossover[JavaCodeIndividua
   }
 
   override def cross(father: JavaCodeIndividual, mother: JavaCodeIndividual): List[JavaCodeIndividual] = {
-    val son: JavaCodeIndividual = father.duplicate().asInstanceOf[JavaCodeIndividual]
-    val daughter: JavaCodeIndividual = father.duplicate().asInstanceOf[JavaCodeIndividual]
+    val son: JavaCodeIndividual = father.duplicate.asInstanceOf[JavaCodeIndividual]
+    val daughter: JavaCodeIndividual = father.duplicate.asInstanceOf[JavaCodeIndividual]
     var sonMembers = son.ast.getTypes.get(0).getMembers.asScala
     var daughterMembers = son.ast.getTypes.get(0).getMembers.asScala
     val n = sonMembers.size()

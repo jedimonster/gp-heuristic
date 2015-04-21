@@ -3,7 +3,7 @@ package evolution_impl
 import java.io.File
 
 import evolution_engine.evolution.PopulationInitializer
-import evolution_impl.gpprograms.JavaCodeIndividual
+import evolution_impl.gpprograms.base.JavaCodeIndividual
 import japa.parser.JavaParser
 
 import scala.collection.JavaConversions._

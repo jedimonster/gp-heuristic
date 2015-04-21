@@ -13,7 +13,8 @@ import evolution_engine.evolution.{EvolutionParameters, ParentSelectionEvolution
 import evolution_impl.crossover.JavaCodeCrossover
 import evolution_impl.fitness.{IndividualHolder, MultiGameFitnessCalculator, SingleGameFitnessCalculator}
 import evolution_impl.fitness.dummyagent.StateObservationWrapper
-import evolution_impl.gpprograms.{RandomGrowInitializer, JavaCodeIndividual}
+import evolution_impl.gpprograms.base.HeuristicIndividual
+import evolution_impl.gpprograms.trees.HeuristicTreeInitializer
 import evolution_impl.mutators.{RegrowMethodMutator, ForLoopsMutator, ConstantsMutator}
 
 /**
@@ -26,7 +27,7 @@ object GPRunHolder {
 
 class GPHeuristic() extends StateHeuristic {
   val gpRun: ThreadedGPRun = GPRunHolder.gpRun
-  var individual: Option[JavaCodeIndividual] = None
+  var individual: Option[HeuristicIndividual] = None
 
   // if we weren't given an individual, we have to hope the GP run will set one eventually.
   def waitForFirstIndividual() = {
@@ -60,8 +61,10 @@ class GPHeuristic() extends StateHeuristic {
 
 
 class ThreadedGPRun() extends Runnable {
+
   val crossovers = new JavaCodeCrossover(0.3)
   val mutators = List(new ConstantsMutator(0.15), new ForLoopsMutator(0.25), new RegrowMethodMutator(0.15))
+
   val generations = 100
   val popSize = 32
   val paramTypes = List(new StateObservationWrapper(null))
@@ -70,17 +73,21 @@ class ThreadedGPRun() extends Runnable {
   val fitnessCalculator = new SingleGameFitnessCalculator(ThreadedGPRun.gameName)
   //      val fitnessCalculator = new SingleGameFitnessCalculator("zelda")
   //  val fitnessCalculator = new MultiGameFitnessCalculator(cutoff = 2000)
-  val selection = new TournamentSelection[JavaCodeIndividual](false)
-  val params = new EvolutionParameters[JavaCodeIndividual](fitnessCalculator, selection,
-    crossovers, mutators, new RandomGrowInitializer(paramTypes, methodCount), generations, popSize)
-  var runningEvolution: EvolutionRun[JavaCodeIndividual] = null
+  val selection = new TournamentSelection[HeuristicIndividual](false)
+
+  val params = new EvolutionParameters[HeuristicIndividual](fitnessCalculator, selection,
+    null, List(), new HeuristicTreeInitializer(paramTypes, methodCount, 1), generations, popSize)
+//  val params = new EvolutionParameters[HeuristicIndividual](fitnessCalculator, selection,
+//    crossovers, mutators, new RandomGrowInitializer(paramTypes, methodCount), generations, popSize)
+
+  var runningEvolution: EvolutionRun[HeuristicIndividual] = null
 
   def run() = {
-    val logger = CSVEvolutionLogger.createCSVEvolutionLogger[JavaCodeIndividual](getNextLogDirectory("D:\\logs\\"))
+    val logger = CSVEvolutionLogger.createCSVEvolutionLogger[HeuristicIndividual](getNextLogDirectory("D:\\logs\\"))
     params.setLogger(logger)
 
     runningEvolution = new EvolutionRun()
-    runningEvolution.run(params, new ParentSelectionEvolutionStrategy[JavaCodeIndividual](params))
+    runningEvolution.run(params, new ParentSelectionEvolutionStrategy[HeuristicIndividual](params))
   }
 
   def stop() = {
@@ -91,7 +98,7 @@ class ThreadedGPRun() extends Runnable {
     !params.bestIndividual.isEmpty
   }
 
-  def getBestIndividual: Option[JavaCodeIndividual] = {
+  def getBestIndividual: Option[HeuristicIndividual] = {
     IndividualHolder.synchronized {
       while (IndividualHolder.bestIndividual == null) {
         IndividualHolder.bestIndividual.wait()

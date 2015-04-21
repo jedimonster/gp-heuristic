@@ -5,7 +5,7 @@ import java.util.Random
 import core.game.{Game, StateObservation}
 import core.{ArcadeMachine, VGDLFactory, VGDLParser, VGDLRegistry}
 import evolution_engine.fitness.{FitnessCalculator, FitnessResult}
-import evolution_impl.gpprograms.JavaCodeIndividual
+import evolution_impl.gpprograms.base.{HeuristicIndividual, JavaCodeIndividual}
 import evolution_impl.search.{AStar, Position}
 import tools.ElapsedCpuTimer
 
@@ -15,7 +15,7 @@ import scala.collection.mutable.ListBuffer
 /**
  * Created by itayaza on 24/11/2014.
  */
-class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[JavaCodeIndividual] with PlayoutCalculator {
+class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[HeuristicIndividual] with PlayoutCalculator {
   val gamesPath: String = "gvgai/examples/gridphysics/"
   val levelId = 0
   val gamePath = gamesPath + gameName + ".txt"
@@ -37,7 +37,7 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
 
   var gen = 0
 
-  override def processResult(result: FitnessResult[JavaCodeIndividual]): Unit = {
+  override def processResult(result: FitnessResult[HeuristicIndividual]): Unit = {
     val fitnessValues = result.getMap
     val best = fitnessValues.maxBy(x => x._2)
     val averageDepth: Double = depthsReached.sum / depthsReached.size
@@ -64,12 +64,13 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
     //        }
   }
 
-  def getIndividualFitness(individual: JavaCodeIndividual): Double = {
+  def getIndividualFitness(individual: HeuristicIndividual): Double = {
     IndividualHolder.synchronized {
       IndividualHolder.currentIndividual = Some(individual)
       IndividualHolder.notifyAll()
     }
-    individual.compile()
+    // individuals compile themselves.
+//    individual.compile()
     IndividualHolder.synchronized {
       IndividualHolder.readyIndividual = Some(individual)
     }
@@ -82,6 +83,9 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
       scores.sum / (n + 1)
     } catch {
       // todo case compilation error drop it
+      case e: ClassFormatError =>
+        e.printStackTrace()
+        sys.exit(-1)
       case e: Exception =>
         println("FAILED FITNESS EVALUATION - RETRYING")
         getIndividualFitness(individual)
@@ -89,7 +93,7 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
   }
 
 
-  def simulateGame(individual: JavaCodeIndividual, cutoff: Int): Double = {
+  def simulateGame(individual: HeuristicIndividual, cutoff: Int): Double = {
     var state: StateObservation = null
     //    val playoutState = playout(individual, state, cutoff)
     //    playoutState.getGameScore
@@ -112,7 +116,7 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
     score
   }
 
-  def playGame(individual: JavaCodeIndividual, visuals: Boolean = false) = {
+  def playGame(individual: HeuristicIndividual, visuals: Boolean = false) = {
     val gpHeuristic: String = "evolution_impl.fitness.dummyagent.Agent"
 
     //Other settings
@@ -136,9 +140,9 @@ class SingleGameFitnessCalculator(gameName: String) extends FitnessCalculator[Ja
 }
 
 object IndividualHolder {
-  var readyIndividual: Option[JavaCodeIndividual] = None
-  var currentIndividual: Option[JavaCodeIndividual] = None
-  var bestIndividual: Option[JavaCodeIndividual] = None
+  var readyIndividual: Option[HeuristicIndividual] = None
+  var currentIndividual: Option[HeuristicIndividual] = None
+  var bestIndividual: Option[HeuristicIndividual] = None
   var currentState: StateObservation = null
   var aStar = new AStar[Position]()
 }

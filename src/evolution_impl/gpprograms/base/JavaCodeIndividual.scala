@@ -1,4 +1,4 @@
-package evolution_impl.gpprograms
+package evolution_impl.gpprograms.base
 
 import java.io._
 import java.nio.charset.StandardCharsets
@@ -8,6 +8,7 @@ import javax.tools.{DiagnosticCollector, JavaCompiler, JavaFileObject, ToolProvi
 import evolution_engine.evolution.Individual
 import evolution_impl.GPProgram
 import evolution_impl.fitness.dummyagent.StateObservationWrapper
+import evolution_impl.gpprograms.{ClassName, CompilationException}
 import evolution_impl.util.JavaSourceFromString
 import japa.parser.JavaParser
 import japa.parser.ast.CompilationUnit
@@ -36,10 +37,12 @@ class JavaCodeIndividual(
 
   def run(input: StateObservationWrapper): Double = {
     //    val packageName = ast.getPackage.getName
-    if (!compiled) {
-      throw new RuntimeException("Individual not compiled before running")
+    this.synchronized {
+      if (!compiled) {
+        compile()
+        //      throw new RuntimeException("Individual not compiled before running")
+      }
     }
-
     val instance = individualObject match {
       case Some(individual) => individual.asInstanceOf[GPProgram]
       case None => throw new RuntimeException("Individual compiled but not instantiated (impossible?)")
@@ -108,12 +111,12 @@ class JavaCodeIndividual(
    * todo this currently parses the current AST as string, it could probably be improved by proper deep copying, which is not supported by the AST library.
    * @return
    */
-  override def duplicate(): Individual = {
+  override def duplicate: JavaCodeIndividual = {
     val oldClassName: String = ast.getTypes.get(0).getName
     //    val newClassName = incrementNumber(oldClassName)
     val oldSrc = new ByteArrayInputStream(ast.toString.getBytes(StandardCharsets.UTF_8))
     val newAST: CompilationUnit = JavaParser.parse(oldSrc)
-    val newName: ClassName = new ClassName(className.name, NameCounter.getNext())
+    val newName: ClassName = new ClassName(className.name, NameCounter.getNext)
     newAST.getTypes.get(0).setName(String.valueOf(newName.toString()))
     val individual: JavaCodeIndividual = new JavaCodeIndividual(newAST, originalFile, newName)
     individual.gardener = gardener
@@ -129,7 +132,7 @@ class JavaCodeIndividual(
 object NameCounter {
   var next = 1
 
-  def getNext() = {
+  def getNext = {
     this.synchronized {
       next = next + 1
       next

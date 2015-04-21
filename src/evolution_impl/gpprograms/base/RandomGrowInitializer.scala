@@ -1,19 +1,19 @@
-package evolution_impl.gpprograms
+package evolution_impl.gpprograms.base
 
 import java.io.File
-import java.lang.reflect.{ParameterizedType, Type, Method}
-import evolution_engine.evolution.{EvolutionParameters, PopulationInitializer}
-import evolution_impl.gpprograms.scope.{CallableNode, Scope, ScopeManager}
-import evolution_impl.gpprograms.util.{TypesConversionStrategy, ClassUtil}
-import evolution_impl.mutators.{ForLoopsVisitor, ForLoopsMutator}
+
+import evolution_engine.evolution.PopulationInitializer
+import evolution_impl.gpprograms.TreeGrowingException
+import evolution_impl.gpprograms.scope.{CallableNode, ScopeManager}
+import evolution_impl.gpprograms.util.{ClassUtil, TypesConversionStrategy}
+import evolution_impl.mutators.ForLoopsVisitor
 import japa.parser.JavaParser
+import japa.parser.ast.CompilationUnit
 import japa.parser.ast.`type`.{ClassOrInterfaceType, ReferenceType}
 import japa.parser.ast.body._
-import japa.parser.ast.expr.{StringLiteralExpr, BinaryExpr, DoubleLiteralExpr}
+import japa.parser.ast.expr.{BinaryExpr, DoubleLiteralExpr, StringLiteralExpr}
 import japa.parser.ast.stmt.{BlockStmt, ReturnStmt, Statement}
-import japa.parser.ast.{CompilationUnit, Node}
 import org.apache.commons.math3.distribution.NormalDistribution
-import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl
 
 import scala.collection.JavaConversions._
 import scala.collection.immutable.IndexedSeq
@@ -66,7 +66,7 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
   def growIndividual(id: Int): JavaCodeIndividual = {
 
     // get a copy of the prototype
-    val individual: JavaCodeIndividual = prototype.duplicate() match {
+    val individual: JavaCodeIndividual = prototype.duplicate match {
       case i: JavaCodeIndividual => i
       case _ => throw new TreeGrowingException("Individual type not supported")
     }

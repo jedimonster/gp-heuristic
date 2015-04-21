@@ -4,7 +4,7 @@ import java.util.concurrent.ThreadPoolExecutor
 
 import evolution_engine.evolution.Individual
 import evolution_impl.DumbFitnessResult
-import evolution_impl.gpprograms.JavaCodeIndividual
+import evolution_impl.gpprograms.base.JavaCodeIndividual
 
 import scala.collection.parallel.{ThreadPoolTaskSupport, ForkJoinTaskSupport}
 

@@ -2,7 +2,7 @@ import core.game.Game
 import core.{VGDLParser, VGDLRegistry, VGDLFactory}
 import evolution_impl.fitness.SingleGameFitnessCalculator
 import evolution_impl.fitness.dummyagent.StateObservationWrapper
-import evolution_impl.gpprograms.JavaCodeIndividual
+import evolution_impl.gpprograms.base.JavaCodeIndividual
 
 /**
  * Created By Itay Azaria

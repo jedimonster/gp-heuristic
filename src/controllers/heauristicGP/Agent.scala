@@ -46,7 +46,7 @@ class Agent extends AbstractPlayer {
 //    heuristic.individual = IndividualHolder.bestIndividual
     statesEvaluated = 0
 
-    // estimate amount of time available for each heurstic eval by evaluating the current state.
+    // estimate amount of time available for each heuristic eval by evaluating the current state.
     val timer = new ElapsedCpuTimer()
     heuristic.evaluateState(stateObs)
     heuristicEvalTime = timer.elapsedMillis()

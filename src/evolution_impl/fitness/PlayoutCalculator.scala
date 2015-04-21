@@ -2,7 +2,7 @@ package evolution_impl.fitness
 
 import core.game.StateObservation
 import evolution_impl.fitness.dummyagent.StateObservationWrapper
-import evolution_impl.gpprograms.JavaCodeIndividual
+import evolution_impl.gpprograms.base.{HeuristicIndividual, JavaCodeIndividual}
 import ontology.Types
 import tools.ElapsedCpuTimer
 import scala.annotation.tailrec
@@ -62,7 +62,7 @@ trait PlayoutCalculator {
     * @param stateObservation
     * @return (Score, Heuristic Val, depth_reached) best values that can be reached from the given state.
     */
-  @tailrec final def rec_playout(individual: JavaCodeIndividual, stateObservation: StateObservation, timeLeft: ElapsedCpuTimer, depthReached: Int = 0):
+  @tailrec final def rec_playout(individual: HeuristicIndividual, stateObservation: StateObservation, timeLeft: ElapsedCpuTimer, depthReached: Int = 0):
   (Double, Double, Int) = {
     if (timeLeft.exceededMaxTime() || stateObservation.isGameOver) {
       val heuristicVal: Double = individual.run(new StateObservationWrapper(stateObservation))

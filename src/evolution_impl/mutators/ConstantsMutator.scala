@@ -3,7 +3,7 @@ package evolution_impl.mutators
 import java.util
 
 import evolution_engine.mutators.Mutator
-import evolution_impl.gpprograms.JavaCodeIndividual
+import evolution_impl.gpprograms.base.JavaCodeIndividual
 import japa.parser.ast.expr.{BinaryExpr, DoubleLiteralExpr}
 
 import scala.collection.JavaConversions._
