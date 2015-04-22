@@ -8,4 +8,5 @@ import evolution_impl.fitness.dummyagent.StateObservationWrapper
  */
 abstract class HeuristicIndividual extends Individual {
   def run(input: StateObservationWrapper): Double =  ???
+  def compile()
 }

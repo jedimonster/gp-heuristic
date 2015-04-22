@@ -67,6 +67,7 @@ class JavaCodeIndividual(
   @throws[CompilationException]("if the individual couldn't be compiled")
   def compile() = {
     //        val packageName = ast.getPackage.getName
+
     val className = ast.getTypes.get(0).getName
     //        val fullClassName: String = packageName + "." + className
     //    val originalClass: Class[_] = Class.forName(className)
@@ -130,7 +131,7 @@ class JavaCodeIndividual(
 }
 
 object NameCounter {
-  var next = 1
+  private var next = 1
 
   def getNext = {
     this.synchronized {

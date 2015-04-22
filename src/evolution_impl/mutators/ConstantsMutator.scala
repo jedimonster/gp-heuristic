@@ -34,7 +34,7 @@ class ConstantsMutator(probability: Double) extends Mutator[JavaCodeIndividual] 
 class ConstantVisitor[A](probability: Double) extends ASTVisitor[A] {
   override def visit(n: DoubleLiteralExpr, arg: A): Unit = {
     val diff: Double = Math.round(Math.random()) // keep the sign, another mutator will change that
-    if (math.random < this.probability)
+    if (Math.random < this.probability)
       n.setValue((n.getValue.toDouble + diff).toString)
     super.visit(n, arg)
   }

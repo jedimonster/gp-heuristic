@@ -28,6 +28,7 @@ import scala.util.Random
  */
 class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends PopulationInitializer[JavaCodeIndividual]  {
   val distribution = new NormalDistribution(0, 5)
+  val ParamCount: Int = 2
 
 
   val paramTypes: List[Parameter] = {
@@ -61,10 +62,8 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
   }
 
 
-  val ParamCount: Int = 2
 
   def growIndividual(id: Int): JavaCodeIndividual = {
-
     // get a copy of the prototype
     val individual: JavaCodeIndividual = prototype.duplicate match {
       case i: JavaCodeIndividual => i
@@ -215,6 +214,7 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
     }
     val retExp: CallableNode = callables.foldLeft(new CallableNode(new DoubleLiteralExpr(distribution.sample.toString))) { (bigExpr: CallableNode, currentNode: CallableNode) =>
       if (addRandomMultiplier) {
+
         new CallableNode(new BinaryExpr(
           new BinaryExpr(
             new DoubleLiteralExpr(distribution.sample.toString),
