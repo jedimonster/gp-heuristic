@@ -15,7 +15,7 @@ import evolution_impl.fitness.{IndividualHolder, MultiGameFitnessCalculator, Sin
 import evolution_impl.fitness.dummyagent.StateObservationWrapper
 import evolution_impl.gpprograms.base.HeuristicIndividual
 import evolution_impl.gpprograms.trees.{HeuristicTreeIndividual, HeuristicTreeInitializer}
-import evolution_impl.mutators.trees.{RegrowHeuristicMutator, InTreeMutatorAdapter}
+import evolution_impl.mutators.trees.{NodeThresholdMutator, RegrowHeuristicMutator, InTreeMutatorAdapter}
 import evolution_impl.mutators.{RegrowMethodMutator, ForLoopsMutator, ConstantsMutator}
 
 /**
@@ -65,7 +65,7 @@ class ThreadedGPRun() extends Runnable {
 
   val crossovers = new InTreeCrossoverAdapter(new JavaCodeCrossover(1.0), 0.3)
   val mutators = List(new ConstantsMutator(0.15), new ForLoopsMutator(0.25), new RegrowMethodMutator(0.15))
-  val treeMutators = List(new InTreeMutatorAdapter(0.5, mutators), new RegrowHeuristicMutator(0.2))
+  val treeMutators = List(new InTreeMutatorAdapter(0.5, mutators), new RegrowHeuristicMutator(0.2), new NodeThresholdMutator(0.2))
 
   val generations = 100
   val popSize = 32
@@ -79,8 +79,8 @@ class ThreadedGPRun() extends Runnable {
 
   val params = new EvolutionParameters[HeuristicTreeIndividual](fitnessCalculator, selection,
     crossovers, treeMutators, new HeuristicTreeInitializer(paramTypes, methodCount, 1), generations, popSize)
-//  val params = new EvolutionParameters[HeuristicIndividual](fitnessCalculator, selection,
-//    crossovers, mutators, new RandomGrowInitializer(paramTypes, methodCount), generations, popSize)
+  //  val params = new EvolutionParameters[HeuristicIndividual](fitnessCalculator, selection,
+  //    crossovers, mutators, new RandomGrowInitializer(paramTypes, methodCount), generations, popSize)
 
   var runningEvolution: EvolutionRun[HeuristicTreeIndividual] = null
 
@@ -151,7 +151,7 @@ object ThreadedGPRun {
   def main(args: Array[String]): Unit = {
     // create a new threaded GP run, it will update the best individual each gen.
     GPRunHolder.gpRun = ThreadedGPRun.newInstance
-//    Thread.sleep(1000)
+    //    Thread.sleep(1000)
 
     // run a game using the best individual know at each step
     runNewGame()

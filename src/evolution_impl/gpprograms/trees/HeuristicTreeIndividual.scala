@@ -1,8 +1,7 @@
 package evolution_impl.gpprograms.trees
 
-import evolution_engine.evolution.Individual
 import evolution_impl.fitness.dummyagent.StateObservationWrapper
-import evolution_impl.gpprograms.base.{NameCounter, HeuristicIndividual}
+import evolution_impl.gpprograms.base.{HeuristicIndividual, NameCounter}
 
 /**
  * Created by Itay on 20/04/2015.
@@ -14,20 +13,20 @@ class HeuristicTreeIndividual(val root: TreeNode, name: String) extends Heuristi
 
   override def duplicate: HeuristicTreeIndividual = new HeuristicTreeIndividual(root.duplicate, NameCounter.getNext.toString)
 
-  override def compile: Unit = {
-    for(i <- root.inOrder)
+  override def compile(): Unit = {
+    for (i <- root.inOrder)
       i.heuristic.compile()
   }
 
   protected def traverseTree(node: TreeNode, state: StateObservationWrapper): Double = {
     node match {
       case HeuristicLeaf(h) => h.run(state)
-      case HeuristicNode(h, l, r) => if (h.run(state) > 0) traverseTree(l, state) else traverseTree(r, state)
+      case HeuristicNode(h, l, r, threshold) => if (h.run(state) <= threshold) traverseTree(l, state) else traverseTree(r, state)
     }
   }
 
   override def toString: String = {
-    root.inOrder.map(t => t.heuristic.toString).foldRight[String]("") {
+    root.inOrder.map(t => t.toString).foldRight[String]("") {
       (l, r) => l + r
     }
   }

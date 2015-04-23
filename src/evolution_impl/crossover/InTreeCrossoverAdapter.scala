@@ -1,12 +1,10 @@
 package evolution_impl.crossover
 
-import java.util
 
 import evolution_engine.mutators.{Crossover, Mutator}
 import evolution_impl.gpprograms.base.JavaCodeIndividual
 import evolution_impl.gpprograms.trees.{HeuristicTreeIndividual, TreeNode}
 import scala.util.Random
-import scalaj.collection.Imports._
 
 /**
  * Created by Itay on 20/04/2015.
