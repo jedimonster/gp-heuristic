@@ -5,13 +5,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/evolution_impl/mutators/trees/NodeThresholdMutator.scala" line="39" mnemonic="1" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="719a2b7b-e7d5-44e2-8910-1b2c90982fb0" name="Default" comment="tree heuristics - in-tree xo">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/evolution_impl/mutators/trees/NodeThresholdMutator.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_impl/GPHeuristic.scala" afterPath="$PROJECT_DIR$/src/evolution_impl/GPHeuristic.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_impl/gpprograms/trees/HeuristicNodes.scala" afterPath="$PROJECT_DIR$/src/evolution_impl/gpprograms/trees/HeuristicNodes.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_impl/gpprograms/trees/HeuristicTreeIndividual.scala" afterPath="$PROJECT_DIR$/src/evolution_impl/gpprograms/trees/HeuristicTreeIndividual.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_impl/crossover/InTreeCrossoverAdapter.scala" afterPath="$PROJECT_DIR$/src/evolution_impl/crossover/InTreeCrossoverAdapter.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/evolution_impl/gpprograms/base/JavaCodeIndividual.scala" afterPath="$PROJECT_DIR$/src/evolution_impl/gpprograms/base/JavaCodeIndividual.scala" />
+    <list default="true" id="719a2b7b-e7d5-44e2-8910-1b2c90982fb0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="gp-heuristic.iws" />
@@ -1064,7 +1058,8 @@
     <MESSAGE value="Random binary operators&#10;" />
     <MESSAGE value="tree heuristics" />
     <MESSAGE value="tree heuristics - in-tree xo" />
-    <option name="LAST_COMMIT_MESSAGE" value="tree heuristics - in-tree xo" />
+    <MESSAGE value="adding mutators" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding mutators" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
