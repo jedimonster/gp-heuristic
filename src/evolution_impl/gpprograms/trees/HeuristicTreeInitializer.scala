@@ -8,7 +8,7 @@ import evolution_impl.gpprograms.trees.HeuristicTreeIndividual
  * Created by Itay on 20/04/2015.
  */
 class HeuristicTreeInitializer(params: List[Any], val methodCount: Int, val depth: Int) extends PopulationInitializer[HeuristicTreeIndividual] {
-  protected val heuristicInitializer = new RandomGrowInitializer(params, 2)
+  protected val heuristicInitializer = new RandomGrowInitializer(params, methodCount)
 
   override def getInitialPopulation(n: Int): List[HeuristicTreeIndividual] = (for (i <- 0 to n) yield new HeuristicTreeIndividual(growNode(depth), NameCounter.getNext.toString)).toList
 
