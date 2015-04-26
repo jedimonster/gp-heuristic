@@ -9,14 +9,14 @@ import evolution_impl.gpprograms.trees.HeuristicTreeIndividual
  */
 class HeuristicTreeInitializer(params: List[Any], val methodCount: Int, val depth: Int) extends PopulationInitializer[HeuristicTreeIndividual] {
   protected val heuristicInitializer = new RandomGrowInitializer(params, methodCount)
+  protected val decisionInitializer = new RandomGrowInitializer(params, 1)
 
   override def getInitialPopulation(n: Int): List[HeuristicTreeIndividual] = (for (i <- 0 to n) yield new HeuristicTreeIndividual(growNode(depth), NameCounter.getNext.toString)).toList
 
   protected def growNode(depth: Int): TreeNode = {
-    val nodeHeuristic: JavaCodeIndividual = heuristicInitializer.growIndividual(NameCounter.getNext)
     if (depth == 0)
-      new HeuristicLeaf(nodeHeuristic)
+      new HeuristicLeaf(heuristicInitializer.growIndividual(NameCounter.getNext))
     else
-      new HeuristicNode(nodeHeuristic, growNode(depth - 1), growNode(depth - 1))
+      new HeuristicNode(decisionInitializer.growIndividual(NameCounter.getNext), growNode(depth - 1), growNode(depth - 1))
   }
 }

@@ -70,10 +70,10 @@ class SingleGameFitnessCalculator[I <: HeuristicIndividual](gameName: String) ex
       IndividualHolder.currentIndividual = Some(individual)
       IndividualHolder.notifyAll()
     }
-    // individuals compile themselves.
-    //    individual.compile()
+    individual.compile()
     IndividualHolder.synchronized {
       IndividualHolder.readyIndividual = Some(individual)
+      IndividualHolder.notifyAll()
     }
     val n = 0
     try {
@@ -106,10 +106,10 @@ class SingleGameFitnessCalculator[I <: HeuristicIndividual](gameName: String) ex
       }
       state = IndividualHolder.currentState
     }
-    individual.compile
+//    individual.compile()
     val timer = new ElapsedCpuTimer(ElapsedCpuTimer.TimerType.CPU_TIME)
     //        timer.setMaxTimeMillis(Int.MaxValue)
-    timer.setMaxTimeMillis(50)
+    timer.setMaxTimeMillis(30)
     val playoutResult: (Double, Double, Int) = rec_playout(individual, state, timer) // score, heuristic score, depth
     val score = playoutResult._1
     depthsReached.append(playoutResult._3)
@@ -142,10 +142,10 @@ class SingleGameFitnessCalculator[I <: HeuristicIndividual](gameName: String) ex
 }
 
 object IndividualHolder {
-  var readyIndividual: Option[HeuristicIndividual] = None
-  var currentIndividual: Option[HeuristicIndividual] = None
-  var bestIndividual: Option[HeuristicIndividual] = None
-  var currentState: StateObservation = null
+  var readyIndividual: Option[HeuristicIndividual] = None // filled by the first gen so we can start
+  var currentIndividual: Option[HeuristicIndividual] = None // can be used to evaluate fitness of a given heuristic
+  var bestIndividual: Option[HeuristicIndividual] = None // best known individual per generation
+  var currentState: StateObservation = null // updated by the real time agent each turn
   var aStar = new AStar[Position]()
 }
 

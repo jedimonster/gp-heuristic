@@ -19,7 +19,7 @@ import japa.parser.ast.CompilationUnit
  */
 class JavaCodeIndividual(
                           val ast: CompilationUnit, val originalFile: File, val className: ClassName
-                          ) extends Individual {
+                          ) extends HeuristicIndividual {
   val javaCompiler: JavaCompiler = ToolProvider.getSystemJavaCompiler()
   var gardener: Option[RandomGrowInitializer] = None
   var compiled = false
@@ -35,7 +35,7 @@ class JavaCodeIndividual(
   //    for (x <- values) yield run(x)
   //  }
 
-  def run(input: StateObservationWrapper): Double = {
+  override def run(input: StateObservationWrapper): Double = {
     //    val packageName = ast.getPackage.getName
     this.synchronized {
       if (!compiled) {
@@ -65,44 +65,44 @@ class JavaCodeIndividual(
   }
 
   @throws[CompilationException]("if the individual couldn't be compiled")
-  def compile() = {
-    this.synchronized {
-      //        val packageName = ast.getPackage.getName
+  def compile() : Unit = {
+    //    this.synchronized {
+    //        val packageName = ast.getPackage.getName
+    if (compiled)
+      return
+    val className = ast.getTypes.get(0).getName
+    //        val fullClassName: String = packageName + "." + className
+    //    val originalClass: Class[_] = Class.forName(className)
 
-      val className = ast.getTypes.get(0).getName
-      //        val fullClassName: String = packageName + "." + className
-      //    val originalClass: Class[_] = Class.forName(className)
+    val srcFile: JavaSourceFromString = new JavaSourceFromString(className, ast.toString)
+    val compilationUnits = java.util.Arrays.asList(srcFile)
+    val diagnostics = new DiagnosticCollector[JavaFileObject]()
 
-      val srcFile: JavaSourceFromString = new JavaSourceFromString(className, ast.toString)
-      val compilationUnits = java.util.Arrays.asList(srcFile)
-      val diagnostics = new DiagnosticCollector[JavaFileObject]()
+    val task = javaCompiler.getTask(null, null, diagnostics, null, null, compilationUnits)
 
-      val task = javaCompiler.getTask(null, null, diagnostics, null, null, compilationUnits)
+    //    printf("original class hash = %s\n", originalClass.hashCode())
 
-      //    printf("original class hash = %s\n", originalClass.hashCode())
+    val success = task.call()
 
-      val success = task.call()
-
-      if (!success) {
-        println("Failed compiling\n")
-        println(diagnostics.getDiagnostics.get(0).toString)
-        println(this.ast.toString)
-        //      for(d <- diagnostics.getDiagnostics) {
-        //        print(d.toString)
-        //      }
-        //      GPEvolutionLogger.saveBadIndividual(this)
-        throw new CompilationException
-      } else {
-        compiled = true
-
-      }
-      //      printf("Compiled class %s successfully\n", className)
-      // todo if failed log errors and catch expeption
-      var loadedClass: Class[_] = Class.forName(className)
-      loadedClass = ClassLoader.getSystemClassLoader.loadClass(loadedClass.getName)
-      val instance: GPProgram = loadedClass.newInstance().asInstanceOf[GPProgram]
-      individualObject = Some(instance)
+    if (!success) {
+      println("Failed compiling\n")
+      println(diagnostics.getDiagnostics.get(0).toString)
+      println(this.ast.toString)
+      //      for(d <- diagnostics.getDiagnostics) {
+      //        print(d.toString)
+      //      }
+      //      GPEvolutionLogger.saveBadIndividual(this)
+      throw new CompilationException
+    } else {
+      compiled = true
     }
+    //      printf("Compiled class %s successfully\n", className)
+    // todo if failed log errors and catch expeption
+    var loadedClass: Class[_] = Class.forName(className)
+    loadedClass = ClassLoader.getSystemClassLoader.loadClass(loadedClass.getName)
+    val instance: GPProgram = loadedClass.newInstance().asInstanceOf[GPProgram]
+    individualObject = Some(instance)
+    //    }
   }
 
   def writeToFile(path: String) = {

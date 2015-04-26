@@ -13,7 +13,7 @@ import evolution_engine.evolution.{EvolutionParameters, ParentSelectionEvolution
 import evolution_impl.crossover.{InTreeCrossoverAdapter, JavaCodeCrossover}
 import evolution_impl.fitness.{IndividualHolder, MultiGameFitnessCalculator, SingleGameFitnessCalculator}
 import evolution_impl.fitness.dummyagent.StateObservationWrapper
-import evolution_impl.gpprograms.base.HeuristicIndividual
+import evolution_impl.gpprograms.base.{JavaCodeIndividual, RandomGrowInitializer, HeuristicIndividual}
 import evolution_impl.gpprograms.trees.{HeuristicTreeIndividual, HeuristicTreeInitializer}
 import evolution_impl.mutators.trees.{NodeThresholdMutator, RegrowHeuristicMutator, InTreeMutatorAdapter}
 import evolution_impl.mutators.{RegrowMethodMutator, ForLoopsMutator, ConstantsMutator}
@@ -33,7 +33,7 @@ class GPHeuristic() extends StateHeuristic {
   // if we weren't given an individual, we have to hope the GP run will set one eventually.
   def waitForFirstIndividual() = {
     fitness.IndividualHolder.synchronized {
-      while (individual.isEmpty && fitness.IndividualHolder.currentIndividual.isEmpty)
+      while (individual.isEmpty && fitness.IndividualHolder.readyIndividual.isEmpty)
         fitness.IndividualHolder.wait()
     }
   }
@@ -62,8 +62,8 @@ class GPHeuristic() extends StateHeuristic {
 
 
 class ThreadedGPRun() extends Runnable {
-
-  val crossovers = new InTreeCrossoverAdapter(new JavaCodeCrossover(1.0), 0.3)
+  val crossovers = new JavaCodeCrossover(0.3)
+  val treeCrossovers = new InTreeCrossoverAdapter(new JavaCodeCrossover(1.0), 0.3)
   val mutators = List(new ConstantsMutator(0.15), new ForLoopsMutator(0.25), new RegrowMethodMutator(0.15))
   val treeMutators = List(new InTreeMutatorAdapter(0.5, mutators), new RegrowHeuristicMutator(0.2), new NodeThresholdMutator(0.2))
 
@@ -72,15 +72,16 @@ class ThreadedGPRun() extends Runnable {
   val paramTypes = List(new StateObservationWrapper(null))
 
   val methodCount = 3
-  val fitnessCalculator = new SingleGameFitnessCalculator[HeuristicTreeIndividual](ThreadedGPRun.gameName)
-  //      val fitnessCalculator = new SingleGameFitnessCalculator("zelda")
+  val treeFitnessCalculator = new SingleGameFitnessCalculator[HeuristicTreeIndividual](ThreadedGPRun.gameName)
+  val fitnessCalculator = new SingleGameFitnessCalculator[JavaCodeIndividual](ThreadedGPRun.gameName)
   //  val fitnessCalculator = new MultiGameFitnessCalculator(cutoff = 2000)
-  val selection = new TournamentSelection[HeuristicTreeIndividual](false)
+  val selection = new TournamentSelection[JavaCodeIndividual](false)
+  val treeSelection = new TournamentSelection[HeuristicTreeIndividual](false)
 
-  val params = new EvolutionParameters[HeuristicTreeIndividual](fitnessCalculator, selection,
-    crossovers, treeMutators, new HeuristicTreeInitializer(paramTypes, methodCount, 1), generations, popSize)
-  //  val params = new EvolutionParameters[HeuristicIndividual](fitnessCalculator, selection,
-  //    crossovers, mutators, new RandomGrowInitializer(paramTypes, methodCount), generations, popSize)
+    val params = new EvolutionParameters[HeuristicTreeIndividual](treeFitnessCalculator, treeSelection,
+      treeCrossovers, treeMutators, new HeuristicTreeInitializer(paramTypes, methodCount, 1), generations, popSize)
+//  val params = new EvolutionParameters[JavaCodeIndividual](fitnessCalculator, selection,
+//    crossovers, mutators, new RandomGrowInitializer(paramTypes, methodCount), generations, popSize)
 
   var runningEvolution: EvolutionRun[HeuristicTreeIndividual] = null
 
@@ -133,7 +134,7 @@ object ThreadedGPRun {
   // works with unlimited time: camelRace, firestorms, infection
   // pass but sucks with unlimited time: digdug, firecaster (but they all fail)
   // fail with unlimited time: overload
-  val gameName = "frogs"
+  val gameName = "aliens"
 
   val gamesPath: String = "gvgai/examples/gridphysics/"
   val levelId = 0

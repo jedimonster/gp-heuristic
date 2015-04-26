@@ -15,14 +15,14 @@
 // */
 //object Driver {
 //  def main(args: Array[String]): Unit = {
-//    val crossovers = new JavaCodeCrossover(1.0)
+//    val treeCrossovers = new JavaCodeCrossover(1.0)
 //    val mutators = List(new ConstantsMutator(0.05))
 //    val generations = 20
 //    val popSize = 64
 //    val paramTypes = List(0.0) // only para is a double. value is ignored.
 //    val methodCount = 2
 //    val params = new EvolutionParameters[JavaCodeIndividual](new EquationFitnessCalculator(), new TournamentSelection[JavaCodeIndividual](true),
-//      crossovers, mutators, new RandomGrowInitializer(paramTypes, methodCount), generations, popSize)
+//      treeCrossovers, mutators, new RandomGrowInitializer(paramTypes, methodCount), generations, popSize)
 //
 //    val logger = CSVEvolutionLogger.createCSVEvolutionLogger[JavaCodeIndividual](getNextLogDirectory("D:\\logs\\"))
 //    params.setLogger(logger)

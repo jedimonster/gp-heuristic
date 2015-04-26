@@ -88,7 +88,7 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
     //    // add it
     //    classDeceleration.getMembers.add(runMethod)
 
-
+//    individual.compile()
     individual
   }
 
