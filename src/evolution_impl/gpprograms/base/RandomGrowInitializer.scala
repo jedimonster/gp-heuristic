@@ -74,7 +74,7 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
     individual.gardener = Some(this)
 
     // randomly grow methods
-    val methods: IndexedSeq[MethodDeclaration] = for (i <- 0 to methodCount) yield growMethod(HeuristicsNumbers.getNext, ParamCount, individual)
+    val methods: IndexedSeq[MethodDeclaration] = for (i <- 0 to methodCount - 1) yield growMethod(HeuristicsNumbers.getNext, ParamCount, individual)
     val classDeceleration: ClassOrInterfaceDeclaration = individual.ast.getTypes.get(0) match {
       case e: ClassOrInterfaceDeclaration => e
       case _ => throw new TreeGrowingException("Can't find main class")
