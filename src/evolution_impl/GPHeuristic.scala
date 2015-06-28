@@ -171,8 +171,9 @@ object ThreadedGPRun {
     // run a game using the best individual know at each step
     val gamesResults = for (game <- gamesToPlay) yield {
       GPRunHolder.gpRun = ThreadedGPRun.newInstance
-      runNewGame(game)
+      val res = runNewGame(game)
       GPRunHolder.gpRun.stop()
+      res
     }
     println("finished playing, stopping evolution...")
 
