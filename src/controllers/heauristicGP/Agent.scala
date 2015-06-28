@@ -74,6 +74,8 @@ class Agent extends AbstractPlayer {
     //    actionsScores.maxBy(actionScore => actionScore._2)._1
   }
 
+  val heuristicWeight: Double = 0.5
+
   /**
    * recursively evaluates the followup states, until out of time.
    * @param stateObservation
@@ -100,7 +102,7 @@ class Agent extends AbstractPlayer {
       val actionResult: ActionResult = evaluateStates(action, stateCopy, newTimer, depth + 1)
       new ActionResult(action, actionResult.gameScore, actionResult.heuristicScore, actionResult.depth)
     }
-    possible_scores.maxBy(actionResult => actionResult.heuristicScore * 0.5 + actionResult.gameScore * 0.5)
+    possible_scores.maxBy(actionResult => actionResult.heuristicScore * heuristicWeight + actionResult.gameScore * heuristicWeight)
   }
 }
 

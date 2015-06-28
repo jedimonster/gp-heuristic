@@ -240,10 +240,16 @@ public class StateObservationWrapper {
 
 //        if (observationsList != null) {
 //            for (List<Observation> observations : observationsList) {
-        for (Observation observation : observationsList) {
-            double distance = getAStarLength(so.getAvatarPosition(), observation);
-            result.add(distance);
+        if (observationsList != null) {
+
+            for (Observation observation : observationsList) {
+                double distance = getAStarLength(so.getAvatarPosition(), observation);
+                result.add(distance);
+            }
+        } else {
+            result.add(0.0);
         }
+
 //            }
 //        }
 //
@@ -264,6 +270,8 @@ public class StateObservationWrapper {
                     result.add(distance);
                 }
             }
+        } else {
+            result.add(0.0);
         }
 
         return result;

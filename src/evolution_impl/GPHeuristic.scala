@@ -18,6 +18,8 @@ import evolution_impl.gpprograms.trees.{HeuristicTreeIndividual, HeuristicTreeIn
 import evolution_impl.mutators.trees.{NodeThresholdPercentMutator, NodeThresholdMutator, RegrowHeuristicMutator, InTreeMutatorAdapter}
 import evolution_impl.mutators.{RegrowMethodMutator, ForLoopsMutator, ConstantsMutator}
 
+import scala.collection.immutable.IndexedSeq
+
 /**
  * Created by itayaza on 24/11/2014.
  */
@@ -65,7 +67,7 @@ class ThreadedGPRun() extends Runnable {
   val crossovers = new JavaCodeCrossover(0.3)
   val treeCrossovers = new InTreeCrossoverAdapter(new JavaCodeCrossover(1.0), 0.3)
   val mutators = List(new ConstantsMutator(0.15)
-    ,new ForLoopsMutator(0.3)
+    , new ForLoopsMutator(0.3)
     ,
     new RegrowMethodMutator(0.25)
   )
@@ -76,28 +78,28 @@ class ThreadedGPRun() extends Runnable {
   val popSize = 32
   val paramTypes = List(new StateObservationWrapper(null))
 
-  val methodCount = 1
+  val methodCount = 2
   val treeFitnessCalculator = new SingleGameFitnessCalculator[HeuristicTreeIndividual](ThreadedGPRun.gameName, independent = false, evaluationTimeout = 200)
-  val fitnessCalculator = new SingleGameFitnessCalculator[JavaCodeIndividual](ThreadedGPRun.gameName, false, 150)
+  val fitnessCalculator = new SingleGameFitnessCalculator[JavaCodeIndividual](ThreadedGPRun.gameName, false, 75)
   //  val fitnessCalculator = new MultiGameFitnessCalculator(cutoff = 2000)
   val selection = new TournamentSelection[JavaCodeIndividual](false)
   val treeSelection = new TournamentSelection[HeuristicTreeIndividual](false)
 
-//  val params = new EvolutionParameters[HeuristicTreeIndividual](treeFitnessCalculator, treeSelection,
-//    treeCrossovers, treeMutators, new HeuristicTreeInitializer(paramTypes, methodCount, 3), generations, popSize)
-    val params = new EvolutionParameters[JavaCodeIndividual](fitnessCalculator, selection,
-      crossovers, mutators, new RandomGrowInitializer(paramTypes, methodCount), generations, popSize)
+  //  val params = new EvolutionParameters[HeuristicTreeIndividual](treeFitnessCalculator, treeSelection,
+  //    treeCrossovers, treeMutators, new HeuristicTreeInitializer(paramTypes, methodCount, 3), generations, popSize)
+  val params = new EvolutionParameters[JavaCodeIndividual](fitnessCalculator, selection,
+    crossovers, mutators, new RandomGrowInitializer(paramTypes, methodCount), generations, popSize)
 
-//  var runningEvolution: EvolutionRun[HeuristicTreeIndividual] = null
+  //  var runningEvolution: EvolutionRun[HeuristicTreeIndividual] = null
   var runningEvolution: EvolutionRun[JavaCodeIndividual] = null
 
   def run() = {
-//    val logger = CSVEvolutionLogger.createCSVEvolutionLogger[HeuristicTreeIndividual](getNextLogDirectory("D:\\logs\\"))
+    //    val logger = CSVEvolutionLogger.createCSVEvolutionLogger[HeuristicTreeIndividual](getNextLogDirectory("D:\\logs\\"))
     val logger = CSVEvolutionLogger.createCSVEvolutionLogger[JavaCodeIndividual](getNextLogDirectory("D:\\logs\\"))
     params.setLogger(logger)
 
     runningEvolution = new EvolutionRun()
-//    runningEvolution.run(params, new ParentSelectionEvolutionStrategy[HeuristicTreeIndividual](params))
+    //    runningEvolution.run(params, new ParentSelectionEvolutionStrategy[HeuristicTreeIndividual](params))
     runningEvolution.run(params, new ParentSelectionEvolutionStrategy[JavaCodeIndividual](params))
   }
 
@@ -142,7 +144,7 @@ object ThreadedGPRun {
   // works with unlimited time: camelRace, firestorms, infection
   // pass but sucks with unlimited time: digdug, firecaster (but they all fail)
   // fail with unlimited time: overload
-  val gameName = "aliens"
+  val gameName = "zelda"
 
   val gamesPath: String = "gvgai/examples/gridphysics/"
   val levelId = 0
@@ -157,18 +159,28 @@ object ThreadedGPRun {
     run
   }
 
+  //    val gamesToPlay = List("aliens", "boulderdash", "butterflies", "chase", "frogs", "milssilecommand", "portals", "sokoban", "survivezombies", "zelda"
+  //      , "camelRace", "digdug", "firestorms", "infection", "firecaster", "overload", "pacman", "seaquest", "whackamole", "eggomania")
+  //  val gamesToPlay = List("seaquest", "whackamole", "eggomania")
+  val gamesToPlay = List("zelda")
+
   def main(args: Array[String]): Unit = {
     // create a new threaded GP run, it will update the best individual each gen.
-    GPRunHolder.gpRun = ThreadedGPRun.newInstance
     //    Thread.sleep(1000)
 
     // run a game using the best individual know at each step
-        runNewGame()
-        println("finished playing, stopping evolution...")
-        GPRunHolder.gpRun.stop()
+    val gamesResults = for (game <- gamesToPlay) yield {
+      GPRunHolder.gpRun = ThreadedGPRun.newInstance
+      runNewGame(game)
+      GPRunHolder.gpRun.stop()
+    }
+    println("finished playing, stopping evolution...")
+
+    printf("Results: %s\n", gamesResults.toString)
   }
 
-  def runNewGame(gameToPlay: String = gameName) = {
+
+  def runNewGame(gameToPlay: String): GameRunResult = {
     val gpHeuristic: String = "controllers.heauristicGP.Agent"
     val gamePath = gamesPath + gameToPlay + ".txt"
 
@@ -179,7 +191,7 @@ object ThreadedGPRun {
     Thread.sleep(1000) // for the initial bug.
     //Game and level to play
     println("---\nPlaying a game with evolving heuristic")
-    val scores = for (i <- 0.to(4)) yield {
+    val scores: IndexedSeq[Double] = for (i <- 0.to(4)) yield {
       val levelPath = gamesPath + gameToPlay + "_lvl" + i + ".txt"
       IndividualHolder.resetAStar()
       ArcadeMachine.runOneGame(gamePath, levelPath, true, gpHeuristic, recordActionsFile, seed)
@@ -187,5 +199,7 @@ object ThreadedGPRun {
 
     printf("Scores for %s: %s\n", gameToPlay, scores.toString)
     printf("Average for %s: %s\n", gameToPlay, scores.sum / scores.size)
+
+    new GameRunResult(gameToPlay, scores)
   }
 }
