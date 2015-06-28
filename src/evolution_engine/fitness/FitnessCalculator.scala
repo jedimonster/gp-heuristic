@@ -23,7 +23,7 @@ trait FitnessCalculator[I <: Individual] {
 
     val endTime = System.nanoTime()
     val diffTime = endTime - startTime
-    printf("Generation time: %fs\n", diffTime * Math.pow(10, -9))
+    printf("\n------\nGeneration time: %fs\n", diffTime * Math.pow(10, -9))
     processResult(result)
 
     result

@@ -54,9 +54,9 @@ public class StateObservationWrapper {
     }
 
     //
-    public int getGameTick() {
-        return so.getGameTick();
-    }
+//    public int getGameTick() {
+//        return so.getGameTick();
+//    }
 
     public int getBlockSize() {
         return so.getBlockSize();
@@ -66,13 +66,13 @@ public class StateObservationWrapper {
 //        return so.getAvatarPosition();
 //    }
 
-    public double getAvatarSpeed() {
-        return so.getAvatarSpeed();
-    }
+//    public double getAvatarSpeed() {
+//        return so.getAvatarSpeed();
+//    }
 
-    public Vector2d getAvatarOrientation() {
-        return so.getAvatarOrientation();
-    }
+//    public Vector2d getAvatarOrientation() {
+//        return so.getAvatarOrientation();
+//    }
 
     public double countTouchingNPCs() {
 //        int currentX = (int) so.getAvatarPosition().x / so.getBlockSize(),
@@ -116,16 +116,16 @@ public class StateObservationWrapper {
     // game 0 NPCs: category = 3,3 itype = 4,9
     // game 1 NPCs: category = 3,3 itype = 9,10
     // game 2 NPCs: category = 3 itype = 4
-    public Iterable<Observation> getNPCsPositions(
-//            @AllowedValues(values = {"0", "1", "2", "3", "4", "5"}) int category,
-//            @AllowedValues(values = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}) int itype) {
-            @AllowedValues(values = {"3"}) int category,
-            @AllowedValues(values = {"4", "9"}) int itype) {
-        Vector2d avatarPosition = so.getAvatarPosition();
-
-        ArrayList<Observation>[] npcPositions = so.getNPCPositions(avatarPosition);
-        return flatObservations(npcPositions);
-    }
+//    public Iterable<Observation> getNPCsPositions(
+////            @AllowedValues(values = {"0", "1", "2", "3", "4", "5"}) int category,
+////            @AllowedValues(values = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}) int itype) {
+//            @AllowedValues(values = {"3"}) int category,
+//            @AllowedValues(values = {"4", "9"}) int itype) {
+//        Vector2d avatarPosition = so.getAvatarPosition();
+//
+//        ArrayList<Observation>[] npcPositions = so.getNPCPositions(avatarPosition);
+//        return flatObservations(npcPositions);
+//    }
 
     // game 0 immovables: category = 4, itype = 2
     // game 1 immovables: category = 4,4, type = 0,3
@@ -137,25 +137,58 @@ public class StateObservationWrapper {
             @AllowedValues(values = {"4"}) int category,
             @AllowedValues(values = {"2"}) int itype) {
         Vector2d avatarPosition = so.getAvatarPosition();
-
         ArrayList<Observation>[] immovablePositions = so.getImmovablePositions(avatarPosition);
-        return flatObservations(immovablePositions);
+        List<Observation> positions = flatObservations(immovablePositions);
+        List<Observation> filteredPositions = new ArrayList<>(positions.size());
+
+        for (Observation position : positions) {
+            if (position.itype == 0)
+                filteredPositions.add(position);
+        }
+
+        return filteredPositions;
     }
 
-    public Iterable<Double> getResourcesHeuristicDistance() {
-        Vector2d avatarPosition = so.getAvatarPosition();
+    public Iterable<Double> getImmovableRealDistance() {
+        ArrayList<Observation>[] immovablePositions = so.getImmovablePositions();
+        List<Observation> positions = flatObservations(immovablePositions);
+        List<Observation> filteredPositions = new ArrayList<>(positions.size());
 
-        ArrayList<Observation>[] resourcesPositions = so.getResourcesPositions(avatarPosition);
-        return getHeuristicDistances(resourcesPositions);
+        for (Observation position : positions) {
+            if (position.itype != 0)
+                filteredPositions.add(position);
+        }
+
+        return getAStarDistances(filteredPositions);
     }
 
+    public Double getImmovableCount() {
+        ArrayList<Observation>[] immovablePositions = so.getImmovablePositions();
+        List<Observation> positions = flatObservations(immovablePositions);
+        double count = 0;
 
-    public Iterable<Double> getPortalsHeuristicDistance() {
-        Vector2d avatarPosition = so.getAvatarPosition();
+        for (Observation position : positions) {
+            if (position.itype != 0)
+                count++;
+        }
 
-        ArrayList<Observation>[] portalsPositions = so.getPortalsPositions(avatarPosition);
-        return getHeuristicDistances(portalsPositions);
+        return count;
     }
+
+//    public Iterable<Double> getResourcesHeuristicDistance() {
+//        Vector2d avatarPosition = so.getAvatarPosition();
+//
+//        ArrayList<Observation>[] resourcesPositions = so.getResourcesPositions(avatarPosition);
+//        return getHeuristicDistances(resourcesPositions);
+//    }
+
+
+//    public Iterable<Double> getPortalsHeuristicDistance() {
+//        Vector2d avatarPosition = so.getAvatarPosition();
+//
+//        ArrayList<Observation>[] portalsPositions = so.getPortalsPositions(avatarPosition);
+//        return getHeuristicDistances(portalsPositions);
+//    }
 
     public Iterable<Double> getNPCHeursticDistance() {
         Vector2d avatarPosition = so.getAvatarPosition();
@@ -163,12 +196,12 @@ public class StateObservationWrapper {
         return getHeuristicDistances(npcPositions);
     }
 
-//    public Iterable<Double> getPortalRealDistance() {
-//        Vector2d avatarPosition = so.getAvatarPosition();
-//
-//        ArrayList<Observation>[] portalsPositions = so.getPortalsPositions();
-//        return getAStarDistances(portalsPositions);
-//    }
+    public Iterable<Double> getPortalRealDistance() {
+        Vector2d avatarPosition = so.getAvatarPosition();
+
+        ArrayList<Observation>[] portalsPositions = so.getPortalsPositions();
+        return getAStarDistances(flatObservations(portalsPositions));
+    }
 //
 //    public Iterable<Double> getResourcesRealDistance() {
 //        Vector2d avatarPosition = so.getAvatarPosition();
@@ -190,7 +223,7 @@ public class StateObservationWrapper {
         if (observationsList != null) {
             for (List<Observation> observations : observationsList) {
                 for (Observation observation : observations) {
-                if (observation.itype != 0)
+//                if (observation.itype != 0)
                     result.add(observation);
                 }
             }
@@ -201,18 +234,19 @@ public class StateObservationWrapper {
 
 
     @GPIgnore
-    protected List<Double> getAStarDistances(List<Observation>[] observationsList) {
+    protected List<Double> getAStarDistances(List<Observation> observationsList) {
         List<Double> result = new ArrayList<>();
+//        List<Observation> flatObservations = flatObservations(observationsList);
 
-        if (observationsList != null) {
-            for (List<Observation> observations : observationsList) {
-                for (Observation observation : observations) {
-                    double distance = getAStarLength(so.getAvatarPosition(), observation);
-                    result.add(distance);
-                }
-            }
+//        if (observationsList != null) {
+//            for (List<Observation> observations : observationsList) {
+        for (Observation observation : observationsList) {
+            double distance = getAStarLength(so.getAvatarPosition(), observation);
+            result.add(distance);
         }
-
+//            }
+//        }
+//
         return result;
     }
 
@@ -241,8 +275,11 @@ public class StateObservationWrapper {
         Position start = new Position((int) avatarPosition.x / blockSize, (int) avatarPosition.y / blockSize, so);
         Position goal = new Position((int) observation.position.x / blockSize, (int) observation.position.y / blockSize, so);
 
+        if (goal.equals(start))
+            return 0;
+
         try {
-            return aStar.aStarLength(new AStarPathRequest<Position>(start, goal));
+            return aStar.aStarLength(new AStarPathRequest<Position>(start, goal)) - 1;
         } catch (AStarException e) {  // hopefully there was no path
             return Integer.MAX_VALUE;
         }

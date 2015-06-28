@@ -5,18 +5,19 @@ import java.util
 import evolution_engine.mutators.Mutator
 import evolution_impl.fitness.IndividualHolder
 import evolution_impl.fitness.dummyagent.StateObservationWrapper
-import evolution_impl.gpprograms.base.NameCounter
 import evolution_impl.gpprograms.trees.{HeuristicNode, TreeNode, HeuristicTreeIndividual}
-import scala.util.Random
+import org.apache.commons.math3.distribution.NormalDistribution
 
+import scala.util.Random
 import scala.collection.JavaConversions._
 import scala.collection.JavaConverters._
 
 
 /**
- * Created by Itay on 23/04/2015.
+ * Created By Itay Azaria
+ * Date: 17/05/2015
  */
-class NodeThresholdMutator(probability: Double) extends Mutator[HeuristicTreeIndividual] {
+class NodeThresholdPercentMutator(probability: Double) extends Mutator[HeuristicTreeIndividual] {
   /**
    * mutates the given features according to their fitness and appropriate strategy.
    *
@@ -38,8 +39,10 @@ class NodeThresholdMutator(probability: Double) extends Mutator[HeuristicTreeInd
     val nodes: List[TreeNode] = individual.root.inOrder.filter(tn => tn.isInstanceOf[HeuristicNode])
     val victimNode = nodes(Random.nextInt(nodes.size))
 
-    val newValue: Double = victimNode.heuristic.run(new StateObservationWrapper(IndividualHolder.currentState))
-    victimNode.asInstanceOf[HeuristicNode].threshold = newValue
+    val oldValue: Double = victimNode.asInstanceOf[HeuristicNode].threshold
+    val stdDev: Double = Math.max(1,Math.abs(oldValue * 0.1))
+    val distribution: NormalDistribution = new NormalDistribution(oldValue, stdDev)
+    victimNode.asInstanceOf[HeuristicNode].threshold = distribution.sample()
   }
 
   override def getProbability: Double = probability

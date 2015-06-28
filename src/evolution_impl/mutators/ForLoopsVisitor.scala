@@ -23,7 +23,7 @@ import scala.util.Random
 class ForLoopsVisitor(probability: Double) extends ASTVisitor[JavaCodeIndividual] {
   override def visit(method: MethodDeclaration, arg: JavaCodeIndividual): Unit = {
     super.visit(method, arg)
-    if (Math.random() > probability)
+    if (method.getName.equals("run") || Math.random() > probability)
       return
 
     method.getBody.setStmts(
@@ -54,7 +54,7 @@ class ForLoopsVisitor(probability: Double) extends ASTVisitor[JavaCodeIndividual
     val statements: ListBuffer[Statement] = ListBuffer[Statement]()
     val innerStatements: ListBuffer[Statement] = ListBuffer[Statement]()
 
-    val accVar: VariableDeclarator = new VariableDeclarator(new VariableDeclaratorId("acc"), new DoubleLiteralExpr("0.0"))
+    val accVar: VariableDeclarator = new VariableDeclarator(new VariableDeclaratorId("acc"), new DoubleLiteralExpr("1.0"))
     statements.append(new ExpressionStmt(new VariableDeclarationExpr(new ClassOrInterfaceType("double"), List(accVar))))
     val allowedOperators = List(Operator.plus, Operator.minus, Operator.star, Operator.slash)
     if (Math.random() > 0.5)
@@ -87,6 +87,7 @@ class ForLoopsVisitor(probability: Double) extends ASTVisitor[JavaCodeIndividual
     arg.gardener.get.createReturnStatement(method, nodesToReturn.toList, List[CallableNode](), true)
   }
 }
+
 object ForLoopsVisitor {
   val expandedTypes = new mutable.HashMap[String, Seq[CallableNode]]()
 }

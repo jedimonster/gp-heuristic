@@ -16,23 +16,31 @@ import scala.collection.mutable.ListBuffer
 /**
  * Created by itayaza on 24/11/2014.
  */
-class SingleGameFitnessCalculator[I <: HeuristicIndividual](gameName: String) extends FitnessCalculator[I] with PlayoutCalculator {
+class SingleGameFitnessCalculator[I <: HeuristicIndividual]
+(gameName: String,
+ independent: Boolean = false,
+ evaluationTimeout: Long = Int.MaxValue)
+  extends FitnessCalculator[I]
+  with PlayoutCalculator {
+
   val gamesPath: String = "gvgai/examples/gridphysics/"
-  val levelId = 0
+  val levelId = 1
   val gamePath = gamesPath + gameName + ".txt"
-  val levelPath = gamesPath + gameName + "_lvl" + levelId + ".txt"
+  val levelPath = gamesPath + gameName + "_lvl"
+  //  + levelId + ".txt"
   var depthsReached = ListBuffer[Double]()
   val vGDLFactory = VGDLFactory.GetInstance().init()
   val vGDLRegistry = VGDLRegistry.GetInstance().init()
 
-  def intitialState = {
+  val intitialStates = {
     this.synchronized {
       val game: Game = new VGDLParser().parseGame(gamePath)
+      for (i <- 0 to 4) yield {
+        game.buildLevel(levelPath + i.toString + ".txt")
+        game.getObservation.copy()
+      }
 
-      game.buildLevel(levelPath)
 
-
-      game.getObservation.copy()
     }
   }
 
@@ -100,22 +108,42 @@ class SingleGameFitnessCalculator[I <: HeuristicIndividual](gameName: String) ex
     //    playoutState.getGameScore
 
     //    state = intitialState.copy
-    IndividualHolder.synchronized {
-      while (IndividualHolder.currentState == null) {
-        IndividualHolder.wait()
-      }
-      state = IndividualHolder.currentState
-    }
-//    individual.compile()
-    val timer = new ElapsedCpuTimer(ElapsedCpuTimer.TimerType.CPU_TIME)
-    //        timer.setMaxTimeMillis(Int.MaxValue)
-    timer.setMaxTimeMillis(30)
-    val playoutResult: (Double, Double, Int) = rec_playout(individual, state, timer) // score, heuristic score, depth
-    val score = playoutResult._1
-    depthsReached.append(playoutResult._3)
-    //        printf("played out in %dms \n", timer.elapsedMillis())
+    if (independent) {
+      var state : StateObservation = null
+      val scores = ListBuffer[Double]()
 
-    score
+      for (i <- 0 to 4) {
+        state = intitialStates(0).copy()
+        IndividualHolder.currentState = state
+        val timer = new ElapsedCpuTimer(ElapsedCpuTimer.TimerType.CPU_TIME)
+        timer.setMaxTimeMillis(evaluationTimeout)
+        val playoutResult: (Double, Double, Int) = rec_playout(individual, state, timer) // score, heuristic score, depth
+        val score = playoutResult._1
+        depthsReached.append(playoutResult._3)
+
+        scores.append(score)
+      }
+      //        printf("played out in %dms \n", timer.elapsedMillis())
+      scores.sum / scores.size
+    } else {
+      IndividualHolder.synchronized {
+        while (IndividualHolder.currentState == null) {
+          IndividualHolder.wait()
+        }
+        state = IndividualHolder.currentState
+      }
+      val timer = new ElapsedCpuTimer(ElapsedCpuTimer.TimerType.CPU_TIME)
+      timer.setMaxTimeMillis(evaluationTimeout)
+      val playoutResult: (Double, Double, Int) = rec_playout(individual, state, timer) // score, heuristic score, depth
+      val score = playoutResult._1
+      depthsReached.append(playoutResult._3)
+      //        printf("played out in %dms \n", timer.elapsedMillis())
+
+      score
+    }
+
+    //    individual.compile()
+
   }
 
   def playGame(individual: I, visuals: Boolean = false) = {
@@ -142,11 +170,19 @@ class SingleGameFitnessCalculator[I <: HeuristicIndividual](gameName: String) ex
 }
 
 object IndividualHolder {
-  var readyIndividual: Option[HeuristicIndividual] = None // filled by the first gen so we can start
-  var currentIndividual: Option[HeuristicIndividual] = None // can be used to evaluate fitness of a given heuristic
-  var bestIndividual: Option[HeuristicIndividual] = None // best known individual per generation
-  var currentState: StateObservation = null // updated by the real time agent each turn
+  var readyIndividual: Option[HeuristicIndividual] = None
+  // filled by the first gen so we can start
+  var currentIndividual: Option[HeuristicIndividual] = None
+  // can be used to evaluate fitness of a given heuristic
+  var bestIndividual: Option[HeuristicIndividual] = None
+  // best known individual per generation
+  var currentState: StateObservation = null
+  // updated by the real time agent each turn
   var aStar = new AStar[Position]()
+
+  def resetAStar(): Unit = {
+    aStar = new AStar[Position]();
+  }
 }
 
 

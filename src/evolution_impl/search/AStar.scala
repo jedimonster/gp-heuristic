@@ -17,6 +17,8 @@ class AStar[N <: GraphNode[N]] {
     path.size
   }
 
+  protected val HEURISTIC_WEIGHT: Int = 2
+
   def aStar(pathRequest: AStarPathRequest[N]): List[N] = {
     if (aStarCache.contains(pathRequest)) {
       //      println("Restoring path from cache") // todo we can fail between .contains and .get if this is shared...
@@ -41,13 +43,14 @@ class AStar[N <: GraphNode[N]] {
         return reconstructPath(cameFrom, goal)
 
       val tailToGoalRequest: AStarPathRequest[N] = new AStarPathRequest[N](current, goal)
-      aStarCache.get(tailToGoalRequest) match {
-        case Some(tail) => // if we have the rest of the path, we found our winner.
-          val fullPath: List[N] = reconstructPath(cameFrom, current) ::: tail.asInstanceOf[List[N]]
-          aStarCache.put(pathRequest, fullPath)
-          return fullPath
-
-        case None => // otherwise continue the search
+      // this was a bad idea because we might go back in the path..
+//      aStarCache.get(tailToGoalRequest) match {
+//        case Some(tail) => // if we have the rest of the path, we found our winner.
+//          val fullPath: List[N] = reconstructPath(cameFrom, current) ::: tail.asInstanceOf[List[N]]
+//          aStarCache.put(pathRequest, fullPath)
+//          return fullPath
+//
+//        case None => // otherwise continue the search
           openSet.remove(current)
           closedSet.add(current)
 
@@ -58,12 +61,12 @@ class AStar[N <: GraphNode[N]] {
               if (!openSet.contains(neighbor) || tentativeGScore < gScore.get(neighbor).get) {
                 cameFrom.put(neighbor, current)
                 gScore.put(neighbor, tentativeGScore)
-                fScore.put(neighbor, gScore.get(neighbor).get + neighbor.heuristicDistance(goal))
+                fScore.put(neighbor, gScore.get(neighbor).get + HEURISTIC_WEIGHT *neighbor.heuristicDistance(goal))
                 if (!openSet.contains(neighbor))
                   openSet.add(neighbor)
               }
             }
-          }
+//          }
       }
     }
 

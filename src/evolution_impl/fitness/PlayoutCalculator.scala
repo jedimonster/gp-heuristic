@@ -56,6 +56,8 @@ trait PlayoutCalculator {
     bestStateScore
   }
 
+  protected val heuristicWeight: Double = 0.5
+
   /** *
     *
     * @param individual
@@ -67,8 +69,9 @@ trait PlayoutCalculator {
     if (timeLeft.exceededMaxTime() || stateObservation.isGameOver) {
       val heuristicVal: Double = individual.run(new StateObservationWrapper(stateObservation))
       val gameScore: Double = stateObservation.getGameScore
+
       if (stateObservation.getGameWinner == Types.WINNER.PLAYER_WINS)
-        return (100 * gameScore, heuristicVal, depthReached)
+        return (gameScore, heuristicVal, depthReached)
       else
         return (-1 / Math.max(0.001, Math.abs(gameScore)), heuristicVal, depthReached)
     }
@@ -76,7 +79,10 @@ trait PlayoutCalculator {
     val scores = for (nextAction <- stateObservation.getAvailableActions.asScala) yield {
       val nextState = stateObservation.copy()
       nextState.advance(nextAction)
-      (nextState, individual.run(new StateObservationWrapper(nextState)))
+      val heuristicScore: Double = individual.run(new StateObservationWrapper(nextState))
+      val gameScore = nextState.getGameScore
+      val weightedScore = heuristicWeight * gameScore + (1 - heuristicWeight) * heuristicScore
+      (nextState, weightedScore)
     }
     // at this point we can follow up the best heuristic value, or  - if time permits - more.
     val bestScore = scores.maxBy(x => x._2)

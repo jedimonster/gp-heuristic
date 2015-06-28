@@ -2,8 +2,9 @@ package evolution_impl.mutators
 
 import evolution_engine.mutators.Mutator
 import evolution_impl.gpprograms.base.{HeuristicsNumbers, RandomGrowInitializer, JavaCodeIndividual}
-import japa.parser.ast.body.{MethodDeclaration, ClassOrInterfaceDeclaration}
+import japa.parser.ast.body.{BodyDeclaration, MethodDeclaration, ClassOrInterfaceDeclaration}
 
+import scala.collection.mutable
 import scala.util.Random
 
 //import scalaj.collection.Imports._
@@ -34,7 +35,9 @@ class RegrowMethodVisitor extends ASTVisitor[JavaCodeIndividual] {
   override def visit(n: ClassOrInterfaceDeclaration, individual: JavaCodeIndividual): Unit = {
     super.visit(n, individual)
     // drop a random method
-    n.getMembers.remove(Random.nextInt(n.getMembers.size))
+    val membersNoRun: mutable.Buffer[BodyDeclaration] = n.getMembers.filterNot(bd => bd.asInstanceOf[MethodDeclaration].getName.equals("run"))
+    n.getMembers.remove(n.getMembers.indexOf(membersNoRun(Random.nextInt(membersNoRun.size))))
+//    n.getMembers.remove(Random.nextInt(n.getMembers.size))
     // add a new one:
     val gardener: RandomGrowInitializer = individual.gardener.get
     val method: MethodDeclaration = gardener.growMethod(HeuristicsNumbers.getNext, gardener.ParamCount, individual)
