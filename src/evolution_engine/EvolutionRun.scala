@@ -15,6 +15,7 @@ class EvolutionRun[I <: Individual] {
       initialPopulation = evolutionStrategy.evolve(initialPopulation)
       System.out.print("Finished Generation %d\n".format(i))
       if (stopRequested)
+//        return
         System.exit(0)
     }
   }

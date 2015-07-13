@@ -56,7 +56,7 @@ trait PlayoutCalculator {
     bestStateScore
   }
 
-  protected val heuristicWeight: Double = 0.5
+  protected val heuristicWeight: Double = 1.0
 
   /** *
     *
@@ -64,28 +64,64 @@ trait PlayoutCalculator {
     * @param stateObservation
     * @return (Score, Heuristic Val, depth_reached) best values that can be reached from the given state.
     */
-  @tailrec final def rec_playout(individual: HeuristicIndividual, stateObservation: StateObservation, timeLeft: ElapsedCpuTimer, depthReached: Int = 0):
+  @tailrec final def rec_playout(individual: HeuristicIndividual, stateObservation: StateObservation, timeLeft: ElapsedCpuTimer, depthReached: Int = 0, maxDepth:Int = 50):
   (Double, Double, Int) = {
-    if (timeLeft.exceededMaxTime() || stateObservation.isGameOver) {
+//    if (timeLeft.exceededMaxTime() || stateObservation.isGameOver) {
+    if (depthReached > maxDepth|| stateObservation.isGameOver) {
       val heuristicVal: Double = individual.run(new StateObservationWrapper(stateObservation))
       val gameScore: Double = stateObservation.getGameScore
 
       if (stateObservation.getGameWinner == Types.WINNER.PLAYER_WINS)
+        return (10 * gameScore, heuristicVal, depthReached)
+      else if(!stateObservation.isGameOver)
         return (gameScore, heuristicVal, depthReached)
       else
         return (-1 / Math.max(0.001, Math.abs(gameScore)), heuristicVal, depthReached)
     }
 
     val scores = for (nextAction <- stateObservation.getAvailableActions.asScala) yield {
-      val nextState = stateObservation.copy()
+      var nextState = stateObservation.copy()
       nextState.advance(nextAction)
-      val heuristicScore: Double = individual.run(new StateObservationWrapper(nextState))
+
+      var heuristicScore: Double = individual.run(new StateObservationWrapper(nextState))
+      // handle the case we changed orientation and didn't move by taking max(move, don't move)
+      if (nextState.getAvatarPosition.equals(stateObservation.getAvatarPosition)) {
+        val moveTwiceState = nextState.copy()
+        moveTwiceState.advance(nextAction)
+        val moveTwiceHeuristicScore = individual.run(new StateObservationWrapper(moveTwiceState))
+        if (moveTwiceHeuristicScore > heuristicScore) {
+          heuristicScore = moveTwiceHeuristicScore
+          nextState = moveTwiceState
+        }
+      }
+
+
       val gameScore = nextState.getGameScore
-      val weightedScore = heuristicWeight * gameScore + (1 - heuristicWeight) * heuristicScore
+      val weightedScore = heuristicWeight * heuristicScore + (1 - heuristicWeight) * gameScore
       (nextState, weightedScore)
     }
     // at this point we can follow up the best heuristic value, or  - if time permits - more.
     val bestScore = scores.maxBy(x => x._2)
-    rec_playout(individual, bestScore._1, timeLeft, depthReached + 1)
+    rec_playout(individual, bestScore._1, timeLeft, depthReached + 1, maxDepth)
+  }
+
+  def widePlayout(individual: HeuristicIndividual, stateObservation: StateObservation, timeLeft: ElapsedCpuTimer, depth: Int): (Double, Double, Int) = {
+    val stateToPlayout = maxStateToDepth(individual, stateObservation, depth)._1
+    rec_playout(individual, stateToPlayout, timeLeft, depth)
+  }
+
+  def maxStateToDepth(individual: HeuristicIndividual, stateObservation: StateObservation, depth: Int):
+  (StateObservation, Double) = {
+    if (depth == 0 || stateObservation.isGameOver) {
+      (stateObservation, individual.run(new StateObservationWrapper(stateObservation)))
+    } else {
+      val successorsValues = for (action <- stateObservation.getAvailableActions(true).asScalaMutable)
+        yield {
+          val stateCopy: StateObservation = stateObservation.copy()
+          stateCopy.advance(action)
+          maxStateToDepth(individual, stateCopy, depth - 1)
+        }
+      successorsValues.maxBy((sv: (StateObservation, Double)) => sv._2)
+    }
   }
 }

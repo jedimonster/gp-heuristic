@@ -27,7 +27,7 @@ import scala.util.Random
  * Combines into a linear combination of resulting numbers.
  */
 class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends PopulationInitializer[JavaCodeIndividual]  {
-  val distribution = new NormalDistribution(0, 5)
+  val distribution = new NormalDistribution(0, 1)
   val ParamCount: Int = 2
 
 

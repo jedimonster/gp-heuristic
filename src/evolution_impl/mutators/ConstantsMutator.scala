@@ -22,10 +22,10 @@ class ConstantsMutator(probability: Double) extends Mutator[JavaCodeIndividual] 
     val inds: List[JavaCodeIndividual] = individuals.toList
     for (x: JavaCodeIndividual <- inds) {
       //      new ConstantVisitor().visit(x.ast, null)
-      val visitor: ConstantVisitor[Object] = new ConstantVisitor[Object](probability)
+      val constantVisitor: ConstantVisitor[Object] = new ConstantVisitor[Object](probability)
       val signVisitor: SignVisitor[Object] = new SignVisitor[Object]()
-      visitor.visit(x.ast, new Object)
-//      signVisitor.visit(x.ast, new Object)
+      constantVisitor.visit(x.ast, new Object)
+      signVisitor.visit(x.ast, new Object)
     }
     inds.asJava
   }
@@ -42,17 +42,23 @@ class ConstantVisitor[A](probability: Double) extends ASTVisitor[A] {
 
 
 class SignVisitor[T]() extends ASTVisitor[T] {
-  override def visit(n: DoubleLiteralExpr, arg: T): Unit = {
-    if (Math.random() < 0.05)
-      n.setValue((-1 * n.getValue.toDouble).toString)
-    super.visit(n, arg)
-  }
+  //  override def visit(n: DoubleLiteralExpr, arg: T): Unit = {
+  //    if (Math.random() < 0.5)
+  //      n.setValue((-1 * n.getValue.toDouble).toString)
+  //    super.visit(n, arg)
+  //  }
 
   override def visit(n: BinaryExpr, arg: T): Unit = {
-    if (Random.nextBoolean)
-      n.setOperator(BinaryExpr.Operator.times)
-    else
-      n.setOperator(BinaryExpr.Operator.divide)
+    if (n.getOperator.equals(BinaryExpr.Operator.minus)
+      && Math.random() < 0.1)
+      n.setOperator(BinaryExpr.Operator.plus)
+    else if(n.getOperator.equals(BinaryExpr.Operator.plus)
+      && Math.random() < 0.1)
+    n.setOperator(BinaryExpr.Operator.minus)
+    //    if (Random.nextBoolean)
+    //      n.setOperator(BinaryExpr.Operator.times)
+    //    else
+    //      n.setOperator(BinaryExpr.Operator.divide)
     super.visit(n, arg)
   }
 }

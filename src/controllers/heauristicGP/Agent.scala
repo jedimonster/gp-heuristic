@@ -36,7 +36,7 @@ class Agent extends AbstractPlayer {
 
     IndividualHolder.synchronized {
       IndividualHolder.currentState = stateObs
-      //      IndividualHolder.aStarCache.clear()
+//            IndividualHolder.aStarCache.clear()
       IndividualHolder.notifyAll() // wake up any threads waiting for a new state
     }
   }
@@ -48,15 +48,16 @@ class Agent extends AbstractPlayer {
     statesEvaluated = 0
 
     // estimate amount of time available for each heuristic eval by evaluating the current state.
-    val timer = new ElapsedCpuTimer()
     heuristic.evaluateState(stateObs)
+    val timer = new ElapsedCpuTimer()
+    heuristic.evaluateState(stateObs) // we do this twice because the 2nd time closer to the average
     heuristicEvalTime = timer.elapsedMillis()
     val newTimer = new ElapsedCpuTimer()
-    val remainingTime: Long = elapsedTimer.remainingTimeMillis() - 10
+    val remainingTime: Long = (elapsedTimer.remainingTimeMillis() * 0.8).asInstanceOf[Long]
     newTimer.setMaxTimeMillis(remainingTime)
 
     val actionScores = evaluateStates(ACTIONS.ACTION_NIL, stateObs, newTimer)
-    actionScores.action
+
     //    val actionsScores = for (action <- stateObs.getAvailableActions) yield {
     //      val stateCopy: StateObservation = stateObs.copy
     //      stateCopy.advance(action)
@@ -64,17 +65,23 @@ class Agent extends AbstractPlayer {
     //      newTimer.setMaxTimeMillis((elapsedTimer.remainingTimeMillis - 10) / stateObs.getAvailableActions.size)
     //      (action, evaluateStates(action, stateCopy, newTimer))
     //    }
-    //    statesEvaluatedCounts :+= statesEvaluated
-    //    actions += 1
+    statesEvaluatedCounts :+= statesEvaluated
+    actions += 1
     //
-    //    if (actions % 500 == 0) {
-    //      printf("Average states evaluated by agent %f\n", statesEvaluatedCounts.sum.toDouble / statesEvaluatedCounts.size)
-    //      statesEvaluatedCounts = ListBuffer[Int]()
-    //    }
+    if (actions % 100 == 0) {
+      printf("Average states evaluated by agent %f\n", statesEvaluatedCounts.sum.toDouble / statesEvaluatedCounts.size)
+      statesEvaluatedCounts = ListBuffer[Int]()
+    }
     //    actionsScores.maxBy(actionScore => actionScore._2)._1
+
+
+    actionScores.action
+
   }
 
-  val heuristicWeight: Double = 0.5
+  val heuristicWeight: Double = 1.0
+
+  protected val Gamma: Double = 0.9
 
   /**
    * recursively evaluates the followup states, until out of time.
@@ -82,27 +89,40 @@ class Agent extends AbstractPlayer {
    * @param elapsedCpuTimer the best (score, heuristic score) that can be reached from each state.
    */
   def evaluateStates(action: ACTIONS, stateObservation: StateObservation, elapsedCpuTimer: ElapsedCpuTimer, depth: Int = 0): ActionResult = {
-    if (elapsedCpuTimer.remainingTimeMillis() <= heuristicEvalTime * 1.0 || stateObservation.isGameOver) {
+    //    if (elapsedCpuTimer.remainingTimeMillis() <= heuristicEvalTime * stateObservation.getAvailableActions.size || stateObservation.isGameOver) {
+    if (depth >= 2 || stateObservation.isGameOver) {
       statesEvaluated += 1
       val score: Double = stateObservation.getGameScore
 
       if (stateObservation.getGameWinner == WINNER.PLAYER_WINS) // todo this is generally a good idea but it masks a bug with not going over portals despite heuristic.
-        return new ActionResult(action, Double.MaxValue, Double.MaxValue, depth + 1)
+        return new ActionResult(action, Double.MaxValue, Double.MaxValue, depth)
       if (stateObservation.isGameOver)
-        return new ActionResult(action, Double.MinValue, Double.MinValue, depth + 1)
-      return new ActionResult(action, score, heuristic.evaluateState(stateObservation), depth + 1)
+        return new ActionResult(action, Double.MinValue, Double.MinValue, depth)
+      return new ActionResult(action, score, Math.pow(Gamma, depth) * heuristic.evaluateState(stateObservation), depth + 1)
     }
     val availableActions: util.ArrayList[ACTIONS] = stateObservation.getAvailableActions(true)
+    val estimatedTimePerAction: Long = elapsedCpuTimer.remainingTimeMillis / availableActions.size
+
     val possible_scores = for (action <- availableActions) yield {
-      val stateCopy: StateObservation = stateObservation.copy
+      var stateCopy: StateObservation = stateObservation.copy
       val newTimer = new ElapsedCpuTimer()
 
       stateCopy.advance(action)
-      newTimer.setMaxTimeMillis(elapsedCpuTimer.remainingTimeMillis / availableActions.size)
+      if (stateCopy.getAvatarPosition equals stateObservation.getAvatarPosition) {
+        val moveTwiceState = stateCopy.copy()
+        moveTwiceState.advance(action)
+        if (heuristic.evaluateState(moveTwiceState) > heuristic.evaluateState(stateCopy))
+          stateCopy = moveTwiceState
+      }
+      newTimer.setMaxTimeMillis(estimatedTimePerAction)
       val actionResult: ActionResult = evaluateStates(action, stateCopy, newTimer, depth + 1)
       new ActionResult(action, actionResult.gameScore, actionResult.heuristicScore, actionResult.depth)
     }
-    possible_scores.maxBy(actionResult => actionResult.heuristicScore * heuristicWeight + actionResult.gameScore * heuristicWeight)
+    val childrensMax = possible_scores.maxBy(actionResult => actionResult.heuristicScore * heuristicWeight + actionResult.gameScore * (1 - heuristicWeight))
+    val stateHeuristicVal: Double = Math.pow(Gamma, depth) * heuristic.evaluateState(stateObservation)
+    if (stateHeuristicVal >= childrensMax.heuristicScore)
+      return new ActionResult(action, stateObservation.getGameScore, stateHeuristicVal, depth)
+    childrensMax
   }
 }
 

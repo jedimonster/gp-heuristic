@@ -138,7 +138,13 @@ public class MovingAvatar extends VGDLSprite {
                 System.out.println("Overspent: " + "(exceeding "+(exceeded)+"ms): applying ACTION_NIL.");
             }
 
-            action = Types.ACTIONS.ACTION_NIL;
+//            action = Types.ACTIONS.ACTION_NIL;
+        } else {
+            try {
+                Thread.sleep(ect.remainingTimeMillis());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
 

@@ -1,0 +1,31 @@
+limiting A* to 1ms:
+
+aliens Vector(69.0, 60.0, 48.0, 37.0, 43.0)
+
+boulderdash Vector(3.0, 17.0, 3.0, -1.0, 9.0)
+
+butterflies: Vector(14.0, 30.0, 60.0, 24.0, 14.0)
+Average for butterflies: 28.4
+
+chase: Vector(1.0, 4.0, 9.0, 1.0, 3.0)
+Average for chase: 3.6
+
+frogs: Vector(-2.0, 0.0, -2.0, -2.0, 0.0)
+Average for frogs: -1.2
+disqualifies a lot
+
+missilecommand: Vector(5.0, 16.0, 8.0, 8.0, 8.0)
+Average for missilecommand: 9.0
+
+portals: Vector(0.0, 0.0, 1.0, 1.0, 0.0)
+Average for portals: 0.4
+
+sokoban: Vector(1.0, 0.0, 0.0, 0.0, 0.0)
+Average for sokoban: 0.2
+
+survivezombies: Vector(55.0, 1.0, 1.0, 2.0, 0.0)
+Average for survivezombies: 11.8
+won once but generally no idea how to win this.. first round he learns and forgets to collect gold
+
+zelda: Vector(-1.0, 6.0, 7.0, 1.0, 7.0)
+Average for zelda: 4.0
