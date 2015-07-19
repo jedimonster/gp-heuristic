@@ -36,7 +36,8 @@ class Agent extends AbstractPlayer {
 
     IndividualHolder.synchronized {
       IndividualHolder.currentState = stateObs
-//            IndividualHolder.aStarCache.clear()
+      //            IndividualHolder.aStarCache.clear()
+      IndividualHolder.aStar.aStarCache.clear()
       IndividualHolder.notifyAll() // wake up any threads waiting for a new state
     }
   }
@@ -95,7 +96,7 @@ class Agent extends AbstractPlayer {
       val score: Double = stateObservation.getGameScore
 
       if (stateObservation.getGameWinner == WINNER.PLAYER_WINS) // todo this is generally a good idea but it masks a bug with not going over portals despite heuristic.
-        return new ActionResult(action, Double.MaxValue, Double.MaxValue, depth)
+        return new ActionResult(action, Math.pow(Gamma, depth) * Double.MaxValue, Math.pow(Gamma, depth) *Double.MaxValue, depth)
       if (stateObservation.isGameOver)
         return new ActionResult(action, Double.MinValue, Double.MinValue, depth)
       return new ActionResult(action, score, Math.pow(Gamma, depth) * heuristic.evaluateState(stateObservation), depth + 1)

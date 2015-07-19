@@ -32,7 +32,6 @@ object GPRunHolder {
 class GPHeuristic() extends StateHeuristic {
   val gpRun: ThreadedGPRun = GPRunHolder.gpRun
   var individual: Option[HeuristicIndividual] = None
-  val aStar = new AStar[Position]()
 
   // if we weren't given an individual, we have to hope the GP run will set one eventually.
   def waitForFirstIndividual() = {
@@ -56,7 +55,7 @@ class GPHeuristic() extends StateHeuristic {
   override def evaluateState(stateObs: StateObservation): Double = {
 
     //    bestIndividual = gpRun.getBestIndividual
-    val wrappedObservation = new StateObservationWrapper(stateObs, aStar)
+    val wrappedObservation = new StateObservationWrapper(stateObs, IndividualHolder.aStar)
     individual match {
       case Some(heuristic) => heuristic.run(wrappedObservation)
       case None => throw new RuntimeException("no individual to use for heuristic eval")
@@ -164,7 +163,7 @@ object ThreadedGPRun {
   //      val gamesToPlay = List("aliens", "boulderdash", "butterflies", "chase", "frogs", "missilecommand", "portals", "sokoban", "survivezombies", "zelda"
   //        , "camelRace", "digdug", "firestorms", "infection", "firecaster", "overload", "pacman", "seaquest", "whackamole", "eggomania")
   //  val gamesToPlay = List("seaquest", "whackamole", "eggomania")
-  val gamesToPlay = List("zelda")
+  val gamesToPlay = List("zenpuzzle")
 
   def main(args: Array[String]): Unit = {
     // create a new threaded GP run, it will update the best individual each gen.

@@ -208,11 +208,11 @@ public class StateObservationWrapper {
         return getAStarDistances(flatObservations(portalsPositions));
     }
 
-//    public Iterable<Double> getResourcesRealDistance() {
-//        List<Observation> resourcesPositions = flatObservations(so.getResourcesPositions());
-//
-//        return getAStarDistances(resourcesPositions);
-//    }
+    public Iterable<Double> getResourcesRealDistance() {
+        List<Observation> resourcesPositions = flatObservations(so.getResourcesPositions());
+
+        return getAStarDistances(resourcesPositions);
+    }
 
     public Iterable<Double> getNPCRealDistance() {
         Vector2d avatarPosition = so.getAvatarPosition();

@@ -19,23 +19,32 @@ class AStar[N <: GraphNode[N]] {
       val path: List[N] = aStar(pathRequest)
       path.size + 1
     } catch {
-      case e: AStarTimeoutException => pathRequest.start.heuristicDistance(pathRequest.end).toInt
+      case e: AStarTimeoutException =>
+        pathRequest.start.heuristicDistance(pathRequest.end).toInt
     }
 
   }
 
-  protected val HEURISTIC_WEIGHT: Int = 2
-  protected var estimated = 0
+  protected val HEURISTIC_WEIGHT: Int = 3
+  protected var estimated : Integer= 0
   protected var accurate = 0
 
   def aStar(pathRequest: AStarPathRequest[N]): List[N] = {
+//    estimated.synchronized {
+//      if (estimated % 1000 == 0 && estimated > 5) {
+//        printf("A* accurate results: %d, estimates: %d, ratio: %f\n", accurate, estimated, accurate.asInstanceOf[Float] / (accurate + estimated))
+//        estimated = 0
+//        accurate = 0
+//      }
+//    }
+
     if (aStarCache.contains(pathRequest)) {
       //      println("Restoring path from cache") // todo we can fail between .contains and .get if this is shared...
       accurate += 1
       return aStarCache.get(pathRequest).get
     }
     val timer = new ElapsedCpuTimer()
-    timer.setMaxTimeMillis(10)
+    timer.setMaxTimeMillis(2)
     val start = pathRequest.start
     val goal = pathRequest.end
     val closedSet: mutable.HashSet[N] = new mutable.HashSet[N]
@@ -50,18 +59,18 @@ class AStar[N <: GraphNode[N]] {
     gScore.put(start, 0.0)
     fScore.put(start, gScore.get(start).get + start.heuristicDistance(goal))
     while (!openSet.isEmpty) {
-      if (timer.exceededMaxTime()) {
-        println("A* returned estimate")
-        estimated += 1
-        throw new AStarTimeoutException()
-      }
+//      if (timer.exceededMaxTime()) {
+//        //        println("A* returned estimate")
+//        estimated += 1
+//        throw new AStarTimeoutException()
+//      }
       val current: N = openSet.get(0)
       if (current equals goal) {
         accurate += 1
         return reconstructPath(cameFrom, goal)
       }
 
-      val tailToGoalRequest: AStarPathRequest[N] = new AStarPathRequest[N](current, goal)
+//      val tailToGoalRequest: AStarPathRequest[N] = new AStarPathRequest[N](current, goal)
       // this was a bad idea because we might go back in the path..
       //      aStarCache.get(tailToGoalRequest) match {
       //        case Some(tail) => // if we have the rest of the path, we found our winner.

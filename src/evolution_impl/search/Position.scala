@@ -31,7 +31,7 @@ class Position(val x: Int, val y: Int, so: StateObservation) extends GraphNode[P
         while (i < observations.size && !wall) {
           val observation: Observation = observations.get(i)
 
-          wall = immovablePositions.contains(observation) // todo for some reason resources might appear here..
+          wall = observation.itype == 0  // todo for some reason resources might appear here..
           i += 1
         }
 
