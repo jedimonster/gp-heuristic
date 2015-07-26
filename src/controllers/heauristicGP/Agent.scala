@@ -6,6 +6,7 @@ import core.game.StateObservation
 import core.player.AbstractPlayer
 import evolution_impl.GPHeuristic
 import evolution_impl.fitness.IndividualHolder
+import evolution_impl.search.{Position, GraphCachingAStar}
 import ontology.Types
 import ontology.Types.{WINNER, ACTIONS}
 import tools.ElapsedCpuTimer
@@ -36,8 +37,12 @@ class Agent extends AbstractPlayer {
 
     IndividualHolder.synchronized {
       IndividualHolder.currentState = stateObs
-      //            IndividualHolder.aStarCache.clear()
-      IndividualHolder.aStar.aStarCache.clear()
+      //      IndividualHolder.aStar.aStarCache.clear()
+      val blockSize: Int = stateObs.getBlockSize
+      val avatarPosition = stateObs.getAvatarPosition
+      val graphRoot: Position = new Position(avatarPosition.x.toInt / blockSize, avatarPosition.y.toInt / blockSize, stateObs)
+
+      IndividualHolder.aStar = new GraphCachingAStar[Position](graphRoot)
       IndividualHolder.notifyAll() // wake up any threads waiting for a new state
     }
   }
@@ -82,26 +87,26 @@ class Agent extends AbstractPlayer {
 
   val heuristicWeight: Double = 1.0
 
-  protected val Gamma: Double = 0.9
+  protected val Gamma: Double = 0.99
 
   /**
    * recursively evaluates the followup states, until out of time.
    * @param stateObservation
    * @param elapsedCpuTimer the best (score, heuristic score) that can be reached from each state.
    */
-  def evaluateStates(action: ACTIONS, stateObservation: StateObservation, elapsedCpuTimer: ElapsedCpuTimer, depth: Int = 0): ActionResult = {
+  def evaluateStates(originalAction: ACTIONS, stateObservation: StateObservation, elapsedCpuTimer: ElapsedCpuTimer, depth: Int = 0): ActionResult = {
     //    if (elapsedCpuTimer.remainingTimeMillis() <= heuristicEvalTime * stateObservation.getAvailableActions.size || stateObservation.isGameOver) {
     if (depth >= 2 || stateObservation.isGameOver) {
       statesEvaluated += 1
       val score: Double = stateObservation.getGameScore
 
-      if (stateObservation.getGameWinner == WINNER.PLAYER_WINS) // todo this is generally a good idea but it masks a bug with not going over portals despite heuristic.
-        return new ActionResult(action, Math.pow(Gamma, depth) * Double.MaxValue, Math.pow(Gamma, depth) *Double.MaxValue, depth)
+      if (stateObservation.getGameWinner == WINNER.PLAYER_WINS)
+        return new ActionResult(originalAction, Math.pow(Gamma, depth) * Double.MaxValue, Math.pow(Gamma, depth) * Double.MaxValue, depth)
       if (stateObservation.isGameOver)
-        return new ActionResult(action, Double.MinValue, Double.MinValue, depth)
-      return new ActionResult(action, score, Math.pow(Gamma, depth) * heuristic.evaluateState(stateObservation), depth + 1)
+        return new ActionResult(originalAction, Double.MinValue, Double.MinValue, depth)
+      return new ActionResult(originalAction, score, Math.pow(Gamma, depth) * heuristic.evaluateState(stateObservation), depth + 1)
     }
-    val availableActions: util.ArrayList[ACTIONS] = stateObservation.getAvailableActions(true)
+    val availableActions: util.ArrayList[ACTIONS] = stateObservation.getAvailableActions(false)
     val estimatedTimePerAction: Long = elapsedCpuTimer.remainingTimeMillis / availableActions.size
 
     val possible_scores = for (action <- availableActions) yield {
@@ -121,13 +126,16 @@ class Agent extends AbstractPlayer {
     }
     val childrensMax = possible_scores.maxBy(actionResult => actionResult.heuristicScore * heuristicWeight + actionResult.gameScore * (1 - heuristicWeight))
     val stateHeuristicVal: Double = Math.pow(Gamma, depth) * heuristic.evaluateState(stateObservation)
-    if (stateHeuristicVal >= childrensMax.heuristicScore)
-      return new ActionResult(action, stateObservation.getGameScore, stateHeuristicVal, depth)
+
+//        if (stateHeuristicVal >= childrensMax.heuristicScore)
+    if (stateHeuristicVal >= childrensMax.heuristicScore && childrensMax.heuristicScore > Double.MinValue / 10)
+      return new ActionResult(originalAction, stateObservation.getGameScore, stateHeuristicVal, depth)
+//    return new ActionResult(originalAction, childrensMax.gameScore, stateHeuristicVal + childrensMax.heuristicScore, depth)
     childrensMax
   }
 }
 
 class ActionResult(val action: ACTIONS, val gameScore: Double, val heuristicScore: Double, val depth: Int) {
 
-  override def toString = s"ActionResult(action=$action, gameScore=$gameScore, heuristicScore=$heuristicScore, depth=$depth)"
+  override def toString = s"ActionResult(originalAction=$action, gameScore=$gameScore, heuristicScore=$heuristicScore, depth=$depth)"
 }

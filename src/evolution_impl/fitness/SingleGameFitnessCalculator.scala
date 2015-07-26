@@ -8,7 +8,6 @@ import evolution_engine.fitness.{FitnessCalculator, FitnessResult}
 import evolution_impl.gpprograms.base.{HeuristicIndividual, JavaCodeIndividual}
 import evolution_impl.gpprograms.trees.HeuristicTreeIndividual
 import evolution_impl.search.{AStar, Position}
-import tests.MinDistanceToImmovableHeuristic
 import tools.ElapsedCpuTimer
 
 import scala.collection.mutable.ListBuffer
@@ -56,7 +55,7 @@ class SingleGameFitnessCalculator[I <: HeuristicIndividual]
     printf("average depth reached %f\n", averageDepth)
     printf("min depth reached %f\n", depthsReached.min)
 
-//    printf("%f", getIndividualFitness((new MinDistanceToImmovableHeuristic).asInstanceOf[I]))
+    //    printf("%f", getIndividualFitness((new MinDistanceToImmovableHeuristic).asInstanceOf[I]))
 
     depthsReached = ListBuffer[Double]()
 
@@ -115,39 +114,41 @@ class SingleGameFitnessCalculator[I <: HeuristicIndividual]
     //    playoutState.getGameScore
 
     //    state = intitialState.copy
-//    if (independent) {
-//      var state: StateObservation = null
-//      val scores = ListBuffer[Double]()
-//
-//      for (i <- 0 to 4) {
-//        state = intitialStates(0).copy()
-//        IndividualHolder.currentState = state
-//        val timer = new ElapsedCpuTimer(ElapsedCpuTimer.TimerType.CPU_TIME)
-//        timer.setMaxTimeMillis(evaluationTimeout)
-//        val playoutResult: (Double, Double, Int) = widePlayout(individual, state, timer, 3) // score, heuristic score, depth
-//        val score = playoutResult._1
-//        depthsReached.append(playoutResult._3)
-//
-//        scores.append(score)
-//      }
-//      //        printf("played out in %dms \n", timer.elapsedMillis())
-//      scores.sum / scores.size
-//    } else {
-      IndividualHolder.synchronized {
-        while (IndividualHolder.currentState == null) {
-          IndividualHolder.wait()
-        }
-        state = IndividualHolder.currentState.copy()
+    //    if (independent) {
+    //      var state: StateObservation = null
+    //      val scores = ListBuffer[Double]()
+    //
+    //      for (i <- 0 to 4) {
+    //        state = intitialStates(0).copy()
+    //        IndividualHolder.currentState = state
+    //        val timer = new ElapsedCpuTimer(ElapsedCpuTimer.TimerType.CPU_TIME)
+    //        timer.setMaxTimeMillis(evaluationTimeout)
+    //        val playoutResult: (Double, Double, Int) = widePlayout(individual, state, timer, 3) // score, heuristic score, depth
+    //        val score = playoutResult._1
+    //        depthsReached.append(playoutResult._3)
+    //
+    //        scores.append(score)
+    //      }
+    //      //        printf("played out in %dms \n", timer.elapsedMillis())
+    //      scores.sum / scores.size
+    //    } else {
+    IndividualHolder.synchronized {
+      while (IndividualHolder.currentState == null) {
+        IndividualHolder.wait()
       }
-      val timer = new ElapsedCpuTimer(ElapsedCpuTimer.TimerType.CPU_TIME)
-      timer.setMaxTimeMillis(evaluationTimeout)
-      val playoutResult: (Double, Double, Int) = widePlayout(individual, state, timer, 3) // score, heuristic score, depth
-      val score = playoutResult._1
-      depthsReached.append(playoutResult._3)
-      //        printf("played out in %dms \n", timer.elapsedMillis())
+      state = IndividualHolder.currentState.copy()
+    }
+    val timer = new ElapsedCpuTimer(ElapsedCpuTimer.TimerType.CPU_TIME)
+    timer.setMaxTimeMillis(evaluationTimeout)
+    //      val playoutResult: (Double, Double, Int) = widePlayout(individual, state, timer, 6) // score, heuristic score, depth
+    val playoutResult: (Double, Double, Int) = adjustableWidthPlayout(individual, state, 5, 10) // score, heuristic score, depth
 
-      score
-//    }
+    val score = playoutResult._1
+    depthsReached.append(playoutResult._3)
+    //        printf("played out in %dms \n", timer.elapsedMillis())
+
+    score
+    //    }
 
     //    individual.compile()
 

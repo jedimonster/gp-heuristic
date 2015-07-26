@@ -48,12 +48,10 @@ public class StateObservationWrapper {
 //        return copy.getGameScore();
 //    }
 
-    //
     public double getGameScore() {
         return so.getGameScore();
     }
 
-    //
 //    public int getGameTick() {
 //        return so.getGameTick();
 //    }
@@ -74,44 +72,44 @@ public class StateObservationWrapper {
 //        return so.getAvatarOrientation();
 //    }
 
-    public double countTouchingNPCs() {
-//        int currentX = (int) so.getAvatarPosition().x / so.getBlockSize(),
-//                currentY = (int) so.getAvatarPosition().y / so.getBlockSize();
-//        Position currentPosition = new Position(currentX, currentY);
-//        ArrayList<Observation>[][] observationGrid = so.getObservationGrid();
-        double oneBlockSqDistance = Math.pow(so.getBlockSize(), 2); // the square distance from a touching npc should be equal to this.
-        List<Observation> npcPositions = flatObservations(so.getNPCPositions(so.getAvatarPosition()));
-        double count = 0;
+//    public double countTouchingNPCs() {
+////        int currentX = (int) so.getAvatarPosition().x / so.getBlockSize(),
+////                currentY = (int) so.getAvatarPosition().y / so.getBlockSize();
+////        Position currentPosition = new Position(currentX, currentY);
+////        ArrayList<Observation>[][] observationGrid = so.getObservationGrid();
+//        double oneBlockSqDistance = Math.pow(so.getBlockSize(), 2); // the square distance from a touching npc should be equal to this.
+//        List<Observation> npcPositions = flatObservations(so.getNPCPositions(so.getAvatarPosition()));
+//        double count = 0;
+//
+//        for (Observation npcPosition : npcPositions) {
+//            if (npcPosition.sqDist <= oneBlockSqDistance)
+//                count++;
+//        }
+//
+//        return count;
+//    }
 
-        for (Observation npcPosition : npcPositions) {
-            if (npcPosition.sqDist <= oneBlockSqDistance)
-                count++;
-        }
-
-        return count;
-    }
-
-    public double getResourcesCount() {
-        HashMap<Integer, Integer> idCountMap = so.getAvatarResources();
-        double sum = 0;
-
-        for (Integer v : idCountMap.values()) {
-            sum += v;
-        }
-
-        return sum;
-    }
-
-    public double getNPCCount() {
-        double sum = 0;
-        ArrayList<Observation>[] npcPositions = so.getNPCPositions();
-        if (npcPositions != null) {
-            for (ArrayList<Observation> observations : npcPositions) {
-                sum += observations.size();
-            }
-        }
-        return sum;
-    }
+//    public double getAvatarResourcesCount() {
+//        HashMap<Integer, Integer> idCountMap = so.getAvatarResources();
+//        double sum = 0;
+//
+//        for (Integer v : idCountMap.values()) {
+//            sum += v;
+//        }
+//
+//        return sum;
+//    }
+//
+//    public double getNPCCount() {
+//        double sum = 0;
+//        ArrayList<Observation>[] npcPositions = so.getNPCPositions();
+//        if (npcPositions != null) {
+//            for (ArrayList<Observation> observations : npcPositions) {
+//                sum += observations.size();
+//            }
+//        }
+//        return sum;
+//    }
 
     // game 0 NPCs: category = 3,3 itype = 4,9
     // game 1 NPCs: category = 3,3 itype = 9,10
@@ -151,75 +149,73 @@ public class StateObservationWrapper {
 
         return filteredPositions;
     }
-
-    public Iterable<Double> getImmovableRealDistance(
-//            @AllowedValues(values = {"4"}) int category,
-//                                                     @AllowedValues(values = {"3", "4"}) int itype
-    ) {
-        ArrayList<Observation>[] immovablePositions = so.getImmovablePositions();
-        List<Observation> positions = flatObservations(immovablePositions);
-        List<Observation> filteredPositions = new ArrayList<>(positions.size());
-
-        for (Observation position : positions) {
-//            if (position.itype == itype)
-            if (position.itype != 0)
-                filteredPositions.add(position);
-        }
-
-        return getAStarDistances(filteredPositions);
-    }
-
-    public Double getImmovableCount() {
-        ArrayList<Observation>[] immovablePositions = so.getImmovablePositions();
-        List<Observation> positions = flatObservations(immovablePositions);
-        double count = 0;
-
-        for (Observation position : positions) {
-            if (position.itype != 0)
-                count++;
-        }
-
-        return count;
-    }
-
-//    public Iterable<Double> getResourcesHeuristicDistance() {
-//        Vector2d avatarPosition = so.getAvatarPosition();
 //
-//        ArrayList<Observation>[] resourcesPositions = so.getResourcesPositions(avatarPosition);
-//        return getHeuristicDistances(resourcesPositions);
-//    }
-
-
-//    public Iterable<Double> getPortalsHeuristicDistance() {
-//        Vector2d avatarPosition = so.getAvatarPosition();
+//    public Iterable<Double> getImmovableRealDistance(
+////            @AllowedValues(values = {"4"}) int category,
+////                                                     @AllowedValues(values = {"3", "4"}) int itype
+//    ) {
+//        ArrayList<Observation>[] immovablePositions = so.getImmovablePositions();
+//        List<Observation> positions = flatObservations(immovablePositions);
+//        List<Observation> filteredPositions = new ArrayList<>(positions.size());
 //
-//        ArrayList<Observation>[] portalsPositions = so.getPortalsPositions(avatarPosition);
-//        return getHeuristicDistances(portalsPositions);
+//        for (Observation position : positions) {
+////            if (position.itype == itype)
+//            if (position.itype != 0)
+//                filteredPositions.add(position);
+//        }
+//
+//        return getAStarDistances(filteredPositions, so.getAvatarPosition());
 //    }
 
-//    public Iterable<Double> getNPCHeursticDistance() {
-//        Vector2d avatarPosition = so.getAvatarPosition();
-//        ArrayList<Observation>[] npcPositions = so.getNPCPositions(avatarPosition);
-//        return getHeuristicDistances(npcPositions);
+//    public Double getImmovableCount() {
+//        ArrayList<Observation>[] immovablePositions = so.getImmovablePositions();
+//        List<Observation> positions = flatObservations(immovablePositions);
+//        double count = 0;
+//
+//        for (Observation position : positions) {
+//            if (position.itype != 0)
+//                count++;
+//        }
+//
+//        return count;
 //    }
+
 
     public Iterable<Double> getPortalRealDistance() {
         ArrayList<Observation>[] portalsPositions = so.getPortalsPositions();
-        return getAStarDistances(flatObservations(portalsPositions));
+        return getAStarDistances(flatObservations(portalsPositions), so.getAvatarPosition());
     }
 
-    public Iterable<Double> getResourcesRealDistance() {
-        List<Observation> resourcesPositions = flatObservations(so.getResourcesPositions());
-
-        return getAStarDistances(resourcesPositions);
+    public Iterable<Double> getMovableRealDistance() {
+        ArrayList<Observation>[] movablePositions = so.getMovablePositions();
+        return getAStarDistances(flatObservations(movablePositions), so.getAvatarPosition());
     }
 
-    public Iterable<Double> getNPCRealDistance() {
-        Vector2d avatarPosition = so.getAvatarPosition();
-        List<Observation> npcPositions = flatObservations(so.getNPCPositions());
+    @GPIgnore
+    public Iterable<Double> getMovableDistanceFromImmovable() {
+        List<Observation> portals = flatObservations(so.getImmovablePositions());
+        List<Observation> movables = flatObservations(so.getMovablePositions());
 
-        return getAStarDistances(npcPositions);
+        for (Observation portal : portals) {
+            if(portal.itype != 0) {
+                return getAStarDistances(movables, portal.position);
+            }
+        }
+        return new ArrayList<>();
     }
+
+//    public Iterable<Double> getResourcesRealDistance() {
+//        List<Observation> resourcesPositions = flatObservations(so.getResourcesPositions());
+//
+//        return getAStarDistances(resourcesPositions, so.getAvatarPosition());
+//    }
+//
+//    public Iterable<Double> getNPCRealDistance() {
+//        List<Observation> npcPositions = flatObservations(so.getNPCPositions());
+//
+//        return getAStarDistances(npcPositions, so.getAvatarPosition());
+//    }
+
 
     @GPIgnore
     protected List<Observation> flatObservations(List<Observation>[] observationsList) {
@@ -239,13 +235,13 @@ public class StateObservationWrapper {
 
 
     @GPIgnore
-    protected List<Double> getAStarDistances(List<Observation> observationsList) {
+    protected List<Double> getAStarDistances(List<Observation> observationsList, Vector2d reference) {
         List<Double> result = new ArrayList<>();
 
         if (observationsList != null && !observationsList.isEmpty()) {
 
             for (Observation observation : observationsList) {
-                double distance = getAStarLength(so.getAvatarPosition(), observation);
+                double distance = getAStarLength(reference, observation);
                 result.add(distance);
             }
         } else {

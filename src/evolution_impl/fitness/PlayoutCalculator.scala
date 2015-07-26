@@ -3,6 +3,7 @@ package evolution_impl.fitness
 import core.game.StateObservation
 import evolution_impl.fitness.dummyagent.StateObservationWrapper
 import evolution_impl.gpprograms.base.{HeuristicIndividual, JavaCodeIndividual}
+import evolution_impl.search.Position
 import ontology.Types
 import tools.ElapsedCpuTimer
 import scala.annotation.tailrec
@@ -64,7 +65,7 @@ trait PlayoutCalculator {
     * @param stateObservation
     * @return (Score, Heuristic Val, depth_reached) best values that can be reached from the given state.
     */
-  @tailrec final def rec_playout(individual: HeuristicIndividual, stateObservation: StateObservation, timeLeft: ElapsedCpuTimer, depthReached: Int = 0, maxDepth: Int = 30):
+  @tailrec final def rec_playout(individual: HeuristicIndividual, stateObservation: StateObservation, timeLeft: ElapsedCpuTimer, depthReached: Int = 0, maxDepth: Int = 70):
   (Double, Double, Int) = {
     //    if (timeLeft.exceededMaxTime() || stateObservation.isGameOver) {
     if (depthReached > maxDepth || stateObservation.isGameOver) {
@@ -79,7 +80,7 @@ trait PlayoutCalculator {
         return (-1 / Math.max(0.001, Math.abs(gameScore)), heuristicVal, depthReached)
     }
 
-    val scores = for (nextAction <- stateObservation.getAvailableActions.asScala) yield {
+    val scores = for (nextAction <- stateObservation.getAvailableActions(false).asScala) yield {
       var nextState = stateObservation.copy()
       nextState.advance(nextAction)
 
@@ -105,7 +106,8 @@ trait PlayoutCalculator {
     rec_playout(individual, bestScore._1, timeLeft, depthReached + 1, maxDepth)
   }
 
-  def widePlayout(individual: HeuristicIndividual, stateObservation: StateObservation, timeLeft: ElapsedCpuTimer, depth: Int): (Double, Double, Int) = {
+  def widePlayout(individual: HeuristicIndividual, stateObservation: StateObservation, timeLeft: ElapsedCpuTimer, depth: Int):
+  (Double, Double, Int) = {
     val stateToPlayout = maxStateToDepth(individual, stateObservation, depth)._1
     rec_playout(individual, stateToPlayout, timeLeft, depth)
   }
@@ -115,7 +117,7 @@ trait PlayoutCalculator {
     if (depth == 0 || stateObservation.isGameOver) {
       (stateObservation, individual.run(new StateObservationWrapper(stateObservation, IndividualHolder.aStar)))
     } else {
-      val successorsValues = for (action <- stateObservation.getAvailableActions(true).asScalaMutable)
+      val successorsValues = for (action <- stateObservation.getAvailableActions(false).asScalaMutable)
         yield {
           val stateCopy: StateObservation = stateObservation.copy()
           stateCopy.advance(action)
@@ -124,4 +126,15 @@ trait PlayoutCalculator {
       successorsValues.maxBy((sv: (StateObservation, Double)) => sv._2)
     }
   }
+
+  def adjustableWidthPlayout(individual: HeuristicIndividual, stateObservation: StateObservation, depth: Int, iterations: Int):
+  (Double, Double, Int) = {
+    var currentBestState: StateObservation = stateObservation
+    for (i <- 0 to iterations) {
+      currentBestState = maxStateToDepth(individual, currentBestState, depth)._1
+    }
+    rec_playout(individual, currentBestState, new ElapsedCpuTimer(), 0, 0)
+  }
+
+
 }

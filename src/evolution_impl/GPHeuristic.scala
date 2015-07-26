@@ -145,7 +145,7 @@ object ThreadedGPRun {
   // works with unlimited time: camelRace, firestorms, infection
   // pass but sucks with unlimited time: digdug, firecaster (but they all fail)
   // fail with unlimited time: overload
-  val gameName = "aliens"
+  val gameName = "sokoban"
 
   val gamesPath: String = "gvgai/examples/gridphysics/"
   val levelId = 0
@@ -163,7 +163,7 @@ object ThreadedGPRun {
   //      val gamesToPlay = List("aliens", "boulderdash", "butterflies", "chase", "frogs", "missilecommand", "portals", "sokoban", "survivezombies", "zelda"
   //        , "camelRace", "digdug", "firestorms", "infection", "firecaster", "overload", "pacman", "seaquest", "whackamole", "eggomania")
   //  val gamesToPlay = List("seaquest", "whackamole", "eggomania")
-  val gamesToPlay = List("zenpuzzle")
+  val gamesToPlay = List(gameName)
 
   def main(args: Array[String]): Unit = {
     // create a new threaded GP run, it will update the best individual each gen.

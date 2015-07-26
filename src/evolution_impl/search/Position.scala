@@ -14,38 +14,47 @@ import scala.collection.mutable.ListBuffer
  */
 class Position(val x: Int, val y: Int, so: StateObservation) extends GraphNode[Position] {
 
+  var neighbors: Option[List[Position]] = None
+
   override def getNeighbors: List[Position] = {
-    val immovablePositions = new StateObservationWrapper(so).getImmovablePositions(0, 0).iterator().asScala.toSet
-    val candidates: List[Position] = List(new Position(x - 1, y, so), new Position(x + 1, y, so), new Position(x, y - 1, so), new Position(x, y + 1, so))
-    val observationGrid: Array[Array[java.util.ArrayList[Observation]]] = so.getObservationGrid
-    val neighbors = ListBuffer[Position]()
-    var wall: Boolean = false
+    this.neighbors match {
+      case Some(ns) =>
+        ns
+      case None =>
+        val immovablePositions = new StateObservationWrapper(so).getImmovablePositions(0, 0).iterator().asScala.toSet
+        val candidates: List[Position] = List(new Position(x - 1, y, so), new Position(x + 1, y, so), new Position(x, y - 1, so), new Position(x, y + 1, so))
+        val observationGrid: Array[Array[java.util.ArrayList[Observation]]] = so.getObservationGrid
+        val neighbors = ListBuffer[Position]()
+        var isWall: Boolean = false
 
-    for (candidate: Position <- candidates) {
-      wall = false
-      if (!(candidate.x >= observationGrid.length || candidate.x < 0 || candidate.y >= observationGrid(0).length || candidate.y < 0)) {
-        // if the candidate is in range
+        for (candidate: Position <- candidates) {
+          isWall = false
+          if (!(candidate.x >= observationGrid.length || candidate.x < 0 || candidate.y >= observationGrid(0).length || candidate.y < 0)) {
+            // if the candidate is in range
 
-        val observations: util.ArrayList[Observation] = observationGrid(candidate.x)(candidate.y)
-        var i: Int = 0
-        while (i < observations.size && !wall) {
-          val observation: Observation = observations.get(i)
+            val observations: util.ArrayList[Observation] = observationGrid(candidate.x)(candidate.y)
+            var i: Int = 0
+            while (i < observations.size && !isWall) {
+              val observation: Observation = observations.get(i)
 
-          wall = observation.itype == 0  // todo for some reason resources might appear here..
-          i += 1
+              isWall = observation.itype == 0 // todo for some reason resources might appear here..
+              i += 1
+            }
+
+            if (!isWall)
+              neighbors.append(candidate)
+          }
         }
 
-        if (!wall)
-          neighbors.append(candidate)
-      }
+        this.neighbors = Some(neighbors.toList)
+        this.neighbors.get
     }
 
-    neighbors.toList
   }
 
   def heuristicDistance(goal: Position): Double = {
     Math.abs(x - goal.x) + Math.abs(y - goal.y)
-//    0
+    //    0
   }
 
   override def toString: String = {
