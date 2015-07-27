@@ -141,7 +141,7 @@ class SingleGameFitnessCalculator[I <: HeuristicIndividual]
     val timer = new ElapsedCpuTimer(ElapsedCpuTimer.TimerType.CPU_TIME)
     timer.setMaxTimeMillis(evaluationTimeout)
     //      val playoutResult: (Double, Double, Int) = widePlayout(individual, state, timer, 6) // score, heuristic score, depth
-    val playoutResult: (Double, Double, Int) = adjustableWidthPlayout(individual, state, 5, 10) // score, heuristic score, depth
+    val playoutResult: (Double, Double, Int) = adjustableWidthPlayout(individual, state, 4, 20) // score, heuristic score, depth
 
     val score = playoutResult._1
     depthsReached.append(playoutResult._3)

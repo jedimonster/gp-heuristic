@@ -193,7 +193,7 @@ object ThreadedGPRun {
     Thread.sleep(1000) // for the initial bug.
     //Game and level to play
     println("---\nPlaying a game with evolving heuristic")
-    val scores: IndexedSeq[Double] = for (i <- 0.to(4)) yield {
+    val scores: IndexedSeq[Double] = for (i <- 0 to 4) yield {
       val levelPath = gamesPath + gameToPlay + "_lvl" + i + ".txt"
       IndividualHolder.resetAStar()
       ArcadeMachine.runOneGame(gamePath, levelPath, true, gpHeuristic, recordActionsFile, seed)

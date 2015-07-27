@@ -11,7 +11,7 @@ class GraphCachingAStar[N <: GraphNode[N]](root: N) extends AStar[N] {
   val nodes: mutable.HashMap[N, N] = {
     val closedSet = new mutable.HashMap[N, N]()
     val openSet: ListBuffer[N] = ListBuffer[N]()
-    closedSet.put(root, root)
+//    closedSet.put(root, root)
     openSet append root
 
     while (openSet.nonEmpty) {

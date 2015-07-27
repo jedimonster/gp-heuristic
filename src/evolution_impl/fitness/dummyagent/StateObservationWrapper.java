@@ -20,12 +20,8 @@ public class StateObservationWrapper {
     protected AStar<Position> aStar;
     protected core.game.StateObservation so;
 
-    // todo add manhattan distance from stuff.
     // todo fitness<->individual mapping in logs
-    // todo add random loops to gen 0
-    // todo search the game tree using heuristics up to cutoff.
     // perhaps look at top x, or all until there's actually variance/cutoff time.
-    // todo give up and use heuristics in MCTS?
     public StateObservationWrapper(core.game.StateObservation so) {
         this(so, IndividualHolder.aStar());
     }
@@ -40,6 +36,8 @@ public class StateObservationWrapper {
 //        return so.copy();
 //    }
 //
+
+    @GPIgnore
     public double getScoreInMoves(@AllowedValues(values = {"1", "2", "4"}) int moves) {
         StateObservation copy = so.copy();
         for (int i = 0; i < moves; i++) {
@@ -74,10 +72,6 @@ public class StateObservationWrapper {
     }
 
     public double countTouchingNPCs() {
-//        int currentX = (int) so.getAvatarPosition().x / so.getBlockSize(),
-//                currentY = (int) so.getAvatarPosition().y / so.getBlockSize();
-//        Position currentPosition = new Position(currentX, currentY);
-//        ArrayList<Observation>[][] observationGrid = so.getObservationGrid();
         double oneBlockSqDistance = Math.pow(so.getBlockSize(), 2); // the square distance from a touching npc should be equal to this.
         List<Observation> npcPositions = flatObservations(so.getNPCPositions(so.getAvatarPosition()));
         double count = 0;
@@ -100,7 +94,8 @@ public class StateObservationWrapper {
 
         return sum;
     }
-//
+
+    //
     public double getNPCCount() {
         double sum = 0;
         ArrayList<Observation>[] npcPositions = so.getNPCPositions();
@@ -150,7 +145,8 @@ public class StateObservationWrapper {
 
         return filteredPositions;
     }
-//
+
+    //
     public Iterable<Double> getImmovableRealDistance(
 //            @AllowedValues(values = {"4"}) int category,
 //                                                     @AllowedValues(values = {"3", "4"}) int itype
@@ -192,17 +188,24 @@ public class StateObservationWrapper {
         return getAStarDistances(flatObservations(movablePositions), so.getAvatarPosition());
     }
 
-    @GPIgnore
-    public Iterable<Double> getMovableDistanceFromImmovable() {
-        List<Observation> portals = flatObservations(so.getImmovablePositions());
+    //    @GPIgnore
+    public Iterable<Double> getMovableDistanceFromImmovable(@AllowedValues(values = {"3", "1", "2"}) int immovableIndex) {
+        List<Observation> immovables = flatObservations(so.getImmovablePositions());
         List<Observation> movables = flatObservations(so.getMovablePositions());
         ArrayList<Double> distances = new ArrayList<>();
-        for (Observation portal : portals) {
-            if(portal.itype != 0) {
-                List<Double> aStarDistances = getAStarDistances(movables, portal.position);
-                distances.addAll(aStarDistances);
-            }
+
+//        for (Observation portal : portals) {
+        int i, encounteredPortals;
+        for (i = 0, encounteredPortals = 0; encounteredPortals < immovableIndex && i < immovables.size(); i++) {
+            if (immovables.get(i).itype != 0)
+                encounteredPortals++;
         }
+        Observation portal = immovables.get(i - 1);
+//        if (portal.itype != 0) {
+        List<Double> aStarDistances = getAStarDistances(movables, portal.position);
+        distances.addAll(aStarDistances);
+//        }
+//        }
         return distances;
     }
 
@@ -216,6 +219,29 @@ public class StateObservationWrapper {
         List<Observation> npcPositions = flatObservations(so.getNPCPositions());
 
         return getAStarDistances(npcPositions, so.getAvatarPosition());
+    }
+
+    public Double getBlockedImmovablesCount() {
+        Iterable<Double> movablesBlockedSidesCount = getMovablesBlockedSidesCount();
+        int blocked = 0;
+        for (Double blockedSizes : movablesBlockedSidesCount) {
+            if (blockedSizes > 1)
+                blocked++;
+        }
+        return Double.valueOf(blocked);
+    }
+
+    @GPIgnore
+    public Iterable<Double> getMovablesBlockedSidesCount() {
+        List<Observation> movables = flatObservations(so.getMovablePositions());
+        List<Double> counts = new ArrayList<>();
+
+        for (Observation movable : movables) {
+            Position position = new Position(movable, so);
+            counts.add((double) (4 - position.getNeighbors().size()));
+        }
+
+        return counts;
     }
 
 
@@ -250,9 +276,6 @@ public class StateObservationWrapper {
             result.add(0.1);
         }
 
-//            }
-//        }
-//
         return result;
     }
 

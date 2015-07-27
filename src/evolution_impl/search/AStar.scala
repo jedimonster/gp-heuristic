@@ -13,14 +13,14 @@ import scala.collection.mutable.ListBuffer
  */
 class AStar[N <: GraphNode[N]] {
   val aStarCache: mutable.HashMap[AStarPathRequest[N], List[N]] with mutable.SynchronizedMap[AStarPathRequest[N], List[N]] = new mutable.HashMap[AStarPathRequest[N], List[N]] with mutable.SynchronizedMap[AStarPathRequest[N], List[N]]
-  protected val HEURISTIC_WEIGHT: Int = 3
+  protected val HEURISTIC_WEIGHT: Int = 1
   protected var estimated: Integer = 0
   protected var accurate = 0
 
   def aStarLength(pathRequest: AStarPathRequest[N]): Int = {
     try {
       val path: List[N] = aStar(pathRequest)
-      path.size + 1
+      path.size
     } catch {
       case e: AStarTimeoutException =>
         pathRequest.start.heuristicDistance(pathRequest.end).toInt

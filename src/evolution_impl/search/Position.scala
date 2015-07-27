@@ -14,6 +14,10 @@ import scala.collection.mutable.ListBuffer
  */
 class Position(val x: Int, val y: Int, so: StateObservation) extends GraphNode[Position] {
 
+  def this(observation: Observation, so: StateObservation) = {
+    this((observation.position.x).asInstanceOf[Int] / so.getBlockSize, (observation.position.y).asInstanceOf[Int] / so.getBlockSize, so)
+  }
+
   var neighbors: Option[List[Position]] = None
 
   override def getNeighbors: List[Position] = {
@@ -71,4 +75,5 @@ class Position(val x: Int, val y: Int, so: StateObservation) extends GraphNode[P
   override def hashCode: Int = {
     31 * x + y
   }
+
 }
