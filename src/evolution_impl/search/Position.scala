@@ -72,6 +72,8 @@ class Position(val x: Int, val y: Int, so: StateObservation) extends GraphNode[P
     }
   }
 
+
+
   override def hashCode: Int = {
     31 * x + y
   }

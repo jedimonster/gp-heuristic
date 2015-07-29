@@ -137,11 +137,11 @@ public class MovingAvatar extends VGDLSprite {
 
 //            action = Types.ACTIONS.ACTION_NIL;
         } else {
-            try {
-                Thread.sleep(ect.remainingTimeMillis());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Thread.sleep(ect.remainingTimeMillis());
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
         }
 
 

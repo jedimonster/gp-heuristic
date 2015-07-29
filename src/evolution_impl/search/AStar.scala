@@ -13,7 +13,7 @@ import scala.collection.mutable.ListBuffer
  */
 class AStar[N <: GraphNode[N]] {
   val aStarCache: mutable.HashMap[AStarPathRequest[N], List[N]] with mutable.SynchronizedMap[AStarPathRequest[N], List[N]] = new mutable.HashMap[AStarPathRequest[N], List[N]] with mutable.SynchronizedMap[AStarPathRequest[N], List[N]]
-  protected val HEURISTIC_WEIGHT: Int = 1
+  protected val HeuristicWeight: Int = 3
   protected var estimated: Integer = 0
   protected var accurate = 0
 
@@ -89,7 +89,7 @@ class AStar[N <: GraphNode[N]] {
           if (!openSet.contains(neighbor) || tentativeGScore < gScore.get(neighbor).get) {
             cameFrom.put(neighbor, current)
             gScore.put(neighbor, tentativeGScore)
-            fScore.put(neighbor, gScore.get(neighbor).get + HEURISTIC_WEIGHT * neighbor.heuristicDistance(goal))
+            fScore.put(neighbor, gScore.get(neighbor).get + HeuristicWeight * neighbor.heuristicDistance(goal))
             if (!openSet.contains(neighbor))
               openSet.add(neighbor)
           }

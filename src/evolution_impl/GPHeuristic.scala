@@ -79,7 +79,7 @@ class ThreadedGPRun() extends Runnable {
   val popSize = 32
   val paramTypes = List(new StateObservationWrapper(null))
 
-  val methodCount = 2
+  val methodCount = 3
   val treeFitnessCalculator = new SingleGameFitnessCalculator[HeuristicTreeIndividual](ThreadedGPRun.gameName, independent = false, evaluationTimeout = 200)
   val fitnessCalculator = new SingleGameFitnessCalculator[JavaCodeIndividual](ThreadedGPRun.gameName, false, 100)
   //  val fitnessCalculator = new MultiGameFitnessCalculator(cutoff = 2000)
@@ -145,7 +145,7 @@ object ThreadedGPRun {
   // works with unlimited time: camelRace, firestorms, infection
   // pass but sucks with unlimited time: digdug, firecaster (but they all fail)
   // fail with unlimited time: overload
-  val gameName = "sokoban"
+  val gameName = "chase"
 
   val gamesPath: String = "gvgai/examples/gridphysics/"
   val levelId = 0

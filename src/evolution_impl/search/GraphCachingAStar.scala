@@ -8,10 +8,12 @@ import scala.collection.mutable.ListBuffer
  * Date: 21/07/2015
  */
 class GraphCachingAStar[N <: GraphNode[N]](root: N) extends AStar[N] {
-  val nodes: mutable.HashMap[N, N] = {
+  val nodes: mutable.HashMap[N, N] = expandNode(root)
+
+  def expandNode(root: N): mutable.HashMap[N, N] = {
     val closedSet = new mutable.HashMap[N, N]()
     val openSet: ListBuffer[N] = ListBuffer[N]()
-//    closedSet.put(root, root)
+    //    closedSet.put(root, root)
     openSet append root
 
     while (openSet.nonEmpty) {
@@ -30,6 +32,10 @@ class GraphCachingAStar[N <: GraphNode[N]](root: N) extends AStar[N] {
   }
 
   override def aStar(pathRequest: AStarPathRequest[N]): List[N] = {
+    if (!(nodes contains pathRequest.start))
+      nodes.++=(expandNode(pathRequest.start))
+    if (!(nodes contains pathRequest.end))
+      nodes.++=(expandNode(pathRequest.end))
     if (!(nodes contains pathRequest.start) || !(nodes contains pathRequest.end))
       return super.aStar(pathRequest)
     val startNode: N = nodes(pathRequest.start)

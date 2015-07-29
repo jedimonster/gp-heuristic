@@ -20,6 +20,8 @@ public class StateObservationWrapper {
     protected AStar<Position> aStar;
     protected core.game.StateObservation so;
 
+    public final int MAX_ELEMENETS;
+
     // todo fitness<->individual mapping in logs
     // perhaps look at top x, or all until there's actually variance/cutoff time.
     public StateObservationWrapper(core.game.StateObservation so) {
@@ -29,6 +31,10 @@ public class StateObservationWrapper {
     public StateObservationWrapper(StateObservation so, AStar<Position> aStar) {
         this.so = so;
         this.aStar = aStar;
+        if (so != null)
+            MAX_ELEMENETS = so.getObservationGrid().length * so.getObservationGrid()[0].length;
+        else
+            MAX_ELEMENETS = 0;
     }
 
 //    @GPIgnore
@@ -47,41 +53,48 @@ public class StateObservationWrapper {
         return copy.getGameScore();
     }
 
+
+    @GPIgnore
     public double getGameScore() {
-        return so.getGameScore();
+        return so.getGameScore() / 200;
     }
 
     public int getGameTick() {
-        return so.getGameTick();
+        return so.getGameTick() / 2000;
     }
 
+    @GPIgnore
     public int getBlockSize() {
         return so.getBlockSize();
     }
 
+    @GPIgnore
     public Vector2d getAvatarPosition() {
         return so.getAvatarPosition();
     }
 
+    @GPIgnore
     public double getAvatarSpeed() {
         return so.getAvatarSpeed();
     }
 
+    @GPIgnore
     public Vector2d getAvatarOrientation() {
         return so.getAvatarOrientation();
     }
 
-    public double countTouchingNPCs() {
-        double oneBlockSqDistance = Math.pow(so.getBlockSize(), 2); // the square distance from a touching npc should be equal to this.
+//    @GPIgnore
+    public double countNearVicinityNPCs(@AllowedValues(values = {"1", "2", "4"}) int blocks) {
+        double vicinitySquareDistance = Math.pow(blocks * so.getBlockSize(), 2); // the square distance from a touching npc should be equal to this.
         List<Observation> npcPositions = flatObservations(so.getNPCPositions(so.getAvatarPosition()));
         double count = 0;
 
         for (Observation npcPosition : npcPositions) {
-            if (npcPosition.sqDist <= oneBlockSqDistance)
+            if (npcPosition.sqDist <= vicinitySquareDistance)
                 count++;
         }
 
-        return count;
+        return count / npcPositions.size();
     }
 
     public double getAvatarResourcesCount() {
@@ -97,15 +110,13 @@ public class StateObservationWrapper {
 
     //
     public double getNPCCount() {
-        double sum = 0;
-        ArrayList<Observation>[] npcPositions = so.getNPCPositions();
-        if (npcPositions != null) {
-            for (ArrayList<Observation> observations : npcPositions) {
-                sum += observations.size();
-            }
-        }
-        return sum;
+        return (double) flatObservations(so.getNPCPositions()).size();
+
     }
+
+//    public List<Double> getNoObstucleDistance(){
+//
+//    }
 
     // game 0 NPCs: category = 3,3 itype = 4,9
     // game 1 NPCs: category = 3,3 itype = 9,10
@@ -174,7 +185,7 @@ public class StateObservationWrapper {
                 count++;
         }
 
-        return count;
+        return count / MAX_ELEMENETS;
     }
 
 
@@ -188,7 +199,7 @@ public class StateObservationWrapper {
         return getAStarDistances(flatObservations(movablePositions), so.getAvatarPosition());
     }
 
-    //    @GPIgnore
+    @GPIgnore
     public Iterable<Double> getMovableDistanceFromImmovable(@AllowedValues(values = {"3", "1", "2"}) int immovableIndex) {
         List<Observation> immovables = flatObservations(so.getImmovablePositions());
         List<Observation> movables = flatObservations(so.getMovablePositions());
@@ -221,6 +232,7 @@ public class StateObservationWrapper {
         return getAStarDistances(npcPositions, so.getAvatarPosition());
     }
 
+    @GPIgnore
     public Double getBlockedImmovablesCount() {
         Iterable<Double> movablesBlockedSidesCount = getMovablesBlockedSidesCount();
         int blocked = 0;
@@ -228,7 +240,7 @@ public class StateObservationWrapper {
             if (blockedSizes > 1)
                 blocked++;
         }
-        return Double.valueOf(blocked);
+        return (double) blocked;
     }
 
     @GPIgnore
@@ -238,7 +250,7 @@ public class StateObservationWrapper {
 
         for (Observation movable : movables) {
             Position position = new Position(movable, so);
-            counts.add((double) (4 - position.getNeighbors().size()));
+            counts.add((double) (4 - position.getNeighbors().size()) / 4);
         }
 
         return counts;
@@ -270,7 +282,7 @@ public class StateObservationWrapper {
 
             for (Observation observation : observationsList) {
                 double distance = getAStarLength(reference, observation);
-                result.add(distance);
+                result.add(distance / MAX_ELEMENETS);
             }
         } else {
             result.add(0.1);
@@ -308,6 +320,12 @@ public class StateObservationWrapper {
 
         if (goal.equals(start))
             return 0;
+
+//        for (Observation o : so.getObservationGrid()[start.x()][start.y()]) {
+//            if (o.itype != 1)      // not avatar
+//                return Integer.MAX_VALUE;
+//        }
+
 
         try {
             return aStar.aStarLength(new AStarPathRequest<Position>(start, goal));
