@@ -4,10 +4,7 @@ import core.game.Observation;
 import core.game.StateObservation;
 import evolution_impl.fitness.IndividualHolder;
 import evolution_impl.fitness.IndividualHolder$;
-import evolution_impl.search.AStar;
-import evolution_impl.search.AStarException;
-import evolution_impl.search.AStarPathRequest;
-import evolution_impl.search.Position;
+import evolution_impl.search.*;
 import ontology.Types;
 import tools.Vector2d;
 
@@ -37,11 +34,16 @@ public class StateObservationWrapper {
             MAX_ELEMENETS = 0;
     }
 
-//    @GPIgnore
-//    public core.game.StateObservation getState() {
-//        return so.copy();
-//    }
-//
+    @GPIgnore
+    public core.game.StateObservation getState() {
+        return so;
+    }
+
+    @GPIgnore
+    public AStar<Position> getAStar() {
+        return aStar;
+    }
+
 
     @GPIgnore
     public double getScoreInMoves(@AllowedValues(values = {"1", "2", "4"}) int moves) {
@@ -83,7 +85,16 @@ public class StateObservationWrapper {
         return so.getAvatarOrientation();
     }
 
-//    @GPIgnore
+    public double isDeadInaTurn() {
+        StateObservation copy = so.copy();
+        copy.advance(Types.ACTIONS.ACTION_NIL);
+        if (copy.isGameOver() && copy.getGameWinner() != Types.WINNER.PLAYER_WINS)
+            return 1;
+
+        return 0;
+    }
+
+    //    @GPIgnore
     public double countNearVicinityNPCs(@AllowedValues(values = {"1", "2", "4"}) int blocks) {
         double vicinitySquareDistance = Math.pow(blocks * so.getBlockSize(), 2); // the square distance from a touching npc should be equal to this.
         List<Observation> npcPositions = flatObservations(so.getNPCPositions(so.getAvatarPosition()));
@@ -144,7 +155,7 @@ public class StateObservationWrapper {
             @AllowedValues(values = {"4"}) int category,
             @AllowedValues(values = {"3", "4"}) int itype) {
         Vector2d avatarPosition = so.getAvatarPosition();
-        ArrayList<Observation>[] immovablePositions = so.getImmovablePositions(avatarPosition);
+        ArrayList<Observation>[] immovablePositions = so.getImmovablePositions();
         List<Observation> positions = flatObservations(immovablePositions);
         List<Observation> filteredPositions = new ArrayList<>(positions.size());
 
@@ -199,7 +210,6 @@ public class StateObservationWrapper {
         return getAStarDistances(flatObservations(movablePositions), so.getAvatarPosition());
     }
 
-    @GPIgnore
     public Iterable<Double> getMovableDistanceFromImmovable(@AllowedValues(values = {"3", "1", "2"}) int immovableIndex) {
         List<Observation> immovables = flatObservations(so.getImmovablePositions());
         List<Observation> movables = flatObservations(so.getMovablePositions());
@@ -232,7 +242,7 @@ public class StateObservationWrapper {
         return getAStarDistances(npcPositions, so.getAvatarPosition());
     }
 
-    @GPIgnore
+//    @GPIgnore
     public Double getBlockedImmovablesCount() {
         Iterable<Double> movablesBlockedSidesCount = getMovablesBlockedSidesCount();
         int blocked = 0;
@@ -243,7 +253,7 @@ public class StateObservationWrapper {
         return (double) blocked;
     }
 
-    @GPIgnore
+//    @GPIgnore
     public Iterable<Double> getMovablesBlockedSidesCount() {
         List<Observation> movables = flatObservations(so.getMovablePositions());
         List<Double> counts = new ArrayList<>();
@@ -256,6 +266,13 @@ public class StateObservationWrapper {
         return counts;
     }
 
+    public Double getTouchingWallsCount() {
+        int avatarX = (int) so.getAvatarPosition().x / so.getBlockSize();
+        int avatarY = (int) so.getAvatarPosition().y / so.getBlockSize();
+        Position avatarPosition = new Position(avatarX, avatarY, so);
+
+        return (double) avatarPosition.getNeighbors().size() / 4;
+    }
 
     @GPIgnore
     protected List<Observation> flatObservations(List<Observation>[] observationsList) {

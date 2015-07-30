@@ -13,7 +13,7 @@ import scala.collection.mutable.ListBuffer
  */
 class AStar[N <: GraphNode[N]] {
   val aStarCache: mutable.HashMap[AStarPathRequest[N], List[N]] with mutable.SynchronizedMap[AStarPathRequest[N], List[N]] = new mutable.HashMap[AStarPathRequest[N], List[N]] with mutable.SynchronizedMap[AStarPathRequest[N], List[N]]
-  protected val HeuristicWeight: Int = 3
+  protected val HeuristicWeight: Int = 1
   protected var estimated: Integer = 0
   protected var accurate = 0
 
@@ -43,8 +43,8 @@ class AStar[N <: GraphNode[N]] {
       accurate += 1
       return aStarCache.get(pathRequest).get
     }
-    val timer = new ElapsedCpuTimer()
-    timer.setMaxTimeMillis(2)
+//    val timer = new ElapsedCpuTimer()
+//    timer.setMaxTimeMillis(2)
     val start = pathRequest.start
     val goal = pathRequest.end
     val closedSet: mutable.HashSet[N] = new mutable.HashSet[N]

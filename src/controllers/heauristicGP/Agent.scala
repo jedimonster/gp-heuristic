@@ -36,7 +36,7 @@ class Agent extends AbstractPlayer with PlayoutCalculator {
 
     IndividualHolder.synchronized {
       IndividualHolder.currentState = stateObs
-      //      IndividualHolder.aStar.aStarCache.clear()
+      IndividualHolder.aStar.aStarCache.clear()
       val blockSize: Int = stateObs.getBlockSize
       val avatarPosition = stateObs.getAvatarPosition
       val graphRoot: Position = new Position(avatarPosition.x.toInt / blockSize, avatarPosition.y.toInt / blockSize, stateObs)
@@ -62,7 +62,7 @@ class Agent extends AbstractPlayer with PlayoutCalculator {
     //    newTimer.setMaxTimeMillis(remainingTime)
 
     //    val actionScores = evaluateStates(ACTIONS.ACTION_NIL, stateObs, newTimer)
-    val maxState = maxStateToDepth(heuristic.individual.get, ACTIONS.ACTION_NIL, stateObs, 2)
+    val maxState = maxStateToDepth(heuristic.individual.get, ACTIONS.ACTION_NIL, stateObs, 3)
     while (elapsedTimer.remainingTimeMillis() > 20) {}
     maxState.action
     //    val actionsScores = for (action <- stateObs.getAvailableActions) yield {

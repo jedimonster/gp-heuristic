@@ -68,9 +68,9 @@ class ThreadedGPRun() extends Runnable {
   val crossovers = new JavaCodeCrossover(0.3)
   val treeCrossovers = new InTreeCrossoverAdapter(new JavaCodeCrossover(1.0), 0.3)
   val mutators = List(new ConstantsMutator(0.15)
-    , new ForLoopsMutator(0.3)
+    , new ForLoopsMutator(0.1)
     ,
-    new RegrowMethodMutator(0.2)
+    new RegrowMethodMutator(0.1)
   )
   val treeMutators = List(new InTreeMutatorAdapter(0.3, mutators), new RegrowHeuristicMutator(0.2), new NodeThresholdMutator(0.1), new NodeThresholdPercentMutator(0.2))
   // todo add note threshold % change.
@@ -145,7 +145,7 @@ object ThreadedGPRun {
   // works with unlimited time: camelRace, firestorms, infection
   // pass but sucks with unlimited time: digdug, firecaster (but they all fail)
   // fail with unlimited time: overload
-  val gameName = "chase"
+  val gameName = "painter"
 
   val gamesPath: String = "gvgai/examples/gridphysics/"
   val levelId = 0
