@@ -145,7 +145,7 @@ object ThreadedGPRun {
   // works with unlimited time: camelRace, firestorms, infection
   // pass but sucks with unlimited time: digdug, firecaster (but they all fail)
   // fail with unlimited time: overload
-  val gameName = "painter"
+  val gameName = "sokoban"
 
   val gamesPath: String = "gvgai/examples/gridphysics/"
   val levelId = 0
