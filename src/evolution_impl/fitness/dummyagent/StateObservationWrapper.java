@@ -93,6 +93,18 @@ public class StateObservationWrapper {
         return copy.getGameScore();
     }
 
+    public double isFacingNPC() {
+        Vector2d avatarOrientation = so.getAvatarOrientation();
+        int blockSize = getBlockSize();
+        Vector2d blockFaced = so.getAvatarPosition().add(avatarOrientation.x * blockSize, avatarOrientation.y * blockSize);
+        for (Observation observation : flatObservations(so.getNPCPositions())) {
+            if (observation.position.equals(blockFaced))
+                return 1;
+        }
+
+        return 0;
+    }
+
     public double countNearVicinityNPCs(@AllowedValues(values = {"1", "2", "4"}) int blocks) {
         double vicinitySquareDistance = Math.pow(blocks * so.getBlockSize(), 2); // the square distance from a touching npc should be equal to this.
         List<Observation> npcPositions = flatObservations(so.getNPCPositions(so.getAvatarPosition()));

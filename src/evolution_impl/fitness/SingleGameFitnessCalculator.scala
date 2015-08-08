@@ -101,7 +101,7 @@ class SingleGameFitnessCalculator[I <: HeuristicIndividual]
         e.printStackTrace()
         sys.exit(-1)
       case e: Exception =>
-//        e.printStackTrace()
+        //        e.printStackTrace()
         println("Failed fitness evaluation - retrying")
         getIndividualFitness(individual)
     }
