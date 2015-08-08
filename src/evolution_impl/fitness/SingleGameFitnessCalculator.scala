@@ -88,7 +88,7 @@ class SingleGameFitnessCalculator[I <: HeuristicIndividual]
       IndividualHolder.readyIndividual = Some(individual)
       IndividualHolder.notifyAll()
     }
-    val n = 2
+    val n = 1
     try {
       // this can fail due to concurrency issues, since it means the old score is no longer relevent, and it's rare, we just try again.
       val scores = for (i <- 0 to n)

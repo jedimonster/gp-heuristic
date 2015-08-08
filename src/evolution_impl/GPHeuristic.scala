@@ -69,7 +69,7 @@ class ThreadedGPRun() extends Runnable {
 
   val crossovers = new JavaCodeCrossover(0.3)
   val mutators = List(new ConstantsMutator(0.05),
-    new ForLoopsMutator(0.15),
+    new ForLoopsMutator(0.25),
     new RegrowMethodMutator(0.15)
   )
   val treeMutators = List(new InTreeMutatorAdapter(0.3, mutators), new RegrowHeuristicMutator(0.2), new NodeThresholdMutator(0.1), new NodeThresholdPercentMutator(0.2))
