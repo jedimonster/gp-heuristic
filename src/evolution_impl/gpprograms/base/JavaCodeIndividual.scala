@@ -5,11 +5,9 @@ import java.nio.charset.StandardCharsets
 import java.nio.file.{Files, Paths}
 import javax.tools.{DiagnosticCollector, JavaCompiler, JavaFileObject, ToolProvider}
 
-import evolution_engine.evolution.Individual
 import evolution_impl.GPProgram
 import evolution_impl.fitness.dummyagent.StateObservationWrapper
 import evolution_impl.gpprograms.{ClassName, CompilationException}
-import evolution_impl.util.JavaSourceFromString
 import japa.parser.JavaParser
 import japa.parser.ast.CompilationUnit
 import org.mdkt.compiler.InMemoryJavaCompiler
@@ -67,45 +65,19 @@ class JavaCodeIndividual(
 
   @throws[CompilationException]("if the individual couldn't be compiled")
   def compile(): Unit = {
-    //    this.synchronized {
-    //        val packageName = ast.getPackage.getName
     if (compiled)
       return
     val className = ast.getTypes.get(0).getName
-    //            val fullClassName: String = packageName + "." + className
-    //    val originalClass: Class[_] = Class.forName(className)
-
-    //    val srcFile: JavaSourceFromString = new JavaSourceFromString(className, ast.toString)
-    val loadedClass = InMemoryJavaCompiler.compile(className, ast.toString())
-
-    //    val compilationUnits = java.util.Arrays.asList(srcFile)
-    //    val diagnostics = new DiagnosticCollector[JavaFileObject]()
-    //
-    //    val task = javaCompiler.getTask(null, null, diagnostics, null, null, compilationUnits)
-    //
-    //    //    printf("original class hash = %s\n", originalClass.hashCode())
-    //
-    //    val success = task.call()
-
-    //    if (!success) {
-    //      println("Failed compiling\n")
-    //      println(diagnostics.getDiagnostics.get(0).toString)
-    //      println(this.ast.toString)
-    //      //      for(d <- diagnostics.getDiagnostics) {
-    //      //        print(d.toString)
-    //      //      }
-    //      //      GPEvolutionLogger.saveBadIndividual(this)
-    //      throw new CompilationException
-    //    } else {
-    compiled = true
-    //    }
-    //      printf("Compiled class %s successfully\n", className)
-    // todo if failed log errors and catch expeption
-    //    var loadedClass: Class[_] = Class.forName(className)
-    //    loadedClass = ClassLoader.getSystemClassLoader.loadClass(loadedClass.getName)
-    val instance: GPProgram = loadedClass.newInstance().asInstanceOf[GPProgram]
-    individualObject = Some(instance)
-    //    }
+    try {
+      val loadedClass = InMemoryJavaCompiler.compile(className, ast.toString())
+      compiled = true
+      val instance: GPProgram = loadedClass.newInstance().asInstanceOf[GPProgram]
+      individualObject = Some(instance)
+    } catch {
+      case e: Exception =>
+        e.printStackTrace()
+        throw new CompilationException
+    }
   }
 
   def writeToFile(path: String) = {

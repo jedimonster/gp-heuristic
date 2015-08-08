@@ -44,18 +44,7 @@ public class StateObservationWrapper {
         return aStar;
     }
 
-
     @GPIgnore
-    public double getScoreInMoves(@AllowedValues(values = {"1", "2", "4"}) int moves) {
-        StateObservation copy = so.copy();
-        for (int i = 0; i < moves; i++) {
-            copy.advance(Types.ACTIONS.ACTION_NIL);
-        }
-
-        return copy.getGameScore();
-    }
-
-
     public double getGameScore() {
         return so.getGameScore() / 200;
     }
@@ -95,6 +84,15 @@ public class StateObservationWrapper {
     }
 
     @GPIgnore
+    public double getScoreInMoves(@AllowedValues(values = {"1", "2", "4"}) int moves) {
+        StateObservation copy = so.copy();
+        for (int i = 0; i < moves; i++) {
+            copy.advance(Types.ACTIONS.ACTION_NIL);
+        }
+
+        return copy.getGameScore();
+    }
+
     public double countNearVicinityNPCs(@AllowedValues(values = {"1", "2", "4"}) int blocks) {
         double vicinitySquareDistance = Math.pow(blocks * so.getBlockSize(), 2); // the square distance from a touching npc should be equal to this.
         List<Observation> npcPositions = flatObservations(so.getNPCPositions(so.getAvatarPosition()));
@@ -125,10 +123,6 @@ public class StateObservationWrapper {
 
     }
 
-//    public List<Double> getNoObstucleDistance(){
-//
-//    }
-
     // game 0 NPCs: category = 3,3 itype = 4,9
     // game 1 NPCs: category = 3,3 itype = 9,10
     // game 2 NPCs: category = 3 itype = 4
@@ -146,32 +140,9 @@ public class StateObservationWrapper {
     // game 0 immovables: category = 4, itype = 2
     // game 1 immovables: category = 4,4, type = 0,3
     // game 2 immovables: category = 4,4, type = 0,2
-    @GPIgnore
-    // used by Node's getNeighbors method; GP has objectively better methods to use (getRealDistance, getHeuristicDistance)
-    public Iterable<Observation> getImmovablePositions(
 
-//            @AllowedValues(values = {"0", "1", "2", "3", "4", "5"}) int category,
-//            @AllowedValues(values = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}) int itype) {
-            @AllowedValues(values = {"4"}) int category,
-            @AllowedValues(values = {"3", "4"}) int itype) {
-        Vector2d avatarPosition = so.getAvatarPosition();
-        ArrayList<Observation>[] immovablePositions = so.getImmovablePositions();
-        List<Observation> positions = flatObservations(immovablePositions);
-        List<Observation> filteredPositions = new ArrayList<>(positions.size());
 
-        for (Observation position : positions) {
-//            if (position.itype == itype)
-            if (position.itype != 0)
-                filteredPositions.add(position);
-        }
-
-        return filteredPositions;
-    }
-
-    public Iterable<Double> getImmovableRealDistance(
-//            @AllowedValues(values = {"4"}) int category,
-//                                                     @AllowedValues(values = {"3", "4"}) int itype
-    ) {
+    public Iterable<Double> getImmovableRealDistance() {
         ArrayList<Observation>[] immovablePositions = so.getImmovablePositions();
         List<Observation> positions = flatObservations(immovablePositions);
         List<Observation> filteredPositions = new ArrayList<>(positions.size());
@@ -391,4 +362,23 @@ public class StateObservationWrapper {
 
         return walls;
     }
+
+    @GPIgnore
+    // used by Node's getNeighbors method; GP has objectively better methods to use (getRealDistance, getHeuristicDistance)
+    public Iterable<Observation> getImmovablePositions(
+            @AllowedValues(values = {"4"}) int category,
+            @AllowedValues(values = {"3", "4"}) int itype) {
+        Vector2d avatarPosition = so.getAvatarPosition();
+        ArrayList<Observation>[] immovablePositions = so.getImmovablePositions();
+        List<Observation> positions = flatObservations(immovablePositions);
+        List<Observation> filteredPositions = new ArrayList<>(positions.size());
+
+        for (Observation position : positions) {
+            if (position.itype != 0)
+                filteredPositions.add(position);
+        }
+
+        return filteredPositions;
+    }
+
 }
