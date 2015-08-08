@@ -12,6 +12,7 @@ import evolution_impl.gpprograms.{ClassName, CompilationException}
 import evolution_impl.util.JavaSourceFromString
 import japa.parser.JavaParser
 import japa.parser.ast.CompilationUnit
+import org.mdkt.compiler.InMemoryJavaCompiler
 
 /**
  * Created By Itay Azaria
@@ -65,41 +66,43 @@ class JavaCodeIndividual(
   }
 
   @throws[CompilationException]("if the individual couldn't be compiled")
-  def compile() : Unit = {
+  def compile(): Unit = {
     //    this.synchronized {
     //        val packageName = ast.getPackage.getName
     if (compiled)
       return
     val className = ast.getTypes.get(0).getName
-    //        val fullClassName: String = packageName + "." + className
+    //            val fullClassName: String = packageName + "." + className
     //    val originalClass: Class[_] = Class.forName(className)
 
-    val srcFile: JavaSourceFromString = new JavaSourceFromString(className, ast.toString)
-    val compilationUnits = java.util.Arrays.asList(srcFile)
-    val diagnostics = new DiagnosticCollector[JavaFileObject]()
+    //    val srcFile: JavaSourceFromString = new JavaSourceFromString(className, ast.toString)
+    val loadedClass = InMemoryJavaCompiler.compile(className, ast.toString())
 
-    val task = javaCompiler.getTask(null, null, diagnostics, null, null, compilationUnits)
+    //    val compilationUnits = java.util.Arrays.asList(srcFile)
+    //    val diagnostics = new DiagnosticCollector[JavaFileObject]()
+    //
+    //    val task = javaCompiler.getTask(null, null, diagnostics, null, null, compilationUnits)
+    //
+    //    //    printf("original class hash = %s\n", originalClass.hashCode())
+    //
+    //    val success = task.call()
 
-    //    printf("original class hash = %s\n", originalClass.hashCode())
-
-    val success = task.call()
-
-    if (!success) {
-      println("Failed compiling\n")
-      println(diagnostics.getDiagnostics.get(0).toString)
-      println(this.ast.toString)
-      //      for(d <- diagnostics.getDiagnostics) {
-      //        print(d.toString)
-      //      }
-      //      GPEvolutionLogger.saveBadIndividual(this)
-      throw new CompilationException
-    } else {
-      compiled = true
-    }
+    //    if (!success) {
+    //      println("Failed compiling\n")
+    //      println(diagnostics.getDiagnostics.get(0).toString)
+    //      println(this.ast.toString)
+    //      //      for(d <- diagnostics.getDiagnostics) {
+    //      //        print(d.toString)
+    //      //      }
+    //      //      GPEvolutionLogger.saveBadIndividual(this)
+    //      throw new CompilationException
+    //    } else {
+    compiled = true
+    //    }
     //      printf("Compiled class %s successfully\n", className)
     // todo if failed log errors and catch expeption
-    var loadedClass: Class[_] = Class.forName(className)
-    loadedClass = ClassLoader.getSystemClassLoader.loadClass(loadedClass.getName)
+    //    var loadedClass: Class[_] = Class.forName(className)
+    //    loadedClass = ClassLoader.getSystemClassLoader.loadClass(loadedClass.getName)
     val instance: GPProgram = loadedClass.newInstance().asInstanceOf[GPProgram]
     individualObject = Some(instance)
     //    }
