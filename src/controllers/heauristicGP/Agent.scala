@@ -36,7 +36,7 @@ class Agent extends AbstractPlayer with PlayoutCalculator {
 
     IndividualHolder.synchronized {
       IndividualHolder.currentState = stateObs
-      IndividualHolder.aStar.aStarCache.clear()
+//      IndividualHolder.aStar.aStarCache.clear()
       val blockSize: Int = stateObs.getBlockSize
       val avatarPosition = stateObs.getAvatarPosition
       val graphRoot: Position = new Position(avatarPosition.x.toInt / blockSize, avatarPosition.y.toInt / blockSize, stateObs)
@@ -46,8 +46,7 @@ class Agent extends AbstractPlayer with PlayoutCalculator {
     }
   }
 
-  def act(stateObs: StateObservation, elapsedTimer: ElapsedCpuTimer): Types.ACTIONS = {
-    IndividualHolder.currentState = stateObs.copy
+  def act(stateObs: StateObservation, elapsedTimer: ElapsedCpuTimer): Types.ACTIONS = {IndividualHolder.currentState = stateObs.copy
     heuristic.useBestKnownIndividual()
     //    heuristic.individual = IndividualHolder.bestIndividual
     statesEvaluated = 0

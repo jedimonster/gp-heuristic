@@ -19,7 +19,7 @@ import scala.collection.JavaConversions._
  */
 trait PlayoutCalculator {
 
-  protected val Gamma: Double = 0.95
+  protected val Gamma: Double = 0.99
 
   /**
    * Simply picks the next move according to best heuristic value all the way down the tree or cutoff.
@@ -183,11 +183,13 @@ trait PlayoutCalculator {
     val childrensMax = possible_scores.maxBy(actionResult => actionResult.heuristicScore * heuristicWeight + actionResult.gameScore * (1 - heuristicWeight))
 
     //    val stateHeuristicVal: Double = Math.pow(Gamma, depth) * heuristic.run(new StateObservationWrapper(stateObservation))
+    //    new ActionResult(childrensMax.action, childrensMax.gameScore, childrensMax.heuristicScore + stateHeuristicVal, childrensMax.depth, childrensMax.stateObservation)
 
     //    if (stateHeuristicVal >= childrensMax.heuristicScore)
     //      if (stateHeuristicVal >= childrensMax.heuristicScore && childrensMax.heuristicScore > Double.MinValue / 10)
     //        return new ActionResult(originalAction, stateObservation.getGameScore, stateHeuristicVal, depth, stateObservation)
     //        return new ActionResult(originalAction, childrensMax.gameScore, stateHeuristicVal + childrensMax.heuristicScore, depth)
+
     childrensMax
   }
 }

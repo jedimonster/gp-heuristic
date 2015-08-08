@@ -65,12 +65,12 @@ class GPHeuristic() extends StateHeuristic {
 
 
 class ThreadedGPRun() extends Runnable {
-  val crossovers = new JavaCodeCrossover(0.3)
   val treeCrossovers = new InTreeCrossoverAdapter(new JavaCodeCrossover(1.0), 0.3)
-  val mutators = List(new ConstantsMutator(0.15)
-    , new ForLoopsMutator(0.1)
-    ,
-    new RegrowMethodMutator(0.1)
+
+  val crossovers = new JavaCodeCrossover(0.3)
+  val mutators = List(new ConstantsMutator(0.2),
+    new ForLoopsMutator(0.07),
+    new RegrowMethodMutator(0.07)
   )
   val treeMutators = List(new InTreeMutatorAdapter(0.3, mutators), new RegrowHeuristicMutator(0.2), new NodeThresholdMutator(0.1), new NodeThresholdPercentMutator(0.2))
   // todo add note threshold % change.
@@ -79,7 +79,7 @@ class ThreadedGPRun() extends Runnable {
   val popSize = 32
   val paramTypes = List(new StateObservationWrapper(null))
 
-  val methodCount = 3
+  val methodCount = 4
   val treeFitnessCalculator = new SingleGameFitnessCalculator[HeuristicTreeIndividual](ThreadedGPRun.gameName, independent = false, evaluationTimeout = 200)
   val fitnessCalculator = new SingleGameFitnessCalculator[JavaCodeIndividual](ThreadedGPRun.gameName, false, 100)
   //  val fitnessCalculator = new MultiGameFitnessCalculator(cutoff = 2000)
