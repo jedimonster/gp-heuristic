@@ -85,6 +85,7 @@ public class StateObservationWrapper {
         return so.getAvatarOrientation();
     }
 
+    @GPIgnore
     public double isDeadInaTurn() {
         StateObservation copy = so.copy();
         copy.advance(Types.ACTIONS.ACTION_NIL);
@@ -168,7 +169,7 @@ public class StateObservationWrapper {
         return filteredPositions;
     }
 
-    //
+
     public Iterable<Double> getImmovableRealDistance(
 //            @AllowedValues(values = {"4"}) int category,
 //                                                     @AllowedValues(values = {"3", "4"}) int itype
@@ -210,6 +211,7 @@ public class StateObservationWrapper {
         return getAStarDistances(flatObservations(movablePositions), so.getAvatarPosition());
     }
 
+    @GPIgnore
     public Iterable<Double> getMovableDistanceFromImmovable(@AllowedValues(values = {"3", "1", "2"}) int immovableIndex) {
         List<Observation> immovables = flatObservations(so.getImmovablePositions());
         List<Observation> movables = flatObservations(so.getMovablePositions());
@@ -229,6 +231,7 @@ public class StateObservationWrapper {
 //        }
         return distances;
     }
+
 
     public Iterable<Double> getResourcesRealDistance() {
         List<Observation> resourcesPositions = flatObservations(so.getResourcesPositions());
@@ -270,6 +273,7 @@ public class StateObservationWrapper {
         return counts;
     }
 
+    @GPIgnore
     public Double getTouchingWallsCount() {
         int avatarX = (int) so.getAvatarPosition().x / so.getBlockSize();
         int avatarY = (int) so.getAvatarPosition().y / so.getBlockSize();

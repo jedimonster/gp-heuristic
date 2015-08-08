@@ -46,8 +46,8 @@ public class Test {
         //Game and level to play
         int gameIdx = 9;
         int levelIdx = 0; //level names from 0 to 4 (game_lvlN.txt).
-        String game = gamesPath + "realportals" + ".txt";
-        String level1 = gamesPath + "realportals" + "_lvl" + levelIdx + ".txt";
+        String game = gamesPath + "brainman" + ".txt";
+        String level1 = gamesPath + "brainman" + "_lvl" + levelIdx + ".txt";
 
         // 1. This starts a game, in a level, played by a human.
         ArcadeMachine.playOneGame(game, level1, recordActionsFile, seed);
