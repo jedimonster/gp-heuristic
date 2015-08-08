@@ -88,7 +88,7 @@ class SingleGameFitnessCalculator[I <: HeuristicIndividual]
       IndividualHolder.readyIndividual = Some(individual)
       IndividualHolder.notifyAll()
     }
-    val n = 0
+    val n = 2
     try {
       // this can fail due to concurrency issues, since it means the old score is no longer relevent, and it's rare, we just try again.
       val scores = for (i <- 0 to n)
@@ -101,8 +101,8 @@ class SingleGameFitnessCalculator[I <: HeuristicIndividual]
         e.printStackTrace()
         sys.exit(-1)
       case e: Exception =>
-        e.printStackTrace()
-        println("FAILED FITNESS EVALUATION - RETRYING")
+//        e.printStackTrace()
+        println("Failed fitness evaluation - retrying")
         getIndividualFitness(individual)
     }
   }
@@ -142,7 +142,7 @@ class SingleGameFitnessCalculator[I <: HeuristicIndividual]
     //    val timer = new ElapsedCpuTimer(ElapsedCpuTimer.TimerType.CPU_TIME)
     //    timer.setMaxTimeMillis(evaluationTimeout)
     //          val playoutResult: (Double, Double, Int) = widePlayout(individual, state, timer, 10) // score, heuristic score, depth
-    val playoutResult: (Double, Double, Int) = adjustableWidthPlayout(individual, state, 2, 2, 70) // score, heuristic score, depth
+    val playoutResult: (Double, Double, Int) = adjustableWidthPlayout(individual, state, 2, 1, 70) // score, heuristic score, depth
 
     val score = playoutResult._1
     depthsReached.append(playoutResult._3)

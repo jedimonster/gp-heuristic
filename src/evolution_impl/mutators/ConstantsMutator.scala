@@ -38,8 +38,13 @@ class ConstantVisitor[A](probability: Double) extends ASTVisitor[A] {
   override def visit(n: DoubleLiteralExpr, arg: A): Unit = {
     //    val diff: Double = Math.round(Math.random()) // keep the sign, another mutator will change that
     val diff = dist.sample()
-    if (Math.random < this.probability)
-      n.setValue((n.getValue.toDouble + diff).toString)
+    if (Math.random < this.probability) {
+      val oldVal: Double = n.getValue.toDouble
+      var newVal: Double = oldVal + diff
+      if (newVal.signum != oldVal.signum)
+        newVal = -1 * newVal
+      n.setValue(newVal.toString)
+    }
     super.visit(n, arg)
   }
 }

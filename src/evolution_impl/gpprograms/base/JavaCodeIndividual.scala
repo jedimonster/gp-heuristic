@@ -19,14 +19,12 @@ import org.mdkt.compiler.InMemoryJavaCompiler
 class JavaCodeIndividual(
                           val ast: CompilationUnit, val originalFile: File, val className: ClassName
                           ) extends HeuristicIndividual {
-  val javaCompiler: JavaCompiler = ToolProvider.getSystemJavaCompiler()
   var gardener: Option[RandomGrowInitializer] = None
   var compiled = false
   var individualObject: Option[Any] = None
+  val compiler: InMemoryJavaCompiler = new InMemoryJavaCompiler()
 
   def setName(s: String) = ast.getTypes.get(0).setName(s)
-
-  def this(ast: CompilationUnit, originalFile: File) = this(ast, originalFile, new ClassName(ast.getTypes.get(0).getName, 0))
 
   //  @throws[CompilationException]("if the individual couldn't be compiled")
   //  def getValues(values: List[StateObservation]) = {
@@ -34,12 +32,12 @@ class JavaCodeIndividual(
   //    for (x <- values) yield run(x)
   //  }
 
+  def this(ast: CompilationUnit, originalFile: File) = this(ast, originalFile, new ClassName(ast.getTypes.get(0).getName, 0))
+
   override def run(input: StateObservationWrapper): Double = {
-    //    val packageName = ast.getPackage.getName
     this.synchronized {
       if (!compiled) {
         compile()
-        //      throw new RuntimeException("Individual not compiled before running")
       }
     }
     val instance = individualObject match {
@@ -49,8 +47,6 @@ class JavaCodeIndividual(
 
     val className = ast.getTypes.get(0).getName
 
-    //    val params = new java.util.ArrayList[Object]
-    //    params.add(new java.lang.Double(input))
     try {
       instance.run(input)
     } catch {
@@ -69,7 +65,7 @@ class JavaCodeIndividual(
       return
     val className = ast.getTypes.get(0).getName
     try {
-      val loadedClass = InMemoryJavaCompiler.compile(className, ast.toString())
+      val loadedClass = compiler.compile(className, ast.toString())
       compiled = true
       val instance: GPProgram = loadedClass.newInstance().asInstanceOf[GPProgram]
       individualObject = Some(instance)
