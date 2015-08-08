@@ -19,7 +19,7 @@ import scala.collection.JavaConversions._
  */
 trait PlayoutCalculator {
 
-  protected val Gamma: Double = 0.99
+  protected val Gamma: Double = 0.95
 
   /**
    * Simply picks the next move according to best heuristic value all the way down the tree or cutoff.
@@ -39,16 +39,23 @@ trait PlayoutCalculator {
       bestHeuristicScore = Double.MinValue
 
       for (action <- state.getAvailableActions) {
-        val stateCopy: StateObservation = state.copy()
+        var stateCopy: StateObservation = state.copy()
         stateCopy.advance(action)
         val score: Double = stateCopy.getGameScore
         var heuristicVal = individual.run(new StateObservationWrapper(stateCopy))
 
         if (stateCopy.getAvatarOrientation.eq(stateObservation.getAvatarOrientation)) {
-          // we only turned so it had no effect, move so it does and heuristics can update
-          // todo we might not want to move but only look at something.. but we really need to look past it, pick max, and follow through.
-          stateCopy.advance(action)
-          heuristicVal = individual.run(new StateObservationWrapper(stateCopy))
+          //           we only turned so it had no effect, move so it does and heuristics can update
+          val moveTwiceState = stateCopy.copy()
+          moveTwiceState.advance(action)
+          val moveTwiceHeuristicVal = individual.run(new StateObservationWrapper(moveTwiceState))
+          if (moveTwiceHeuristicVal > heuristicVal) {
+            heuristicVal = moveTwiceHeuristicVal
+            stateCopy = moveTwiceState
+          }
+          //          stateCopy.advance(action)
+          //          heuristicVal = individual.run(new StateObservationWrapper(stateCopy))
+
         }
 
         if (heuristicVal > bestHeuristicScore) {
@@ -60,7 +67,9 @@ trait PlayoutCalculator {
       }
 
       state = bestState
-    } while (state.getGameTick < cutoff && !state.isGameOver)
+    }
+
+    while (state.getGameTick < cutoff && !state.isGameOver)
 
     bestStateScore
   }
@@ -147,14 +156,13 @@ trait PlayoutCalculator {
   def maxStateToDepth(heuristic: HeuristicIndividual, originalAction: ACTIONS, stateObservation: StateObservation, maxDepth: Int = 2, depth: Int = 0): ActionResult = {
     //    if (elapsedCpuTimer.remainingTimeMillis() <= heuristicEvalTime * stateObservation.getAvailableActions.size || stateObservation.isGameOver) {
     if (depth >= maxDepth || stateObservation.isGameOver) {
-
       val heuristicScore = heuristic.run(new StateObservationWrapper(stateObservation))
 
       val score: Double = stateObservation.getGameScore
       if (stateObservation.getGameWinner == WINNER.PLAYER_WINS)
-      return new ActionResult(originalAction, Math.pow(Gamma, depth) * Double.MaxValue, Math.pow(Gamma, depth) * Double.MaxValue, depth, stateObservation)
+        return new ActionResult(originalAction, Math.pow(Gamma, depth) * Double.MaxValue, Math.pow(Gamma, depth) * Double.MaxValue, depth, stateObservation)
       if (stateObservation.isGameOver)
-      return new ActionResult(originalAction, Double.MinValue, Double.MinValue, depth, stateObservation)
+        return new ActionResult(originalAction, Double.MinValue, Double.MinValue, depth, stateObservation)
       return new ActionResult(originalAction, score, Math.pow(Gamma, depth) * heuristicScore, depth + 1, stateObservation)
     }
     val availableActions: util.ArrayList[ACTIONS] = stateObservation.getAvailableActions(false)
@@ -170,15 +178,16 @@ trait PlayoutCalculator {
           stateCopy = moveTwiceState
       }
       val actionResult: ActionResult = maxStateToDepth(heuristic, action, stateCopy, maxDepth, depth + 1)
-      new ActionResult(action, actionResult.gameScore, actionResult.heuristicScore, actionResult.depth,stateCopy)
+      new ActionResult(action, actionResult.gameScore, actionResult.heuristicScore, actionResult.depth, stateCopy)
     }
     val childrensMax = possible_scores.maxBy(actionResult => actionResult.heuristicScore * heuristicWeight + actionResult.gameScore * (1 - heuristicWeight))
-    val stateHeuristicVal: Double = Math.pow(Gamma, depth) * heuristic.run(new StateObservationWrapper(stateObservation))
 
-    //        if (stateHeuristicVal >= childrensMax.heuristicScore)
-//    if (stateHeuristicVal >= childrensMax.heuristicScore && childrensMax.heuristicScore > Double.MinValue / 10)
-//      return new ActionResult(originalAction, stateObservation.getGameScore, stateHeuristicVal, depth, stateObservation)
-    //    return new ActionResult(originalAction, childrensMax.gameScore, stateHeuristicVal + childrensMax.heuristicScore, depth)
+//    val stateHeuristicVal: Double = Math.pow(Gamma, depth) * heuristic.run(new StateObservationWrapper(stateObservation))
+
+//    if (stateHeuristicVal >= childrensMax.heuristicScore)
+//      if (stateHeuristicVal >= childrensMax.heuristicScore && childrensMax.heuristicScore > Double.MinValue / 10)
+//        return new ActionResult(originalAction, stateObservation.getGameScore, stateHeuristicVal, depth, stateObservation)
+    //        return new ActionResult(originalAction, childrensMax.gameScore, stateHeuristicVal + childrensMax.heuristicScore, depth)
     childrensMax
   }
 }

@@ -94,7 +94,7 @@ public class StateObservationWrapper {
         return 0;
     }
 
-    //    @GPIgnore
+    @GPIgnore
     public double countNearVicinityNPCs(@AllowedValues(values = {"1", "2", "4"}) int blocks) {
         double vicinitySquareDistance = Math.pow(blocks * so.getBlockSize(), 2); // the square distance from a touching npc should be equal to this.
         List<Observation> npcPositions = flatObservations(so.getNPCPositions(so.getAvatarPosition()));
@@ -105,7 +105,7 @@ public class StateObservationWrapper {
                 count++;
         }
 
-        return count / npcPositions.size();
+        return count;
     }
 
     public double getAvatarResourcesCount() {
@@ -196,7 +196,7 @@ public class StateObservationWrapper {
                 count++;
         }
 
-        return count / MAX_ELEMENETS;
+        return count;
     }
 
 
@@ -242,25 +242,29 @@ public class StateObservationWrapper {
         return getAStarDistances(npcPositions, so.getAvatarPosition());
     }
 
-//    @GPIgnore
+    @GPIgnore
     public Double getBlockedImmovablesCount() {
         Iterable<Double> movablesBlockedSidesCount = getMovablesBlockedSidesCount();
         int blocked = 0;
+        int all = 0;
+
         for (Double blockedSizes : movablesBlockedSidesCount) {
+            all++;
+
             if (blockedSizes > 1)
                 blocked++;
         }
         return (double) blocked;
     }
 
-//    @GPIgnore
+    @GPIgnore
     public Iterable<Double> getMovablesBlockedSidesCount() {
         List<Observation> movables = flatObservations(so.getMovablePositions());
         List<Double> counts = new ArrayList<>();
 
         for (Observation movable : movables) {
             Position position = new Position(movable, so);
-            counts.add((double) (4 - position.getNeighbors().size()) / 4);
+            counts.add((double) (4 - position.getNeighbors().size()));
         }
 
         return counts;
@@ -271,7 +275,7 @@ public class StateObservationWrapper {
         int avatarY = (int) so.getAvatarPosition().y / so.getBlockSize();
         Position avatarPosition = new Position(avatarX, avatarY, so);
 
-        return (double) avatarPosition.getNeighbors().size() / 4;
+        return (double) avatarPosition.getNeighbors().size();
     }
 
     @GPIgnore
@@ -298,8 +302,13 @@ public class StateObservationWrapper {
         if (observationsList != null && !observationsList.isEmpty()) {
 
             for (Observation observation : observationsList) {
-                double distance = getAStarLength(reference, observation);
-                result.add(distance / MAX_ELEMENETS);
+                try {
+                    double distance = getAStarLength(reference, observation);
+                    result.add(distance);
+                } catch (AStarException ignore) {
+                    // no path, just don't add it
+                }
+
             }
         } else {
             result.add(0.1);
@@ -344,11 +353,11 @@ public class StateObservationWrapper {
 //        }
 
 
-        try {
-            return aStar.aStarLength(new AStarPathRequest<Position>(start, goal));
-        } catch (AStarException e) {  // hopefully there was no path
-            return Integer.MAX_VALUE;
-        }
+//        try {
+        return aStar.aStarLength(new AStarPathRequest<Position>(start, goal));
+//        } catch (AStarException e) {  // hopefully there was no path
+//            return Integer.MAX_VALUE;
+//        }
     }
 
     @GPIgnore
