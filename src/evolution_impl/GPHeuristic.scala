@@ -76,7 +76,7 @@ class ThreadedGPRun() extends Runnable {
   // todo add note threshold % change.
 
   val generations = 2000
-  val popSize = 32
+  val popSize = 62
   val paramTypes = List(new StateObservationWrapper(null))
 
   val methodCount = 3
