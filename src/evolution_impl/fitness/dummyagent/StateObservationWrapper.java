@@ -109,6 +109,7 @@ public class StateObservationWrapper {
         return count;
     }
 
+    @GPIgnore
     public double getAvatarResourcesCount() {
         HashMap<Integer, Integer> idCountMap = so.getAvatarResources();
         double sum = 0;
@@ -120,7 +121,7 @@ public class StateObservationWrapper {
         return sum;
     }
 
-    //
+
     public double getNPCCount() {
         return (double) flatObservations(so.getNPCPositions()).size();
 
@@ -169,7 +170,7 @@ public class StateObservationWrapper {
         return filteredPositions;
     }
 
-
+    @GPIgnore
     public Iterable<Double> getImmovableRealDistance(
 //            @AllowedValues(values = {"4"}) int category,
 //                                                     @AllowedValues(values = {"3", "4"}) int itype
@@ -200,7 +201,7 @@ public class StateObservationWrapper {
         return count;
     }
 
-
+    @GPIgnore
     public Iterable<Double> getPortalRealDistance() {
         ArrayList<Observation>[] portalsPositions = so.getPortalsPositions();
         return getAStarDistances(flatObservations(portalsPositions), so.getAvatarPosition());
@@ -232,13 +233,14 @@ public class StateObservationWrapper {
         return distances;
     }
 
-
+    @GPIgnore
     public Iterable<Double> getResourcesRealDistance() {
         List<Observation> resourcesPositions = flatObservations(so.getResourcesPositions());
 
         return getAStarDistances(resourcesPositions, so.getAvatarPosition());
     }
 
+    @GPIgnore
     public Iterable<Double> getNPCRealDistance() {
         List<Observation> npcPositions = flatObservations(so.getNPCPositions());
 

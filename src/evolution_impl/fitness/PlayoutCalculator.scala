@@ -144,13 +144,13 @@ trait PlayoutCalculator {
   //    }
   //  }
 
-  def adjustableWidthPlayout(individual: HeuristicIndividual, stateObservation: StateObservation, maxDepth: Int, iterations: Int):
+  def adjustableWidthPlayout(individual: HeuristicIndividual, stateObservation: StateObservation, maxDepth: Int, iterations: Int, oneStepDepth: Int = 70):
   (Double, Double, Int) = {
     var currentBestState: StateObservation = stateObservation
-    for (i <- 0 to iterations) {
+    for (i <- 0 to iterations - 1) {
       currentBestState = maxStateToDepth(individual, ACTIONS.ACTION_NIL, currentBestState, maxDepth).stateObservation
     }
-    rec_playout(individual, currentBestState, new ElapsedCpuTimer(), 0, 70)
+    rec_playout(individual, currentBestState, new ElapsedCpuTimer(), 0, oneStepDepth)
   }
 
   def maxStateToDepth(heuristic: HeuristicIndividual, originalAction: ACTIONS, stateObservation: StateObservation, maxDepth: Int = 2, depth: Int = 0): ActionResult = {
@@ -182,11 +182,11 @@ trait PlayoutCalculator {
     }
     val childrensMax = possible_scores.maxBy(actionResult => actionResult.heuristicScore * heuristicWeight + actionResult.gameScore * (1 - heuristicWeight))
 
-//    val stateHeuristicVal: Double = Math.pow(Gamma, depth) * heuristic.run(new StateObservationWrapper(stateObservation))
+    //    val stateHeuristicVal: Double = Math.pow(Gamma, depth) * heuristic.run(new StateObservationWrapper(stateObservation))
 
-//    if (stateHeuristicVal >= childrensMax.heuristicScore)
-//      if (stateHeuristicVal >= childrensMax.heuristicScore && childrensMax.heuristicScore > Double.MinValue / 10)
-//        return new ActionResult(originalAction, stateObservation.getGameScore, stateHeuristicVal, depth, stateObservation)
+    //    if (stateHeuristicVal >= childrensMax.heuristicScore)
+    //      if (stateHeuristicVal >= childrensMax.heuristicScore && childrensMax.heuristicScore > Double.MinValue / 10)
+    //        return new ActionResult(originalAction, stateObservation.getGameScore, stateHeuristicVal, depth, stateObservation)
     //        return new ActionResult(originalAction, childrensMax.gameScore, stateHeuristicVal + childrensMax.heuristicScore, depth)
     childrensMax
   }

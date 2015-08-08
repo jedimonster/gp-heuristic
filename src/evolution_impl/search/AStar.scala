@@ -32,7 +32,7 @@ class AStar[N <: GraphNode[N]] {
   def aStar(pathRequest: AStarPathRequest[N]): List[N] = {
     //    estimated.synchronized {
     //      if (estimated % 1000 == 0 && estimated > 5) {
-    //        printf("A* accurate results: %d, estimates: %d, ratio: %f\n", accurate, estimated, accurate.asInstanceOf[Float] / (accurate + estimated))
+    //        printf("A* calculated results: %d, cached: %d, ratio: %f\n", accurate, estimated, accurate.asInstanceOf[Float] / (accurate + estimated))
     //        estimated = 0
     //        accurate = 0
     //      }
@@ -43,30 +43,37 @@ class AStar[N <: GraphNode[N]] {
       accurate += 1
       return aStarCache.get(pathRequest).get
     }
-//    val timer = new ElapsedCpuTimer()
-//    timer.setMaxTimeMillis(2)
+    //    val timer = new ElapsedCpuTimer()
+    //    timer.setMaxTimeMillis(2)
     val start = pathRequest.start
     val goal = pathRequest.end
     val closedSet: mutable.HashSet[N] = new mutable.HashSet[N]
     val fScore: mutable.HashMap[N, Double] = new mutable.HashMap[N, Double]()
-    val openSet: SortedList[N] = new SortedList[N](new Comparator[N] {
-      override def compare(o1: N, o2: N): Int = fScore.get(o1).get.compareTo(fScore.get(o2).get)
-    })
+    //    val openSet: SortedList[N] = new SortedList[N](new Comparator[N] {
+    //      override def compare(o1: N, o2: N): Int = fScore.get(o1).get.compareTo(fScore.get(o2).get)
+    //    })
+//    val nodeOrdering = Ordering[Double].on[N](n => fScore.get(n).get)
+    val nodeOrdering = Ordering[Double].on[N](n => fScore.get(n).get).reverse
+    val openQueue = new mutable.PriorityQueue[N]()(nodeOrdering)
+    val openSet = new mutable.HashSet[N]()
     val cameFrom: mutable.HashMap[N, N] = new mutable.HashMap[N, N]
     val gScore: mutable.HashMap[N, Double] = new mutable.HashMap[N, Double]
 
-    openSet.add(start)
+    openQueue.enqueue(start)
+    openSet += start
+
     gScore.put(start, 0.0)
     fScore.put(start, gScore.get(start).get + start.heuristicDistance(goal))
-    while (!openSet.isEmpty) {
+    while (openQueue.nonEmpty) {
       //      if (timer.exceededMaxTime()) {
       //        //        println("A* returned estimate")
       //        estimated += 1
       //        throw new AStarTimeoutException()
       //      }
-      val current: N = openSet.get(0)
+      val current: N = openQueue.dequeue()
+      openSet -= current
       if (current equals goal) {
-        accurate += 1
+        estimated += 1
         return reconstructPath(cameFrom, goal)
       }
 
@@ -79,7 +86,7 @@ class AStar[N <: GraphNode[N]] {
       //          return fullPath
       //
       //        case None => // otherwise continue the search
-      openSet.remove(current)
+      //      openSet.remove(current)
       closedSet.add(current)
 
       for (neighbor <- current.getNeighbors) {
@@ -90,8 +97,10 @@ class AStar[N <: GraphNode[N]] {
             cameFrom.put(neighbor, current)
             gScore.put(neighbor, tentativeGScore)
             fScore.put(neighbor, gScore.get(neighbor).get + HeuristicWeight * neighbor.heuristicDistance(goal))
-            if (!openSet.contains(neighbor))
-              openSet.add(neighbor)
+            if (!openSet.contains(neighbor)) {
+              openSet += neighbor
+              openQueue.enqueue(neighbor)
+            }
           }
         }
         //          }
