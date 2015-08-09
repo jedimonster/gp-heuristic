@@ -11,12 +11,12 @@ import evolution_engine.selection.TournamentSelection
 import evolution_engine.{CSVEvolutionLogger, EvolutionRun}
 import evolution_engine.evolution.{EvolutionParameters, ParentSelectionEvolutionStrategy}
 import evolution_impl.crossover.{InTreeCrossoverAdapter, JavaCodeCrossover}
-import evolution_impl.fitness.{IndividualHolder, MultiGameFitnessCalculator, SingleGameFitnessCalculator}
+import evolution_impl.fitness.{AlternatingPlayoutCalculator, IndividualHolder, MultiGameFitnessCalculator, SingleGameFitnessCalculator}
 import evolution_impl.fitness.dummyagent.StateObservationWrapper
-import evolution_impl.gpprograms.base.{JavaCodeIndividual, RandomGrowInitializer, HeuristicIndividual}
+import evolution_impl.gpprograms.base.{WildRandomGrowInitializer, JavaCodeIndividual, RandomGrowInitializer, HeuristicIndividual}
 import evolution_impl.gpprograms.trees.{HeuristicTreeIndividual, HeuristicTreeInitializer}
 import evolution_impl.mutators.trees.{NodeThresholdPercentMutator, NodeThresholdMutator, RegrowHeuristicMutator, InTreeMutatorAdapter}
-import evolution_impl.mutators.{RegrowMethodMutator, ForLoopsMutator, ConstantsMutator}
+import evolution_impl.mutators.{AlphasMutator, RegrowMethodMutator, ForLoopsMutator, ConstantsMutator}
 import evolution_impl.search.{Position, AStar}
 
 import scala.collection.immutable.IndexedSeq
@@ -71,17 +71,19 @@ class ThreadedGPRun() extends Runnable {
   val mutators = List(new ConstantsMutator(0.05),
     new ForLoopsMutator(0.25),
     new RegrowMethodMutator(0.15)
+//    ,    new AlphasMutator(0.2)
   )
-  val treeMutators = List(new InTreeMutatorAdapter(0.3, mutators), new RegrowHeuristicMutator(0.2), new NodeThresholdMutator(0.1), new NodeThresholdPercentMutator(0.2))
+//  val treeMutators = List(new InTreeMutatorAdapter(0.3, mutators), new RegrowHeuristicMutator(0.2), new NodeThresholdMutator(0.1), new NodeThresholdPercentMutator(0.2))
   // todo add note threshold % change.
 
   val generations = 2000
-  val popSize = 62
+  val popSize = 42
   val paramTypes = List(new StateObservationWrapper(null))
 
   val methodCount = 3
   val treeFitnessCalculator = new SingleGameFitnessCalculator[HeuristicTreeIndividual](ThreadedGPRun.gameName, independent = false, evaluationTimeout = 200)
   val fitnessCalculator = new SingleGameFitnessCalculator[JavaCodeIndividual](ThreadedGPRun.gameName, false, 100)
+//    with AlternatingPlayoutCalculator
   //  val fitnessCalculator = new MultiGameFitnessCalculator(cutoff = 2000)
   val selection = new TournamentSelection[JavaCodeIndividual](false)
   val treeSelection = new TournamentSelection[HeuristicTreeIndividual](false)
@@ -89,7 +91,8 @@ class ThreadedGPRun() extends Runnable {
   //  val params = new EvolutionParameters[HeuristicTreeIndividual](treeFitnessCalculator, treeSelection,
   //    treeCrossovers, treeMutators, new HeuristicTreeInitializer(paramTypes, methodCount, 3), generations, popSize)
   val params = new EvolutionParameters[JavaCodeIndividual](fitnessCalculator, selection,
-    crossovers, mutators, new RandomGrowInitializer(paramTypes, methodCount), generations, popSize)
+    crossovers, mutators, new WildRandomGrowInitializer(paramTypes, methodCount), generations, popSize)
+  //    crossovers, mutators, new RandomGrowInitializer(paramTypes, methodCount), generations, popSize)
 
   //  var runningEvolution: EvolutionRun[HeuristicTreeIndividual] = null
   var runningEvolution: EvolutionRun[JavaCodeIndividual] = null

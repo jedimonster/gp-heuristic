@@ -191,7 +191,6 @@ public class StateObservationWrapper {
         return getAStarDistances(flatObservations(movablePositions), so.getAvatarPosition());
     }
 
-    @GPIgnore
     public Iterable<Double> getMovableDistanceFromImmovable(@AllowedValues(values = {"3", "1", "2"}) int immovableIndex) {
         List<Observation> immovables = flatObservations(so.getImmovablePositions());
         List<Observation> movables = flatObservations(so.getMovablePositions());
@@ -224,7 +223,6 @@ public class StateObservationWrapper {
         return getAStarDistances(npcPositions, so.getAvatarPosition());
     }
 
-    @GPIgnore
     public Double getBlockedImmovablesCount() {
         Iterable<Double> movablesBlockedSidesCount = getMovablesBlockedSidesCount();
         int blocked = 0;
@@ -239,7 +237,6 @@ public class StateObservationWrapper {
         return (double) blocked;
     }
 
-    @GPIgnore
     public Iterable<Double> getMovablesBlockedSidesCount() {
         List<Observation> movables = flatObservations(so.getMovablePositions());
         List<Double> counts = new ArrayList<>();
@@ -252,7 +249,6 @@ public class StateObservationWrapper {
         return counts;
     }
 
-    @GPIgnore
     public Double getTouchingWallsCount() {
         int avatarX = (int) so.getAvatarPosition().x / so.getBlockSize();
         int avatarY = (int) so.getAvatarPosition().y / so.getBlockSize();
@@ -322,7 +318,7 @@ public class StateObservationWrapper {
     }
 
     @GPIgnore
-    protected int getAStarLength(Vector2d avatarPosition, Observation observation) {
+     protected int getAStarLength(Vector2d avatarPosition, Observation observation) {
         int blockSize = so.getBlockSize();
         Position start = new Position((int) avatarPosition.x / blockSize, (int) avatarPosition.y / blockSize, so);
         Position goal = new Position((int) observation.position.x / blockSize, (int) observation.position.y / blockSize, so);

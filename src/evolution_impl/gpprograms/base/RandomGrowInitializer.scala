@@ -65,7 +65,7 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
 
   def growIndividual(id: Int): JavaCodeIndividual = {
     // get a copy of the prototype
-    val individual: JavaCodeIndividual = prototype.duplicate match {
+    val individual = prototype.duplicate match {
       case i: JavaCodeIndividual => i
       case _ => throw new TreeGrowingException("Individual type not supported")
     }
