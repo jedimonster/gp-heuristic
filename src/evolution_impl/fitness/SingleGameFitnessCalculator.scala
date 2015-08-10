@@ -143,6 +143,7 @@ class SingleGameFitnessCalculator[I <: HeuristicIndividual]
     //    timer.setMaxTimeMillis(evaluationTimeout)
     //          val playoutResult: (Double, Double, Int) = widePlayout(individual, state, timer, 10) // score, heuristic score, depth
 //    val playoutResult: (Double, Double, Int) = adjustableWidthPlayout(individual, state, 2, 1, 70) // score, heuristic score, depth
+    individual.compile()
     val playoutResult: (Double, Double, Int) = playout(individual, state) // score, heuristic score, depth
 
     val score = playoutResult._1

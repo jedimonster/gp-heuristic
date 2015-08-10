@@ -35,11 +35,11 @@ class JavaCodeIndividual(
   def this(ast: CompilationUnit, originalFile: File) = this(ast, originalFile, new ClassName(ast.getTypes.get(0).getName, 0))
 
   override def run(input: StateObservationWrapper): Double = {
-    this.synchronized {
-      if (!compiled) {
-        compile()
-      }
-    }
+//    this.synchronized {
+//      if (!compiled) {
+//        compile()
+//      }
+//    }
     val instance = individualObject match {
       case Some(individual) => individual.asInstanceOf[GPProgram]
       case None => throw new RuntimeException("Individual compiled but not instantiated (impossible?)")
