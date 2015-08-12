@@ -63,12 +63,12 @@ class Agent extends AbstractPlayer with PlayoutCalculator {
     //    newTimer.setMaxTimeMillis(remainingTime)
 
     //    val actionScores = evaluateStates(ACTIONS.ACTION_NIL, stateObs, newTimer)
-    val maxState = maxStateToDepth(heuristic.individual.get, None, stateObs, 2)
+    val maxState = maxStateToDepth(heuristic.individual.get, ACTIONS.ACTION_NIL, stateObs, 2)
     //    while (elapsedTimer.remainingTimeMillis() > 20) {}
     while (elapsedTimer.remainingTimeMillis() > 11) {
 
     }
-    maxState.action.get
+    maxState.action
     //    val actionsScores = for (action <- stateObs.getAvailableActions) yield {
     //      val stateCopy: StateObservation = stateObs.copy
     //      stateCopy.advance(action)

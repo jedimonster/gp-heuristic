@@ -93,7 +93,7 @@ class MultiGameFitnessCalculator(cutoff: Int = Int.MaxValue) extends FitnessCalc
     toPlay.buildLevel(levelStr)
     val state = toPlay.getObservation
 
-    playout(individual, state)._1
+    playout(individual, state, cutoff)
 
   }
 }

@@ -31,23 +31,30 @@ class ConstantsMutator(probability: Double) extends Mutator[JavaCodeIndividual] 
     inds.asJava
   }
 }
-
 class ConstantVisitor[A](probability: Double) extends ASTVisitor[A] {
-  val dist = new NormalDistribution(0, 1)
-
   override def visit(n: DoubleLiteralExpr, arg: A): Unit = {
-    //    val diff: Double = Math.round(Math.random()) // keep the sign, another mutator will change that
-    val diff = dist.sample()
-    if (Math.random < this.probability) {
-      val oldVal: Double = n.getValue.toDouble
-      var newVal: Double = oldVal + diff
-      if (newVal.signum != oldVal.signum)
-        newVal = -1 * newVal
-      n.setValue(newVal.toString)
-    }
+    val diff: Double = Math.round(Math.random()) // keep the sign, another mutator will change that
+    if (Math.random < this.probability)
+      n.setValue((n.getValue.toDouble + diff).toString)
     super.visit(n, arg)
   }
 }
+//class ConstantVisitor[A](probability: Double) extends ASTVisitor[A] {
+//  val dist = new NormalDistribution(0, 1)
+//
+//  override def visit(n: DoubleLiteralExpr, arg: A): Unit = {
+//    //    val diff: Double = Math.round(Math.random()) // keep the sign, another mutator will change that
+//    val diff = dist.sample()
+//    if (Math.random < this.probability) {
+//      val oldVal: Double = n.getValue.toDouble
+//      var newVal: Double = oldVal + diff
+//      if (newVal.signum != oldVal.signum)
+//        newVal = -1 * newVal
+//      n.setValue(newVal.toString)
+//    }
+//    super.visit(n, arg)
+//  }
+//}
 
 
 class SignVisitor[T]() extends ASTVisitor[T] {

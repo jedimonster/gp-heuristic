@@ -89,12 +89,21 @@ class SingleGameFitnessCalculator[I <: HeuristicIndividual]
       IndividualHolder.notifyAll()
     }
     val n = 1
+    var state: StateObservation = null
+    IndividualHolder.synchronized {
+      while (IndividualHolder.currentState == null) {
+        IndividualHolder.wait()
+      }
+      state = IndividualHolder.currentState.copy()
+    }
     try {
       // this can fail due to concurrency issues, since it means the old score is no longer relevent, and it's rare, we just try again.
-      val scores = for (i <- 0 to n)
-        yield simulateGame(individual, cutoff = Int.MinValue)
+      val scores = for (i <- 0 to n) yield {
+        simulateGame(individual, state, cutoff = Int.MinValue)
+      }
 
-      scores.sum / (n + 1)
+      //      scores.sum / (n + 1)
+      scores.min
     } catch {
       // todo case compilation error drop it
       case e: ClassFormatError =>
@@ -108,8 +117,8 @@ class SingleGameFitnessCalculator[I <: HeuristicIndividual]
   }
 
 
-  def simulateGame(individual: I, cutoff: Int): Double = {
-    var state: StateObservation = null
+  def simulateGame(individual: I, stateObservation: StateObservation, cutoff: Int): Double = {
+    var state: StateObservation = stateObservation.copy()
     //    val playoutState = playout(individual, state, cutoff)
     //    playoutState.getGameScore
 
@@ -132,19 +141,14 @@ class SingleGameFitnessCalculator[I <: HeuristicIndividual]
     //      //        printf("played out in %dms \n", timer.elapsedMillis())
     //      scores.sum / scores.size
     //    } else {
-    IndividualHolder.synchronized {
-      while (IndividualHolder.currentState == null) {
-        IndividualHolder.wait()
-      }
-      state = IndividualHolder.currentState.copy()
-    }
+
     //    }
     //    val timer = new ElapsedCpuTimer(ElapsedCpuTimer.TimerType.CPU_TIME)
     //    timer.setMaxTimeMillis(evaluationTimeout)
     //          val playoutResult: (Double, Double, Int) = widePlayout(individual, state, timer, 10) // score, heuristic score, depth
-//    val playoutResult: (Double, Double, Int) = adjustableWidthPlayout(individual, state, 2, 1, 70) // score, heuristic score, depth
     individual.compile()
-    val playoutResult: (Double, Double, Int) = playout(individual, state) // score, heuristic score, depth
+    val playoutResult: (Double, Double, Int) = adjustableWidthPlayout(individual, state, 2, 5) // score, heuristic score, depth
+    //    val playoutResult: (Double, Double, Int) = rec_playout(individual, state,) // score, heuristic score, depth
 
     val score = playoutResult._1
     depthsReached.append(playoutResult._3)

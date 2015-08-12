@@ -2,7 +2,6 @@ package evolution_impl.gpprograms.trees
 
 import evolution_engine.evolution.PopulationInitializer
 import evolution_impl.gpprograms.base.{JavaCodeIndividual, NameCounter, RandomGrowInitializer}
-import evolution_impl.gpprograms.trees.HeuristicTreeIndividual
 
 /**
  * Created by Itay on 20/04/2015.

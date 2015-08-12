@@ -11,7 +11,7 @@ import evolution_engine.selection.TournamentSelection
 import evolution_engine.{CSVEvolutionLogger, EvolutionRun}
 import evolution_engine.evolution.{EvolutionParameters, ParentSelectionEvolutionStrategy}
 import evolution_impl.crossover.{InTreeCrossoverAdapter, JavaCodeCrossover}
-import evolution_impl.fitness.{AlternatingPlayoutCalculator, IndividualHolder, MultiGameFitnessCalculator, SingleGameFitnessCalculator}
+import evolution_impl.fitness.{IndividualHolder, MultiGameFitnessCalculator, SingleGameFitnessCalculator}
 import evolution_impl.fitness.dummyagent.StateObservationWrapper
 import evolution_impl.gpprograms.base.{WildRandomGrowInitializer, JavaCodeIndividual, RandomGrowInitializer, HeuristicIndividual}
 import evolution_impl.gpprograms.trees.{HeuristicTreeIndividual, HeuristicTreeInitializer}
@@ -67,9 +67,9 @@ class GPHeuristic() extends StateHeuristic {
 class ThreadedGPRun() extends Runnable {
   val treeCrossovers = new InTreeCrossoverAdapter(new JavaCodeCrossover(1.0), 0.3)
 
-  val crossovers = new JavaCodeCrossover(0.3)
-  val mutators = List(new ConstantsMutator(0.05),
-    new ForLoopsMutator(0.25),
+  val crossovers = new JavaCodeCrossover(0.25)
+  val mutators = List(new ConstantsMutator(0.1),
+    new ForLoopsMutator(0.15),
     new RegrowMethodMutator(0.15)
 //    ,    new AlphasMutator(0.2)
   )
@@ -193,10 +193,10 @@ object ThreadedGPRun {
     val recordActionsFile: String = null
     val seed: Int = new Random().nextInt
 
-    Thread.sleep(1000) // for the initial bug.
     //Game and level to play
     println("---\nPlaying a game with evolving heuristic")
     val scores: IndexedSeq[Double] = for (i <- 0 to 4) yield {
+//      Thread.sleep(1000)
       val levelPath = gamesPath + gameToPlay + "_lvl" + i + ".txt"
       IndividualHolder.resetAStar()
       ArcadeMachine.runOneGame(gamePath, levelPath, true, gpHeuristic, recordActionsFile, seed)

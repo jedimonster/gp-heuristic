@@ -44,11 +44,11 @@ public class StateObservationWrapper {
         return aStar;
     }
 
-    @GPIgnore
     public double getGameScore() {
-        return so.getGameScore() / 200;
+        return so.getGameScore();
     }
 
+    @GPIgnore
     public int getGameTick() {
         return so.getGameTick() / 2000;
     }
@@ -73,12 +73,11 @@ public class StateObservationWrapper {
         return so.getAvatarOrientation();
     }
 
-    @GPIgnore
     public double isDeadInaTurn() {
         StateObservation copy = so.copy();
         copy.advance(Types.ACTIONS.ACTION_NIL);
         if (copy.isGameOver() && copy.getGameWinner() != Types.WINNER.PLAYER_WINS)
-            return 1;
+            return 10;
 
         return 0;
     }
@@ -91,6 +90,14 @@ public class StateObservationWrapper {
         }
 
         return copy.getGameScore();
+    }
+
+    public double isLastActionUse() {
+        Types.ACTIONS lastAction = so.getAvatarLastAction();
+        if (lastAction.equals(Types.ACTIONS.ACTION_USE))
+            return 5;
+
+        return 0;
     }
 
     public double isFacingNPC() {
@@ -318,7 +325,7 @@ public class StateObservationWrapper {
     }
 
     @GPIgnore
-     protected int getAStarLength(Vector2d avatarPosition, Observation observation) {
+    protected int getAStarLength(Vector2d avatarPosition, Observation observation) {
         int blockSize = so.getBlockSize();
         Position start = new Position((int) avatarPosition.x / blockSize, (int) avatarPosition.y / blockSize, so);
         Position goal = new Position((int) observation.position.x / blockSize, (int) observation.position.y / blockSize, so);
