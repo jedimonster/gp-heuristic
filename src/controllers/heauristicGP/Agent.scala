@@ -5,7 +5,7 @@ import java.util
 import core.game.StateObservation
 import core.player.AbstractPlayer
 import evolution_impl.GPHeuristic
-import evolution_impl.fitness.{PlayoutCalculator, IndividualHolder}
+import evolution_impl.fitness.{ActionResult, PlayoutCalculator, IndividualHolder}
 import evolution_impl.search.{Position, GraphCachingAStar}
 import ontology.Types
 import ontology.Types.{WINNER, ACTIONS}
@@ -33,6 +33,8 @@ class Agent extends AbstractPlayer with PlayoutCalculator {
     heuristic = new GPHeuristic()
     heuristic.waitForFirstIndividual()
 
+    if (heuristic.gpRun.fitnessCalculator.gen != 0)
+      heuristic.gpRun.fitnessCalculator.skipCurrentGen()
 
     IndividualHolder.synchronized {
       IndividualHolder.currentState = stateObs
@@ -44,50 +46,23 @@ class Agent extends AbstractPlayer with PlayoutCalculator {
       IndividualHolder.aStar = new GraphCachingAStar[Position](graphRoot)
       IndividualHolder.notifyAll() // wake up any threads waiting for a new state
     }
-    while (elapsedTimer.remainingTimeMillis() > 50) {}
+    //    while (elapsedTimer.remainingTimeMillis() > 50) {}
   }
+
+  val statesSelected = ListBuffer[ActionResult]()
 
   def act(stateObs: StateObservation, elapsedTimer: ElapsedCpuTimer): Types.ACTIONS = {
     IndividualHolder.currentState = stateObs.copy
     heuristic.useBestKnownIndividual()
-    //    heuristic.individual = IndividualHolder.bestIndividual
     statesEvaluated = 0
 
-    // estimate amount of time available for each heuristic eval by evaluating the current state.
-    //    heuristic.evaluateState(stateObs)
-    //    val timer = new ElapsedCpuTimer()
-    //    heuristic.evaluateState(stateObs) // we do this twice because the 2nd time closer to the average
-    //    heuristicEvalTime = timer.elapsedMillis()
-    //    val newTimer = new ElapsedCpuTimer()
-    //    val remainingTime: Long = (elapsedTimer.remainingTimeMillis() * 0.8).asInstanceOf[Long]
-    //    newTimer.setMaxTimeMillis(remainingTime)
-
-    //    val actionScores = evaluateStates(ACTIONS.ACTION_NIL, stateObs, newTimer)
-    val maxState = maxStateToDepth(heuristic.individual.get, ACTIONS.ACTION_NIL, stateObs, 2)
-    //    while (elapsedTimer.remainingTimeMillis() > 20) {}
+    val maxStates = for (i <- 0 to 1) yield maxStateToDepth(heuristic.individual.get, ACTIONS.ACTION_NIL, stateObs, 2)
+    val maxState = maxStates.maxBy(s => s.heuristicScore)
+    //    val maxState = maxStateToDepth(heuristic.individual.get, ACTIONS.ACTION_NIL, stateObs, 2)
+    //    statesSelected += maxState
     while (elapsedTimer.remainingTimeMillis() > 11) {
-
     }
     maxState.action
-    //    val actionsScores = for (action <- stateObs.getAvailableActions) yield {
-    //      val stateCopy: StateObservation = stateObs.copy
-    //      stateCopy.advance(action)
-    //      val newTimer = new ElapsedCpuTimer()
-    //      newTimer.setMaxTimeMillis((elapsedTimer.remainingTimeMillis - 10) / stateObs.getAvailableActions.size)
-    //      (action, evaluateStates(action, stateCopy, newTimer))
-    //    }
-    //    statesEvaluatedCounts :+= statesEvaluated
-    //    actions += 1
-    //
-    //    if (actions % 100 == 0) {
-    //      printf("Average states evaluated by agent %f\n", statesEvaluatedCounts.sum.toDouble / statesEvaluatedCounts.size)
-    //      statesEvaluatedCounts = ListBuffer[Int]()
-    //    }
-    //    actionsScores.maxBy(actionScore => actionScore._2)._1
-
-
-    //    actionScores.action
-
   }
 }
 

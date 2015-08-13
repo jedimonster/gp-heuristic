@@ -73,6 +73,7 @@ public class StateObservationWrapper {
         return so.getAvatarOrientation();
     }
 
+    @GPIgnore
     public double isDeadInaTurn() {
         StateObservation copy = so.copy();
         copy.advance(Types.ACTIONS.ACTION_NIL);
@@ -161,6 +162,19 @@ public class StateObservationWrapper {
     // game 2 immovables: category = 4,4, type = 0,2
 
 
+    public Double getImmovableCount() {
+        ArrayList<Observation>[] immovablePositions = so.getImmovablePositions();
+        List<Observation> positions = flatObservations(immovablePositions);
+        double count = 0;
+
+        for (Observation position : positions) {
+            if (position.itype != 0)
+                count++;
+        }
+
+        return count;
+    }
+
     public Iterable<Double> getImmovableRealDistance() {
         ArrayList<Observation>[] immovablePositions = so.getImmovablePositions();
         List<Observation> positions = flatObservations(immovablePositions);
@@ -175,18 +189,6 @@ public class StateObservationWrapper {
         return getAStarDistances(filteredPositions, so.getAvatarPosition());
     }
 
-    public Double getImmovableCount() {
-        ArrayList<Observation>[] immovablePositions = so.getImmovablePositions();
-        List<Observation> positions = flatObservations(immovablePositions);
-        double count = 0;
-
-        for (Observation position : positions) {
-            if (position.itype != 0)
-                count++;
-        }
-
-        return count;
-    }
 
     public Iterable<Double> getPortalRealDistance() {
         ArrayList<Observation>[] portalsPositions = so.getPortalsPositions();
@@ -196,6 +198,18 @@ public class StateObservationWrapper {
     public Iterable<Double> getMovableRealDistance() {
         ArrayList<Observation>[] movablePositions = so.getMovablePositions();
         return getAStarDistances(flatObservations(movablePositions), so.getAvatarPosition());
+    }
+
+    public Iterable<Double> getResourcesRealDistance() {
+        List<Observation> resourcesPositions = flatObservations(so.getResourcesPositions());
+
+        return getAStarDistances(resourcesPositions, so.getAvatarPosition());
+    }
+
+    public Iterable<Double> getNPCRealDistance() {
+        List<Observation> npcPositions = flatObservations(so.getNPCPositions());
+
+        return getAStarDistances(npcPositions, so.getAvatarPosition());
     }
 
     public Iterable<Double> getMovableDistanceFromImmovable(@AllowedValues(values = {"3", "1", "2"}) int immovableIndex) {
@@ -218,18 +232,7 @@ public class StateObservationWrapper {
         return distances;
     }
 
-    public Iterable<Double> getResourcesRealDistance() {
-        List<Observation> resourcesPositions = flatObservations(so.getResourcesPositions());
-
-        return getAStarDistances(resourcesPositions, so.getAvatarPosition());
-    }
-
-    public Iterable<Double> getNPCRealDistance() {
-        List<Observation> npcPositions = flatObservations(so.getNPCPositions());
-
-        return getAStarDistances(npcPositions, so.getAvatarPosition());
-    }
-
+    @GPIgnore // todo limit to n (like A*)
     public Double getBlockedImmovablesCount() {
         Iterable<Double> movablesBlockedSidesCount = getMovablesBlockedSidesCount();
         int blocked = 0;
@@ -244,6 +247,7 @@ public class StateObservationWrapper {
         return (double) blocked;
     }
 
+    @GPIgnore
     public Iterable<Double> getMovablesBlockedSidesCount() {
         List<Observation> movables = flatObservations(so.getMovablePositions());
         List<Double> counts = new ArrayList<>();
@@ -286,7 +290,7 @@ public class StateObservationWrapper {
         List<Double> result = new ArrayList<>();
 
         if (observationsList != null && !observationsList.isEmpty()) {
-
+            observationsList = trimToNearestObservations(observationsList, reference, 10);
             for (Observation observation : observationsList) {
                 try {
                     double distance = getAStarLength(reference, observation);
@@ -301,6 +305,18 @@ public class StateObservationWrapper {
         }
 
         return result;
+    }
+
+    protected List<Observation> trimToNearestObservations(List<Observation> observationsList, Vector2d reference, int n) {
+        Collections.sort(observationsList, new Comparator<Observation>() {
+            @Override
+            public int compare(Observation o1, Observation o2) {
+                double o1Distance = Math.abs(o1.position.x - reference.x) + Math.abs(o1.position.y - reference.y);
+                double o2Distance = Math.abs(o2.position.x - reference.x) + Math.abs(o2.position.y - reference.y);
+                return (int) (o1Distance - o2Distance);
+            }
+        });
+        return observationsList.subList(0, Math.min(n, observationsList.size()));
     }
 
     @GPIgnore

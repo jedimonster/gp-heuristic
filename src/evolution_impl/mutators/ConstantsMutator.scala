@@ -5,7 +5,7 @@ import java.util
 import evolution_engine.mutators.Mutator
 import evolution_impl.gpprograms.base.JavaCodeIndividual
 import japa.parser.ast.expr.{BinaryExpr, DoubleLiteralExpr}
-import org.apache.commons.math3.distribution.NormalDistribution
+import org.apache.commons.math3.distribution.{LogNormalDistribution, NormalDistribution}
 
 import scala.collection.JavaConversions._
 import scala.collection.JavaConverters._
@@ -31,14 +31,23 @@ class ConstantsMutator(probability: Double) extends Mutator[JavaCodeIndividual] 
     inds.asJava
   }
 }
+
 class ConstantVisitor[A](probability: Double) extends ASTVisitor[A] {
+  //  val dist = new LogNormalDistribution(0,2)
+  val dist = new NormalDistribution(0, 1)
+
   override def visit(n: DoubleLiteralExpr, arg: A): Unit = {
-    val diff: Double = Math.round(Math.random()) // keep the sign, another mutator will change that
+    //    val diff: Double = Math.round(Math.random()) // keep the sign, another mutator will change that
+    var diff: Double = dist.sample // keep the sign, another mutator will change that
+    if (n.getValue.toDouble.signum != (n.getValue.toDouble + diff).signum)
+      diff = -1 * diff
+
     if (Math.random < this.probability)
       n.setValue((n.getValue.toDouble + diff).toString)
     super.visit(n, arg)
   }
 }
+
 //class ConstantVisitor[A](probability: Double) extends ASTVisitor[A] {
 //  val dist = new NormalDistribution(0, 1)
 //

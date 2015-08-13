@@ -32,57 +32,20 @@ class SingleGameFitnessCalculator[I <: HeuristicIndividual]
   val vGDLFactory = VGDLFactory.GetInstance().init()
   val vGDLRegistry = VGDLRegistry.GetInstance().init()
 
-  val intitialStates = {
-    this.synchronized {
-      val game: Game = new VGDLParser().parseGame(gamePath)
-      for (i <- 0 to 4) yield {
-        game.buildLevel(levelPath + i.toString + ".txt")
-        game.getObservation.copy()
-      }
+//  val intitialStates = {
+//    this.synchronized {
+//      val game: Game = new VGDLParser().parseGame(gamePath)
+//      for (i <- 0 to 4) yield {
+//        game.buildLevel(levelPath + i.toString + ".txt")
+//        game.getObservation.copy()
+//      }
+//
+//
+//    }
+//  }
 
-
-    }
-  }
-
-  var gen = 0
-
-  override def processResult(result: FitnessResult[I]): Unit = {
-    val fitnessValues = result.getMap
-    val best = fitnessValues.maxBy(x => x._2)
-    val averageDepth: Double = depthsReached.sum / depthsReached.size
-
-    printf("Gen %d\nBest fitness - %s - %s\n", gen, best._2, best._1.getName)
-    printf("average depth reached %f\n", averageDepth)
-    printf("min depth reached %f\n", depthsReached.min)
-
-    //    printf("%f", getIndividualFitness((new MinDistanceToImmovableHeuristic).asInstanceOf[I]))
-
-    depthsReached = ListBuffer[Double]()
-
-    // update the best individual for the evolving heuristic agent.
-
-    IndividualHolder.synchronized {
-      IndividualHolder.bestIndividual = Some(best._1)
-      IndividualHolder.notifyAll()
-    }
-    //    val realScore = playGame(best._1)
-    //      println("real score with it " + realScore)
-    //      println("playout score with it " + getIndividualFitness(best._1))
-    //      if (best._2 > 76) {
-    //      val in = readLine("Show best individuals game(Y/N)?")
-    gen += 1
-
-    //      if (gen % 5 == 0)
-    //        playGame(best._1, visuals = true)
-
-    //        }
-  }
 
   def getIndividualFitness(individual: I): Double = {
-    IndividualHolder.synchronized {
-      IndividualHolder.currentIndividual = Some(individual)
-      IndividualHolder.notifyAll()
-    }
     individual.compile()
     IndividualHolder.synchronized {
       IndividualHolder.readyIndividual = Some(individual)
@@ -102,64 +65,36 @@ class SingleGameFitnessCalculator[I <: HeuristicIndividual]
         simulateGame(individual, state, cutoff = Int.MinValue)
       }
 
-      //      scores.sum / (n + 1)
-      scores.min
+      scores.sum / (n + 1)
+      //      scores.min
     } catch {
       // todo case compilation error drop it
       case e: ClassFormatError =>
         e.printStackTrace()
         sys.exit(-1)
       case e: Exception =>
-        //        e.printStackTrace()
+        if (skipGen) {
+          // the result is going to be ignored anyway.
+          return 0.0
+        }
         println("Failed fitness evaluation - retrying")
         getIndividualFitness(individual)
     }
   }
 
-
   def simulateGame(individual: I, stateObservation: StateObservation, cutoff: Int): Double = {
     var state: StateObservation = stateObservation.copy()
-    //    val playoutState = playout(individual, state, cutoff)
-    //    playoutState.getGameScore
 
-    //    state = intitialState.copy
-    //    if (independent) {
-    //      var state: StateObservation = null
-    //      val scores = ListBuffer[Double]()
-    //
-    //      for (i <- 0 to 4) {
-    //        state = intitialStates(0).copy()
-    //        IndividualHolder.currentState = state
-    //        val timer = new ElapsedCpuTimer(ElapsedCpuTimer.TimerType.CPU_TIME)
-    //        timer.setMaxTimeMillis(evaluationTimeout)
-    //        val playoutResult: (Double, Double, Int) = widePlayout(individual, state, timer, 3) // score, heuristic score, depth
-    //        val score = playoutResult._1
-    //        depthsReached.append(playoutResult._3)
-    //
-    //        scores.append(score)
-    //      }
-    //      //        printf("played out in %dms \n", timer.elapsedMillis())
-    //      scores.sum / scores.size
-    //    } else {
 
-    //    }
-    //    val timer = new ElapsedCpuTimer(ElapsedCpuTimer.TimerType.CPU_TIME)
-    //    timer.setMaxTimeMillis(evaluationTimeout)
-    //          val playoutResult: (Double, Double, Int) = widePlayout(individual, state, timer, 10) // score, heuristic score, depth
-    individual.compile()
     val playoutResult: (Double, Double, Int) = adjustableWidthPlayout(individual, state, 2, 5) // score, heuristic score, depth
-    //    val playoutResult: (Double, Double, Int) = rec_playout(individual, state,) // score, heuristic score, depth
-
     val score = playoutResult._1
+
     depthsReached.append(playoutResult._3)
-    //        printf("played out in %dms \n", timer.elapsedMillis())
 
     score
-    //    }
-
-    //    individual.compile()
 
   }
+
 
   def playGame(individual: I, visuals: Boolean = false) = {
     val gpHeuristic: String = "evolution_impl.fitness.dummyagent.Agent"
@@ -181,6 +116,31 @@ class SingleGameFitnessCalculator[I <: HeuristicIndividual]
     //
     //    (score + score2) / 2
     scores.sum / scores.size
+  }
+
+  override def processResult(result: FitnessResult[I]): Unit = {
+    val fitnessValues = result.getMap
+    val best = fitnessValues.maxBy(x => x._2)
+    val averageDepth: Double = depthsReached.sum / depthsReached.size
+
+    printf("Gen %d\nBest fitness - %s - %s\n", gen, best._2, best._1.getName)
+    printf("average depth reached %f\n", averageDepth)
+    printf("min depth reached %f\n", depthsReached.min)
+
+    //    printf("%f", getIndividualFitness((new MinDistanceToImmovableHeuristic).asInstanceOf[I]))
+
+    depthsReached = ListBuffer[Double]()
+
+    // update the best individual for the evolving heuristic agent.
+
+    IndividualHolder.synchronized {
+      IndividualHolder.bestIndividual = Some(best._1)
+      IndividualHolder.notifyAll()
+    }
+
+    gen += 1
+
+
   }
 }
 

@@ -27,7 +27,7 @@ public class AgentExecutor {
 
         int seed = new Random().nextInt();
 
-        double gameScore = ArcadeMachine.runOneGame(map, level, false, playerClassString, action_file, seed);
-        //System.out.println(gameScore);
+        double gameScore = ArcadeMachine.runOneGame(map, level, true, playerClassString, action_file, seed);
+        System.out.println(gameScore);
     }
 }

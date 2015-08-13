@@ -16,7 +16,7 @@ import evolution_impl.fitness.dummyagent.StateObservationWrapper
 import evolution_impl.gpprograms.base.{WildRandomGrowInitializer, JavaCodeIndividual, RandomGrowInitializer, HeuristicIndividual}
 import evolution_impl.gpprograms.trees.{HeuristicTreeIndividual, HeuristicTreeInitializer}
 import evolution_impl.mutators.trees.{NodeThresholdPercentMutator, NodeThresholdMutator, RegrowHeuristicMutator, InTreeMutatorAdapter}
-import evolution_impl.mutators.{AlphasMutator, RegrowMethodMutator, ForLoopsMutator, ConstantsMutator}
+import evolution_impl.mutators._
 import evolution_impl.search.{Position, AStar}
 
 import scala.collection.immutable.IndexedSeq
@@ -70,10 +70,12 @@ class ThreadedGPRun() extends Runnable {
   val crossovers = new JavaCodeCrossover(0.25)
   val mutators = List(new ConstantsMutator(0.1),
     new ForLoopsMutator(0.15),
-    new RegrowMethodMutator(0.15)
-//    ,    new AlphasMutator(0.2)
+    new RegrowMethodMutator(0.05),
+    new DropMethodMutator(0.05),
+    new GrowNewwMethodMutator(0.05)
+    //    ,    new AlphasMutator(0.2)
   )
-//  val treeMutators = List(new InTreeMutatorAdapter(0.3, mutators), new RegrowHeuristicMutator(0.2), new NodeThresholdMutator(0.1), new NodeThresholdPercentMutator(0.2))
+  //  val treeMutators = List(new InTreeMutatorAdapter(0.3, mutators), new RegrowHeuristicMutator(0.2), new NodeThresholdMutator(0.1), new NodeThresholdPercentMutator(0.2))
   // todo add note threshold % change.
 
   val generations = 2000
@@ -83,7 +85,7 @@ class ThreadedGPRun() extends Runnable {
   val methodCount = 3
   val treeFitnessCalculator = new SingleGameFitnessCalculator[HeuristicTreeIndividual](ThreadedGPRun.gameName, independent = false, evaluationTimeout = 200)
   val fitnessCalculator = new SingleGameFitnessCalculator[JavaCodeIndividual](ThreadedGPRun.gameName, false, 100)
-//    with AlternatingPlayoutCalculator
+  //    with AlternatingPlayoutCalculator
   //  val fitnessCalculator = new MultiGameFitnessCalculator(cutoff = 2000)
   val selection = new TournamentSelection[JavaCodeIndividual](false)
   val treeSelection = new TournamentSelection[HeuristicTreeIndividual](false)
@@ -196,7 +198,7 @@ object ThreadedGPRun {
     //Game and level to play
     println("---\nPlaying a game with evolving heuristic")
     val scores: IndexedSeq[Double] = for (i <- 0 to 4) yield {
-//      Thread.sleep(1000)
+      Thread.sleep(1000)
       val levelPath = gamesPath + gameToPlay + "_lvl" + i + ".txt"
       IndividualHolder.resetAStar()
       ArcadeMachine.runOneGame(gamePath, levelPath, true, gpHeuristic, recordActionsFile, seed)

@@ -37,6 +37,7 @@ public class MovingAvatar extends VGDLSprite {
     }
 
 
+
     public MovingAvatar(Vector2d position, Dimension size, SpriteContent cnt) {
         //Init the sprite
         this.init(position, size);
@@ -64,7 +65,8 @@ public class MovingAvatar extends VGDLSprite {
     public void postProcess() {
 
         //Define actions here first.
-        if (actions.size() == 0) {
+        if(actions.size()==0)
+        {
             actions.add(Types.ACTIONS.ACTION_LEFT);
             actions.add(Types.ACTIONS.ACTION_RIGHT);
             actions.add(Types.ACTIONS.ACTION_DOWN);
@@ -74,7 +76,8 @@ public class MovingAvatar extends VGDLSprite {
         super.postProcess();
 
         //A separate array with the same actions, plus NIL.
-        for (Types.ACTIONS act : actions) {
+        for(Types.ACTIONS act : actions)
+        {
             actionsNIL.add(act);
         }
         actionsNIL.add(Types.ACTIONS.ACTION_NIL);
@@ -82,7 +85,6 @@ public class MovingAvatar extends VGDLSprite {
 
     /**
      * This update call is for the game tick() loop.
-     *
      * @param game current state of the game.
      */
     public void update(Game game) {
@@ -102,8 +104,7 @@ public class MovingAvatar extends VGDLSprite {
 
     /**
      * This move call is for the Forward Model tick() loop.
-     *
-     * @param game       current state of the game.
+     * @param game current state of the game.
      * @param actionMask action to apply.
      */
     public void move(Game game, boolean[] actionMask) {
@@ -115,37 +116,33 @@ public class MovingAvatar extends VGDLSprite {
 
     /**
      * Requests the controller's input, setting the game.ki.action mask with the processed data.
-     *
      * @param game
      */
-    protected void requestPlayerInput(Game game) {
+    protected void requestPlayerInput(Game game)
+    {
         ElapsedCpuTimer ect = new ElapsedCpuTimer(CompetitionParameters.TIMER_TYPE);
         ect.setMaxTimeMillis(CompetitionParameters.ACTION_TIME);
 
         Types.ACTIONS action = this.player.act(game.getObservation(), ect.copy());
 
-        if (ect.exceededMaxTime()) {
-            long exceeded = -ect.remainingTimeMillis();
+        if(ect.exceededMaxTime())
+        {
+            long exceeded =  - ect.remainingTimeMillis();
 
-            if (ect.elapsedMillis() > CompetitionParameters.ACTION_TIME_DISQ) {
+            if(ect.elapsedMillis() > CompetitionParameters.ACTION_TIME_DISQ)
+            {
                 //The agent took too long to replay. The game is over and the agent is disqualified
-                System.out.println("Too long: " + "(exceeding " + (exceeded) + "ms): controller disqualified.");
+                System.out.println("Too long: " + "(exceeding "+(exceeded)+"ms): controller disqualified.");
 //                game.disqualify();
-            } else {
-                System.out.println("Overspent: " + "(exceeding " + (exceeded) + "ms): applying ACTION_NIL.");
+            }else{
+                System.out.println("Overspent: " + "(exceeding "+(exceeded)+"ms): applying ACTION_NIL.");
             }
 
 //            action = Types.ACTIONS.ACTION_NIL;
-        } else {
-//            try {
-//                Thread.sleep(ect.remainingTimeMillis());
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
         }
 
 
-        if (!actions.contains(action))
+        if(!actions.contains(action))
             action = Types.ACTIONS.ACTION_NIL;
 
         this.player.logAction(action);
@@ -155,7 +152,8 @@ public class MovingAvatar extends VGDLSprite {
     }
 
 
-    public void updateUse(Game game) {
+    public void updateUse(Game game)
+    {
         //Nothing to do by default.
     }
 
