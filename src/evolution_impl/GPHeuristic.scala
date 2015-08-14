@@ -178,7 +178,7 @@ object ThreadedGPRun {
     // create a new threaded GP run, it will update the best individual each gen.
     //    Thread.sleep(1000)
 
-    if (args.size < 2) {
+    if (args.length < 3) {
       System.err.println("Usage: run <visuals> <game>")
       System.exit(-1)
     }
@@ -186,7 +186,7 @@ object ThreadedGPRun {
     // run a game using the best individual know at each step
     val gamesResults = for (game <- gamesToPlay) yield {
       GPRunHolder.gpRun = ThreadedGPRun.newInstance
-      val res = runNewGame(args(1), args(0).equals("1"))
+      val res = runNewGame(args(1), args(0).equals("1"), args(2).toInt)
       GPRunHolder.gpRun.stop()
       res
     }
@@ -196,7 +196,7 @@ object ThreadedGPRun {
   }
 
 
-  def runNewGame(gameToPlay: String, visuals: Boolean): GameRunResult = {
+  def runNewGame(gameToPlay: String, visuals: Boolean, times: Int): GameRunResult = {
     val gpHeuristic: String = "controllers.heauristicGP.Agent"
     val gamePath = gamesPath + gameToPlay + ".txt"
 
@@ -206,16 +206,19 @@ object ThreadedGPRun {
 
     //Game and level to play
     println("---\nPlaying a game with evolving heuristic")
-    val scores: IndexedSeq[Double] = for (i <- 0 to 4) yield {
-      Thread.sleep(1000)
-      val levelPath = gamesPath + gameToPlay + "_lvl" + i + ".txt"
-      IndividualHolder.resetAStar()
-      ArcadeMachine.runOneGame(gamePath, levelPath, visuals, gpHeuristic, recordActionsFile, seed)
+    val scores = for (i <- 0 to 4) yield {
+      val levelScores = for (j <- 0 to (times - 1)) yield {
+        Thread.sleep(1000)
+        val levelPath = gamesPath + gameToPlay + "_lvl" + i + ".txt"
+        IndividualHolder.resetAStar()
+        ArcadeMachine.runOneGame(gamePath, levelPath, visuals, gpHeuristic, recordActionsFile, seed)
+      }
+      levelScores
     }
 
     printf("Scores for %s: %s\n", gameToPlay, scores.toString)
-    printf("Average for %s: %s\n", gameToPlay, scores.sum / scores.size)
+    //    printf("Average for %s: %s\n", gameToPlay, scores.sum / scores.size)
 
-    new GameRunResult(gameToPlay, scores)
+    new GameRunResult(gameToPlay, scores(9))
   }
 }
