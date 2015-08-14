@@ -1,0 +1,387 @@
+---
+Playing a game with evolving heuristic
+ ** Playing game gvgai/examples/gridphysics/camelRace.txt, level gvgai/examples/gridphysics/camelRace_lvl0.txt **
+Controller initialization time: 20 ms.
+Overspent: (exceeding 8ms): applying ACTION_NIL.
+Too long: (exceeding 16ms): controller disqualified.
+
+------
+Generation time: 3.693176s
+Gen 0
+Best fitness - 10.0 - Ind26
+average depth reached 48.575758
+min depth reached 23.000000
+Finished Generation 0
+
+------
+Generation time: 1.412096s
+Gen 1
+Best fitness - -1.0 - Ind59
+average depth reached 23.937500
+min depth reached 15.000000
+Finished Generation 1
+
+------
+Generation time: 0.705763s
+Gen 2
+Best fitness - -1.0 - Ind81
+average depth reached 5.406250
+min depth reached 1.000000
+Finished Generation 2
+
+------
+Generation time: 0.475023s
+Gen 3
+Best fitness - -1.0 - Ind104
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 3
+Result (1->win; 0->lose):0, Score:-1.0, timesteps:79
+
+------
+Generation time: 0.168392s
+Gen 4
+Best fitness - -1.0 - Ind159
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 4
+
+------
+Generation time: 0.173565s
+Gen 5
+Best fitness - -1.0 - Ind192
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 5
+
+------
+Generation time: 0.162728s
+Gen 6
+Best fitness - -1.0 - Ind209
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 6
+
+------
+Generation time: 0.170648s
+Gen 7
+Best fitness - -1.0 - Ind249
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 7
+ ** Playing game gvgai/examples/gridphysics/camelRace.txt, level gvgai/examples/gridphysics/camelRace_lvl1.txt **
+
+------
+Generation time: 0.200268s
+Gen 8
+Best fitness - -1.0 - Ind286
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 8
+Controller initialization time: 2 ms.
+--
+SKIPPING USELESS FITNESS VALUES (GEN 9)
+--
+
+------
+Generation time: 0.947004s
+Gen 9
+Best fitness - 10.0 - Ind299
+average depth reached 40.687500
+min depth reached 0.000000
+Finished Generation 9
+
+------
+Generation time: 0.825716s
+Gen 10
+Best fitness - -1.0 - Ind337
+average depth reached 20.625000
+min depth reached 12.000000
+Finished Generation 10
+
+------
+Generation time: 0.648253s
+Gen 11
+Best fitness - -1.0 - Ind381
+average depth reached 11.437500
+min depth reached 4.000000
+Finished Generation 11
+
+------
+Generation time: 0.463857s
+Gen 12
+Best fitness - -1.0 - Ind416
+average depth reached 0.687500
+min depth reached 0.000000
+Finished Generation 12
+Result (1->win; 0->lose):0, Score:-1.0, timesteps:79
+
+------
+Generation time: 0.274257s
+Gen 13
+Best fitness - -1.0 - Ind420
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 13
+
+------
+Generation time: 0.151593s
+Gen 14
+Best fitness - -1.0 - Ind451
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 14
+
+------
+Generation time: 0.151499s
+Gen 15
+Best fitness - -1.0 - Ind507
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 15
+
+------
+Generation time: 0.175270s
+Gen 16
+Best fitness - -1.0 - Ind532
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 16
+
+------
+Generation time: 0.132601s
+Gen 17
+Best fitness - -1.0 - Ind561
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 17
+ ** Playing game gvgai/examples/gridphysics/camelRace.txt, level gvgai/examples/gridphysics/camelRace_lvl2.txt **
+Controller initialization time: 2 ms.
+--
+SKIPPING USELESS FITNESS VALUES (GEN 18)
+--
+
+------
+Generation time: 1.168557s
+Gen 18
+Best fitness - 10.0 - Ind589
+average depth reached 28.015625
+min depth reached 0.000000
+Finished Generation 18
+
+------
+Generation time: 0.805032s
+Gen 19
+Best fitness - 10.0 - Ind638
+average depth reached 31.812500
+min depth reached 10.000000
+Finished Generation 19
+
+------
+Generation time: 0.650120s
+Gen 20
+Best fitness - 10.0 - Ind643
+average depth reached 12.656250
+min depth reached 0.000000
+Finished Generation 20
+Result (1->win; 0->lose):1, Score:1.0, timesteps:48
+
+------
+Generation time: 0.205838s
+Gen 21
+Best fitness - 10.0 - Ind694
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 21
+
+------
+Generation time: 0.161891s
+Gen 22
+Best fitness - 10.0 - Ind725
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 22
+
+------
+Generation time: 0.154114s
+Gen 23
+Best fitness - 10.0 - Ind763
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 23
+
+------
+Generation time: 0.141625s
+Gen 24
+Best fitness - 10.0 - Ind797
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 24
+
+------
+Generation time: 0.175354s
+Gen 25
+Best fitness - 10.0 - Ind826
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 25
+
+------
+Generation time: 0.145166s
+Gen 26
+Best fitness - 10.0 - Ind849
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 26
+ ** Playing game gvgai/examples/gridphysics/camelRace.txt, level gvgai/examples/gridphysics/camelRace_lvl3.txt **
+Controller initialization time: 2 ms.
+--
+SKIPPING USELESS FITNESS VALUES (GEN 27)
+--
+
+------
+Generation time: 0.970541s
+Gen 27
+Best fitness - 10.0 - Ind885
+average depth reached 32.218750
+min depth reached 0.000000
+Finished Generation 27
+
+------
+Generation time: 0.897612s
+Gen 28
+Best fitness - 10.0 - Ind917
+average depth reached 36.343750
+min depth reached 7.000000
+Finished Generation 28
+
+------
+Generation time: 0.534707s
+Gen 29
+Best fitness - 10.0 - Ind959
+average depth reached 16.625000
+min depth reached 0.000000
+Finished Generation 29
+Result (1->win; 0->lose):1, Score:1.0, timesteps:47
+
+------
+Generation time: 0.136847s
+Gen 30
+Best fitness - 10.0 - Ind975
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 30
+
+------
+Generation time: 0.106065s
+Gen 31
+Best fitness - 10.0 - Ind1002
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 31
+
+------
+Generation time: 0.148894s
+Gen 32
+Best fitness - 10.0 - Ind1054
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 32
+
+------
+Generation time: 0.205616s
+Gen 33
+Best fitness - 10.0 - Ind1079
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 33
+
+------
+Generation time: 0.133761s
+Gen 34
+Best fitness - 10.0 - Ind1113
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 34
+
+------
+Generation time: 0.123864s
+Gen 35
+Best fitness - 10.0 - Ind1128
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 35
+
+------
+Generation time: 0.157336s
+Gen 36
+Best fitness - 10.0 - Ind1181
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 36
+ ** Playing game gvgai/examples/gridphysics/camelRace.txt, level gvgai/examples/gridphysics/camelRace_lvl4.txt **
+Controller initialization time: 2 ms.
+--
+SKIPPING USELESS FITNESS VALUES (GEN 37)
+--
+
+------
+Generation time: 1.056082s
+Gen 37
+Best fitness - 10.0 - Ind1187
+average depth reached 37.671875
+min depth reached 0.000000
+Finished Generation 37
+
+------
+Generation time: 0.772096s
+Gen 38
+Best fitness - 10.0 - Ind1231
+average depth reached 45.250000
+min depth reached 29.000000
+Finished Generation 38
+
+------
+Generation time: 0.657120s
+Gen 39
+Best fitness - 10.0 - Ind1281
+average depth reached 33.250000
+min depth reached 20.000000
+Finished Generation 39
+
+------
+Generation time: 0.524541s
+Gen 40
+Best fitness - 10.0 - Ind1290
+average depth reached 23.687500
+min depth reached 10.000000
+Finished Generation 40
+
+------
+Generation time: 0.471046s
+Gen 41
+Best fitness - 10.0 - Ind1345
+average depth reached 16.031250
+min depth reached 5.000000
+Finished Generation 41
+
+------
+Generation time: 0.466822s
+Gen 42
+Best fitness - 10.0 - Ind1353
+average depth reached 15.000000
+min depth reached 0.000000
+Finished Generation 42
+Result (1->win; 0->lose):1, Score:1.0, timesteps:73
+Scores for camelRace: Vector(-1.0, -1.0, 1.0, 1.0, 1.0)
+Average for camelRace: 0.2
+finished playing, stopping evolution...
+Results: List(camelRace Vector(-1.0, -1.0, 1.0, 1.0, 1.0))
+
+------
+Generation time: 0.137731s
+Gen 43
+Best fitness - 10.0 - Ind1393
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 43

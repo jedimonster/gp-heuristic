@@ -1,0 +1,476 @@
+---
+Playing a game with evolving heuristic
+ ** Playing game gvgai/examples/gridphysics/missilecommand.txt, level gvgai/examples/gridphysics/missilecommand_lvl0.txt **
+Controller initialization time: 17 ms.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+
+------
+Generation time: 4.226129s
+Gen 0
+Best fitness - 2.0 - Ind18
+average depth reached 69.939394
+min depth reached 64.000000
+Finished Generation 0
+
+------
+Generation time: 1.907033s
+Gen 1
+Best fitness - -0.3333333333333333 - Ind47
+average depth reached 43.437500
+min depth reached 30.000000
+Finished Generation 1
+
+------
+Generation time: 0.977532s
+Gen 2
+Best fitness - -0.3333333333333333 - Ind69
+average depth reached 19.687500
+min depth reached 12.000000
+Finished Generation 2
+
+------
+Generation time: 0.552226s
+Gen 3
+Best fitness - -0.3333333333333333 - Ind122
+average depth reached 7.406250
+min depth reached 3.000000
+Finished Generation 3
+
+------
+Generation time: 0.561249s
+Gen 4
+Best fitness - -0.3333333333333333 - Ind150
+average depth reached 0.625000
+min depth reached 0.000000
+Finished Generation 4
+
+------
+Generation time: 0.290822s
+Gen 5
+Best fitness - -0.3333333333333333 - Ind191
+average depth reached 0.000000
+min depth reached 0.000000
+Result (1->win; 0->lose):0, Score:-3.0, timesteps:110
+Finished Generation 5
+
+------
+Generation time: 0.169348s
+Gen 6
+Best fitness - -0.3333333333333333 - Ind217
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 6
+
+------
+Generation time: 0.165680s
+Gen 7
+Best fitness - -0.3333333333333333 - Ind236
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 7
+
+------
+Generation time: 0.169361s
+Gen 8
+Best fitness - -0.3333333333333333 - Ind287
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 8
+
+------
+Generation time: 0.137398s
+Gen 9
+Best fitness - -0.3333333333333333 - Ind292
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 9
+
+------
+Generation time: 0.154495s
+Gen 10
+Best fitness - -0.3333333333333333 - Ind347
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 10
+ ** Playing game gvgai/examples/gridphysics/missilecommand.txt, level gvgai/examples/gridphysics/missilecommand_lvl1.txt **
+
+------
+Generation time: 0.423093s
+Gen 11
+Best fitness - -0.3333333333333333 - Ind365
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 11
+Controller initialization time: 1 ms.
+--
+SKIPPING USELESS FITNESS VALUES (GEN 12)
+--
+
+------
+Generation time: 1.166254s
+Gen 12
+Best fitness - -0.1111111111111111 - Ind403
+average depth reached 61.765625
+min depth reached 36.000000
+Finished Generation 12
+
+------
+Generation time: 1.058990s
+Gen 13
+Best fitness - -0.1111111111111111 - Ind420
+average depth reached 35.187500
+min depth reached 25.000000
+Finished Generation 13
+
+------
+Generation time: 0.743371s
+Gen 14
+Best fitness - -0.07692307692307693 - Ind478
+average depth reached 21.187500
+min depth reached 16.000000
+Finished Generation 14
+
+------
+Generation time: 0.527874s
+Gen 15
+Best fitness - -0.09090909090909091 - Ind512
+average depth reached 10.625000
+min depth reached 5.000000
+Finished Generation 15
+
+------
+Generation time: 0.358198s
+Gen 16
+Best fitness - 160.0 - Ind530
+average depth reached 1.625000
+min depth reached 0.000000
+Finished Generation 16
+Result (1->win; 0->lose):1, Score:16.0, timesteps:93
+
+------
+Generation time: 0.196229s
+Gen 17
+Best fitness - 160.0 - Ind570
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 17
+
+------
+Generation time: 0.150729s
+Gen 18
+Best fitness - 160.0 - Ind607
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 18
+
+------
+Generation time: 0.180839s
+Gen 19
+Best fitness - 160.0 - Ind632
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 19
+
+------
+Generation time: 0.146598s
+Gen 20
+Best fitness - 160.0 - Ind674
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 20
+
+------
+Generation time: 0.142678s
+Gen 21
+Best fitness - 160.0 - Ind692
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 21
+
+------
+Generation time: 0.157153s
+Gen 22
+Best fitness - 160.0 - Ind712
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 22
+ ** Playing game gvgai/examples/gridphysics/missilecommand.txt, level gvgai/examples/gridphysics/missilecommand_lvl2.txt **
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Controller initialization time: 1 ms.
+--
+SKIPPING USELESS FITNESS VALUES (GEN 23)
+--
+
+------
+Generation time: 1.278164s
+Gen 23
+Best fitness - 50.0 - Ind760
+average depth reached 45.603175
+min depth reached 0.000000
+Finished Generation 23
+
+------
+Generation time: 1.013068s
+Gen 24
+Best fitness - 50.0 - Ind771
+average depth reached 47.500000
+min depth reached 8.000000
+Finished Generation 24
+
+------
+Generation time: 0.895305s
+Gen 25
+Best fitness - 50.0 - Ind815
+average depth reached 36.625000
+min depth reached 8.000000
+Finished Generation 25
+
+------
+Generation time: 0.761247s
+Gen 26
+Best fitness - 20.0 - Ind847
+average depth reached 29.562500
+min depth reached 1.000000
+Finished Generation 26
+Result (1->win; 0->lose):1, Score:2.0, timesteps:98
+
+------
+Generation time: 0.213371s
+Gen 27
+Best fitness - 20.0 - Ind873
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 27
+
+------
+Generation time: 0.148796s
+Gen 28
+Best fitness - 20.0 - Ind913
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 28
+
+------
+Generation time: 0.186879s
+Gen 29
+Best fitness - 20.0 - Ind946
+average depth reached 0.375000
+min depth reached 0.000000
+Finished Generation 29
+
+------
+Generation time: 0.175980s
+Gen 30
+Best fitness - 20.0 - Ind983
+average depth reached 2.093750
+min depth reached 0.000000
+Finished Generation 30
+
+------
+Generation time: 0.207358s
+Gen 31
+Best fitness - 20.0 - Ind1024
+average depth reached 1.718750
+min depth reached 0.000000
+Finished Generation 31
+ ** Playing game gvgai/examples/gridphysics/missilecommand.txt, level gvgai/examples/gridphysics/missilecommand_lvl3.txt **
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Controller initialization time: 1 ms.
+--
+SKIPPING USELESS FITNESS VALUES (GEN 32)
+--
+
+------
+Generation time: 0.783872s
+Gen 32
+Best fitness - -0.5 - Ind1055
+average depth reached 30.500000
+min depth reached 0.000000
+Finished Generation 32
+
+------
+Generation time: 0.696641s
+Gen 33
+Best fitness - -0.5 - Ind1063
+average depth reached 34.593750
+min depth reached 11.000000
+Finished Generation 33
+
+------
+Generation time: 0.521540s
+Gen 34
+Best fitness - -0.5 - Ind1110
+average depth reached 18.468750
+min depth reached 5.000000
+Finished Generation 34
+
+------
+Generation time: 0.331112s
+Gen 35
+Best fitness - -0.5 - Ind1123
+average depth reached 5.781250
+min depth reached 0.000000
+Finished Generation 35
+
+------
+Generation time: 0.267212s
+Gen 36
+Best fitness - -0.5 - Ind1179
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 36
+Result (1->win; 0->lose):0, Score:-2.0, timesteps:61
+
+------
+Generation time: 0.118509s
+Gen 37
+Best fitness - -0.5 - Ind1216
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 37
+
+------
+Generation time: 0.121097s
+Gen 38
+Best fitness - -0.5 - Ind1224
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 38
+
+------
+Generation time: 0.109139s
+Gen 39
+Best fitness - -0.5 - Ind1264
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 39
+
+------
+Generation time: 0.134394s
+Gen 40
+Best fitness - -0.5 - Ind1290
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 40
+
+------
+Generation time: 0.133660s
+Gen 41
+Best fitness - -0.5 - Ind1326
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 41
+
+------
+Generation time: 0.088916s
+Gen 42
+Best fitness - -0.5 - Ind1360
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 42
+
+------
+Generation time: 0.099786s
+Gen 43
+Best fitness - -0.5 - Ind1389
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 43
+
+------
+Generation time: 0.124576s
+Gen 44
+Best fitness - -0.5 - Ind1442
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 44
+ ** Playing game gvgai/examples/gridphysics/missilecommand.txt, level gvgai/examples/gridphysics/missilecommand_lvl4.txt **
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Controller initialization time: 8 ms.
+--
+SKIPPING USELESS FITNESS VALUES (GEN 45)
+--
+
+------
+Generation time: 1.094728s
+Gen 45
+Best fitness - 20.0 - Ind1473
+average depth reached 43.109375
+min depth reached 0.000000
+Finished Generation 45
+
+------
+Generation time: 1.067246s
+Gen 46
+Best fitness - 50.0 - Ind1500
+average depth reached 68.906250
+min depth reached 49.000000
+Finished Generation 46
+
+------
+Generation time: 0.965944s
+Gen 47
+Best fitness - 50.0 - Ind1517
+average depth reached 61.468750
+min depth reached 31.000000
+Finished Generation 47
+
+------
+Generation time: 0.980938s
+Gen 48
+Best fitness - 50.0 - Ind1540
+average depth reached 54.250000
+min depth reached 7.000000
+Finished Generation 48
+
+------
+Generation time: 0.569609s
+Gen 49
+Best fitness - 20.0 - Ind1573
+average depth reached 26.406250
+min depth reached 0.000000
+Finished Generation 49
+
+------
+Generation time: 0.226202s
+Gen 50
+Best fitness - 20.0 - Ind1604
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 50
+Result (1->win; 0->lose):1, Score:2.0, timesteps:110
+Scores for missilecommand: Vector(-3.0, 16.0, 2.0, -2.0, 2.0)
+Average for missilecommand: 3.0
+finished playing, stopping evolution...
+Results: List(missilecommand Vector(-3.0, 16.0, 2.0, -2.0, 2.0))
+
+------
+Generation time: 0.123038s
+Gen 51
+Best fitness - 20.0 - Ind1665
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 51

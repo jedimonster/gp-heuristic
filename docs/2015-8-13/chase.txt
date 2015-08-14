@@ -1,0 +1,1279 @@
+---
+Playing a game with evolving heuristic
+ ** Playing game gvgai/examples/gridphysics/chase.txt, level gvgai/examples/gridphysics/chase_lvl0.txt **
+Controller initialization time: 14 ms.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 4.114229s
+Gen 0
+Best fitness - 5.0 - Ind18
+average depth reached 68.848485
+min depth reached 71.000000
+Finished Generation 0
+
+------
+Generation time: 1.720758s
+Gen 1
+Best fitness - 4.0 - Ind61
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 1
+
+------
+Generation time: 1.413833s
+Gen 2
+Best fitness - 3.0 - Ind84
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 2
+
+------
+Generation time: 1.141645s
+Gen 3
+Best fitness - 3.0 - Ind121
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 3
+
+------
+Generation time: 1.597002s
+Gen 4
+Best fitness - 6.0 - Ind137
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 4
+
+------
+Generation time: 1.557922s
+Gen 5
+Best fitness - 4.0 - Ind194
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 5
+
+------
+Generation time: 1.236424s
+Gen 6
+Best fitness - 70.0 - Ind201
+average depth reached 67.781250
+min depth reached 12.000000
+Finished Generation 6
+
+------
+Generation time: 1.171483s
+Gen 7
+Best fitness - 70.0 - Ind255
+average depth reached 69.968750
+min depth reached 57.000000
+Finished Generation 7
+
+------
+Generation time: 1.162971s
+Gen 8
+Best fitness - 70.0 - Ind283
+average depth reached 62.343750
+min depth reached 43.000000
+Finished Generation 8
+
+------
+Generation time: 1.176672s
+Gen 9
+Best fitness - 70.0 - Ind298
+average depth reached 57.500000
+min depth reached 1.000000
+Finished Generation 9
+
+------
+Generation time: 0.883309s
+Gen 10
+Best fitness - 70.0 - Ind347
+average depth reached 37.281250
+min depth reached 0.000000
+Finished Generation 10
+
+------
+Generation time: 0.747670s
+Gen 11
+Best fitness - 70.0 - Ind359
+average depth reached 40.750000
+min depth reached 10.000000
+Finished Generation 11
+
+------
+Generation time: 0.685159s
+Gen 12
+Best fitness - 70.0 - Ind404
+average depth reached 34.343750
+min depth reached 0.000000
+Finished Generation 12
+
+------
+Generation time: 0.359089s
+Gen 13
+Best fitness - 70.0 - Ind424
+average depth reached 5.687500
+min depth reached 0.000000
+Finished Generation 13
+Result (1->win; 0->lose):1, Score:7.0, timesteps:310
+
+------
+Generation time: 0.420584s
+Gen 14
+Best fitness - 70.0 - Ind452
+average depth reached 15.843750
+min depth reached 0.000000
+Finished Generation 14
+
+------
+Generation time: 0.437269s
+Gen 15
+Best fitness - 70.0 - Ind508
+average depth reached 14.031250
+min depth reached 0.000000
+Finished Generation 15
+ ** Playing game gvgai/examples/gridphysics/chase.txt, level gvgai/examples/gridphysics/chase_lvl1.txt **
+
+------
+Generation time: 0.386833s
+Gen 16
+Best fitness - 70.0 - Ind531
+average depth reached 16.125000
+min depth reached 0.000000
+Controller initialization time: 1 ms.
+Finished Generation 16
+--
+SKIPPING USELESS FITNESS VALUES (GEN 17)
+--
+
+------
+Generation time: 0.694621s
+Gen 17
+Best fitness - 7.0 - Ind562
+average depth reached 48.203125
+min depth reached 11.000000
+Finished Generation 17
+
+------
+Generation time: 0.437755s
+Gen 18
+Best fitness - 7.0 - Ind582
+average depth reached 19.093750
+min depth reached 0.000000
+Finished Generation 18
+Result (1->win; 0->lose):0, Score:3.0, timesteps:36
+
+------
+Generation time: 0.134473s
+Gen 19
+Best fitness - -0.3333333333333333 - Ind637
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 19
+
+------
+Generation time: 0.163029s
+Gen 20
+Best fitness - -0.3333333333333333 - Ind645
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 20
+
+------
+Generation time: 0.123435s
+Gen 21
+Best fitness - -0.3333333333333333 - Ind693
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 21
+
+------
+Generation time: 0.159831s
+Gen 22
+Best fitness - -0.3333333333333333 - Ind726
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 22
+ ** Playing game gvgai/examples/gridphysics/chase.txt, level gvgai/examples/gridphysics/chase_lvl2.txt **
+
+------
+Generation time: 0.477337s
+Gen 23
+Best fitness - -0.3333333333333333 - Ind763
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 23
+Controller initialization time: 1 ms.
+--
+SKIPPING USELESS FITNESS VALUES (GEN 24)
+--
+
+------
+Generation time: 0.859531s
+Gen 24
+Best fitness - 0.0 - Ind797
+average depth reached 70.125000
+min depth reached 29.000000
+Finished Generation 24
+
+------
+Generation time: 1.069490s
+Gen 25
+Best fitness - 0.0 - Ind825
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 25
+
+------
+Generation time: 1.041249s
+Gen 26
+Best fitness - 0.0 - Ind850
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 26
+
+------
+Generation time: 1.012940s
+Gen 27
+Best fitness - 0.0 - Ind887
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 27
+
+------
+Generation time: 1.017298s
+Gen 28
+Best fitness - 0.0 - Ind918
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 28
+
+------
+Generation time: 1.124281s
+Gen 29
+Best fitness - 0.0 - Ind950
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 29
+
+------
+Generation time: 1.042377s
+Gen 30
+Best fitness - 0.0 - Ind976
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 30
+
+------
+Generation time: 0.960598s
+Gen 31
+Best fitness - 0.0 - Ind1001
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 31
+
+------
+Generation time: 1.050184s
+Gen 32
+Best fitness - 0.0 - Ind1053
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 32
+
+------
+Generation time: 1.138125s
+Gen 33
+Best fitness - 1.0 - Ind1089
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 33
+
+------
+Generation time: 1.003988s
+Gen 34
+Best fitness - 4.0 - Ind1095
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 34
+Result (1->win; 0->lose):0, Score:2.0, timesteps:264
+
+------
+Generation time: 0.664651s
+Gen 35
+Best fitness - 4.0 - Ind1150
+average depth reached 37.718750
+min depth reached 0.000000
+Finished Generation 35
+
+------
+Generation time: 0.128056s
+Gen 36
+Best fitness - -0.5 - Ind1182
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 36
+
+------
+Generation time: 0.119901s
+Gen 37
+Best fitness - -0.5 - Ind1187
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 37
+
+------
+Generation time: 0.100928s
+Gen 38
+Best fitness - -0.5 - Ind1246
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 38
+
+------
+Generation time: 0.082252s
+Gen 39
+Best fitness - -0.5 - Ind1281
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 39
+
+------
+Generation time: 0.348491s
+Gen 40
+Best fitness - -0.5 - Ind1290
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 40
+ ** Playing game gvgai/examples/gridphysics/chase.txt, level gvgai/examples/gridphysics/chase_lvl3.txt **
+
+------
+Generation time: 0.100449s
+Gen 41
+Best fitness - -0.5 - Ind1345
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 41
+Controller initialization time: 1 ms.
+--
+SKIPPING USELESS FITNESS VALUES (GEN 42)
+--
+
+------
+Generation time: 0.598753s
+Gen 42
+Best fitness - 4.0 - Ind1371
+average depth reached 58.125000
+min depth reached 0.000000
+Finished Generation 42
+
+------
+Generation time: 0.664488s
+Gen 43
+Best fitness - 2.0 - Ind1394
+average depth reached 66.625000
+min depth reached 19.000000
+Finished Generation 43
+
+------
+Generation time: 0.676876s
+Gen 44
+Best fitness - 1.0 - Ind1418
+average depth reached 60.406250
+min depth reached 10.000000
+Finished Generation 44
+
+------
+Generation time: 0.754888s
+Gen 45
+Best fitness - 2.0 - Ind1459
+average depth reached 61.093750
+min depth reached 0.000000
+Finished Generation 45
+
+------
+Generation time: 0.672947s
+Gen 46
+Best fitness - 1.0 - Ind1479
+average depth reached 55.968750
+min depth reached 10.000000
+Finished Generation 46
+
+------
+Generation time: 0.681741s
+Gen 47
+Best fitness - 2.0 - Ind1527
+average depth reached 67.875000
+min depth reached 18.000000
+Finished Generation 47
+
+------
+Generation time: 0.575128s
+Gen 48
+Best fitness - 1.0 - Ind1539
+average depth reached 52.750000
+min depth reached 0.000000
+Finished Generation 48
+
+------
+Generation time: 0.162016s
+Gen 49
+Best fitness - -1000.0 - Ind1588
+average depth reached 0.562500
+min depth reached 0.000000
+Finished Generation 49
+
+------
+Generation time: 0.142372s
+Gen 50
+Best fitness - -1000.0 - Ind1614
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 50
+
+------
+Generation time: 0.149056s
+Gen 51
+Best fitness - -1000.0 - Ind1654
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 51
+
+------
+Generation time: 0.166053s
+Gen 52
+Best fitness - -1000.0 - Ind1670
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 52
+
+------
+Generation time: 0.461738s
+Gen 53
+Best fitness - -1000.0 - Ind1707
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 53
+
+------
+Generation time: 0.120137s
+Gen 54
+Best fitness - -1000.0 - Ind1760
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 54
+
+------
+Generation time: 0.149573s
+Gen 55
+Best fitness - -1000.0 - Ind1771
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 55
+
+------
+Generation time: 0.158166s
+Gen 56
+Best fitness - -1000.0 - Ind1812
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 56
+
+------
+Generation time: 0.168940s
+Gen 57
+Best fitness - -1000.0 - Ind1858
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 57
+
+------
+Generation time: 0.192022s
+Gen 58
+Best fitness - -1000.0 - Ind1889
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 58
+
+------
+Generation time: 0.170068s
+Gen 59
+Best fitness - -1000.0 - Ind1901
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 59
+
+------
+Generation time: 0.205130s
+Gen 60
+Best fitness - -1000.0 - Ind1944
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 60
+
+------
+Generation time: 0.162770s
+Gen 61
+Best fitness - -1000.0 - Ind1958
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 61
+
+------
+Generation time: 0.213273s
+Gen 62
+Best fitness - -1000.0 - Ind2009
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 62
+
+------
+Generation time: 0.157887s
+Gen 63
+Best fitness - -1000.0 - Ind2020
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 63
+
+------
+Generation time: 0.193369s
+Gen 64
+Best fitness - -1000.0 - Ind2058
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 64
+
+------
+Generation time: 0.137745s
+Gen 65
+Best fitness - -1000.0 - Ind2085
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 65
+
+------
+Generation time: 0.116435s
+Gen 66
+Best fitness - -1000.0 - Ind2119
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 66
+
+------
+Generation time: 0.482779s
+Gen 67
+Best fitness - -1000.0 - Ind2177
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 67
+
+------
+Generation time: 0.131275s
+Gen 68
+Best fitness - -1000.0 - Ind2195
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 68
+
+------
+Generation time: 0.171760s
+Gen 69
+Best fitness - -1000.0 - Ind2235
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 69
+
+------
+Generation time: 0.130227s
+Gen 70
+Best fitness - -1000.0 - Ind2252
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 70
+
+------
+Generation time: 0.141383s
+Gen 71
+Best fitness - -1000.0 - Ind2294
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 71
+
+------
+Generation time: 0.111494s
+Gen 72
+Best fitness - -1000.0 - Ind2311
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 72
+
+------
+Generation time: 0.130056s
+Gen 73
+Best fitness - -1000.0 - Ind2343
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 73
+
+------
+Generation time: 0.108467s
+Gen 74
+Best fitness - -1000.0 - Ind2399
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 74
+
+------
+Generation time: 0.137640s
+Gen 75
+Best fitness - -1000.0 - Ind2407
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 75
+
+------
+Generation time: 0.140375s
+Gen 76
+Best fitness - -1000.0 - Ind2439
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 76
+
+------
+Generation time: 0.121778s
+Gen 77
+Best fitness - -1000.0 - Ind2476
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 77
+
+------
+Generation time: 0.168004s
+Gen 78
+Best fitness - -1000.0 - Ind2524
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 78
+
+------
+Generation time: 0.131894s
+Gen 79
+Best fitness - -1000.0 - Ind2531
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 79
+
+------
+Generation time: 0.158545s
+Gen 80
+Best fitness - -1000.0 - Ind2565
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 80
+
+------
+Generation time: 0.536063s
+Gen 81
+Best fitness - -1000.0 - Ind2601
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 81
+
+------
+Generation time: 0.119163s
+Gen 82
+Best fitness - -1000.0 - Ind2639
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 82
+
+------
+Generation time: 0.124078s
+Gen 83
+Best fitness - -1000.0 - Ind2668
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 83
+
+------
+Generation time: 0.156357s
+Gen 84
+Best fitness - -1000.0 - Ind2702
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 84
+
+------
+Generation time: 0.178461s
+Gen 85
+Best fitness - -1000.0 - Ind2737
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 85
+
+------
+Generation time: 0.171347s
+Gen 86
+Best fitness - -1000.0 - Ind2762
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 86
+
+------
+Generation time: 0.126917s
+Gen 87
+Best fitness - -1000.0 - Ind2805
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 87
+
+------
+Generation time: 0.180769s
+Gen 88
+Best fitness - -1000.0 - Ind2840
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 88
+
+------
+Generation time: 0.157707s
+Gen 89
+Best fitness - -1000.0 - Ind2861
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 89
+
+------
+Generation time: 0.137595s
+Gen 90
+Best fitness - -1000.0 - Ind2900
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 90
+
+------
+Generation time: 0.145864s
+Gen 91
+Best fitness - -1000.0 - Ind2926
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 91
+
+------
+Generation time: 0.120002s
+Gen 92
+Best fitness - -1000.0 - Ind2965
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 92
+
+------
+Generation time: 0.153286s
+Gen 93
+Best fitness - -1000.0 - Ind2988
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 93
+
+------
+Generation time: 0.120992s
+Gen 94
+Best fitness - -1000.0 - Ind3032
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 94
+
+------
+Generation time: 0.165557s
+Gen 95
+Best fitness - -1000.0 - Ind3045
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 95
+
+------
+Generation time: 0.205657s
+Gen 96
+Best fitness - -1000.0 - Ind3092
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 96
+
+------
+Generation time: 0.151144s
+Gen 97
+Best fitness - -1000.0 - Ind3121
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 97
+
+------
+Generation time: 0.577639s
+Gen 98
+Best fitness - -1000.0 - Ind3167
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 98
+
+------
+Generation time: 0.136392s
+Gen 99
+Best fitness - -1000.0 - Ind3181
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 99
+
+------
+Generation time: 0.123781s
+Gen 100
+Best fitness - -1000.0 - Ind3207
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 100
+
+------
+Generation time: 0.172940s
+Gen 101
+Best fitness - -1000.0 - Ind3251
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 101
+
+------
+Generation time: 0.642025s
+Gen 102
+Best fitness - 1.0 - Ind3286
+average depth reached 45.531250
+min depth reached 0.000000
+Finished Generation 102
+
+------
+Generation time: 0.867993s
+Gen 103
+Best fitness - 1.0 - Ind3323
+average depth reached 62.375000
+min depth reached 5.000000
+Finished Generation 103
+
+------
+Generation time: 0.629388s
+Gen 104
+Best fitness - 1.0 - Ind3349
+average depth reached 44.625000
+min depth reached 0.000000
+Finished Generation 104
+
+------
+Generation time: 0.234283s
+Gen 105
+Best fitness - 1.0 - Ind3363
+average depth reached 9.312500
+min depth reached 0.000000
+Finished Generation 105
+
+------
+Generation time: 0.120336s
+Gen 106
+Best fitness - -1000.0 - Ind3397
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 106
+
+------
+Generation time: 0.148536s
+Gen 107
+Best fitness - -1000.0 - Ind3431
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 107
+
+------
+Generation time: 0.128922s
+Gen 108
+Best fitness - -1000.0 - Ind3461
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 108
+
+------
+Generation time: 0.160109s
+Gen 109
+Best fitness - -1000.0 - Ind3496
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 109
+
+------
+Generation time: 0.157231s
+Gen 110
+Best fitness - -1000.0 - Ind3547
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 110
+
+------
+Generation time: 0.118440s
+Gen 111
+Best fitness - -1000.0 - Ind3560
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 111
+
+------
+Generation time: 0.176793s
+Gen 112
+Best fitness - -1.0 - Ind3602
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 112
+
+------
+Generation time: 0.147190s
+Gen 113
+Best fitness - -1.0 - Ind3629
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 113
+
+------
+Generation time: 0.113746s
+Gen 114
+Best fitness - -1.0 - Ind3656
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 114
+
+------
+Generation time: 0.153459s
+Gen 115
+Best fitness - -1.0 - Ind3694
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 115
+
+------
+Generation time: 0.166057s
+Gen 116
+Best fitness - -1.0 - Ind3739
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 116
+
+------
+Generation time: 0.100220s
+Gen 117
+Best fitness - -1.0 - Ind3777
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 117
+
+------
+Generation time: 0.218105s
+Gen 118
+Best fitness - -1.0 - Ind3790
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 118
+
+------
+Generation time: 1.229389s
+Gen 119
+Best fitness - -1.0 - Ind3838
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 119
+
+------
+Generation time: 0.241819s
+Gen 120
+Best fitness - -1.0 - Ind3868
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 120
+
+------
+Generation time: 0.649256s
+Gen 121
+Best fitness - -1.0 - Ind3878
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 121
+
+------
+Generation time: 0.136516s
+Gen 122
+Best fitness - -1.0 - Ind3915
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 122
+
+------
+Generation time: 0.576081s
+Gen 123
+Best fitness - -1.0 - Ind3966
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 123
+
+------
+Generation time: 0.541783s
+Gen 124
+Best fitness - -1.0 - Ind3999
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 124
+
+------
+Generation time: 0.122404s
+Gen 125
+Best fitness - -1.0 - Ind4005
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 125
+
+------
+Generation time: 1.257276s
+Gen 126
+Best fitness - -1.0 - Ind4065
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 126
+
+------
+Generation time: 0.936032s
+Gen 127
+Best fitness - -1.0 - Ind4097
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 127
+
+------
+Generation time: 0.841589s
+Gen 128
+Best fitness - -1.0 - Ind4129
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 128
+
+------
+Generation time: 0.113986s
+Gen 129
+Best fitness - -1.0 - Ind4146
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 129
+
+------
+Generation time: 0.574393s
+Gen 130
+Best fitness - -1.0 - Ind4193
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 130
+
+------
+Generation time: 0.542647s
+Gen 131
+Best fitness - -1.0 - Ind4201
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 131
+
+------
+Generation time: 0.544740s
+Gen 132
+Best fitness - -1.0 - Ind4250
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 132
+
+------
+Generation time: 0.843574s
+Gen 133
+Best fitness - -1.0 - Ind4264
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 133
+Result (1->win; 0->lose):0, Score:1.0, timesteps:467
+
+------
+Generation time: 0.079039s
+Gen 134
+Best fitness - -1.0 - Ind4322
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 134
+ ** Playing game gvgai/examples/gridphysics/chase.txt, level gvgai/examples/gridphysics/chase_lvl4.txt **
+
+------
+Generation time: 0.988814s
+Gen 135
+Best fitness - -1.0 - Ind4327
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 135
+Controller initialization time: 1 ms.
+--
+SKIPPING USELESS FITNESS VALUES (GEN 136)
+--
+
+------
+Generation time: 5.122224s
+Gen 136
+Best fitness - 0.0 - Ind4378
+average depth reached 58.046875
+min depth reached 0.000000
+Finished Generation 136
+
+------
+Generation time: 5.245167s
+Gen 137
+Best fitness - 1.0 - Ind4410
+average depth reached 67.937500
+min depth reached 21.000000
+Finished Generation 137
+
+------
+Generation time: 4.868925s
+Gen 138
+Best fitness - 0.0 - Ind4425
+average depth reached 65.625000
+min depth reached 8.000000
+Finished Generation 138
+
+------
+Generation time: 6.358945s
+Gen 139
+Best fitness - 0.0 - Ind4460
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 139
+
+------
+Generation time: 5.706842s
+Gen 140
+Best fitness - 0.0 - Ind4511
+average depth reached 68.937500
+min depth reached 5.000000
+Finished Generation 140
+
+------
+Generation time: 5.779127s
+Gen 141
+Best fitness - 1.0 - Ind4531
+average depth reached 69.406250
+min depth reached 27.000000
+Finished Generation 141
+
+------
+Generation time: 6.316745s
+Gen 142
+Best fitness - 3.0 - Ind4577
+average depth reached 66.437500
+min depth reached 8.000000
+Finished Generation 142
+
+------
+Generation time: 6.524232s
+Gen 143
+Best fitness - 2.0 - Ind4586
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 143
+
+------
+Generation time: 8.442131s
+Gen 144
+Best fitness - 2.0 - Ind4619
+average depth reached 70.750000
+min depth reached 63.000000
+Finished Generation 144
+
+------
+Generation time: 8.940217s
+Gen 145
+Best fitness - 1.0 - Ind4647
+average depth reached 70.343750
+min depth reached 50.000000
+Finished Generation 145
+
+------
+Generation time: 8.426896s
+Gen 146
+Best fitness - 1.0 - Ind4701
+average depth reached 70.625000
+min depth reached 59.000000
+Finished Generation 146
+
+------
+Generation time: 9.324504s
+Gen 147
+Best fitness - 1.0 - Ind4710
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 147
+
+------
+Generation time: 10.109550s
+Gen 148
+Best fitness - 1.0 - Ind4745
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 148
+
+------
+Generation time: 10.996662s
+Gen 149
+Best fitness - 1.0 - Ind4781
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 149
+
+------
+Generation time: 10.660624s
+Gen 150
+Best fitness - 1.0 - Ind4825
+average depth reached 70.843750
+min depth reached 66.000000
+Finished Generation 150
+
+------
+Generation time: 11.586794s
+Gen 151
+Best fitness - 1.0 - Ind4866
+average depth reached 70.656250
+min depth reached 60.000000
+Finished Generation 151
+
+------
+Generation time: 11.871431s
+Gen 152
+Best fitness - 2.0 - Ind4869
+average depth reached 69.500000
+min depth reached 47.000000
+Finished Generation 152
+
+------
+Generation time: 6.544009s
+Gen 153
+Best fitness - 4.0 - Ind4927
+average depth reached 30.375000
+min depth reached 0.000000
+Finished Generation 153
+Result (1->win; 0->lose):0, Score:4.0, timesteps:354
+Scores for chase: Vector(7.0, 3.0, 2.0, 1.0, 4.0)
+Average for chase: 3.4
+finished playing, stopping evolution...
+Results: List(chase Vector(7.0, 3.0, 2.0, 1.0, 4.0))
+
+------
+Generation time: 1.083028s
+Gen 154
+Best fitness - -0.25 - Ind4949
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 154

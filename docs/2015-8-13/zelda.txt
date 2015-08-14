@@ -1,0 +1,601 @@
+---
+Playing a game with evolving heuristic
+ ** Playing game gvgai/examples/gridphysics/zelda.txt, level gvgai/examples/gridphysics/zelda_lvl0.txt **
+Controller initialization time: 9 ms.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+
+------
+Generation time: 3.516888s
+Gen 0
+Best fitness - 2.0 - Ind17
+average depth reached 59.121212
+min depth reached 2.000000
+Finished Generation 0
+
+------
+Generation time: 1.899613s
+Gen 1
+Best fitness - 2.0 - Ind55
+average depth reached 60.437500
+min depth reached 2.000000
+Finished Generation 1
+
+------
+Generation time: 1.915704s
+Gen 2
+Best fitness - 2.0 - Ind98
+average depth reached 56.187500
+min depth reached 0.000000
+Finished Generation 2
+
+------
+Generation time: 1.433132s
+Gen 3
+Best fitness - 4.0 - Ind126
+average depth reached 51.468750
+min depth reached 0.000000
+Finished Generation 3
+
+------
+Generation time: 1.032674s
+Gen 4
+Best fitness - 2.0 - Ind133
+average depth reached 61.406250
+min depth reached 1.000000
+Finished Generation 4
+
+------
+Generation time: 1.183864s
+Gen 5
+Best fitness - 3.0 - Ind187
+average depth reached 60.562500
+min depth reached 2.000000
+Finished Generation 5
+
+------
+Generation time: 1.109674s
+Gen 6
+Best fitness - 1.0 - Ind202
+average depth reached 60.218750
+min depth reached 0.000000
+Finished Generation 6
+
+------
+Generation time: 0.981316s
+Gen 7
+Best fitness - 10.0 - Ind237
+average depth reached 64.812500
+min depth reached 3.000000
+Finished Generation 7
+
+------
+Generation time: 0.923447s
+Gen 8
+Best fitness - 3.0 - Ind276
+average depth reached 53.343750
+min depth reached 0.000000
+Finished Generation 8
+Result (1->win; 0->lose):1, Score:4.0, timesteps:221
+
+------
+Generation time: 0.170883s
+Gen 9
+Best fitness - 40.0 - Ind310
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 9
+
+------
+Generation time: 0.319584s
+Gen 10
+Best fitness - 40.0 - Ind332
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 10
+
+------
+Generation time: 0.168679s
+Gen 11
+Best fitness - 40.0 - Ind384
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 11
+
+------
+Generation time: 0.160070s
+Gen 12
+Best fitness - 40.0 - Ind417
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 12
+ ** Playing game gvgai/examples/gridphysics/zelda.txt, level gvgai/examples/gridphysics/zelda_lvl1.txt **
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+
+------
+Generation time: 0.160864s
+Gen 13
+Best fitness - 40.0 - Ind433
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 13
+Controller initialization time: 0 ms.
+--
+SKIPPING USELESS FITNESS VALUES (GEN 14)
+--
+
+------
+Generation time: 0.977090s
+Gen 14
+Best fitness - 2.0 - Ind462
+average depth reached 48.093750
+min depth reached 0.000000
+Finished Generation 14
+
+------
+Generation time: 1.412427s
+Gen 15
+Best fitness - 3.0 - Ind511
+average depth reached 55.000000
+min depth reached 1.000000
+Finished Generation 15
+
+------
+Generation time: 0.680131s
+Gen 16
+Best fitness - 2.0 - Ind532
+average depth reached 36.406250
+min depth reached 0.000000
+Finished Generation 16
+
+------
+Generation time: 0.927253s
+Gen 17
+Best fitness - 3.0 - Ind570
+average depth reached 66.718750
+min depth reached 1.000000
+Finished Generation 17
+
+------
+Generation time: 0.887418s
+Gen 18
+Best fitness - 3.0 - Ind591
+average depth reached 65.781250
+min depth reached 4.000000
+Finished Generation 18
+
+------
+Generation time: 0.963467s
+Gen 19
+Best fitness - 7.0 - Ind626
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 19
+
+------
+Generation time: 0.801716s
+Gen 20
+Best fitness - 5.0 - Ind665
+average depth reached 63.843750
+min depth reached 5.000000
+Finished Generation 20
+Result (1->win; 0->lose):0, Score:2.0, timesteps:155
+
+------
+Generation time: 0.534863s
+Gen 21
+Best fitness - 5.0 - Ind686
+average depth reached 46.812500
+min depth reached 0.000000
+Finished Generation 21
+
+------
+Generation time: 0.395421s
+Gen 22
+Best fitness - 40.0 - Ind737
+average depth reached 23.125000
+min depth reached 0.000000
+Finished Generation 22
+ ** Playing game gvgai/examples/gridphysics/zelda.txt, level gvgai/examples/gridphysics/zelda_lvl2.txt **
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Controller initialization time: 0 ms.
+--
+SKIPPING USELESS FITNESS VALUES (GEN 23)
+--
+
+------
+Generation time: 0.717186s
+Gen 23
+Best fitness - 7.0 - Ind744
+average depth reached 44.875000
+min depth reached 0.000000
+Finished Generation 23
+
+------
+Generation time: 0.804401s
+Gen 24
+Best fitness - 7.0 - Ind800
+average depth reached 55.906250
+min depth reached 0.000000
+Finished Generation 24
+
+------
+Generation time: 0.945145s
+Gen 25
+Best fitness - 7.0 - Ind825
+average depth reached 66.625000
+min depth reached 1.000000
+Finished Generation 25
+
+------
+Generation time: 0.945317s
+Gen 26
+Best fitness - 7.0 - Ind846
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 26
+
+------
+Generation time: 0.876709s
+Gen 27
+Best fitness - 7.0 - Ind871
+average depth reached 64.968750
+min depth reached 2.000000
+Finished Generation 27
+
+------
+Generation time: 0.697959s
+Gen 28
+Best fitness - 40.0 - Ind916
+average depth reached 49.187500
+min depth reached 0.000000
+Finished Generation 28
+
+------
+Generation time: 0.771080s
+Gen 29
+Best fitness - 60.0 - Ind945
+average depth reached 53.843750
+min depth reached 0.000000
+Finished Generation 29
+Result (1->win; 0->lose):1, Score:6.0, timesteps:138
+
+------
+Generation time: 0.317445s
+Gen 30
+Best fitness - 60.0 - Ind992
+average depth reached 15.531250
+min depth reached 0.000000
+Finished Generation 30
+
+------
+Generation time: 0.097930s
+Gen 31
+Best fitness - 60.0 - Ind1018
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 31
+
+------
+Generation time: 0.156635s
+Gen 32
+Best fitness - 60.0 - Ind1027
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 32
+
+------
+Generation time: 0.112227s
+Gen 33
+Best fitness - 60.0 - Ind1064
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 33
+
+------
+Generation time: 0.320635s
+Gen 34
+Best fitness - 60.0 - Ind1109
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 34
+
+------
+Generation time: 0.103800s
+Gen 35
+Best fitness - 60.0 - Ind1142
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 35
+
+------
+Generation time: 0.109790s
+Gen 36
+Best fitness - 60.0 - Ind1171
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 36
+ ** Playing game gvgai/examples/gridphysics/zelda.txt, level gvgai/examples/gridphysics/zelda_lvl3.txt **
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Controller initialization time: 0 ms.
+--
+SKIPPING USELESS FITNESS VALUES (GEN 37)
+--
+
+------
+Generation time: 0.422244s
+Gen 37
+Best fitness - 8.0 - Ind1208
+average depth reached 19.125000
+min depth reached 0.000000
+Finished Generation 37
+
+------
+Generation time: 0.583692s
+Gen 38
+Best fitness - 8.0 - Ind1240
+average depth reached 34.562500
+min depth reached 0.000000
+Finished Generation 38
+
+------
+Generation time: 0.604200s
+Gen 39
+Best fitness - 8.0 - Ind1258
+average depth reached 53.531250
+min depth reached 0.000000
+Finished Generation 39
+
+------
+Generation time: 0.903563s
+Gen 40
+Best fitness - 8.0 - Ind1296
+average depth reached 68.812500
+min depth reached 1.000000
+Finished Generation 40
+
+------
+Generation time: 0.859701s
+Gen 41
+Best fitness - 8.0 - Ind1340
+average depth reached 65.093750
+min depth reached 3.000000
+Finished Generation 41
+
+------
+Generation time: 0.552966s
+Gen 42
+Best fitness - 8.0 - Ind1368
+average depth reached 42.718750
+min depth reached 0.000000
+Finished Generation 42
+
+------
+Generation time: 0.727200s
+Gen 43
+Best fitness - 8.0 - Ind1382
+average depth reached 68.781250
+min depth reached 0.000000
+Finished Generation 43
+
+------
+Generation time: 0.778199s
+Gen 44
+Best fitness - 8.0 - Ind1439
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 44
+
+------
+Generation time: 0.961587s
+Gen 45
+Best fitness - 8.0 - Ind1474
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 45
+
+------
+Generation time: 0.728436s
+Gen 46
+Best fitness - 8.0 - Ind1483
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 46
+
+------
+Generation time: 0.733611s
+Gen 47
+Best fitness - 9.0 - Ind1525
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 47
+
+------
+Generation time: 0.760828s
+Gen 48
+Best fitness - 100.0 - Ind1561
+average depth reached 69.062500
+min depth reached 9.000000
+Finished Generation 48
+
+------
+Generation time: 0.570274s
+Gen 49
+Best fitness - 100.0 - Ind1585
+average depth reached 53.906250
+min depth reached 0.000000
+Finished Generation 49
+Result (1->win; 0->lose):1, Score:10.0, timesteps:206
+
+------
+Generation time: 0.082530s
+Gen 50
+Best fitness - 100.0 - Ind1607
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 50
+
+------
+Generation time: 0.114486s
+Gen 51
+Best fitness - 100.0 - Ind1645
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 51
+
+------
+Generation time: 0.085283s
+Gen 52
+Best fitness - 100.0 - Ind1691
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 52
+
+------
+Generation time: 0.092623s
+Gen 53
+Best fitness - 100.0 - Ind1727
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 53
+
+------
+Generation time: 0.120378s
+Gen 54
+Best fitness - 100.0 - Ind1732
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 54
+
+------
+Generation time: 0.091084s
+Gen 55
+Best fitness - 100.0 - Ind1786
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 55
+
+------
+Generation time: 0.103895s
+Gen 56
+Best fitness - 100.0 - Ind1815
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 56
+
+------
+Generation time: 0.099656s
+Gen 57
+Best fitness - 100.0 - Ind1834
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 57
+ ** Playing game gvgai/examples/gridphysics/zelda.txt, level gvgai/examples/gridphysics/zelda_lvl4.txt **
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Controller initialization time: 0 ms.
+--
+SKIPPING USELESS FITNESS VALUES (GEN 58)
+--
+
+------
+Generation time: 0.835164s
+Gen 58
+Best fitness - 6.0 - Ind1868
+average depth reached 30.562500
+min depth reached 0.000000
+Finished Generation 58
+
+------
+Generation time: 0.929497s
+Gen 59
+Best fitness - 5.0 - Ind1918
+average depth reached 57.562500
+min depth reached 1.000000
+Finished Generation 59
+
+------
+Generation time: 0.895604s
+Gen 60
+Best fitness - 5.0 - Ind1938
+average depth reached 53.750000
+min depth reached 0.000000
+Finished Generation 60
+
+------
+Generation time: 0.720690s
+Gen 61
+Best fitness - 7.0 - Ind1975
+average depth reached 53.000000
+min depth reached 0.000000
+Finished Generation 61
+
+------
+Generation time: 0.852588s
+Gen 62
+Best fitness - 60.0 - Ind2012
+average depth reached 66.687500
+min depth reached 2.000000
+Finished Generation 62
+
+------
+Generation time: 0.685908s
+Gen 63
+Best fitness - 60.0 - Ind2048
+average depth reached 49.125000
+min depth reached 0.000000
+Finished Generation 63
+Result (1->win; 0->lose):1, Score:6.0, timesteps:90
+Scores for zelda: Vector(4.0, 2.0, 6.0, 10.0, 6.0)
+Average for zelda: 5.6
+finished playing, stopping evolution...
+Results: List(zelda Vector(4.0, 2.0, 6.0, 10.0, 6.0))
+
+------
+Generation time: 0.133513s
+Gen 64
+Best fitness - 60.0 - Ind2066
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 64

@@ -1,0 +1,2149 @@
+---
+Playing a game with evolving heuristic
+ ** Playing game gvgai/examples/gridphysics/plaqueattack.txt, level gvgai/examples/gridphysics/plaqueattack_lvl0.txt **
+Controller initialization time: 35 ms.
+Too long: (exceeding 15ms): controller disqualified.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 6ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 10ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 7ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 6ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+
+------
+Generation time: 8.008513s
+Gen 0
+Best fitness - 16.0 - Ind9
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 0
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+
+------
+Generation time: 3.718293s
+Gen 1
+Best fitness - 14.0 - Ind53
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 1
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 7ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 4.156663s
+Gen 2
+Best fitness - 17.0 - Ind92
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 2
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+
+------
+Generation time: 3.137518s
+Gen 3
+Best fitness - 25.0 - Ind110
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 3
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+
+------
+Generation time: 3.371342s
+Gen 4
+Best fitness - 17.0 - Ind141
+average depth reached 71.000000
+min depth reached 71.000000
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Finished Generation 4
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+
+------
+Generation time: 3.484397s
+Gen 5
+Best fitness - 22.0 - Ind190
+average depth reached 71.000000
+min depth reached 71.000000
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Finished Generation 5
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 3.002373s
+Gen 6
+Best fitness - 9.0 - Ind216
+average depth reached 58.375000
+min depth reached 23.000000
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Finished Generation 6
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+
+------
+Generation time: 2.773541s
+Gen 7
+Best fitness - 220.0 - Ind229
+average depth reached 57.218750
+min depth reached 7.000000
+Finished Generation 7
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+
+------
+Generation time: 2.701509s
+Gen 8
+Best fitness - 200.0 - Ind284
+average depth reached 60.468750
+min depth reached 17.000000
+Finished Generation 8
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Too long: (exceeding 11ms): controller disqualified.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 2.357751s
+Gen 9
+Best fitness - 100.0 - Ind299
+average depth reached 54.125000
+min depth reached 12.000000
+Finished Generation 9
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Result (1->win; 0->lose):1, Score:10.0, timesteps:637
+
+------
+Generation time: 0.717298s
+Gen 10
+Best fitness - 100.0 - Ind337
+average depth reached 9.843750
+min depth reached 0.000000
+Finished Generation 10
+
+------
+Generation time: 0.180855s
+Gen 11
+Best fitness - 100.0 - Ind381
+average depth reached 0.129032
+min depth reached 0.000000
+Finished Generation 11
+
+------
+Generation time: 0.206955s
+Gen 12
+Best fitness - 100.0 - Ind416
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 12
+
+------
+Generation time: 0.370630s
+Gen 13
+Best fitness - 100.0 - Ind446
+average depth reached 0.062500
+min depth reached 0.000000
+Finished Generation 13
+ ** Playing game gvgai/examples/gridphysics/plaqueattack.txt, level gvgai/examples/gridphysics/plaqueattack_lvl1.txt **
+
+------
+Generation time: 0.256442s
+Gen 14
+Best fitness - 100.0 - Ind452
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 14
+Controller initialization time: 6 ms.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+--
+SKIPPING USELESS FITNESS VALUES (GEN 15)
+--
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+
+------
+Generation time: 3.220851s
+Gen 15
+Best fitness - 10.0 - Ind491
+average depth reached 52.140625
+min depth reached 0.000000
+Finished Generation 15
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+
+------
+Generation time: 3.765706s
+Gen 16
+Best fitness - 16.0 - Ind542
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 16
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 3.820872s
+Gen 17
+Best fitness - 13.0 - Ind554
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 17
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+
+------
+Generation time: 3.713914s
+Gen 18
+Best fitness - 13.0 - Ind608
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 18
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 3.987674s
+Gen 19
+Best fitness - 16.0 - Ind631
+average depth reached 70.593750
+min depth reached 59.000000
+Finished Generation 19
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+
+------
+Generation time: 2.894749s
+Gen 20
+Best fitness - 14.0 - Ind658
+average depth reached 51.562500
+min depth reached 18.000000
+Finished Generation 20
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+
+------
+Generation time: 1.516577s
+Gen 21
+Best fitness - 8.0 - Ind678
+average depth reached 16.687500
+min depth reached 0.000000
+Finished Generation 21
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+
+------
+Generation time: 0.246275s
+Gen 22
+Best fitness - -0.2 - Ind726
+average depth reached 0.000000
+min depth reached 0.000000
+Result (1->win; 0->lose):0, Score:5.0, timesteps:491
+Finished Generation 22
+
+------
+Generation time: 0.251252s
+Gen 23
+Best fitness - -0.14285714285714285 - Ind756
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 23
+
+------
+Generation time: 0.243008s
+Gen 24
+Best fitness - -0.14285714285714285 - Ind788
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 24
+
+------
+Generation time: 0.193715s
+Gen 25
+Best fitness - -0.14285714285714285 - Ind827
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 25
+
+------
+Generation time: 0.241634s
+Gen 26
+Best fitness - -0.14285714285714285 - Ind845
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 26
+ ** Playing game gvgai/examples/gridphysics/plaqueattack.txt, level gvgai/examples/gridphysics/plaqueattack_lvl2.txt **
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Controller initialization time: 4 ms.
+--
+SKIPPING USELESS FITNESS VALUES (GEN 27)
+--
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 2.489599s
+Gen 27
+Best fitness - 12.0 - Ind870
+average depth reached 42.156250
+min depth reached 0.000000
+Finished Generation 27
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+
+------
+Generation time: 3.020162s
+Gen 28
+Best fitness - 10.0 - Ind909
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 28
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 3.047132s
+Gen 29
+Best fitness - 13.0 - Ind959
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 29
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+
+------
+Generation time: 2.891070s
+Gen 30
+Best fitness - 6.0 - Ind976
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 30
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 2.760485s
+Gen 31
+Best fitness - 8.0 - Ind1019
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 31
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+
+------
+Generation time: 2.797050s
+Gen 32
+Best fitness - 12.0 - Ind1032
+average depth reached 70.625000
+min depth reached 59.000000
+Finished Generation 32
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+
+------
+Generation time: 2.591920s
+Gen 33
+Best fitness - 12.0 - Ind1088
+average depth reached 57.281250
+min depth reached 25.000000
+Finished Generation 33
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 1.616280s
+Gen 34
+Best fitness - 12.0 - Ind1116
+average depth reached 33.812500
+min depth reached 9.000000
+Finished Generation 34
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 1.828005s
+Gen 35
+Best fitness - 26.0 - Ind1128
+average depth reached 37.906250
+min depth reached 0.000000
+Finished Generation 35
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 0.666571s
+Gen 36
+Best fitness - -0.2 - Ind1168
+average depth reached 3.625000
+min depth reached 0.000000
+Finished Generation 36
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 1.508433s
+Gen 37
+Best fitness - 24.0 - Ind1213
+average depth reached 33.281250
+min depth reached 0.000000
+Finished Generation 37
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+
+------
+Generation time: 2.546677s
+Gen 38
+Best fitness - 220.0 - Ind1233
+average depth reached 70.781250
+min depth reached 65.000000
+Finished Generation 38
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+
+------
+Generation time: 2.022919s
+Gen 39
+Best fitness - 270.0 - Ind1280
+average depth reached 52.531250
+min depth reached 19.000000
+Finished Generation 39
+
+------
+Generation time: 1.151902s
+Gen 40
+Best fitness - 220.0 - Ind1289
+average depth reached 24.406250
+min depth reached 0.000000
+Finished Generation 40
+Result (1->win; 0->lose):1, Score:22.0, timesteps:651
+
+------
+Generation time: 0.477721s
+Gen 41
+Best fitness - 220.0 - Ind1345
+average depth reached 3.500000
+min depth reached 0.000000
+Finished Generation 41
+
+------
+Generation time: 0.092971s
+Gen 42
+Best fitness - 220.0 - Ind1367
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 42
+
+------
+Generation time: 0.118159s
+Gen 43
+Best fitness - 220.0 - Ind1393
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 43
+
+------
+Generation time: 0.138386s
+Gen 44
+Best fitness - 220.0 - Ind1434
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 44
+
+------
+Generation time: 0.083530s
+Gen 45
+Best fitness - 220.0 - Ind1454
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 45
+
+------
+Generation time: 0.072890s
+Gen 46
+Best fitness - 220.0 - Ind1479
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 46
+
+------
+Generation time: 0.092274s
+Gen 47
+Best fitness - 220.0 - Ind1530
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 47
+
+------
+Generation time: 0.149856s
+Gen 48
+Best fitness - 220.0 - Ind1570
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 48
+
+------
+Generation time: 0.085546s
+Gen 49
+Best fitness - 220.0 - Ind1588
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 49
+ ** Playing game gvgai/examples/gridphysics/plaqueattack.txt, level gvgai/examples/gridphysics/plaqueattack_lvl3.txt **
+
+------
+Generation time: 0.090343s
+Gen 50
+Best fitness - 220.0 - Ind1614
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 50
+Controller initialization time: 5 ms.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+--
+SKIPPING USELESS FITNESS VALUES (GEN 51)
+--
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 3.335373s
+Gen 51
+Best fitness - 12.0 - Ind1645
+average depth reached 43.265625
+min depth reached 0.000000
+Finished Generation 51
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 3.398622s
+Gen 52
+Best fitness - 9.0 - Ind1667
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 52
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 7ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+
+------
+Generation time: 3.600370s
+Gen 53
+Best fitness - -1.0 - Ind1718
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 53
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+
+------
+Generation time: 3.506930s
+Gen 54
+Best fitness - 1.0 - Ind1737
+average depth reached 69.843750
+min depth reached 60.000000
+Finished Generation 54
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+
+------
+Generation time: 2.136247s
+Gen 55
+Best fitness - -0.07692307692307693 - Ind1773
+average depth reached 35.343750
+min depth reached 16.000000
+Finished Generation 55
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+
+------
+Generation time: 1.253692s
+Gen 56
+Best fitness - -0.07692307692307693 - Ind1825
+average depth reached 11.062500
+min depth reached 0.000000
+Finished Generation 56
+Result (1->win; 0->lose):0, Score:-11.0, timesteps:350
+
+------
+Generation time: 0.140592s
+Gen 57
+Best fitness - -0.09090909090909091 - Ind1858
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 57
+
+------
+Generation time: 0.086955s
+Gen 58
+Best fitness - -0.09090909090909091 - Ind1890
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 58
+
+------
+Generation time: 0.090217s
+Gen 59
+Best fitness - -0.09090909090909091 - Ind1901
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 59
+
+------
+Generation time: 0.132385s
+Gen 60
+Best fitness - -0.09090909090909091 - Ind1944
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 60
+
+------
+Generation time: 0.097274s
+Gen 61
+Best fitness - -0.09090909090909091 - Ind1958
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 61
+
+------
+Generation time: 0.095651s
+Gen 62
+Best fitness - -0.09090909090909091 - Ind2010
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 62
+
+------
+Generation time: 0.111862s
+Gen 63
+Best fitness - -0.09090909090909091 - Ind2020
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 63
+ ** Playing game gvgai/examples/gridphysics/plaqueattack.txt, level gvgai/examples/gridphysics/plaqueattack_lvl4.txt **
+
+------
+Generation time: 0.538956s
+Gen 64
+Best fitness - -0.09090909090909091 - Ind2058
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 64
+Controller initialization time: 4 ms.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+--
+SKIPPING USELESS FITNESS VALUES (GEN 65)
+--
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 6ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 6ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+
+------
+Generation time: 3.407329s
+Gen 65
+Best fitness - 13.0 - Ind2089
+average depth reached 71.000000
+min depth reached 71.000000
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Finished Generation 65
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 8ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 6ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 7ms): applying ACTION_NIL.
+Overspent: (exceeding 6ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 6ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 6ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+
+------
+Generation time: 3.789641s
+Gen 66
+Best fitness - 26.0 - Ind2133
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 66
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 8ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+
+------
+Generation time: 3.567411s
+Gen 67
+Best fitness - 28.0 - Ind2164
+average depth reached 70.875000
+min depth reached 67.000000
+Finished Generation 67
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 7ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+
+------
+Generation time: 2.724815s
+Gen 68
+Best fitness - 20.0 - Ind2204
+average depth reached 49.625000
+min depth reached 23.000000
+Finished Generation 68
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 6ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 2.689113s
+Gen 69
+Best fitness - 23.0 - Ind2222
+average depth reached 54.343750
+min depth reached 14.000000
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Finished Generation 69
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 2.915908s
+Gen 70
+Best fitness - 27.0 - Ind2251
+average depth reached 57.156250
+min depth reached 20.000000
+Finished Generation 70
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 3.313314s
+Gen 71
+Best fitness - 29.0 - Ind2280
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 71
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+
+------
+Generation time: 2.538023s
+Gen 72
+Best fitness - 29.0 - Ind2335
+average depth reached 49.750000
+min depth reached 30.000000
+Finished Generation 72
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+
+------
+Generation time: 2.810672s
+Gen 73
+Best fitness - 29.0 - Ind2362
+average depth reached 54.187500
+min depth reached 16.000000
+Finished Generation 73
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 3.477262s
+Gen 74
+Best fitness - 29.0 - Ind2398
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 74
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+
+------
+Generation time: 3.485077s
+Gen 75
+Best fitness - 27.0 - Ind2407
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 75
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+
+------
+Generation time: 3.590829s
+Gen 76
+Best fitness - 27.0 - Ind2440
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 76
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+
+------
+Generation time: 4.176883s
+Gen 77
+Best fitness - 53.0 - Ind2478
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 77
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 3.835040s
+Gen 78
+Best fitness - 36.0 - Ind2517
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 78
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+
+------
+Generation time: 4.067861s
+Gen 79
+Best fitness - 36.0 - Ind2531
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 79
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 4.010869s
+Gen 80
+Best fitness - 610.0 - Ind2592
+average depth reached 70.968750
+min depth reached 70.000000
+Finished Generation 80
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 4.105829s
+Gen 81
+Best fitness - 44.0 - Ind2615
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 81
+Overspent: (exceeding 7ms): applying ACTION_NIL.
+Overspent: (exceeding 7ms): applying ACTION_NIL.
+Overspent: (exceeding 7ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 10ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 4.191337s
+Gen 82
+Best fitness - 46.0 - Ind2644
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 82
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 6ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 7ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 7ms): applying ACTION_NIL.
+Overspent: (exceeding 8ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+
+------
+Generation time: 4.444066s
+Gen 83
+Best fitness - 58.0 - Ind2668
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 83
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Result (1->win; 0->lose):1, Score:58.0, timesteps:1374
+Scores for plaqueattack: Vector(10.0, 5.0, 22.0, -11.0, 58.0)
+Average for plaqueattack: 16.8
+finished playing, stopping evolution...
+Results: List(plaqueattack Vector(10.0, 5.0, 22.0, -11.0, 58.0))
+
+------
+Generation time: 2.774648s
+Gen 84
+Best fitness - 620.0 - Ind2716
+average depth reached 45.031250
+min depth reached 0.000000
+Finished Generation 84

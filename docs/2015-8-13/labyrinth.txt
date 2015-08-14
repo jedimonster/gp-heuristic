@@ -1,0 +1,4 @@
+---
+Playing a game with evolving heuristic
+ ** Playing game gvgai/examples/gridphysics/boulderchaseh.txt, level gvgai/examples/gridphysics/boulderchaseh_lvl0.txt **
+Error reading the file gvgai/examples/gridphysics/boulderchaseh.txt: java.io.FileNotFoundException: gvgai/examples/gridphysics/boulderchaseh.txt (No such file or directory)

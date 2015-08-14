@@ -1,0 +1,4 @@
+---
+Playing a game with evolving heuristic
+ ** Playing game gvgai/examples/gridphysics/escape.txt, level gvgai/examples/gridphysics/escape_lvl0.txt **
+Controller initialization time: 8 ms.

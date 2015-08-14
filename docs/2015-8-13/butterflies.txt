@@ -1,0 +1,479 @@
+---
+Playing a game with evolving heuristic
+ ** Playing game gvgai/examples/gridphysics/butterflies.txt, level gvgai/examples/gridphysics/butterflies_lvl0.txt **
+Controller initialization time: 26 ms.
+Too long: (exceeding 33ms): controller disqualified.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 4.285769s
+Gen 0
+Best fitness - 10.0 - Ind29
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 0
+
+------
+Generation time: 2.100989s
+Gen 1
+Best fitness - 12.0 - Ind43
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 1
+
+------
+Generation time: 1.560419s
+Gen 2
+Best fitness - 260.0 - Ind90
+average depth reached 70.062500
+min depth reached 41.000000
+Finished Generation 2
+
+------
+Generation time: 1.498327s
+Gen 3
+Best fitness - 260.0 - Ind105
+average depth reached 70.156250
+min depth reached 44.000000
+Finished Generation 3
+
+------
+Generation time: 1.244841s
+Gen 4
+Best fitness - 260.0 - Ind152
+average depth reached 63.062500
+min depth reached 13.000000
+Finished Generation 4
+Result (1->win; 0->lose):1, Score:26.0, timesteps:168
+
+------
+Generation time: 0.592482s
+Gen 5
+Best fitness - 260.0 - Ind191
+average depth reached 25.156250
+min depth reached 0.000000
+Finished Generation 5
+
+------
+Generation time: 0.189067s
+Gen 6
+Best fitness - 260.0 - Ind210
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 6
+
+------
+Generation time: 0.277867s
+Gen 7
+Best fitness - 260.0 - Ind249
+average depth reached 4.468750
+min depth reached 0.000000
+Finished Generation 7
+
+------
+Generation time: 0.215642s
+Gen 8
+Best fitness - 260.0 - Ind285
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 8
+ ** Playing game gvgai/examples/gridphysics/butterflies.txt, level gvgai/examples/gridphysics/butterflies_lvl1.txt **
+
+------
+Generation time: 0.539181s
+Gen 9
+Best fitness - 260.0 - Ind298
+average depth reached 2.218750
+min depth reached 0.000000
+Controller initialization time: 2 ms.
+Finished Generation 9
+--
+SKIPPING USELESS FITNESS VALUES (GEN 10)
+--
+
+------
+Generation time: 0.789833s
+Gen 10
+Best fitness - 300.0 - Ind347
+average depth reached 70.812500
+min depth reached 59.000000
+Finished Generation 10
+
+------
+Generation time: 1.233666s
+Gen 11
+Best fitness - 300.0 - Ind386
+average depth reached 70.281250
+min depth reached 53.000000
+Finished Generation 11
+
+------
+Generation time: 0.899289s
+Gen 12
+Best fitness - 300.0 - Ind416
+average depth reached 65.406250
+min depth reached 33.000000
+Finished Generation 12
+
+------
+Generation time: 1.025102s
+Gen 13
+Best fitness - 300.0 - Ind419
+average depth reached 57.406250
+min depth reached 18.000000
+Finished Generation 13
+
+------
+Generation time: 0.808073s
+Gen 14
+Best fitness - 320.0 - Ind451
+average depth reached 52.437500
+min depth reached 18.000000
+Finished Generation 14
+
+------
+Generation time: 0.528572s
+Gen 15
+Best fitness - 300.0 - Ind508
+average depth reached 30.906250
+min depth reached 4.000000
+Finished Generation 15
+
+------
+Generation time: 0.617812s
+Gen 16
+Best fitness - 300.0 - Ind535
+average depth reached 15.968750
+min depth reached 0.000000
+Finished Generation 16
+Result (1->win; 0->lose):1, Score:30.0, timesteps:134
+
+------
+Generation time: 0.153263s
+Gen 17
+Best fitness - 300.0 - Ind562
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 17
+
+------
+Generation time: 0.204886s
+Gen 18
+Best fitness - 300.0 - Ind589
+average depth reached 2.218750
+min depth reached 0.000000
+Finished Generation 18
+
+------
+Generation time: 0.159738s
+Gen 19
+Best fitness - 300.0 - Ind638
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 19
+
+------
+Generation time: 0.153756s
+Gen 20
+Best fitness - 300.0 - Ind645
+average depth reached 0.062500
+min depth reached 0.000000
+Finished Generation 20
+
+------
+Generation time: 0.226234s
+Gen 21
+Best fitness - 300.0 - Ind693
+average depth reached 2.218750
+min depth reached 0.000000
+Finished Generation 21
+ ** Playing game gvgai/examples/gridphysics/butterflies.txt, level gvgai/examples/gridphysics/butterflies_lvl2.txt **
+Controller initialization time: 2 ms.
+--
+SKIPPING USELESS FITNESS VALUES (GEN 22)
+--
+
+------
+Generation time: 1.342126s
+Gen 22
+Best fitness - 260.0 - Ind712
+average depth reached 35.906250
+min depth reached 0.000000
+Finished Generation 22
+
+------
+Generation time: 1.162089s
+Gen 23
+Best fitness - 240.0 - Ind756
+average depth reached 66.781250
+min depth reached 24.000000
+Finished Generation 23
+
+------
+Generation time: 1.175639s
+Gen 24
+Best fitness - 26.0 - Ind775
+average depth reached 70.312500
+min depth reached 49.000000
+Finished Generation 24
+
+------
+Generation time: 1.076458s
+Gen 25
+Best fitness - 26.0 - Ind833
+average depth reached 70.343750
+min depth reached 59.000000
+Finished Generation 25
+
+------
+Generation time: 0.992598s
+Gen 26
+Best fitness - 32.0 - Ind839
+average depth reached 70.531250
+min depth reached 61.000000
+Finished Generation 26
+
+------
+Generation time: 0.937984s
+Gen 27
+Best fitness - 34.0 - Ind883
+average depth reached 69.125000
+min depth reached 38.000000
+Finished Generation 27
+
+------
+Generation time: 0.909954s
+Gen 28
+Best fitness - 34.0 - Ind905
+average depth reached 62.718750
+min depth reached 17.000000
+Finished Generation 28
+
+------
+Generation time: 0.762362s
+Gen 29
+Best fitness - 32.0 - Ind956
+average depth reached 52.281250
+min depth reached 3.000000
+Finished Generation 29
+
+------
+Generation time: 0.766009s
+Gen 30
+Best fitness - 42.0 - Ind975
+average depth reached 48.062500
+min depth reached 0.000000
+Finished Generation 30
+
+------
+Generation time: 0.825850s
+Gen 31
+Best fitness - 44.0 - Ind1002
+average depth reached 47.031250
+min depth reached 0.000000
+Finished Generation 31
+
+------
+Generation time: 1.049692s
+Gen 32
+Best fitness - 44.0 - Ind1058
+average depth reached 57.312500
+min depth reached 0.000000
+Finished Generation 32
+
+------
+Generation time: 0.849157s
+Gen 33
+Best fitness - 44.0 - Ind1067
+average depth reached 49.937500
+min depth reached 0.000000
+Finished Generation 33
+
+------
+Generation time: 0.477401s
+Gen 34
+Best fitness - 40.0 - Ind1119
+average depth reached 30.125000
+min depth reached 0.000000
+Finished Generation 34
+Result (1->win; 0->lose):0, Score:36.0, timesteps:261
+
+------
+Generation time: 0.388445s
+Gen 35
+Best fitness - 44.0 - Ind1125
+average depth reached 22.687500
+min depth reached 0.000000
+Finished Generation 35
+
+------
+Generation time: 0.290844s
+Gen 36
+Best fitness - 40.0 - Ind1186
+average depth reached 18.343750
+min depth reached 0.000000
+Finished Generation 36
+
+------
+Generation time: 0.261498s
+Gen 37
+Best fitness - 42.0 - Ind1212
+average depth reached 12.968750
+min depth reached 0.000000
+Finished Generation 37
+ ** Playing game gvgai/examples/gridphysics/butterflies.txt, level gvgai/examples/gridphysics/butterflies_lvl3.txt **
+Controller initialization time: 2 ms.
+--
+SKIPPING USELESS FITNESS VALUES (GEN 38)
+--
+
+------
+Generation time: 1.939253s
+Gen 38
+Best fitness - 2.0 - Ind1246
+average depth reached 43.656250
+min depth reached 0.000000
+Finished Generation 38
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 5ms): applying ACTION_NIL.
+
+------
+Generation time: 1.212118s
+Gen 39
+Best fitness - 18.0 - Ind1273
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 39
+
+------
+Generation time: 1.244498s
+Gen 40
+Best fitness - 18.0 - Ind1309
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 40
+
+------
+Generation time: 0.827724s
+Gen 41
+Best fitness - 18.0 - Ind1340
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 41
+
+------
+Generation time: 0.808105s
+Gen 42
+Best fitness - 220.0 - Ind1354
+average depth reached 70.531250
+min depth reached 56.000000
+Finished Generation 42
+
+------
+Generation time: 0.706377s
+Gen 43
+Best fitness - 20.0 - Ind1389
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 43
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+
+------
+Generation time: 0.737315s
+Gen 44
+Best fitness - 200.0 - Ind1417
+average depth reached 67.187500
+min depth reached 10.000000
+Finished Generation 44
+
+------
+Generation time: 0.740018s
+Gen 45
+Best fitness - 220.0 - Ind1469
+average depth reached 65.281250
+min depth reached 2.000000
+Finished Generation 45
+
+------
+Generation time: 0.860023s
+Gen 46
+Best fitness - 220.0 - Ind1501
+average depth reached 63.125000
+min depth reached 8.000000
+Finished Generation 46
+Result (1->win; 0->lose):1, Score:22.0, timesteps:199
+
+------
+Generation time: 0.183233s
+Gen 47
+Best fitness - 220.0 - Ind1530
+average depth reached 4.812500
+min depth reached 0.000000
+Finished Generation 47
+
+------
+Generation time: 0.101859s
+Gen 48
+Best fitness - 220.0 - Ind1570
+average depth reached 2.218750
+min depth reached 0.000000
+Finished Generation 48
+
+------
+Generation time: 0.134181s
+Gen 49
+Best fitness - 220.0 - Ind1588
+average depth reached 2.218750
+min depth reached 0.000000
+Finished Generation 49
+
+------
+Generation time: 0.223401s
+Gen 50
+Best fitness - 220.0 - Ind1614
+average depth reached 7.781250
+min depth reached 0.000000
+Finished Generation 50
+
+------
+Generation time: 0.123309s
+Gen 51
+Best fitness - 220.0 - Ind1653
+average depth reached 2.218750
+min depth reached 0.000000
+Finished Generation 51
+ ** Playing game gvgai/examples/gridphysics/butterflies.txt, level gvgai/examples/gridphysics/butterflies_lvl4.txt **
+Controller initialization time: 1 ms.
+--
+SKIPPING USELESS FITNESS VALUES (GEN 52)
+--
+
+------
+Generation time: 1.140087s
+Gen 52
+Best fitness - 0.0 - Ind1670
+average depth reached 38.843750
+min depth reached 0.000000
+Finished Generation 52
+
+------
+Generation time: 0.749881s
+Gen 53
+Best fitness - 140.0 - Ind1704
+average depth reached 69.093750
+min depth reached 20.000000
+Finished Generation 53
+
+------
+Generation time: 1.185181s
+Gen 54
+Best fitness - 140.0 - Ind1760
+average depth reached 60.031250
+min depth reached 0.000000
+Result (1->win; 0->lose):1, Score:14.0, timesteps:72
+Scores for butterflies: Vector(26.0, 30.0, 36.0, 22.0, 14.0)
+Average for butterflies: 25.6
+finished playing, stopping evolution...
+Results: List(butterflies Vector(26.0, 30.0, 36.0, 22.0, 14.0))
+Finished Generation 54

@@ -1,0 +1,865 @@
+---
+Playing a game with evolving heuristic
+ ** Playing game gvgai/examples/gridphysics/seaquest.txt, level gvgai/examples/gridphysics/seaquest_lvl0.txt **
+Controller initialization time: 22 ms.
+Too long: (exceeding 13ms): controller disqualified.
+Result (1->win; 0->lose):0, Score:0.0, timesteps:8
+
+------
+Generation time: 2.230726s
+Gen 0
+Best fitness - 2.0 - Ind0
+average depth reached 7.424242
+min depth reached 0.000000
+Finished Generation 0
+
+------
+Generation time: 0.345695s
+Gen 1
+Best fitness - -1000.0 - Ind50
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 1
+ ** Playing game gvgai/examples/gridphysics/seaquest.txt, level gvgai/examples/gridphysics/seaquest_lvl1.txt **
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+
+------
+Generation time: 0.246985s
+Gen 2
+Best fitness - -1000.0 - Ind70
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 2
+Controller initialization time: 2 ms.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+--
+SKIPPING USELESS FITNESS VALUES (GEN 3)
+--
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 2.577112s
+Gen 3
+Best fitness - 1000.0 - Ind122
+average depth reached 50.046875
+min depth reached 0.000000
+Finished Generation 3
+
+------
+Generation time: 2.198461s
+Gen 4
+Best fitness - 4.0 - Ind135
+average depth reached 69.281250
+min depth reached 16.000000
+Finished Generation 4
+
+------
+Generation time: 1.578193s
+Gen 5
+Best fitness - 7.0 - Ind191
+average depth reached 46.687500
+min depth reached 1.000000
+Finished Generation 5
+
+------
+Generation time: 1.717141s
+Gen 6
+Best fitness - 8.0 - Ind200
+average depth reached 58.000000
+min depth reached 0.000000
+Finished Generation 6
+
+------
+Generation time: 1.522023s
+Gen 7
+Best fitness - 20.0 - Ind257
+average depth reached 55.281250
+min depth reached 3.000000
+Finished Generation 7
+
+------
+Generation time: 1.764583s
+Gen 8
+Best fitness - 27.0 - Ind289
+average depth reached 65.781250
+min depth reached 6.000000
+Finished Generation 8
+
+------
+Generation time: 1.684191s
+Gen 9
+Best fitness - 22.0 - Ind304
+average depth reached 67.687500
+min depth reached 0.000000
+Finished Generation 9
+
+------
+Generation time: 1.252944s
+Gen 10
+Best fitness - 20.0 - Ind329
+average depth reached 59.468750
+min depth reached 2.000000
+Finished Generation 10
+
+------
+Generation time: 2.068212s
+Gen 11
+Best fitness - 19.0 - Ind369
+average depth reached 64.312500
+min depth reached 2.000000
+Finished Generation 11
+
+------
+Generation time: 1.290680s
+Gen 12
+Best fitness - 23.0 - Ind388
+average depth reached 54.593750
+min depth reached 0.000000
+Finished Generation 12
+
+------
+Generation time: 1.585921s
+Gen 13
+Best fitness - 28.0 - Ind443
+average depth reached 64.500000
+min depth reached 1.000000
+Finished Generation 13
+Result (1->win; 0->lose):0, Score:16.0, timesteps:438
+
+------
+Generation time: 1.366258s
+Gen 14
+Best fitness - 1016.0 - Ind453
+average depth reached 64.468750
+min depth reached 0.000000
+Finished Generation 14
+ ** Playing game gvgai/examples/gridphysics/seaquest.txt, level gvgai/examples/gridphysics/seaquest_lvl2.txt **
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Controller initialization time: 1 ms.
+--
+SKIPPING USELESS FITNESS VALUES (GEN 15)
+--
+
+------
+Generation time: 1.359625s
+Gen 15
+Best fitness - 12.0 - Ind490
+average depth reached 68.781250
+min depth reached 0.000000
+Finished Generation 15
+
+------
+Generation time: 1.488702s
+Gen 16
+Best fitness - 9.0 - Ind544
+average depth reached 65.000000
+min depth reached 4.000000
+Finished Generation 16
+
+------
+Generation time: 1.712493s
+Gen 17
+Best fitness - 1002.0 - Ind568
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 17
+
+------
+Generation time: 1.848680s
+Gen 18
+Best fitness - 1003.0 - Ind590
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 18
+
+------
+Generation time: 1.763819s
+Gen 19
+Best fitness - 1007.0 - Ind626
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 19
+
+------
+Generation time: 1.806019s
+Gen 20
+Best fitness - 1007.0 - Ind670
+average depth reached 64.343750
+min depth reached 0.000000
+Finished Generation 20
+
+------
+Generation time: 1.571321s
+Gen 21
+Best fitness - 1007.0 - Ind687
+average depth reached 54.375000
+min depth reached 2.000000
+Finished Generation 21
+
+------
+Generation time: 2.248285s
+Gen 22
+Best fitness - 1005.0 - Ind736
+average depth reached 69.281250
+min depth reached 16.000000
+Finished Generation 22
+
+------
+Generation time: 2.348320s
+Gen 23
+Best fitness - 2006.0 - Ind767
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 23
+
+------
+Generation time: 2.259324s
+Gen 24
+Best fitness - 1009.0 - Ind794
+average depth reached 67.125000
+min depth reached 9.000000
+Finished Generation 24
+
+------
+Generation time: 2.038703s
+Gen 25
+Best fitness - 2007.0 - Ind834
+average depth reached 64.406250
+min depth reached 0.000000
+Finished Generation 25
+
+------
+Generation time: 1.913730s
+Gen 26
+Best fitness - 2008.0 - Ind851
+average depth reached 61.718750
+min depth reached 9.000000
+Finished Generation 26
+
+------
+Generation time: 2.031355s
+Gen 27
+Best fitness - 2010.0 - Ind897
+average depth reached 65.156250
+min depth reached 8.000000
+Finished Generation 27
+
+------
+Generation time: 1.962327s
+Gen 28
+Best fitness - 2008.0 - Ind918
+average depth reached 56.718750
+min depth reached 1.000000
+Finished Generation 28
+
+------
+Generation time: 1.607020s
+Gen 29
+Best fitness - 3011.0 - Ind943
+average depth reached 46.281250
+min depth reached 0.000000
+Finished Generation 29
+
+------
+Generation time: 1.951035s
+Gen 30
+Best fitness - 3013.0 - Ind969
+average depth reached 60.156250
+min depth reached 0.000000
+Finished Generation 30
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 2.580345s
+Gen 31
+Best fitness - 3014.0 - Ind1026
+average depth reached 63.937500
+min depth reached 0.000000
+Finished Generation 31
+
+------
+Generation time: 1.807955s
+Gen 32
+Best fitness - 3012.0 - Ind1037
+average depth reached 52.562500
+min depth reached 1.000000
+Finished Generation 32
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 2.125016s
+Gen 33
+Best fitness - 3015.0 - Ind1063
+average depth reached 63.031250
+min depth reached 1.000000
+Finished Generation 33
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 2.232704s
+Gen 34
+Best fitness - 3017.0 - Ind1113
+average depth reached 63.125000
+min depth reached 1.000000
+Finished Generation 34
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 2.427286s
+Gen 35
+Best fitness - 3017.0 - Ind1126
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 35
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 2.010605s
+Gen 36
+Best fitness - 4014.0 - Ind1183
+average depth reached 54.031250
+min depth reached 0.000000
+Finished Generation 36
+
+------
+Generation time: 2.088643s
+Gen 37
+Best fitness - 40170.0 - Ind1217
+average depth reached 61.968750
+min depth reached 14.000000
+Finished Generation 37
+
+------
+Generation time: 1.474483s
+Gen 38
+Best fitness - 40170.0 - Ind1232
+average depth reached 34.031250
+min depth reached 10.000000
+Finished Generation 38
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 1.062881s
+Gen 39
+Best fitness - 40190.0 - Ind1267
+average depth reached 17.437500
+min depth reached 10.000000
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Finished Generation 39
+
+------
+Generation time: 0.702595s
+Gen 40
+Best fitness - 40190.0 - Ind1301
+average depth reached 5.687500
+min depth reached 2.000000
+Finished Generation 40
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 0.521025s
+Gen 41
+Best fitness - 40170.0 - Ind1329
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 41
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Result (1->win; 0->lose):1, Score:4016.0, timesteps:1000
+
+------
+Generation time: 0.194221s
+Gen 42
+Best fitness - 40160.0 - Ind1370
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 42
+
+------
+Generation time: 0.422913s
+Gen 43
+Best fitness - 40160.0 - Ind1382
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 43
+
+------
+Generation time: 0.129729s
+Gen 44
+Best fitness - 40160.0 - Ind1439
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 44
+
+------
+Generation time: 0.121313s
+Gen 45
+Best fitness - 40160.0 - Ind1474
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 45
+
+------
+Generation time: 0.100736s
+Gen 46
+Best fitness - 40160.0 - Ind1483
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 46
+ ** Playing game gvgai/examples/gridphysics/seaquest.txt, level gvgai/examples/gridphysics/seaquest_lvl3.txt **
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+
+------
+Generation time: 0.166491s
+Gen 47
+Best fitness - 40160.0 - Ind1526
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 47
+Controller initialization time: 1 ms.
+--
+SKIPPING USELESS FITNESS VALUES (GEN 48)
+--
+
+------
+Generation time: 0.085521s
+Gen 48
+Best fitness - -1000.0 - Ind1564
+average depth reached 6.718750
+min depth reached 0.000000
+Finished Generation 48
+
+------
+Generation time: 0.176585s
+Gen 49
+Best fitness - -1000.0 - Ind1587
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 49
+Result (1->win; 0->lose):0, Score:0.0, timesteps:18
+
+------
+Generation time: 0.141330s
+Gen 50
+Best fitness - -1000.0 - Ind1608
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 50
+
+------
+Generation time: 0.127614s
+Gen 51
+Best fitness - -1000.0 - Ind1646
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 51
+
+------
+Generation time: 0.117189s
+Gen 52
+Best fitness - -1000.0 - Ind1692
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 52
+
+------
+Generation time: 0.144284s
+Gen 53
+Best fitness - -1000.0 - Ind1727
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 53
+
+------
+Generation time: 0.108807s
+Gen 54
+Best fitness - -1000.0 - Ind1731
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 54
+
+------
+Generation time: 0.150126s
+Gen 55
+Best fitness - -1000.0 - Ind1785
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 55
+
+------
+Generation time: 0.117538s
+Gen 56
+Best fitness - -1000.0 - Ind1816
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 56
+ ** Playing game gvgai/examples/gridphysics/seaquest.txt, level gvgai/examples/gridphysics/seaquest_lvl4.txt **
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Failed fitness evaluation - retrying
+Controller initialization time: 1 ms.
+--
+SKIPPING USELESS FITNESS VALUES (GEN 57)
+--
+
+------
+Generation time: 2.146294s
+Gen 57
+Best fitness - 3.0 - Ind1852
+average depth reached 35.406250
+min depth reached 0.000000
+Finished Generation 57
+
+------
+Generation time: 2.154617s
+Gen 58
+Best fitness - 3.0 - Ind1867
+average depth reached 63.031250
+min depth reached 2.000000
+Finished Generation 58
+
+------
+Generation time: 2.425083s
+Gen 59
+Best fitness - 1002.0 - Ind1913
+average depth reached 64.750000
+min depth reached 0.000000
+Finished Generation 59
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+Overspent: (exceeding 4ms): applying ACTION_NIL.
+
+------
+Generation time: 2.216304s
+Gen 60
+Best fitness - 20.0 - Ind1941
+average depth reached 56.625000
+min depth reached 4.000000
+Finished Generation 60
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 2.358675s
+Gen 61
+Best fitness - 3.0 - Ind1977
+average depth reached 57.406250
+min depth reached 2.000000
+Finished Generation 61
+
+------
+Generation time: 2.624624s
+Gen 62
+Best fitness - 5.0 - Ind1987
+average depth reached 62.281250
+min depth reached 0.000000
+Finished Generation 62
+
+------
+Generation time: 2.692591s
+Gen 63
+Best fitness - 2.0 - Ind2048
+average depth reached 66.656250
+min depth reached 0.000000
+Finished Generation 63
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 2.937843s
+Gen 64
+Best fitness - 2.0 - Ind2077
+average depth reached 65.000000
+min depth reached 5.000000
+Finished Generation 64
+
+------
+Generation time: 2.764000s
+Gen 65
+Best fitness - 2.0 - Ind2097
+average depth reached 64.875000
+min depth reached 0.000000
+Finished Generation 65
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 2.857845s
+Gen 66
+Best fitness - 3.0 - Ind2120
+average depth reached 63.562500
+min depth reached 4.000000
+Finished Generation 66
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 2.421217s
+Gen 67
+Best fitness - 9.0 - Ind2178
+average depth reached 53.218750
+min depth reached 0.000000
+Finished Generation 67
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+
+------
+Generation time: 2.824959s
+Gen 68
+Best fitness - 1014.0 - Ind2197
+average depth reached 66.656250
+min depth reached 1.000000
+Finished Generation 68
+Overspent: (exceeding 6ms): applying ACTION_NIL.
+
+------
+Generation time: 2.802290s
+Gen 69
+Best fitness - 1013.0 - Ind2236
+average depth reached 64.812500
+min depth reached 1.000000
+Finished Generation 69
+
+------
+Generation time: 2.540941s
+Gen 70
+Best fitness - 1016.0 - Ind2273
+average depth reached 62.281250
+min depth reached 0.000000
+Finished Generation 70
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 2.914693s
+Gen 71
+Best fitness - 1015.0 - Ind2302
+average depth reached 65.093750
+min depth reached 0.000000
+Finished Generation 71
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 3.136699s
+Gen 72
+Best fitness - 1014.0 - Ind2317
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 72
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+
+------
+Generation time: 3.801450s
+Gen 73
+Best fitness - 1015.0 - Ind2348
+average depth reached 60.843750
+min depth reached 4.000000
+Finished Generation 73
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 2.570193s
+Gen 74
+Best fitness - 1015.0 - Ind2396
+average depth reached 44.906250
+min depth reached 0.000000
+Finished Generation 74
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 3.125596s
+Gen 75
+Best fitness - 1015.0 - Ind2420
+average depth reached 51.937500
+min depth reached 0.000000
+Finished Generation 75
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 3.184207s
+Gen 76
+Best fitness - 1016.0 - Ind2461
+average depth reached 67.125000
+min depth reached 4.000000
+Finished Generation 76
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+
+------
+Generation time: 3.216114s
+Gen 77
+Best fitness - 1015.0 - Ind2489
+average depth reached 68.812500
+min depth reached 1.000000
+Finished Generation 77
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 3ms): applying ACTION_NIL.
+
+------
+Generation time: 3.161235s
+Gen 78
+Best fitness - 20140.0 - Ind2524
+average depth reached 62.718750
+min depth reached 8.000000
+Finished Generation 78
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 2.299901s
+Gen 79
+Best fitness - 20180.0 - Ind2545
+average depth reached 33.875000
+min depth reached 0.000000
+Finished Generation 79
+Overspent: (exceeding 2ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 1.417357s
+Gen 80
+Best fitness - 10200.0 - Ind2584
+average depth reached 17.312500
+min depth reached 8.000000
+Finished Generation 80
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+Overspent: (exceeding 0ms): applying ACTION_NIL.
+
+------
+Generation time: 0.822248s
+Gen 81
+Best fitness - 10180.0 - Ind2614
+average depth reached 3.718750
+min depth reached 0.000000
+Finished Generation 81
+Overspent: (exceeding 1ms): applying ACTION_NIL.
+
+------
+Generation time: 0.354583s
+Gen 82
+Best fitness - 10180.0 - Ind2654
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 82
+Result (1->win; 0->lose):1, Score:1018.0, timesteps:1000
+Scores for seaquest: Vector(0.0, 16.0, 4016.0, 0.0, 1018.0)
+Average for seaquest: 1010.0
+finished playing, stopping evolution...
+Results: List(seaquest Vector(0.0, 16.0, 4016.0, 0.0, 1018.0))
+
+------
+Generation time: 0.158273s
+Gen 83
+Best fitness - 10180.0 - Ind2689
+average depth reached 0.000000
+min depth reached 0.000000
+Finished Generation 83

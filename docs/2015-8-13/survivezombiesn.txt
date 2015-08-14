@@ -1,0 +1,27 @@
+---
+Playing a game with evolving heuristic
+ ** Playing game gvgai/examples/gridphysics/sokoban.txt, level gvgai/examples/gridphysics/sokoban_lvl0.txt **
+Controller initialization time: 10 ms.
+
+------
+Generation time: 2.773994s
+Gen 0
+Best fitness - 0.0 - Ind8
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 0
+
+------
+Generation time: 1.352210s
+Gen 1
+Best fitness - 0.0 - Ind50
+average depth reached 71.000000
+min depth reached 71.000000
+Finished Generation 1
+
+------
+Generation time: 1.118811s
+Gen 2
+Best fitness - 0.0 - Ind70
+average depth reached 71.000000
+min depth reached 71.000000

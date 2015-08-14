@@ -1,0 +1,41 @@
+---
+Playing a game with evolving heuristic
+ ** Playing game gvgai/examples/gridphysics/jaws.txt, level gvgai/examples/gridphysics/jaws_lvl0.txt **
+Controller initialization time: 9 ms.
+Exception java.lang.ArrayIndexOutOfBoundsException: -1while running:
+import core.game.Observation;
+import evolution_impl.GPProgram;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created By Itay Azaria
+ * Date: 9/17/2014
+ */
+public class Ind16 implements GPProgram {
+
+    public java.lang.Double heuristic49(evolution_impl.fitness.dummyagent.StateObservationWrapper arg0) {
+        return 0.19084165405589798 * arg0.countNearVicinityNPCs(Integer.valueOf("1")) + -0.6371745624987502 * arg0.getGameScore() + 0.8015768275641725;
+    }
+
+    public java.lang.Double heuristic50(evolution_impl.fitness.dummyagent.StateObservationWrapper arg0) {
+        double acc = 1.0;
+        for (java.lang.Double item : arg0.getMovableDistanceFromImmovable(Integer.valueOf("1"))) {
+            acc = Math.min(item.doubleValue(), acc);
+        }
+        return -0.4267980480699781 * acc + -0.3857194953442806;
+    }
+
+    public java.lang.Double heuristic51(evolution_impl.fitness.dummyagent.StateObservationWrapper arg0) {
+        double acc = 1.0;
+        for (java.lang.Double item : arg0.getResourcesRealDistance()) {
+            acc /= item.doubleValue();
+        }
+        return -0.11681681687401191 * acc + 0.258887226124494;
+    }
+
+    public java.lang.Double run(evolution_impl.fitness.dummyagent.StateObservationWrapper arg0) {
+        return heuristic51(arg0) + heuristic50(arg0) + heuristic49(arg0) + 0.2638808017239879;
+    }
+}
+
