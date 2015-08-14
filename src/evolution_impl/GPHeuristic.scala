@@ -7,8 +7,9 @@ import java.util.Random
 import controllers.Heuristics.StateHeuristic
 import core.ArcadeMachine
 import core.game.StateObservation
+import evolution_engine.fitness.FitnessResult
 import evolution_engine.selection.TournamentSelection
-import evolution_engine.{CSVEvolutionLogger, EvolutionRun}
+import evolution_engine.{EvolutionLogger, CSVEvolutionLogger, EvolutionRun}
 import evolution_engine.evolution.{EvolutionParameters, ParentSelectionEvolutionStrategy}
 import evolution_impl.crossover.{InTreeCrossoverAdapter, JavaCodeCrossover}
 import evolution_impl.fitness.{IndividualHolder, MultiGameFitnessCalculator, SingleGameFitnessCalculator}
@@ -101,7 +102,10 @@ class ThreadedGPRun() extends Runnable {
 
   def run() = {
     //    val logger = CSVEvolutionLogger.createCSVEvolutionLogger[HeuristicTreeIndividual](getNextLogDirectory("D:\\logs\\"))
-    val logger = CSVEvolutionLogger.createCSVEvolutionLogger[JavaCodeIndividual](getNextLogDirectory("D:\\logs\\"))
+    //    val logger = CSVEvolutionLogger.createCSVEvolutionLogger[JavaCodeIndividual](getNextLogDirectory("D:\\logs\\"))
+    val logger = new EvolutionLogger[JavaCodeIndividual]() {
+      override def addGeneration(individuals: List[JavaCodeIndividual], fitness: FitnessResult[JavaCodeIndividual]): Unit = {}
+    }
     params.setLogger(logger)
 
     runningEvolution = new EvolutionRun()
@@ -150,7 +154,7 @@ object ThreadedGPRun {
   // works with unlimited time: camelRace, firestorms, infection
   // pass but sucks with unlimited time: digdug, firecaster (but they all fail)
   // fail with unlimited time: overload
-  val gameName = "zelda"
+  val gameName = "plaqueattack"
 
   val gamesPath: String = "gvgai/examples/gridphysics/"
   val levelId = 0
@@ -174,10 +178,15 @@ object ThreadedGPRun {
     // create a new threaded GP run, it will update the best individual each gen.
     //    Thread.sleep(1000)
 
+    if (args.size < 2) {
+      System.err.println("Usage: run <visuals> <game>")
+      System.exit(-1)
+    }
+
     // run a game using the best individual know at each step
     val gamesResults = for (game <- gamesToPlay) yield {
       GPRunHolder.gpRun = ThreadedGPRun.newInstance
-      val res = runNewGame(game)
+      val res = runNewGame(args(1), args(0).equals("1"))
       GPRunHolder.gpRun.stop()
       res
     }
@@ -187,7 +196,7 @@ object ThreadedGPRun {
   }
 
 
-  def runNewGame(gameToPlay: String): GameRunResult = {
+  def runNewGame(gameToPlay: String, visuals: Boolean): GameRunResult = {
     val gpHeuristic: String = "controllers.heauristicGP.Agent"
     val gamePath = gamesPath + gameToPlay + ".txt"
 
@@ -201,7 +210,7 @@ object ThreadedGPRun {
       Thread.sleep(1000)
       val levelPath = gamesPath + gameToPlay + "_lvl" + i + ".txt"
       IndividualHolder.resetAStar()
-      ArcadeMachine.runOneGame(gamePath, levelPath, true, gpHeuristic, recordActionsFile, seed)
+      ArcadeMachine.runOneGame(gamePath, levelPath, visuals, gpHeuristic, recordActionsFile, seed)
     }
 
     printf("Scores for %s: %s\n", gameToPlay, scores.toString)

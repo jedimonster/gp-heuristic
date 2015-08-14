@@ -380,8 +380,6 @@ public class ForwardModel extends Game {
         this.classConst = a_gameState.classConst;
         this.collisionEffects = a_gameState.collisionEffects;
         this.definedEffects = a_gameState.definedEffects;
-        this.definedAvatarEffects = a_gameState.definedAvatarEffects;
-        this.definedNonAvatarEffects = a_gameState.definedNonAvatarEffects;
         this.eosEffects = a_gameState.eosEffects;
         this.definedEOSEffects = a_gameState.definedEOSEffects;
         this.iSubTypes = a_gameState.iSubTypes;
@@ -394,7 +392,6 @@ public class ForwardModel extends Game {
         this.score = a_gameState.score;
         this.frame_rate = a_gameState.frame_rate; //is this needed?
         this.MAX_SPRITES = a_gameState.MAX_SPRITES;
-        this.avatarSpriteType = a_gameState.avatarSpriteType;
 
         //create the boolean maps of sprite types.
         npcList = new boolean[a_gameState.spriteGroups.length];
@@ -476,7 +473,6 @@ public class ForwardModel extends Game {
     final public void advance(Types.ACTIONS action) {
         if (!isEnded) {
             tick(action);
-            clearAll(this);
             eventHandling();
             clearAll(this);
             terminationHandling();

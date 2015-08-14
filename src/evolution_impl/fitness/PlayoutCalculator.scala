@@ -148,14 +148,11 @@ trait PlayoutCalculator {
   def maxStateToDepth(heuristic: HeuristicIndividual, originalAction: ACTIONS, stateObservation: StateObservation, maxDepth: Int = 2, depth: Int = 0): ActionResult = {
     //    if (elapsedCpuTimer.remainingTimeMillis() <= heuristicEvalTime * stateObservation.getAvailableActions.size || stateObservation.isGameOver) {
     if (depth >= maxDepth || stateObservation.isGameOver) {
-//      if (!stateObservation.isGameOver)
-//        stateObservation.advance(ACTIONS.ACTION_NIL)
-
       val heuristicScore = heuristic.run(new StateObservationWrapper(stateObservation))
       val score: Double = stateObservation.getGameScore
 
       if (stateObservation.getGameWinner == WINNER.PLAYER_WINS)
-        return new ActionResult(originalAction, 10 * stateObservation.getGameScore, gammatizeHeuristicScore(depth, Double.MaxValue), depth, stateObservation)
+        return new ActionResult(originalAction, 10 * stateObservation.getGameScore, gammatizeHeuristicScore(depth, 10000000), depth, stateObservation)
       if (stateObservation.isGameOver)
         return new ActionResult(originalAction, Double.MinValue, Double.MinValue, depth, stateObservation)
 

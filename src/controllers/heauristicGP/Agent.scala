@@ -10,7 +10,8 @@ import evolution_impl.search.{Position, GraphCachingAStar}
 import ontology.Types
 import ontology.Types.{WINNER, ACTIONS}
 import tools.ElapsedCpuTimer
-
+import scala.collection.{Map, mutable}
+import scalaj.collection.Imports._
 import scala.collection.mutable.ListBuffer
 
 /**
@@ -46,7 +47,7 @@ class Agent extends AbstractPlayer with PlayoutCalculator {
       IndividualHolder.aStar = new GraphCachingAStar[Position](graphRoot)
       IndividualHolder.notifyAll() // wake up any threads waiting for a new state
     }
-    //    while (elapsedTimer.remainingTimeMillis() > 50) {}
+        while (elapsedTimer.remainingTimeMillis() > 50) {}
   }
 
   val statesSelected = ListBuffer[ActionResult]()
@@ -55,14 +56,35 @@ class Agent extends AbstractPlayer with PlayoutCalculator {
     IndividualHolder.currentState = stateObs.copy
     heuristic.useBestKnownIndividual()
     statesEvaluated = 0
-
-    val maxStates = for (i <- 0 to 1) yield maxStateToDepth(heuristic.individual.get, ACTIONS.ACTION_NIL, stateObs, 2)
-    val maxState = maxStates.maxBy(s => s.heuristicScore)
-    //    val maxState = maxStateToDepth(heuristic.individual.get, ACTIONS.ACTION_NIL, stateObs, 2)
-    //    statesSelected += maxState
-    while (elapsedTimer.remainingTimeMillis() > 11) {
+    val availableActions = stateObs.getAvailableActions(true).asScalaMutable
+    val possibleResults = new mutable.HashMap[ACTIONS, ListBuffer[ActionResult]]()
+    for (action <- availableActions) {
+      possibleResults.put(action, new ListBuffer[ActionResult]())
     }
-    maxState.action
+    var d = 0
+    while (elapsedTimer.remainingTimeMillis() > 5) {
+      for (action <- availableActions) {
+        val stateCopy = stateObs.copy()
+        stateCopy.advance(action)
+        val currentResult = maxStateToDepth(heuristic.individual.get, action, stateCopy, 2, 1)
+        possibleResults(action) += currentResult
+      }
+      d += 1
+    }
+
+    val actionScores: Map[ACTIONS, Double] = possibleResults.mapValues(results => results.map(_.heuristicScore).sum)
+    actionScores.toList.maxBy((f) => f._2)._1
+
+    //    val possibleResults: Seq[ActionResult] = for (action <- availableActions) yield {
+    //      val actionResults = for (i <- 0 to 3) yield {
+    //        val stateCopy = stateObs.copy()
+    //        stateCopy.advance(action)
+    //        maxStateToDepth(heuristic.individual.get, action, stateCopy, 2, 1)
+    //      }
+    //      new ActionResult(action, actionResults.map(_.gameScore).sum, actionResults.map(_.heuristicScore).sum, 1, null)
+    //    }
+
+    //    possibleResults.maxBy(r => r.heuristicScore).action
   }
 }
 
