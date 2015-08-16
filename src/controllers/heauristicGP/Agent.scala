@@ -47,10 +47,11 @@ class Agent extends AbstractPlayer with PlayoutCalculator {
       IndividualHolder.aStar = new GraphCachingAStar[Position](graphRoot)
       IndividualHolder.notifyAll() // wake up any threads waiting for a new state
     }
-        while (elapsedTimer.remainingTimeMillis() > 50) {}
+    while (elapsedTimer.remainingTimeMillis() > 50) {}
   }
 
   val statesSelected = ListBuffer[ActionResult]()
+  val timesTried = new ListBuffer[Int]()
 
   def act(stateObs: StateObservation, elapsedTimer: ElapsedCpuTimer): Types.ACTIONS = {
     IndividualHolder.currentState = stateObs.copy
@@ -61,16 +62,25 @@ class Agent extends AbstractPlayer with PlayoutCalculator {
     for (action <- availableActions) {
       possibleResults.put(action, new ListBuffer[ActionResult]())
     }
-    var d = 0
-    while (elapsedTimer.remainingTimeMillis() > 5) {
+    var timesEvaluated = 1
+    while (elapsedTimer.remainingTimeMillis() > 10
+//      elapsedTimer.elapsedMillis() / timesEvaluated > elapsedTimer.remainingTimeMillis()
+    ) {
       for (action <- availableActions) {
         val stateCopy = stateObs.copy()
         stateCopy.advance(action)
         val currentResult = maxStateToDepth(heuristic.individual.get, action, stateCopy, 2, 1)
         possibleResults(action) += currentResult
       }
-      d += 1
+      timesEvaluated += 1
     }
+//    timesTried += timesEvaluated - 1
+
+//    if ((timesTried.length+1) % 100 == 0){
+//      println("*** Agent retried average " + timesTried.sum / (timesTried.length + 1))
+//      timesTried.clear()
+//    }
+
 
     val actionScores: Map[ACTIONS, Double] = possibleResults.mapValues(results => results.map(_.heuristicScore).sum)
     actionScores.toList.maxBy((f) => f._2)._1

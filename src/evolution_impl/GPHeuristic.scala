@@ -2,6 +2,8 @@ package evolution_impl
 
 import java.io.File
 import java.nio.file.Path
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.Random
 
 import controllers.Heuristics.StateHeuristic
@@ -65,7 +67,7 @@ class GPHeuristic() extends StateHeuristic {
 }
 
 
-class ThreadedGPRun() extends Runnable {
+class ThreadedGPRun(logDirectory: String) extends Runnable {
   val treeCrossovers = new InTreeCrossoverAdapter(new JavaCodeCrossover(1.0), 0.3)
 
   val crossovers = new JavaCodeCrossover(0.25)
@@ -102,10 +104,10 @@ class ThreadedGPRun() extends Runnable {
 
   def run() = {
     //    val logger = CSVEvolutionLogger.createCSVEvolutionLogger[HeuristicTreeIndividual](getNextLogDirectory("D:\\logs\\"))
-    //    val logger = CSVEvolutionLogger.createCSVEvolutionLogger[JavaCodeIndividual](getNextLogDirectory("D:\\logs\\"))
-    val logger = new EvolutionLogger[JavaCodeIndividual]() {
-      override def addGeneration(individuals: List[JavaCodeIndividual], fitness: FitnessResult[JavaCodeIndividual]): Unit = {}
-    }
+    val logger = CSVEvolutionLogger.createCSVEvolutionLogger[JavaCodeIndividual](getNextLogDirectory(logDirectory))
+    //    val logger = new EvolutionLogger[JavaCodeIndividual]() {
+    //      override def addGeneration(individuals: List[JavaCodeIndividual], fitness: FitnessResult[JavaCodeIndividual]): Unit = {}
+    //    }
     params.setLogger(logger)
 
     runningEvolution = new EvolutionRun()
@@ -162,8 +164,8 @@ object ThreadedGPRun {
   val levelPath = gamesPath + gameName + "_lvl" + levelId + ".txt"
 
 
-  def newInstance: ThreadedGPRun = {
-    val run = new ThreadedGPRun()
+  def newInstance(logDirectory: String): ThreadedGPRun = {
+    val run = new ThreadedGPRun(logDirectory)
     val thread = new Thread(run)
     thread.start()
     run
@@ -178,14 +180,14 @@ object ThreadedGPRun {
     // create a new threaded GP run, it will update the best individual each gen.
     //    Thread.sleep(1000)
 
-    if (args.length < 3) {
+    if (args.length < 4) {
       System.err.println("Usage: run <visuals> <game>")
       System.exit(-1)
     }
 
     // run a game using the best individual know at each step
     val gamesResults = for (game <- gamesToPlay) yield {
-      GPRunHolder.gpRun = ThreadedGPRun.newInstance
+      GPRunHolder.gpRun = ThreadedGPRun.newInstance(args(3) + "/")
       val res = runNewGame(args(1), args(0).equals("1"), args(2).toInt)
       GPRunHolder.gpRun.stop()
       res
@@ -207,7 +209,10 @@ object ThreadedGPRun {
     //Game and level to play
     println("---\nPlaying a game with evolving heuristic")
     val scores = for (i <- 0 to 4) yield {
+      printf("[%s] Playing %s level %d, %d times\n", LocalDateTime.now().toString, gameToPlay, i, times - 1)
+
       val levelScores = for (j <- 0 to (times - 1)) yield {
+        printf("[%s] Iteration %d", LocalDateTime.now().toString, j)
         Thread.sleep(1000)
         val levelPath = gamesPath + gameToPlay + "_lvl" + i + ".txt"
         IndividualHolder.resetAStar()
@@ -219,6 +224,6 @@ object ThreadedGPRun {
     printf("Scores for %s: %s\n", gameToPlay, scores.toString)
     //    printf("Average for %s: %s\n", gameToPlay, scores.sum / scores.size)
 
-    new GameRunResult(gameToPlay, scores(9))
+    new GameRunResult(gameToPlay, scores.head)
   }
 }
