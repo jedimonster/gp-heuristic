@@ -1,0 +1,30 @@
+I tried the old compiler - no change.
+tried the old playout calculator, didn't work.
+freaked out.
+realized it doesn't play the same as before reverting.
+slowed down to 0.5x the competition speed for easier debuging + deeper searches (I know d=3 is beneficial and it doesn't fit in 40ms)
+narrowed it down to the (action, no-action), (no-action, action) bug.
+looked into the gamma-mechanism.
+realized it doesn't work for negative values, plus had low value of gamma.
+fixed that.
+
+
+now speculations:
+I believe a bug* made the agent pick 'use' in contradiction to the heuristic, 
+which led to good results (because spamming 'use' kills stuff)
+
+added isLastActionUse, which will allow a heuristic to spam use.
+
+still have a suiciding agent problem (walks into projectiles)
+
+turned out to be because in maxStateToDepth, where the gamma mechanism pick between the current state and the children, 
+I didn't consider the fact action_nil can kill the agent (this was newly introduced).
+fixed.
+
+lovely bug in the framework, if x is the avatar and y is an enemy, we can go from
+xy
+to
+yx
+and no-one dies. 
+
+todo - pacman, write winning heuristic, try it with the playout calculator (both for fitnesss and picking move).
