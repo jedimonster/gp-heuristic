@@ -25,8 +25,8 @@ import evolution_impl.search.{Position, AStar}
 import scala.collection.immutable.IndexedSeq
 
 /**
- * Created by itayaza on 24/11/2014.
- */
+  * Created by itayaza on 24/11/2014.
+  */
 
 object GPRunHolder {
   var gpRun: ThreadedGPRun = null
@@ -103,15 +103,16 @@ class ThreadedGPRun(logDirectory: String) extends Runnable {
   var runningEvolution: EvolutionRun[JavaCodeIndividual] = null
 
   def run() = {
-    //    val logger = CSVEvolutionLogger.createCSVEvolutionLogger[HeuristicTreeIndividual](getNextLogDirectory("D:\\logs\\"))
-    val logger = CSVEvolutionLogger.createCSVEvolutionLogger[JavaCodeIndividual](getNextLogDirectory(logDirectory))
-    //    val logger = new EvolutionLogger[JavaCodeIndividual]() {
-    //      override def addGeneration(individuals: List[JavaCodeIndividual], fitness: FitnessResult[JavaCodeIndividual]): Unit = {}
-    //    }
+    //    val logger = CSVEvolutionLogger.createCSVEvolutionLogger[JavaCodeIndividual](getNextLogDirectory(logDirectory))
+    val logBaseDir = new File(logDirectory);
+    if (!logBaseDir.exists())
+      throw new RuntimeException("log directory doesn't exist")
+
+    val logger = CSVEvolutionLogger.createCSVEvolutionLogger[JavaCodeIndividual](logBaseDir.toPath)
+
     params.setLogger(logger)
 
     runningEvolution = new EvolutionRun()
-    //    runningEvolution.run(params, new ParentSelectionEvolutionStrategy[HeuristicTreeIndividual](params))
     runningEvolution.run(params, new ParentSelectionEvolutionStrategy[JavaCodeIndividual](params))
   }
 
@@ -119,9 +120,7 @@ class ThreadedGPRun(logDirectory: String) extends Runnable {
     runningEvolution.stop()
   }
 
-  def isBestIndividualReady: Boolean = {
-    !params.bestIndividual.isEmpty
-  }
+  def isBestIndividualReady: Boolean = params.bestIndividual.isDefined
 
   def getBestIndividual: Option[HeuristicIndividual] = {
     IndividualHolder.synchronized {
@@ -185,10 +184,15 @@ object ThreadedGPRun {
       System.exit(-1)
     }
 
-    // run a game using the best individual know at each step
+    // run a game using the best individual known at each step
     val gamesResults = for (game <- gamesToPlay) yield {
-      GPRunHolder.gpRun = ThreadedGPRun.newInstance(args(3) + "/")
-      val res = runNewGame(args(1), args(0).equals("1"), args(2).toInt)
+      val logDirectory: String = args(3) + "/"
+      val gameToPlay: String = args(1)
+      val visuals: Boolean = args(0).equals("1")
+      val repeat: Int = args(2).toInt
+
+      GPRunHolder.gpRun = ThreadedGPRun.newInstance(logDirectory)
+      val res = runNewGame(gameToPlay, visuals, repeat)
       GPRunHolder.gpRun.stop()
       res
     }
