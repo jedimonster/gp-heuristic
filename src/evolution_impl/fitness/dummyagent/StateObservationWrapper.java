@@ -3,12 +3,12 @@ package evolution_impl.fitness.dummyagent;
 import core.game.Observation;
 import core.game.StateObservation;
 import evolution_impl.fitness.IndividualHolder;
-import evolution_impl.fitness.IndividualHolder$;
 import evolution_impl.search.*;
 import ontology.Types;
 import tools.Vector2d;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by itayaza on 22/12/2014.
@@ -212,6 +212,10 @@ public class StateObservationWrapper {
         return getAStarDistances(npcPositions, so.getAvatarPosition());
     }
 
+    public Iterable<Double> getNPCHeuristicDistance() {
+        return getHeuristicDistances(so.getNPCPositions(), so.getAvatarPosition().mul(1.0 / so.getBlockSize()));
+    }
+
     public Iterable<Double> getMovableDistanceFromImmovable(@AllowedValues(values = {"3", "1", "2"}) int immovableIndex) {
         List<Observation> immovables = flatObservations(so.getImmovablePositions());
         List<Observation> movables = flatObservations(so.getMovablePositions());
@@ -223,13 +227,46 @@ public class StateObservationWrapper {
             if (immovables.get(i).itype != 0)
                 encounteredPortals++;
         }
-        Observation portal = immovables.get(i - 1);
-//        if (portal.itype != 0) {
-        List<Double> aStarDistances = getAStarDistances(movables, portal.position);
-        distances.addAll(aStarDistances);
-//        }
-//        }
+
+        if (i > 0) {
+            Observation portal = immovables.get(i - 1);
+            List<Double> aStarDistances = getAStarDistances(movables, portal.position);
+            distances.addAll(aStarDistances);
+        }
+
         return distances;
+    }
+
+
+    public double getHeuristicDistanceBetweenTypes(@AllowedValues(values = {"5"}) final int itype1, @AllowedValues(values = {"7"}) final int itype2) {
+        List<Observation> allSprites = getAllSprites();
+        List<Observation> sprites_type1 = allSprites.stream().filter(o -> o.itype == itype1).collect(Collectors.toList());
+        List<Observation> sprites_type2 = allSprites.stream().filter(o -> o.itype == itype2).collect(Collectors.toList());
+
+        double normalizer = 1.0 / getBlockSize();
+        Vector2d avrg1 = averageObservationsPositions(sprites_type1).mul(normalizer);
+        Vector2d avrg2 = averageObservationsPositions(sprites_type2).mul(normalizer);
+
+        return (Math.abs(avrg1.x - avrg2.x) + Math.abs(avrg1.y - avrg2.y)) + getWallsCountBetween(avrg1, avrg2);
+    }
+
+    private Vector2d averageObservationsPositions(List<Observation> observations) {
+        return observations.stream().map((Observation o) -> o.position).reduce(new Vector2d(0, 0), (v1, v2) -> {
+            v1.add(v2);
+            v1.set(v1.x / 2, v1.y / 2);
+            return v1;
+        });
+    }
+
+    private List<Observation> getAllSprites() {
+        List<Observation> observations = flatObservations(so.getImmovablePositions());
+        observations.addAll(flatObservations(so.getMovablePositions()));
+        observations.addAll(flatObservations(so.getNPCPositions()));
+        observations.addAll(flatObservations(so.getPortalsPositions()));
+        observations.addAll(flatObservations(so.getResourcesPositions()));
+        observations.addAll(flatObservations(so.getFromAvatarSpritesPositions()));
+
+        return observations;
     }
 
     @GPIgnore // todo limit to n (like A*)
@@ -307,7 +344,7 @@ public class StateObservationWrapper {
         return result;
     }
 
-    protected List<Observation> trimToNearestObservations(List<Observation> observationsList, Vector2d reference, int n) {
+    protected List<Observation> trimToNearestObservations(List<Observation> observationsList, final Vector2d reference, int n) {
         Collections.sort(observationsList, new Comparator<Observation>() {
             @Override
             public int compare(Observation o1, Observation o2) {
@@ -320,16 +357,21 @@ public class StateObservationWrapper {
     }
 
     @GPIgnore
-    protected List<Double> getHeuristicDistances(List<Observation>[] observationsList) {
+    public List<Double> getHeuristicDistances(List<Observation>[] observationsList, Vector2d reference) {
         List<Double> result = new ArrayList<>();
-        int blockSize = so.getBlockSize();
+        double normalizer = 1.0 / so.getBlockSize();
 
         if (observationsList != null) {
             for (List<Observation> observations : observationsList) {
                 for (Observation observation : observations) {
 //                if (observation.category == category && observation.itype == itype)
-                    double distance = observation.sqDist / blockSize + countBlockingWalls(observation);
-
+//                    double distance = observation.sqDist / blockSize + countBlockingWalls(observation);
+                    Vector2d position = observation.position;
+                    position.mul(normalizer);
+                    double distance = Math.abs(reference.x - position.x) + Math.abs(reference.y - position.y);
+//                    distance += getWallsCountBetween(position, reference);
+                    distance = Math.max(distance, 0.01);
+                    // todo see about improving this
                     result.add(distance);
                 }
             }
@@ -364,8 +406,7 @@ public class StateObservationWrapper {
 
     @GPIgnore
     protected double countBlockingWalls(Observation dstObservation) {
-        int walls = 0;
-        ArrayList<Observation>[][] observationGrid = so.getObservationGrid();
+
         int currentX = (int) so.getAvatarPosition().x / so.getBlockSize(),
                 currentY = (int) so.getAvatarPosition().y / so.getBlockSize();
 
@@ -374,8 +415,16 @@ public class StateObservationWrapper {
             return 0;
         }
 
-        int dstX = (int) (dstObservation.position.x / so.getBlockSize());
-        int dstY = (int) (dstObservation.position.y / so.getBlockSize());
+
+        return getWallsCountBetween(dstObservation.position, new Vector2d(currentX, currentY));
+    }
+
+    private int getWallsCountBetween(Vector2d dstObservation, Vector2d srcObservation) {
+        int currentX = (int) srcObservation.x, currentY = (int) srcObservation.y;
+        int walls = 0;
+        ArrayList<Observation>[][] observationGrid = so.getObservationGrid();
+        int dstX = (int) (dstObservation.x / so.getBlockSize());
+        int dstY = (int) (dstObservation.y / so.getBlockSize());
         while (currentX != dstX || currentY != dstY) {
             if (!observationGrid[currentX][currentY].isEmpty()) // something is there
                 walls++;
@@ -389,8 +438,6 @@ public class StateObservationWrapper {
             else if (dstY < currentY)
                 currentY--;
         }
-
-
         return walls;
     }
 
@@ -411,5 +458,6 @@ public class StateObservationWrapper {
 
         return filteredPositions;
     }
+
 
 }

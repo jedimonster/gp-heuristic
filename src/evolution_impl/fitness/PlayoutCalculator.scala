@@ -15,19 +15,19 @@ import scala.collection.JavaConversions._
 
 
 /**
- * Created by itayaza on 03/02/2015.
- */
+  * Created by itayaza on 03/02/2015.
+  */
 trait PlayoutCalculator {
 
   protected val Gamma: Double = 0.9999
 
   /**
-   * Simply picks the next move according to best heuristic value all the way down the tree or cutoff.
-   * @param individual
-   * @param stateObservation
-   * @param cutoff
-   * @return Double - score of the best state encountered during the playout.
-   */
+    * Simply picks the next move according to best heuristic value all the way down the tree or cutoff.
+    * @param individual
+    * @param stateObservation
+    * @param cutoff
+    * @return Double - score of the best state encountered during the playout.
+    */
   def playout(individual: JavaCodeIndividual, stateObservation: StateObservation, cutoff: Int): Double = {
     // todo this returns best state score, so if we're one step from losing, we'll return the winning score!
     var state = stateObservation.copy
@@ -85,7 +85,7 @@ trait PlayoutCalculator {
       else if (!stateObservation.isGameOver)
         return (gameScore, heuristicVal, depthReached)
       else
-        return (-1 / Math.max(0.001, Math.abs(gameScore)), heuristicVal, depthReached)
+        return (Math.min(-1 / Math.max(0.001, Math.abs(gameScore)), gameScore), heuristicVal, depthReached)
     }
 
     val scores = for (nextAction <- stateObservation.getAvailableActions(true).asScala) yield {

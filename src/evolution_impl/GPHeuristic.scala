@@ -2,27 +2,20 @@ package evolution_impl
 
 import java.io.File
 import java.nio.file.Path
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.util.Random
+import java.util.{Date, Random}
 
 import controllers.Heuristics.StateHeuristic
 import core.ArcadeMachine
 import core.game.StateObservation
-import evolution_engine.fitness.FitnessResult
-import evolution_engine.selection.TournamentSelection
-import evolution_engine.{EvolutionLogger, CSVEvolutionLogger, EvolutionRun}
 import evolution_engine.evolution.{EvolutionParameters, ParentSelectionEvolutionStrategy}
+import evolution_engine.selection.TournamentSelection
+import evolution_engine.{CSVEvolutionLogger, EvolutionRun}
 import evolution_impl.crossover.{InTreeCrossoverAdapter, JavaCodeCrossover}
-import evolution_impl.fitness.{IndividualHolder, MultiGameFitnessCalculator, SingleGameFitnessCalculator}
 import evolution_impl.fitness.dummyagent.StateObservationWrapper
-import evolution_impl.gpprograms.base.{WildRandomGrowInitializer, JavaCodeIndividual, RandomGrowInitializer, HeuristicIndividual}
-import evolution_impl.gpprograms.trees.{HeuristicTreeIndividual, HeuristicTreeInitializer}
-import evolution_impl.mutators.trees.{NodeThresholdPercentMutator, NodeThresholdMutator, RegrowHeuristicMutator, InTreeMutatorAdapter}
+import evolution_impl.fitness.{IndividualHolder, SingleGameFitnessCalculator}
+import evolution_impl.gpprograms.base.{HeuristicIndividual, JavaCodeIndividual, WildRandomGrowInitializer}
+import evolution_impl.gpprograms.trees.HeuristicTreeIndividual
 import evolution_impl.mutators._
-import evolution_impl.search.{Position, AStar}
-
-import scala.collection.immutable.IndexedSeq
 
 /**
   * Created by itayaza on 24/11/2014.
@@ -82,7 +75,7 @@ class ThreadedGPRun(logDirectory: String) extends Runnable {
   // todo add note threshold % change.
 
   val generations = 2000
-  val popSize = 32
+  val popSize = 64
   val paramTypes = List(new StateObservationWrapper(null))
 
   val methodCount = 3
@@ -213,14 +206,10 @@ object ThreadedGPRun {
     //Game and level to play
     println("---\nPlaying a game with evolving heuristic")
     val scores = for (i <- 0 to 4) yield {
-      printf("[%s] Playing %s level %d, %d times\n", LocalDateTime.now().toString, gameToPlay, i, times - 1)
+      printf("[%s] Playing %s level %d, %d times\n", new Date().toString, gameToPlay, i, times - 1)
 
       val levelScores = for (j <- 0 to (times - 1)) yield {
-        printf("[%s] Iteration %d", LocalDateTime.now().toString, j)
-        Thread.sleep(1000)
-        val levelPath = gamesPath + gameToPlay + "_lvl" + i + ".txt"
-        IndividualHolder.resetAStar()
-        ArcadeMachine.runOneGame(gamePath, levelPath, visuals, gpHeuristic, recordActionsFile, seed)
+        runLevel(gameToPlay, visuals, gpHeuristic, gamePath, recordActionsFile, seed, i, j)
       }
       levelScores
     }
@@ -229,5 +218,20 @@ object ThreadedGPRun {
     //    printf("Average for %s: %s\n", gameToPlay, scores.sum / scores.size)
 
     new GameRunResult(gameToPlay, scores.head)
+  }
+
+  def runLevel(gameToPlay: String, visuals: Boolean, gpHeuristic: String, gamePath: String, recordActionsFile: String, seed: Int, i: Int, j: Int): Double = {
+    try {
+      printf("[%s] Iteration %d", new Date().toString, j)
+      Thread.sleep(1000)
+      val levelPath = gamesPath + gameToPlay + "_lvl" + i + ".txt"
+      IndividualHolder.resetAStar()
+      ArcadeMachine.runOneGame(gamePath, levelPath, visuals, gpHeuristic, recordActionsFile, seed)
+    } catch {
+      case _: Throwable => {
+        println("ERROR: Game engine exception, retrying level")
+        runLevel(gameToPlay, visuals, gpHeuristic, gamePath, recordActionsFile, seed, i, j)
+      }
+    }
   }
 }

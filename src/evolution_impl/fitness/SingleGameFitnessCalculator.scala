@@ -72,7 +72,10 @@ class SingleGameFitnessCalculator[I <: HeuristicIndividual]
       case e: ClassFormatError =>
         e.printStackTrace()
         sys.exit(-1)
-      case e: Exception =>
+      case e: java.lang.NullPointerException =>
+        println("Null Pointer Exception")
+        getIndividualFitness(individual)
+      case e: Throwable =>
         if (skipGen) {
           // the result is going to be ignored anyway.
           return 0.0
@@ -86,7 +89,7 @@ class SingleGameFitnessCalculator[I <: HeuristicIndividual]
     var state: StateObservation = stateObservation.copy()
 
 
-    val playoutResult: (Double, Double, Int) = adjustableWidthPlayout(individual, state, 2, 5) // score, heuristic score, depth
+    val playoutResult: (Double, Double, Int) = adjustableWidthPlayout(individual, state, 2, 10) // score, heuristic score, depth
     val score = playoutResult._1
 
     depthsReached.append(playoutResult._3)
@@ -95,28 +98,28 @@ class SingleGameFitnessCalculator[I <: HeuristicIndividual]
 
   }
 
-
-  def playGame(individual: I, visuals: Boolean = false) = {
-    val gpHeuristic: String = "evolution_impl.fitness.dummyagent.Agent"
-
-    //Other settings
-    val recordActionsFile: String = null
-    val seed: Int = new Random().nextInt
-
-    //Game and level to play
-    println("---\nPlaying a game with " + individual.getName)
-    val scores = for (i <- 0.to(0)) yield {
-      val levelPath = gamesPath + gameName + "_lvl" + i + ".txt"
-      IndividualHolder.synchronized {
-        IndividualHolder.currentIndividual = Some(individual)
-        ArcadeMachine.runOneGame(gamePath, levelPath, true, gpHeuristic, recordActionsFile, seed)
-      }
-    }
-    //    val score2: Double = ArcadeMachine.runOneGame(game, level1, false, gpHeuristic, recordActionsFile, seed)
-    //
-    //    (score + score2) / 2
-    scores.sum / scores.size
-  }
+//
+//  def playGame(individual: I, visuals: Boolean = false) = {
+//    val gpHeuristic: String = "evolution_impl.fitness.dummyagent.Agent"
+//
+//    //Other settings
+//    val recordActionsFile: String = null
+//    val seed: Int = new Random().nextInt
+//
+//    //Game and level to play
+//    println("---\nPlaying a game with " + individual.getName)
+//    val scores = for (i <- 0.to(0)) yield {
+//      val levelPath = gamesPath + gameName + "_lvl" + i + ".txt"
+//      IndividualHolder.synchronized {
+//        IndividualHolder.currentIndividual = Some(individual)
+//        ArcadeMachine.runOneGame(gamePath, levelPath, true, gpHeuristic, recordActionsFile, seed)
+//      }
+//    }
+//    //    val score2: Double = ArcadeMachine.runOneGame(game, level1, false, gpHeuristic, recordActionsFile, seed)
+//    //
+//    //    (score + score2) / 2
+//    scores.sum / scores.size
+//  }
 
   override def processResult(result: FitnessResult[I]): Unit = {
     val fitnessValues = result.getMap
