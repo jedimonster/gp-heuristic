@@ -10,6 +10,7 @@ import evolution_impl.gpprograms.trees.HeuristicTreeIndividual
 import evolution_impl.search.{AStar, Position}
 import tools.ElapsedCpuTimer
 
+import scala.collection.immutable.HashMap
 import scala.collection.mutable.ListBuffer
 
 
@@ -127,6 +128,9 @@ object IndividualHolder {
   def resetAStar(): Unit = {
     aStar = new AStar[Position]();
   }
+
+  var valuesList: HashMap[String, Seq[String]] = new HashMap[String, Seq[String]]
+//  valuesList += (("sprites", Seq("7", "5")))
 }
 
 

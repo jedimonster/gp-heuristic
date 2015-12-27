@@ -238,7 +238,8 @@ public class StateObservationWrapper {
     }
 
 
-    public double getHeuristicDistanceBetweenTypes(@AllowedValues(values = {"5"}) final int itype1, @AllowedValues(values = {"7"}) final int itype2) {
+//    public double getHeuristicDistanceBetweenTypes(@AllowedValues(values = {"5"}) final int itype1, @AllowedValues(values = {"7"}) final int itype2) {
+    public double getHeuristicDistanceBetweenTypes(@ValuesFromList(listName="sprites") final int itype1, @AllowedValues(values = {"7"}) final int itype2) {
         List<Observation> allSprites = getAllSprites();
         List<Observation> sprites_type1 = allSprites.stream().filter(o -> o.itype == itype1).collect(Collectors.toList());
         List<Observation> sprites_type2 = allSprites.stream().filter(o -> o.itype == itype2).collect(Collectors.toList());

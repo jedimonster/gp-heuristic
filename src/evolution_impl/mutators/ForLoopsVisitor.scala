@@ -32,7 +32,7 @@ class ForLoopsVisitor(probability: Double) extends ASTVisitor[JavaCodeIndividual
           || (s.isInstanceOf[ExpressionStmt] && s.asInstanceOf[ExpressionStmt].getExpression.isInstanceOf[VariableDeclarationExpr] && s.asInstanceOf[ExpressionStmt].getExpression.asInstanceOf[VariableDeclarationExpr].getVars.get(0).getId.toString.equals("acc"))))
     // pick a random Iterable from expandedParams:
     val iterables: Seq[CallableNode] = arg.gardener.get.expandedParams.filter(can => can.referenceType.toString.startsWith("java.lang.Iterable"))
-    if (iterables.size == 0)
+    if (iterables.isEmpty)
       return
 
     val iterable = iterables(Random.nextInt(iterables.size))

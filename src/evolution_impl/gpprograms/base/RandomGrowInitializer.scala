@@ -3,6 +3,7 @@ package evolution_impl.gpprograms.base
 import java.io.File
 
 import evolution_engine.evolution.PopulationInitializer
+import evolution_impl.fitness.IndividualHolder
 import evolution_impl.gpprograms.TreeGrowingException
 import evolution_impl.gpprograms.scope.{CallableNode, ScopeManager}
 import evolution_impl.gpprograms.util.{ClassUtil, TypesConversionStrategy}
@@ -16,7 +17,7 @@ import japa.parser.ast.stmt.{BlockStmt, ReturnStmt, Statement}
 import org.apache.commons.math3.distribution.NormalDistribution
 
 import scala.collection.JavaConversions._
-import scala.collection.immutable.IndexedSeq
+import scala.collection.immutable.{HashMap, IndexedSeq}
 import scala.collection.mutable.ListBuffer
 import scala.util.Random
 
@@ -27,9 +28,8 @@ import scala.util.Random
   * Combines into a linear combination of resulting numbers.
   */
 class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends PopulationInitializer[JavaCodeIndividual] {
+  final val ParamCount: Int = 2
   val distribution = new NormalDistribution(0, 1)
-  val ParamCount: Int = 2
-
 
   val paramTypes: List[Parameter] = {
     var i = -1
@@ -48,6 +48,12 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
   }
 
   override def getInitialPopulation(n: Int): List[JavaCodeIndividual] = {
+    IndividualHolder.synchronized {
+      // wait for a SO so we can get sprite types
+      while (IndividualHolder.currentState == null) {
+        IndividualHolder.wait()
+      }
+    }
     val individuals: Seq[JavaCodeIndividual] = for (i <- 0 to n) yield growIndividual(i)
     individuals.toList // convert to java list
   }
@@ -123,7 +129,7 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
 
     method.setBody(new BlockStmt(new java.util.ArrayList[Statement]())) // create an empty body to avoid nulls in the future.
 
-    if (Math.random() > 0.5) {
+    if (Math.random() > 0.5) { // either grow a for loop or a regular statement
       new ForLoopsVisitor(probability = 1.0).visit(method = method, arg = individual)
     } else {
       scopeManager.visit(method, null)
@@ -159,7 +165,7 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
         node.getParameterPossibleValues(up) match {
           case Some(values) =>
             // pick a random value from possible ones.
-            val assignment = values(Random.nextInt(values.size))
+            val assignment = values(Random.nextInt(values.length))
             node.setParameter(up, new CallableNode(new StringLiteralExpr(assignment), refType = new ClassOrInterfaceType("String")))
           case None =>
             // pick a random value from the scope.
@@ -168,7 +174,7 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
             potentialAssignments = satisfyCallables(potentialAssignments, availableNodes.filter(n => n.getUnsatisfiedParameters.isEmpty))
 
             potentialAssignments = potentialAssignments.filter(n => n.getUnsatisfiedParameters.isEmpty)
-            if (!potentialAssignments.isEmpty) {
+            if (potentialAssignments.nonEmpty) {
               val assignment = potentialAssignments.get(Random.nextInt(potentialAssignments.size))
               node.setParameter(up, assignment)
             } else {

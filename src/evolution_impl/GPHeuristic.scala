@@ -228,7 +228,8 @@ object ThreadedGPRun {
       IndividualHolder.resetAStar()
       ArcadeMachine.runOneGame(gamePath, levelPath, visuals, gpHeuristic, recordActionsFile, seed)
     } catch {
-      case _: Throwable => {
+      case e: Throwable => {
+        e.printStackTrace()
         println("ERROR: Game engine exception, retrying level")
         runLevel(gameToPlay, visuals, gpHeuristic, gamePath, recordActionsFile, seed, i, j)
       }

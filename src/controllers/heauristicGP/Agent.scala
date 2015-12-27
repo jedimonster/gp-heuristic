@@ -15,12 +15,12 @@ import scalaj.collection.Imports._
 import scala.collection.mutable.ListBuffer
 
 /**
- * Created with IntelliJ IDEA.
- * User: ssamot
- * Date: 14/11/13
- * Time: 21:45
- * This is a Java port from Tom Schaul's VGDL - https://github.com/schaul/py-vgdl
- */
+  * Created with IntelliJ IDEA.
+  * User: ssamot
+  * Date: 14/11/13
+  * Time: 21:45
+  * This is a Java port from Tom Schaul's VGDL - https://github.com/schaul/py-vgdl
+  */
 class Agent extends AbstractPlayer with PlayoutCalculator {
   protected var heuristic: GPHeuristic = null
   protected var statesEvaluated = 0
@@ -31,6 +31,11 @@ class Agent extends AbstractPlayer with PlayoutCalculator {
 
   def this(stateObs: StateObservation, elapsedTimer: ElapsedCpuTimer) {
     this()
+    IndividualHolder.synchronized {
+      IndividualHolder.currentState = stateObs
+      IndividualHolder.notifyAll()
+    }
+
     heuristic = new GPHeuristic()
     heuristic.waitForFirstIndividual()
 
@@ -38,7 +43,6 @@ class Agent extends AbstractPlayer with PlayoutCalculator {
       heuristic.gpRun.fitnessCalculator.skipCurrentGen()
 
     IndividualHolder.synchronized {
-      IndividualHolder.currentState = stateObs
       //      IndividualHolder.aStar.aStarCache.clear()
       val blockSize: Int = stateObs.getBlockSize
       val avatarPosition = stateObs.getAvatarPosition
@@ -54,6 +58,7 @@ class Agent extends AbstractPlayer with PlayoutCalculator {
   val timesTried = new ListBuffer[Int]()
 
   def act(stateObs: StateObservation, elapsedTimer: ElapsedCpuTimer): Types.ACTIONS = {
+    updateSpritesSet(stateObs)
     IndividualHolder.currentState = stateObs.copy
     heuristic.useBestKnownIndividual()
     statesEvaluated = 0
@@ -64,7 +69,7 @@ class Agent extends AbstractPlayer with PlayoutCalculator {
     }
     var timesEvaluated = 1
     while (elapsedTimer.remainingTimeMillis() > 10
-//      elapsedTimer.elapsedMillis() / timesEvaluated > elapsedTimer.remainingTimeMillis()
+    //      elapsedTimer.elapsedMillis() / timesEvaluated > elapsedTimer.remainingTimeMillis()
     ) {
       for (action <- availableActions) {
         val stateCopy = stateObs.copy()
@@ -74,12 +79,12 @@ class Agent extends AbstractPlayer with PlayoutCalculator {
       }
       timesEvaluated += 1
     }
-//    timesTried += timesEvaluated - 1
+    //    timesTried += timesEvaluated - 1
 
-//    if ((timesTried.length+1) % 100 == 0){
-//      println("*** Agent retried average " + timesTried.sum / (timesTried.length + 1))
-//      timesTried.clear()
-//    }
+    //    if ((timesTried.length+1) % 100 == 0){
+    //      println("*** Agent retried average " + timesTried.sum / (timesTried.length + 1))
+    //      timesTried.clear()
+    //    }
 
 
     val actionScores: Map[ACTIONS, Double] = possibleResults.mapValues(results => results.map(_.heuristicScore).sum)
@@ -95,6 +100,19 @@ class Agent extends AbstractPlayer with PlayoutCalculator {
     //    }
 
     //    possibleResults.maxBy(r => r.heuristicScore).action
+  }
+
+  def updateSpritesSet(stateObs: StateObservation) = {
+    val newSpriteSet = new mutable.HashSet[String]()
+    val allTypes = List(stateObs.getImmovablePositions, stateObs.getMovablePositions(), stateObs.getNPCPositions, stateObs.getPortalsPositions, stateObs.getResourcesPositions)
+    for (observations <- allTypes) {
+      if (observations != null)
+        for (spritesList <- observations) {
+          if (!spritesList.isEmpty)
+            newSpriteSet.add(spritesList.get(0).itype.toString)
+        }
+    }
+    IndividualHolder.valuesList += (("sprites", newSpriteSet.toSeq))
   }
 }
 

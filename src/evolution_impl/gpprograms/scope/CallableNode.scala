@@ -2,7 +2,8 @@ package evolution_impl.gpprograms.scope
 
 import java.lang.annotation.Annotation
 
-import evolution_impl.fitness.dummyagent.AllowedValues
+import evolution_impl.fitness.IndividualHolder
+import evolution_impl.fitness.dummyagent.{ValuesFromList, AllowedValues}
 import evolution_impl.gpprograms.TreeGrowingException
 import evolution_impl.gpprograms.util.{TypesConversionStrategy}
 import japa.parser.ast.Node
@@ -13,8 +14,8 @@ import japa.parser.ast.expr._
 import scalaj.collection.Imports._
 
 /**
- * Created by itayaza on 03/11/2014.
- */
+  * Created by itayaza on 03/11/2014.
+  */
 class CallableNode(val node: AnyRef, val refType: Type = null) {
   val referenceType: Type = {
     if (refType == null) {
@@ -55,13 +56,16 @@ class CallableNode(val node: AnyRef, val refType: Type = null) {
     getParametersAnnotations match {
       case Some(annotations) =>
         val parameterIndex = parameters.indexOf(parameter)
-        //        var annotations: Array[Array[Annotation]] = annotations.get
-        val valuesAnnotations: Array[Annotation] = annotations(parameterIndex).filter(a => a match {
-          case p: AllowedValues => true
-          case _ => false
-        })
-        if (valuesAnnotations.length > 0) {
-          return Some(valuesAnnotations(0).asInstanceOf[AllowedValues].values())
+        for (annotation <- annotations(parameterIndex)) {
+          annotation match {
+            case a: AllowedValues => return Some(a.values())
+            case a: ValuesFromList =>
+              val valuesList = IndividualHolder.valuesList.get(a.listName())
+              valuesList match {
+                case Some(lst: Seq[String]) => return Some(lst.toArray)
+                case _ => return None
+              }
+          }
         }
         return None
       case _ => None
