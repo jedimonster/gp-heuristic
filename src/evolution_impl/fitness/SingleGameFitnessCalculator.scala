@@ -14,8 +14,8 @@ import scala.collection.mutable.ListBuffer
 
 
 /**
- * Created by itayaza on 24/11/2014.
- */
+  * Created by itayaza on 24/11/2014.
+  */
 class SingleGameFitnessCalculator[I <: HeuristicIndividual]
 (gameName: String,
  independent: Boolean = false,
@@ -31,18 +31,6 @@ class SingleGameFitnessCalculator[I <: HeuristicIndividual]
   var depthsReached = ListBuffer[Double]()
   val vGDLFactory = VGDLFactory.GetInstance().init()
   val vGDLRegistry = VGDLRegistry.GetInstance().init()
-
-//  val intitialStates = {
-//    this.synchronized {
-//      val game: Game = new VGDLParser().parseGame(gamePath)
-//      for (i <- 0 to 4) yield {
-//        game.buildLevel(levelPath + i.toString + ".txt")
-//        game.getObservation.copy()
-//      }
-//
-//
-//    }
-//  }
 
 
   def getIndividualFitness(individual: I): Double = {
@@ -98,28 +86,6 @@ class SingleGameFitnessCalculator[I <: HeuristicIndividual]
 
   }
 
-//
-//  def playGame(individual: I, visuals: Boolean = false) = {
-//    val gpHeuristic: String = "evolution_impl.fitness.dummyagent.Agent"
-//
-//    //Other settings
-//    val recordActionsFile: String = null
-//    val seed: Int = new Random().nextInt
-//
-//    //Game and level to play
-//    println("---\nPlaying a game with " + individual.getName)
-//    val scores = for (i <- 0.to(0)) yield {
-//      val levelPath = gamesPath + gameName + "_lvl" + i + ".txt"
-//      IndividualHolder.synchronized {
-//        IndividualHolder.currentIndividual = Some(individual)
-//        ArcadeMachine.runOneGame(gamePath, levelPath, true, gpHeuristic, recordActionsFile, seed)
-//      }
-//    }
-//    //    val score2: Double = ArcadeMachine.runOneGame(game, level1, false, gpHeuristic, recordActionsFile, seed)
-//    //
-//    //    (score + score2) / 2
-//    scores.sum / scores.size
-//  }
 
   override def processResult(result: FitnessResult[I]): Unit = {
     val fitnessValues = result.getMap

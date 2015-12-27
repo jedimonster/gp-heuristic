@@ -21,25 +21,18 @@ import scala.collection.mutable.ListBuffer
 import scala.util.Random
 
 /**
- * Created by itayaza on 28/10/2014
- * Also known as "The Gardener"
- * Randomly grows methodCount methods that randomly use parameters from the given list of parameters
- * Combines into a linear combination of resulting numbers.
- */
-class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends PopulationInitializer[JavaCodeIndividual]  {
+  * Created by itayaza on 28/10/2014
+  * Also known as "The Gardener"
+  * Randomly grows methodCount methods that randomly use parameters from the given list of parameters
+  * Combines into a linear combination of resulting numbers.
+  */
+class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends PopulationInitializer[JavaCodeIndividual] {
   val distribution = new NormalDistribution(0, 1)
   val ParamCount: Int = 2
 
 
   val paramTypes: List[Parameter] = {
     var i = -1
-    //    var types: ListBuffer[Parameter] = ListBuffer()
-    //    for (callable <- ClassUtil.extractCallables(params, null)) {
-    //      yield new Parameter(callable.referenceType, )
-    //      ???
-    //    }
-
-    //    types.toList
     for (p <- params) yield {
       i += 1
       new Parameter(new ClassOrInterfaceType(p.getClass.getName), new VariableDeclaratorId(("arg" + i).toString))
@@ -47,8 +40,6 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
   }
 
   val expandedParams: Seq[CallableNode] = ClassUtil.extractCallables(params, null)
-  //  println("Callables = " + expandedParams.toString)
-  //  }
 
   val prototype: JavaCodeIndividual = {
     val prototypeFile: File = new File("individuals/Prototype.java")
@@ -60,7 +51,6 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
     val individuals: Seq[JavaCodeIndividual] = for (i <- 0 to n) yield growIndividual(i)
     individuals.toList // convert to java list
   }
-
 
 
   def growIndividual(id: Int): JavaCodeIndividual = {
@@ -83,12 +73,6 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
 
     // grow a run method (entry point for our gp)
     growRunMethod(individual)
-    //    val runMethod = new MethodDeclaration(1, new ReferenceType(returnType), "run", ListBuffer(paramTypes: _*))
-    //    runMethod.setBody(new BlockStmt(new java.util.ArrayList[Statement]()))
-    //    // add it
-    //    classDeceleration.getMembers.add(runMethod)
-
-//    individual.compile()
     individual
   }
 
@@ -126,8 +110,6 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
 
 
     createReturnStatement(runMethod, adfs.toList, expandedParams.toList, addRandomMultiplier = false) // create a return statement not which does not include recursive calls.
-
-
   }
 
   def growMethod(id: Int, paramCount: Int, individual: JavaCodeIndividual): MethodDeclaration = {
@@ -166,10 +148,10 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
   }
 
   /**
-   * tries to satisfy @nodesToSatisfy with @availableNodes and returns those that could be satisfied.
-   * @param nodesToSatisfy
-   * @param availableNodes
-   */
+    * tries to satisfy @nodesToSatisfy with @availableNodes and returns those that could be satisfied.
+    * @param nodesToSatisfy
+    * @param availableNodes
+    */
   def satisfyCallables(nodesToSatisfy: List[CallableNode], availableNodes: List[CallableNode]): List[CallableNode] = {
     for (node <- nodesToSatisfy) {
       for (up: Parameter <- node.getUnsatisfiedParameters) {
@@ -237,10 +219,10 @@ class RandomGrowInitializer(params: List[Any], val methodCount: Int) extends Pop
   }
 
   /**
-   * create or overwrite the return statement in @param{method} with a new statement that uses all available local vars.
-   * @param method
-   * @return
-   */
+    * create or overwrite the return statement in @param{method} with a new statement that uses all available local vars.
+    * @param method
+    * @return
+    */
   //  def createReturnStatement(method: MethodDeclaration, scopeManager: ScopeManager, callableFilter: (CallableNode => Boolean) = (_ => true), randomFactor: Boolean = true) = {
   //    val node: Node = method.getBody.getStmts.size() match {
   //      case 0 => method // if it's empty it's new
