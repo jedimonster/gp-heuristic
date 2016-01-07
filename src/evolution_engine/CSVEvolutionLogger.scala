@@ -65,11 +65,11 @@ class CSVEvolutionLogger[I <: Individual] extends EvolutionLogger[I] {
       val generationDir: Path = logDir.resolve("individuals/" + generation + "/")
       Files.createDirectories(generationDir)
       import scala.collection.JavaConversions._
-      for (individual <- individuals) {
-        val name: String = individual.getName
-        val individualPath: Path = generationDir.resolve(name + ".java")
-        Files.write(individualPath, individual.toString.getBytes(StandardCharsets.UTF_8), CREATE)
-      }
+//      for (individual <- individuals) {
+//        val name: String = individual.getName
+//        val individualPath: Path = generationDir.resolve(name + ".java")
+//        Files.write(individualPath, individual.toString.getBytes(StandardCharsets.UTF_8), CREATE)
+//      }
     }
     catch {
       case e: IOException =>

@@ -36,9 +36,19 @@ class MinDistanceToImmovableHeuristic extends HeuristicIndividual {
     //    for (distance <- input.getNPCRealDistance) {
     //      minHeuristic += distance
     //    }
-    (1 / input.getHeuristicDistanceBetweenTypes(5, 7)) + 1.0 / minHeuristic
-//    + (1.0 / minRealDistance)
+    //    (1 / input.getHeuristicDistanceBetweenTypes(5, 7)) + 1.0 / minHeuristic
+    //    + (1.0 / minRealDistance)
     //    1.0 / minHeuristic
+    val resoucesDistances: Iterable[lang.Double] = input.getResourcesRealDistance
+    var totalDistance = 0.0
+    for (d <- resoucesDistances)
+      totalDistance += d
+    if (resoucesDistances isEmpty) {
+      1.0 / input.getPortalRealDistance.iterator().next()
+    } else {
+      -1 * (resoucesDistances.min + 50 * input.getResourcesCount)
+    }
+
   }
 
   override def compile(): Unit = {}

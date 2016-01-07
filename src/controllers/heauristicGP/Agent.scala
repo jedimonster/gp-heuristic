@@ -104,8 +104,8 @@ class Agent extends AbstractPlayer with PlayoutCalculator {
 
   def updateSpritesSet(stateObs: StateObservation) = {
     val newSpriteSet = new mutable.HashSet[String]()
-    val allTypes = List(stateObs.getImmovablePositions, stateObs.getMovablePositions(), stateObs.getNPCPositions, stateObs.getPortalsPositions, stateObs.getResourcesPositions)
-    for (observations <- allTypes) {
+    val allSprites = List(stateObs.getImmovablePositions, stateObs.getMovablePositions(), stateObs.getNPCPositions, stateObs.getPortalsPositions, stateObs.getResourcesPositions)
+    for (observations <- allSprites) {
       if (observations != null)
         for (spritesList <- observations) {
           if (!spritesList.isEmpty)

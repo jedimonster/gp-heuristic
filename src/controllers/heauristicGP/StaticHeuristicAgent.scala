@@ -57,7 +57,7 @@ class StaticHeuristicAgent extends AbstractPlayer with PlayoutCalculator {
       for (action <- availableActions) {
         val stateCopy = stateObs.copy()
         stateCopy.advance(action)
-        val currentResult = maxStateToDepth(heuristic, action, stateCopy, 3, 1)
+        val currentResult = maxStateToDepth(heuristic, action, stateCopy, 2, 1)
         possibleResults(action) += currentResult
       }
       timesEvaluated += 1

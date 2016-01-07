@@ -23,7 +23,7 @@ public class AgentExecutor {
         System.out.println("Map: " + map);
         System.out.println("level: " + level);
         System.out.println("Player Class: " + playerClassString);
-        System.out.println("Agent Action file: " + action_file );
+        System.out.println("Agent Action file: " + action_file);
 
         int seed = new Random().nextInt();
 

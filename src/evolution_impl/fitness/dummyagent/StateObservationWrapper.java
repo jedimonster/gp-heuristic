@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  */
 public class StateObservationWrapper {
     protected AStar<Position> aStar;
-    protected core.game.StateObservation so;
+    public core.game.StateObservation so;
 
     public final int MAX_ELEMENETS;
 
@@ -93,6 +93,32 @@ public class StateObservationWrapper {
         return copy.getGameScore();
     }
 
+    public double getDistanceFromCorner(@AllowedValues(values = {"1", "2", "3", "4"}) int cornerId) {
+        Observation corner = null;
+        Vector2d avatarPosition = so.getAvatarPosition();
+        ArrayList<Observation>[][] grid = so.getObservationGrid();
+
+        switch (cornerId) {
+            case 1:
+                corner = grid[1][1].get(0);
+                break;
+            case 2:
+                corner = grid[grid.length - 2][1].get(0);
+                break;
+            case 3:
+                corner = grid[1][grid[0].length - 2].get(0);
+                break;
+            case 4:
+                corner = grid[grid.length - 2][grid[0].length - 2].get(0);
+                break;
+        }
+        try {
+            return getAStarLength(avatarPosition, corner);
+        } catch (AStarException ignore) { // no path
+            return Math.abs(corner.position.x - avatarPosition.x) + Math.abs(corner.position.y - avatarPosition.y);
+        }
+    }
+
     public double isLastActionUse() {
         Types.ACTIONS lastAction = so.getAvatarLastAction();
         if (lastAction.equals(Types.ACTIONS.ACTION_USE))
@@ -162,7 +188,7 @@ public class StateObservationWrapper {
     // game 2 immovables: category = 4,4, type = 0,2
 
 
-    public Double getImmovableCount() {
+    public double getImmovableCount() {
         ArrayList<Observation>[] immovablePositions = so.getImmovablePositions();
         List<Observation> positions = flatObservations(immovablePositions);
         double count = 0;
@@ -206,6 +232,12 @@ public class StateObservationWrapper {
         return getAStarDistances(resourcesPositions, so.getAvatarPosition());
     }
 
+    public double getResourcesCount() {
+        List<Observation> resourcesPositions = flatObservations(so.getResourcesPositions());
+
+        return resourcesPositions.size();
+    }
+
     public Iterable<Double> getNPCRealDistance() {
         List<Observation> npcPositions = flatObservations(so.getNPCPositions());
 
@@ -238,8 +270,8 @@ public class StateObservationWrapper {
     }
 
 
-//    public double getHeuristicDistanceBetweenTypes(@AllowedValues(values = {"5"}) final int itype1, @AllowedValues(values = {"7"}) final int itype2) {
-    public double getHeuristicDistanceBetweenTypes(@ValuesFromList(listName="sprites") final int itype1, @AllowedValues(values = {"7"}) final int itype2) {
+    //    public double getHeuristicDistanceBetweenTypes(@AllowedValues(values = {"5"}) final int itype1, @AllowedValues(values = {"7"}) final int itype2) {
+    public double getHeuristicDistanceBetweenTypes(@ValuesFromList(listName = "sprites") final int itype1, @AllowedValues(values = {"7"}) final int itype2) {
         List<Observation> allSprites = getAllSprites();
         List<Observation> sprites_type1 = allSprites.stream().filter(o -> o.itype == itype1).collect(Collectors.toList());
         List<Observation> sprites_type2 = allSprites.stream().filter(o -> o.itype == itype2).collect(Collectors.toList());
@@ -298,7 +330,7 @@ public class StateObservationWrapper {
         return counts;
     }
 
-    public Double getTouchingWallsCount() {
+    public double getTouchingWallsCount() {
         int avatarX = (int) so.getAvatarPosition().x / so.getBlockSize();
         int avatarY = (int) so.getAvatarPosition().y / so.getBlockSize();
         Position avatarPosition = new Position(avatarX, avatarY, so);
@@ -345,14 +377,12 @@ public class StateObservationWrapper {
         return result;
     }
 
+
     protected List<Observation> trimToNearestObservations(List<Observation> observationsList, final Vector2d reference, int n) {
-        Collections.sort(observationsList, new Comparator<Observation>() {
-            @Override
-            public int compare(Observation o1, Observation o2) {
-                double o1Distance = Math.abs(o1.position.x - reference.x) + Math.abs(o1.position.y - reference.y);
-                double o2Distance = Math.abs(o2.position.x - reference.x) + Math.abs(o2.position.y - reference.y);
-                return (int) (o1Distance - o2Distance);
-            }
+        Collections.sort(observationsList, (o1, o2) -> {
+            double o1Distance = Math.abs(o1.position.x - reference.x) + Math.abs(o1.position.y - reference.y);
+            double o2Distance = Math.abs(o2.position.x - reference.x) + Math.abs(o2.position.y - reference.y);
+            return (int) (o1Distance - o2Distance);
         });
         return observationsList.subList(0, Math.min(n, observationsList.size()));
     }
