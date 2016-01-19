@@ -37,11 +37,6 @@ class JavaCodeIndividual(
   def this(ast: CompilationUnit, originalFile: File) = this(ast, originalFile, new ClassName(ast.getTypes.get(0).getName, 0))
 
   override def run(input: StateObservationWrapper): Double = {
-    //    this.synchronized {
-    //      if (!compiled) {
-    //        compile()
-    //      }
-    //    }
     val instance = individualObject match {
       case Some(individual) => individual.asInstanceOf[GPProgram]
       case None => throw new RuntimeException("Individual compiled but not instantiated (impossible?)")
@@ -78,46 +73,6 @@ class JavaCodeIndividual(
           throw new CompilationException
       }
     }
-//  @throws[CompilationException]("if the individual couldn't be compiled")
-//  def compile(): Unit = {
-//    //    this.synchronized {
-//    //        val packageName = ast.getPackage.getName
-//    if (compiled)
-//      return
-//    val className = ast.getTypes.get(0).getName
-//    //        val fullClassName: String = packageName + "." + className
-//    //    val originalClass: Class[_] = Class.forName(className)
-//
-//    val srcFile: JavaSourceFromString = new JavaSourceFromString(className, ast.toString)
-//    val compilationUnits = java.util.Arrays.asList(srcFile)
-//    val diagnostics = new DiagnosticCollector[JavaFileObject]()
-//
-//    val task = javaCompiler.getTask(null, null, diagnostics, null, null, compilationUnits)
-//
-//    //    printf("original class hash = %s\n", originalClass.hashCode())
-//
-//    val success = task.call()
-//
-//    if (!success) {
-//      println("Failed compiling\n")
-//      println(diagnostics.getDiagnostics.get(0).toString)
-//      println(this.ast.toString)
-//      //      for(d <- diagnostics.getDiagnostics) {
-//      //        print(d.toString)
-//      //      }
-//      //      GPEvolutionLogger.saveBadIndividual(this)
-//      throw new CompilationException
-//    } else {
-//      compiled = true
-//    }
-//    //      printf("Compiled class %s successfully\n", className)
-//    // todo if failed log errors and catch expeption
-//    var loadedClass: Class[_] = Class.forName(className)
-//    loadedClass = ClassLoader.getSystemClassLoader.loadClass(loadedClass.getName)
-//    val instance: GPProgram = loadedClass.newInstance().asInstanceOf[GPProgram]
-//    individualObject = Some(instance)
-//    //    }
-//  }
 
   def writeToFile(path: String) = {
     Files.write(Paths.get(path), ast.toString.getBytes(StandardCharsets.UTF_8))
