@@ -1,17 +1,15 @@
 //package compiled_output;
 
-import core.game.Observation;
 import evolution_impl.GPProgram;
-import evolution_impl.fitness.dummyagent.StateObservationWrapper;
+import evolution_impl.fitness.twok.BoardWrapper;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * Created By Itay Azaria
  * Date: 9/17/2014
  */
-public class Ind implements GPProgram<StateObservationWrapper> {
+public class Ind implements GPProgram<BoardWrapper> {
     //    @Override
 //    public Double run(List<Object> params) {
 //        Object t = params;
