@@ -21,7 +21,7 @@ object TwoKDriver {
       new GrowNewwMethodMutator(0.05)
       //    ,    new AlphasMutator(0.2)
     )
-    val populationInitializer: WildRandomGrowInitializer = new WildRandomGrowInitializer(params = List(new BoardWrapper(null)), methodCount = 2, new File("individuals/TwoKInd.java"))
+    val populationInitializer: WildRandomGrowInitializer = new WildRandomGrowInitializer(params = List(new BoardWrapper(null, 0)), methodCount = 2, new File("individuals/TwoKInd.java"))
     val params = new EvolutionParameters[JavaCodeIndividual](
       fitnessCalculator = new TwoKFitnessCalculator[JavaCodeIndividual](),
       selectionStrategy = new TournamentSelection[JavaCodeIndividual](false),
