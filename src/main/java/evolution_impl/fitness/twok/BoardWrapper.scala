@@ -10,11 +10,11 @@ import scalaj.collection.Imports._
 /**
   * Created by Itay on 20-Jan-16.
   */
-class BoardWrapper(board: Board) {
+class BoardWrapper(board: Board, suggestedAction: Double) {
   @GPIgnore
   def copy = {
     val newArray: Array[Array[Int]] = board.get.clone
-    new BoardWrapper(new Board(newArray))
+    new BoardWrapper(new Board(newArray), suggestedAction)
   }
 
   def getState = new State2048(board.get)

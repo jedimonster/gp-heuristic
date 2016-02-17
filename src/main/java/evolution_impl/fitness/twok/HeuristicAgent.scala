@@ -15,9 +15,8 @@ import scala.util.Random
   */
 class HeuristicAgent(heuristic: HeuristicIndividual) extends Agent {
   override def chooseAction(board: Board, availableActions: util.List[Action], duration: Duration): Action = {
-    def boardWrapper = new BoardWrapper(board)
     val possibleScores = for (action <- availableActions.asScala) yield {
-      val nextState = boardWrapper.copy
+      val nextState = new BoardWrapper(board, action.ordinal()).copy
       val score: Double = heuristic.run(nextState)
       (action, score)
     }
