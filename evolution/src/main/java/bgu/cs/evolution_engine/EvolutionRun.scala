@@ -1,6 +1,6 @@
-package evolution_engine
+package bgu.cs.evolution_engine
 
-import evolution_engine.evolution.{EvolutionParameters, EvolutionStrategy, Individual}
+import bgu.cs.evolution_engine.evolution.{EvolutionParameters, EvolutionStrategy, Individual}
 
 /**
  * Created By Itay Azaria

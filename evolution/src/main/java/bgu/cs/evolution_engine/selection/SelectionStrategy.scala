@@ -1,7 +1,7 @@
-package evolution_engine.selection
+package bgu.cs.evolution_engine.selection
 
-import evolution_engine.evolution.Individual
-import evolution_engine.fitness.FitnessResult
+import bgu.cs.evolution_engine.evolution.Individual
+import bgu.cs.evolution_engine.fitness.FitnessResult
 import scala.collection.immutable.List
 
 /**

@@ -1,8 +1,8 @@
-package evolution_engine.mutators
+package bgu.cs.evolution_engine.mutators
 
 import java.util.List
 
-import evolution_engine.evolution.Individual
+import bgu.cs.evolution_engine.evolution.Individual
 
 /**
  * Created by Itay Azaria

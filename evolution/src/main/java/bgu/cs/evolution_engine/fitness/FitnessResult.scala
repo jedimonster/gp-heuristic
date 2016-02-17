@@ -1,6 +1,6 @@
-package evolution_engine.fitness
+package bgu.cs.evolution_engine.fitness
 
-import evolution_engine.evolution.Individual
+import bgu.cs.evolution_engine.evolution.Individual
 
 /**
  * Created By Itay Azaria

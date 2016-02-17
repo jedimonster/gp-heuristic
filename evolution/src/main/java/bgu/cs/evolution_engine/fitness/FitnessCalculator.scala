@@ -1,8 +1,8 @@
-package evolution_engine.fitness
+package bgu.cs.evolution_engine.fitness
 
 import java.util.concurrent.ThreadPoolExecutor
 
-import evolution_engine.evolution.Individual
+import bgu.cs.evolution_engine.evolution.Individual
 import evolution_impl.DumbFitnessResult
 import evolution_impl.gpprograms.base.JavaCodeIndividual
 

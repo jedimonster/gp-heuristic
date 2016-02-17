@@ -1,7 +1,7 @@
-package evolution_engine
+package bgu.cs.evolution_engine
 
-import evolution_engine.evolution.Individual
-import evolution_engine.fitness.FitnessResult
+import bgu.cs.evolution_engine.evolution.Individual
+import bgu.cs.evolution_engine.fitness.FitnessResult
 
 /**
  * Created by itayaza on 27/10/2014.
