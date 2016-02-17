@@ -10,8 +10,8 @@ import evolution_engine.fitness.FitnessResult
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics
 
 /**
- * Created by itayaza on 27/10/2014.
- */
+  * Created by itayaza on 27/10/2014.
+  */
 object CSVEvolutionLogger {
   @throws(classOf[IOException])
   def createCSVEvolutionLogger[I <: Individual](logDir: Path): CSVEvolutionLogger[I] = {
@@ -82,8 +82,8 @@ class CSVEvolutionLogger[I <: Individual] extends EvolutionLogger[I] {
     val stats: DescriptiveStatistics = new DescriptiveStatistics(fitnessArray.toArray)
     try {
       val line: String = "Average = %f, Minimum = %f, Maximum = %f, Std. dev. = %f\n".format(stats.getMean, stats.getMin, stats.getMax, stats.getStandardDeviation)
-      val csvLine : String = "%f,%f,%f,%f\n".format(stats.getMean, stats.getMin, stats.getMax, stats.getStandardDeviation)
-//      System.out.println(line)
+      val csvLine: String = "%f,%f,%f,%f\n".format(stats.getMean, stats.getMin, stats.getMax, stats.getStandardDeviation)
+      //      System.out.println(line)
       Files.write(statsFile, csvLine.toString.getBytes(StandardCharsets.UTF_8), APPEND)
     }
     catch {

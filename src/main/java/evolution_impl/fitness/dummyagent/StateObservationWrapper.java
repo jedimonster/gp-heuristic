@@ -123,7 +123,7 @@ public class StateObservationWrapper {
     public double isLastActionUse() {
         Types.ACTIONS lastAction = so.getAvatarLastAction();
         if (lastAction.equals(Types.ACTIONS.ACTION_USE))
-            return 5;
+            return 1;
 
         return 0;
     }
