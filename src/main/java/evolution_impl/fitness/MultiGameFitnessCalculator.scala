@@ -2,7 +2,7 @@ package evolution_impl.fitness
 
 import core.{VGDLParser, VGDLRegistry, VGDLFactory}
 import core.game.{Game, StateObservation}
-import bgu.cs.evolution_engine.fitness.{FitnessResult, FitnessCalculator}
+import evolution_engine.fitness.{FitnessResult, FitnessCalculator}
 import evolution_impl.DumbFitnessResult
 import evolution_impl.gpprograms.base.JavaCodeIndividual
 

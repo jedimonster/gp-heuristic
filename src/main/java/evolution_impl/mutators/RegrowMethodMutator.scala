@@ -1,6 +1,6 @@
 package evolution_impl.mutators
 
-import bgu.cs.evolution_engine.mutators.Mutator
+import evolution_engine.mutators.Mutator
 import evolution_impl.gpprograms.base.{HeuristicsNumbers, RandomGrowInitializer, JavaCodeIndividual}
 import japa.parser.ast.body.{BodyDeclaration, MethodDeclaration, ClassOrInterfaceDeclaration}
 

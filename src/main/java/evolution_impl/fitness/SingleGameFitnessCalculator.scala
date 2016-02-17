@@ -4,7 +4,7 @@ import java.util.Random
 
 import core.game.{Game, StateObservation}
 import core.{ArcadeMachine, VGDLFactory, VGDLParser, VGDLRegistry}
-import bgu.cs.evolution_engine.fitness.{FitnessCalculator, FitnessResult}
+import evolution_engine.fitness.{FitnessCalculator, FitnessResult}
 import evolution_impl.gpprograms.base.{HeuristicIndividual, JavaCodeIndividual}
 import evolution_impl.search.{AStar, Position}
 import tools.ElapsedCpuTimer

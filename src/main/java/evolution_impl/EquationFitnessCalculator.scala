@@ -1,8 +1,8 @@
 //package evolution_impl
 //
 //
-//import bgu.cs.evolution_engine.evolution.Individual
-//import bgu.cs.evolution_engine.fitness.{FitnessCalculator, FitnessResult}
+//import evolution_engine.evolution.Individual
+//import evolution_engine.fitness.{FitnessCalculator, FitnessResult}
 //import evolution_impl.gpprograms.{CompilationException, JavaCodeIndividual}
 //import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics
 //

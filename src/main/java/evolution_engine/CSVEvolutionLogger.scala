@@ -1,12 +1,12 @@
-package bgu.cs.evolution_engine
+package evolution_engine
 
 import java.io.{File, IOException}
 import java.nio.charset.StandardCharsets
 import java.nio.file.StandardOpenOption.{APPEND, CREATE}
 import java.nio.file.{StandardOpenOption, Files, OpenOption, Path}
 
-import bgu.cs.evolution_engine.evolution.Individual
-import bgu.cs.evolution_engine.fitness.FitnessResult
+import evolution_engine.evolution.Individual
+import evolution_engine.fitness.FitnessResult
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics
 
 /**

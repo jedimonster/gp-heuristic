@@ -1,9 +1,9 @@
 import java.io.File
 
 import com.google.common.base.Stopwatch
-import bgu.cs.evolution_engine.EvolutionRun
-import bgu.cs.evolution_engine.evolution.{ParentSelectionEvolutionStrategy, EvolutionParameters}
-import bgu.cs.evolution_engine.selection.TournamentSelection
+import evolution_engine.EvolutionRun
+import evolution_engine.evolution.{ParentSelectionEvolutionStrategy, EvolutionParameters}
+import evolution_engine.selection.TournamentSelection
 import evolution_impl.crossover.JavaCodeCrossover
 import evolution_impl.fitness.twok.{TwoKFitnessCalculator, BoardWrapper}
 import evolution_impl.gpprograms.base.{WildRandomGrowInitializer, JavaCodeIndividual}

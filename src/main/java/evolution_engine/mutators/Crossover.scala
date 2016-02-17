@@ -1,6 +1,6 @@
-package bgu.cs.evolution_engine.mutators
+package evolution_engine.mutators
 
-import bgu.cs.evolution_engine.evolution.Individual
+import evolution_engine.evolution.Individual
 
 /**
  * Created by Itay Azaria

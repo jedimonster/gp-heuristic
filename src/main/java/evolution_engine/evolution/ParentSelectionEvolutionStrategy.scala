@@ -1,6 +1,6 @@
-package bgu.cs.evolution_engine.evolution
+package evolution_engine.evolution
 
-import bgu.cs.evolution_engine.fitness.FitnessResult
+import evolution_engine.fitness.FitnessResult
 
 import scala.collection.mutable.ListBuffer
 import scala.util.Random

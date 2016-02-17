@@ -1,8 +1,8 @@
-package bgu.cs.evolution_engine.selection
+package evolution_engine.selection
 
 
-import bgu.cs.evolution_engine.evolution.Individual
-import bgu.cs.evolution_engine.fitness.FitnessResult
+import evolution_engine.evolution.Individual
+import evolution_engine.fitness.FitnessResult
 
 import scala.collection.JavaConversions._
 import scala.collection.mutable.ListBuffer
