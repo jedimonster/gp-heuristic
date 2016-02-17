@@ -3,7 +3,7 @@ package evolution_impl.fitness.twok
 import java.time.Duration
 import java.util.function.Supplier
 
-import evolution_engine.fitness.{FitnessResult, FitnessCalculator}
+import bgu.cs.evolution_engine.fitness.{FitnessResult, FitnessCalculator}
 import evolution_impl.gpprograms.base.HeuristicIndividual
 import org.apache.commons.math3.random.{RandomDataGenerator, MersenneTwister}
 import org.apache.commons.math3.stat.descriptive.{SummaryStatistics, StatisticalSummaryValues}

@@ -2,7 +2,7 @@ package evolution_impl
 
 import java.io.File
 
-import evolution_engine.evolution.PopulationInitializer
+import bgu.cs.evolution_engine.evolution.PopulationInitializer
 import evolution_impl.gpprograms.base.JavaCodeIndividual
 import japa.parser.JavaParser
 

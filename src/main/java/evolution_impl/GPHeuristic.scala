@@ -7,9 +7,9 @@ import java.util.{Date, Random}
 import controllers.Heuristics.StateHeuristic
 import core.ArcadeMachine
 import core.game.StateObservation
-import evolution_engine.evolution.{EvolutionParameters, ParentSelectionEvolutionStrategy}
-import evolution_engine.selection.TournamentSelection
-import evolution_engine.{CSVEvolutionLogger, EvolutionRun}
+import bgu.cs.evolution_engine.evolution.{EvolutionParameters, ParentSelectionEvolutionStrategy}
+import bgu.cs.evolution_engine.selection.TournamentSelection
+import bgu.cs.evolution_engine.{CSVEvolutionLogger, EvolutionRun}
 import evolution_impl.crossover.JavaCodeCrossover
 import evolution_impl.fitness.dummyagent.StateObservationWrapper
 import evolution_impl.fitness.{IndividualHolder, SingleGameFitnessCalculator}

@@ -2,7 +2,7 @@ package evolution_impl.gpprograms.base
 
 import java.io.File
 
-import evolution_engine.evolution.PopulationInitializer
+import bgu.cs.evolution_engine.evolution.PopulationInitializer
 import evolution_impl.fitness.IndividualHolder
 import evolution_impl.gpprograms.TreeGrowingException
 import evolution_impl.gpprograms.scope.{CallableNode, ScopeManager}
