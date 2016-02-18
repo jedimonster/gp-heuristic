@@ -12,6 +12,7 @@ import evolution_engine.selection.TournamentSelection
 import evolution_engine.{CSVEvolutionLogger, EvolutionRun}
 import evolution_impl.crossover.JavaCodeCrossover
 import evolution_impl.fitness.dummyagent.StateObservationWrapper
+import evolution_impl.fitness.mcts.MCTSPlayoutCalculator
 import evolution_impl.fitness.{IndividualHolder, SingleGameFitnessCalculator}
 import evolution_impl.gpprograms.base.{HeuristicIndividual, JavaCodeIndividual, WildRandomGrowInitializer}
 import evolution_impl.mutators._
@@ -195,7 +196,8 @@ object ThreadedGPRun {
 
 
   def runNewGame(gameToPlay: String, visuals: Boolean, times: Int): GameRunResult = {
-    val gpHeuristic: String = "controllers.heauristicGP.Agent"
+//    val gpHeuristic: String = "controllers.heauristicGP.Agent"
+    val gpHeuristic: String = "evolution_impl.fitness.mcts.Agent"
     val gamePath = gamesPath + gameToPlay + ".txt"
 
     //Other settings
