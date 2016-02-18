@@ -24,10 +24,10 @@ trait MCTSPlayoutCalculator extends PlayoutCalculator {
   var minHeuristicScore = Double.MaxValue
 
 
-  override def adjustableWidthPlayout(individual: HeuristicIndividual, stateObservation: StateObservation, maxDepth: Int, iterations: Int): (Double, Double, Int) = {
-
-    ???
-  }
+  //  override def adjustableWidthPlayout(individual: HeuristicIndividual, stateObservation: StateObservation, maxDepth: Int, iterations: Int): (Double, Double, Int) = {
+  //
+  //    ???
+  //  }
 
   def mcts(individual: HeuristicIndividual, stateObservation: StateObservation, maxDepth: Int, iterations: Int): HeuristicNode = {
     val heuristicNode = new HeuristicNode(stateObservation)
@@ -126,10 +126,13 @@ trait MCTSPlayoutCalculator extends PlayoutCalculator {
       remainingDepth -= 1
     }
 
-    // todo might want to manually penalize losing states here
-    val heuristicScore = heuristicIndividual.run(new StateObservationWrapper(rollingState))
+
+    var heuristicScore = heuristicIndividual.run(new StateObservationWrapper(rollingState))
     maxHeuristicScore = Math.max(maxHeuristicScore, heuristicScore)
     minHeuristicScore = Math.min(minHeuristicScore, heuristicScore)
+
+    if (rollingState.isGameOver)
+      heuristicScore = Double.MinValue
 
     heuristicScore
   }
