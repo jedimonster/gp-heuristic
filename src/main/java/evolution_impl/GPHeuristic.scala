@@ -97,7 +97,7 @@ class ThreadedGPRun(logDirectory: String) extends Runnable {
 
   def run() = {
     //    val logger = CSVEvolutionLogger.createCSVEvolutionLogger[JavaCodeIndividual](getNextLogDirectory(logDirectory))
-    val logBaseDir = new File(logDirectory);
+    val logBaseDir = new File(logDirectory)
     if (!logBaseDir.exists())
       throw new RuntimeException("log directory doesn't exist")
 

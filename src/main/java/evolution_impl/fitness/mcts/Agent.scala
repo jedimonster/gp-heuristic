@@ -17,12 +17,12 @@ class Agent(stateObs: StateObservation, elapsedTimer: ElapsedCpuTimer) extends c
     updateSpritesSet(stateObs)
     IndividualHolder.currentState = stateObs.copy
     heuristic.useBestKnownIndividual()
-    val root: HeuristicNode = mcts(heuristic.individual.get, stateObs, 20, 10)
+    val root: HeuristicNode = mcts(heuristic.individual.get, stateObs, 15, 20)
     var mostVisits = Double.MinValue
     var action = -1
     for (i <- root.children.indices) {
       val childVisits: Double = root.children(i).heuristicScores.sum / root.children(i).heuristicScores.length
-      if (childVisits > mostVisits) {
+      if (childVisits >= mostVisits) {
         mostVisits = childVisits
         action = i
       }

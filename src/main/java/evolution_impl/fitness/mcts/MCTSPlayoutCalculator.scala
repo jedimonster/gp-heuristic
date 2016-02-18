@@ -75,22 +75,24 @@ trait MCTSPlayoutCalculator extends PlayoutCalculator {
     var bestUCB = Double.MinValue
     var selectedNode: Option[HeuristicNode] = None
 
-    for (child <- heuristicNode.children) {
+    val childUCB = for (child <- heuristicNode.children) yield {
       val childN: Double = child.heuristicScores.size + Epsilon
       var childValue = child.heuristicScores.sum / childN
       childValue = Utils.normalise(childValue, minHeuristicScore, maxHeuristicScore)
       val ucbValue = childValue + C * Math.sqrt(Math.log(n) / childN)
 
-      if (ucbValue > bestUCB) {
-        bestUCB = ucbValue
-        selectedNode = Some(child)
-      }
+      //      if (ucbValue >= bestUCB) {
+      //        bestUCB = ucbValue
+      //        selectedNode = Some(child)
+      //      }
+      (child, ucbValue)
     }
 
-    selectedNode match {
-      case Some(child) => child
-      case None => throw new RuntimeException("This shouldn't happen")
-    }
+    //    selectedNode match {
+    //      case Some(child) => child
+    //      case None => throw new RuntimeException("This shouldn't happen")
+    //    }
+    childUCB.maxBy(_._2)._1
   }
 
   def expand(heuristicNode: HeuristicNode): HeuristicNode = {
@@ -132,7 +134,7 @@ trait MCTSPlayoutCalculator extends PlayoutCalculator {
     minHeuristicScore = Math.min(minHeuristicScore, heuristicScore)
 
     if (rollingState.isGameOver)
-      heuristicScore = Double.MinValue
+      heuristicScore = -5000
 
     heuristicScore
   }
