@@ -18,10 +18,10 @@ class Agent(stateObs: StateObservation, elapsedTimer: ElapsedCpuTimer) extends c
     IndividualHolder.currentState = stateObs.copy
     heuristic.useBestKnownIndividual()
     val root: HeuristicNode = mcts(heuristic.individual.get, stateObs, 20, 10)
-    var mostVisits = 0
+    var mostVisits = Double.MinValue
     var action = -1
     for (i <- root.children.indices) {
-      val childVisits: Int = root.children(i).heuristicScores.length
+      val childVisits: Double = root.children(i).heuristicScores.sum / root.children(i).heuristicScores.length
       if (childVisits > mostVisits) {
         mostVisits = childVisits
         action = i
