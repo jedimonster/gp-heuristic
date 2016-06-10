@@ -1,6 +1,6 @@
 package evolution_impl
 
-import java.io.File
+import java.io.{InputStreamReader, BufferedReader, File}
 import java.nio.file.Path
 import java.util.{Date, Random}
 
@@ -22,11 +22,11 @@ import evolution_impl.mutators._
   */
 
 object GPRunHolder {
-  var gpRun: ThreadedGPRun = null
+  var gpRun: GVGGPDriver = null
 }
 
 class GPHeuristic() extends StateHeuristic {
-  val gpRun: ThreadedGPRun = GPRunHolder.gpRun
+  val gpRun: GVGGPDriver = GPRunHolder.gpRun
   var individual: Option[HeuristicIndividual] = None
 
   // if we weren't given an individual, we have to hope the GP run will set one eventually.
@@ -60,7 +60,7 @@ class GPHeuristic() extends StateHeuristic {
 }
 
 
-class ThreadedGPRun(logDirectory: String) extends Runnable {
+class GVGGPDriver(logDirectory: String) extends Runnable {
   //  val treeCrossovers = new InTreeCrossoverAdapter(new JavaCodeCrossover(1.0), 0.3)
 
   val crossovers = new JavaCodeCrossover(0.25)
@@ -80,22 +80,27 @@ class ThreadedGPRun(logDirectory: String) extends Runnable {
 
   val methodCount = 3
   //  val treeFitnessCalculator = new SingleGameFitnessCalculator[HeuristicTreeIndividual](ThreadedGPRun.gameName, independent = false, evaluationTimeout = 200)
-  val fitnessCalculator = new SingleGameFitnessCalculator[JavaCodeIndividual](ThreadedGPRun.gameName, false, 100)
+  val fitnessCalculator = new SingleGameFitnessCalculator[JavaCodeIndividual](GVGGPDriver.gameName, false, 100)
   //    with AlternatingPlayoutCalculator
   //  val fitnessCalculator = new MultiGameFitnessCalculator(cutoff = 2000)
   val selection = new TournamentSelection[JavaCodeIndividual](false)
   //  val treeSelection = new TournamentSelection[HeuristicTreeIndividual](false)
 
+  private val protoTypeFile: File = new File("individuals/Prototype.java")
+
   //  val params = new EvolutionParameters[HeuristicTreeIndividual](treeFitnessCalculator, treeSelection,
   //    treeCrossovers, treeMutators, new HeuristicTreeInitializer(paramTypes, methodCount, 3), generations, popSize)
   val params = new EvolutionParameters[JavaCodeIndividual](fitnessCalculator, selection,
-    crossovers, mutators, new WildRandomGrowInitializer(paramTypes, methodCount, new File("individuals/Prototype.java")), generations, popSize)
+    crossovers, mutators, new WildRandomGrowInitializer(paramTypes, methodCount, protoTypeFile), generations, popSize)
   //    crossovers, mutators, new RandomGrowInitializer(paramTypes, methodCount), generations, popSize)
 
   //  var runningEvolution: EvolutionRun[HeuristicTreeIndividual] = null
   var runningEvolution: EvolutionRun[JavaCodeIndividual] = null
 
   def run() = {
+//    println("Individual:")
+//    println(scala.io.Source.fromFile(protoTypeFile).mkString)
+//    System.exit(-1)
     //    val logger = CSVEvolutionLogger.createCSVEvolutionLogger[JavaCodeIndividual](getNextLogDirectory(logDirectory))
     val logBaseDir = new File(logDirectory)
     if (!logBaseDir.exists())
@@ -137,17 +142,7 @@ class ThreadedGPRun(logDirectory: String) extends Runnable {
   }
 }
 
-object ThreadedGPRun {
-  // works on the fly: aliens, butterflies, missilecommand (sort of), frogs (almost)
-  // works with unlimited time: aliens, boulderdash, butterflies, missilecommand, frogs, survivezombies, zelda
-  // fails: chase
-  // fails compilation/exception:
-  // neg infinity?? portals,sokoban
-
-  // cross validation set:
-  // works with unlimited time: camelRace, firestorms, infection
-  // pass but sucks with unlimited time: digdug, firecaster (but they all fail)
-  // fail with unlimited time: overload
+object GVGGPDriver {
   val gameName = "plaqueattack"
 
   val gamesPath: String = "gvgai/examples/gridphysics/"
@@ -156,21 +151,15 @@ object ThreadedGPRun {
   val levelPath = gamesPath + gameName + "_lvl" + levelId + ".txt"
 
 
-  def newInstance(logDirectory: String): ThreadedGPRun = {
-    val run = new ThreadedGPRun(logDirectory)
+  def newInstance(logDirectory: String): GVGGPDriver = {
+    val run = new GVGGPDriver(logDirectory)
     val thread = new Thread(run)
     thread.start()
     run
   }
 
-  //      val gamesToPlay = List("aliens", "boulderdash", "butterflies", "chase", "frogs", "missilecommand", "portals", "sokoban", "survivezombies", "zelda"
-  //        , "camelRace", "digdug", "firestorms", "infection", "firecaster", "overload", "pacman", "seaquest", "whackamole", "eggomania")
-  //  val gamesToPlay = List("seaquest", "whackamole", "eggomania")
-  val gamesToPlay = List(gameName)
-
   def main(args: Array[String]): Unit = {
     // create a new threaded GP run, it will update the best individual each gen.
-    //    Thread.sleep(1000)
 
     if (args.length < 4) {
       System.err.println("Usage: run <visuals> <game>")
@@ -178,13 +167,13 @@ object ThreadedGPRun {
     }
 
     // run a game using the best individual known at each step
-    val gamesResults = for (game <- gamesToPlay) yield {
+    val gamesResults = {
       val logDirectory: String = args(3) + "/"
       val gameToPlay: String = args(1)
       val visuals: Boolean = args(0).equals("1")
       val repeat: Int = args(2).toInt
 
-      GPRunHolder.gpRun = ThreadedGPRun.newInstance(logDirectory)
+      GPRunHolder.gpRun = GVGGPDriver.newInstance(logDirectory)
       val res = runNewGame(gameToPlay, visuals, repeat)
       GPRunHolder.gpRun.stop()
       res
@@ -229,11 +218,10 @@ object ThreadedGPRun {
       IndividualHolder.resetAStar()
       ArcadeMachine.runOneGame(gamePath, levelPath, visuals, gpHeuristic, recordActionsFile, seed)
     } catch {
-      case e: Throwable => {
+      case e: Throwable =>
         e.printStackTrace()
         println("ERROR: Game engine exception, retrying level")
         runLevel(gameToPlay, visuals, gpHeuristic, gamePath, recordActionsFile, seed, i, j)
-      }
     }
   }
 }

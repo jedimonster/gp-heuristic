@@ -39,7 +39,7 @@ class SingleGameFitnessCalculator[I <: HeuristicIndividual]
       IndividualHolder.readyIndividual = Some(individual)
       IndividualHolder.notifyAll()
     }
-    val n = 0
+    val n = 1
     var state: StateObservation = null
     IndividualHolder.synchronized {
       while (IndividualHolder.currentState == null) {

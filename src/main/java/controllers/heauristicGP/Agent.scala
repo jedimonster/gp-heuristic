@@ -51,13 +51,27 @@ class Agent extends AbstractPlayer with PlayoutCalculator {
       IndividualHolder.aStar = new GraphCachingAStar[Position](graphRoot)
       IndividualHolder.notifyAll() // wake up any threads waiting for a new state
     }
+    updateSpritesSet(stateObs)
     while (elapsedTimer.remainingTimeMillis() > 50) {}
   }
 
   val statesSelected = ListBuffer[ActionResult]()
   val timesTried = new ListBuffer[Int]()
 
-  def act(stateObs: StateObservation, elapsedTimer: ElapsedCpuTimer): Types.ACTIONS = {
+
+  def act(stateObs: StateObservation, elapsedCpuTimer: ElapsedCpuTimer): Types.ACTIONS = {
+    updateSpritesSet(stateObs)
+    IndividualHolder.currentState = stateObs.copy
+    heuristic.useBestKnownIndividual()
+
+
+    while(elapsedCpuTimer.remainingTimeMillis() > 5) {
+      
+    }
+  }
+
+
+  def act1(stateObs: StateObservation, elapsedTimer: ElapsedCpuTimer): Types.ACTIONS = {
     updateSpritesSet(stateObs)
     IndividualHolder.currentState = stateObs.copy
     heuristic.useBestKnownIndividual()
@@ -67,8 +81,8 @@ class Agent extends AbstractPlayer with PlayoutCalculator {
     for (action <- availableActions) {
       possibleResults.put(action, new ListBuffer[ActionResult]())
     }
-    var timesEvaluated = 1
-    while (elapsedTimer.remainingTimeMillis() > 10
+    var timesEvaluated = 0
+    while (elapsedTimer.remainingTimeMillis() > 5
     //      elapsedTimer.elapsedMillis() / timesEvaluated > elapsedTimer.remainingTimeMillis()
     ) {
       for (action <- availableActions) {
@@ -79,6 +93,7 @@ class Agent extends AbstractPlayer with PlayoutCalculator {
       }
       timesEvaluated += 1
     }
+    //    printf("%d\n", timesEvaluated)
     //    timesTried += timesEvaluated - 1
 
     //    if ((timesTried.length+1) % 100 == 0){
@@ -88,7 +103,11 @@ class Agent extends AbstractPlayer with PlayoutCalculator {
 
 
     val actionScores: Map[ACTIONS, Double] = possibleResults.mapValues(results => results.map(_.heuristicScore).sum)
-    actionScores.toList.maxBy((f) => f._2)._1
+    val actionGameScores: Map[ACTIONS, Double] = possibleResults.mapValues(results => results.map(_.gameScore).min)
+    val bestResult: (ACTIONS, Double) = actionScores.toList.maxBy((f) => f._2)
+    print(actionGameScores)
+    println(bestResult._1)
+    bestResult._1
 
     //    val possibleResults: Seq[ActionResult] = for (action <- availableActions) yield {
     //      val actionResults = for (i <- 0 to 3) yield {

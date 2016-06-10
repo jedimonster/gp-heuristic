@@ -22,16 +22,17 @@ import java.util.Random;
  * Time: 11:24
  * This is a Java port from Tom Schaul's VGDL - https://github.com/schaul/py-vgdl
  */
-public class ArcadeMachine {
+public class ArcadeMachine
+{
     public static final boolean VERBOSE = false;
 
     /**
      * Reads and launches a game for a human to be played. Graphics always on.
-     *
-     * @param game_file  game description file.
+     * @param game_file game description file.
      * @param level_file file with the level to be played.
      */
-    public static double playOneGame(String game_file, String level_file, String actionFile, int randomSeed) {
+    public static double playOneGame(String game_file, String level_file, String actionFile, int randomSeed)
+    {
         String agentName = "controllers.human.Agent";
         boolean visuals = true;
         return runOneGame(game_file, level_file, visuals, agentName, actionFile, randomSeed);
@@ -39,16 +40,16 @@ public class ArcadeMachine {
 
     /**
      * Reads and launches a game for a bot to be played. Graphics can be on or off.
-     *
-     * @param game_file  game description file.
+     * @param game_file game description file.
      * @param level_file file with the level to be played.
-     * @param visuals    true to show the graphics, false otherwise.
-     * @param agentName  name (inc. package) where the controller is otherwise.
+     * @param visuals true to show the graphics, false otherwise.
+     * @param agentName name (inc. package) where the controller is otherwise.
      * @param actionFile filename of the file where the actions of this player, for this game, should be recorded.
      * @param randomSeed sampleRandom seed for the sampleRandom generator.
      */
     public static double runOneGame(String game_file, String level_file, boolean visuals,
-                                    String agentName, String actionFile, int randomSeed) {
+                                    String agentName, String actionFile, int randomSeed)
+    {
         VGDLFactory.GetInstance().init(); //This always first thing to do.
         VGDLRegistry.GetInstance().init();
 
@@ -64,7 +65,8 @@ public class ArcadeMachine {
         //Create the player.
         AbstractPlayer player = ArcadeMachine.createPlayer(agentName, actionFile, toPlay.getObservation(), randomSeed);
 
-        if (player == null) {
+        if(player == null)
+        {
             //Something went wrong in the constructor, controller disqualified
             toPlay.disqualify();
 
@@ -75,7 +77,7 @@ public class ArcadeMachine {
 
         //Then, play the game.
         double score = 0.0;
-        if (visuals)
+        if(visuals)
             score = toPlay.playGame(player, randomSeed);
         else
             score = toPlay.runGame(player, randomSeed);
@@ -89,13 +91,13 @@ public class ArcadeMachine {
 
     /**
      * Runs a replay given a game, level and file with the actions to execute.
-     *
-     * @param game_file  game description file.
+     * @param game_file game description file.
      * @param level_file file with the level to be played.
-     * @param visuals    true to show the graphics, false otherwise.
+     * @param visuals true to show the graphics, false otherwise.
      * @param actionFile name of the file where the actions of this player, for this game, must be read from.
      */
-    public static double replayGame(String game_file, String level_file, boolean visuals, String actionFile) {
+    public static double replayGame(String game_file, String level_file, boolean visuals, String actionFile)
+    {
         String agentName = "controllers.replayer.Agent";
         VGDLFactory.GetInstance().init();  //This always first thing to do.
         VGDLRegistry.GetInstance().init();
@@ -108,7 +110,8 @@ public class ArcadeMachine {
         // (we don't want to record anything from this execution).
         AbstractPlayer player = ArcadeMachine.createPlayer(agentName, null, toPlay.getObservation(), -1);
 
-        if (player == null) {
+        if(player == null)
+        {
             //Something went wrong in the constructor, controller disqualified
             toPlay.disqualify();
 
@@ -117,9 +120,10 @@ public class ArcadeMachine {
         }
 
         int seed = 0;
-        ArrayList<Types.ACTIONS> actions = new ArrayList<Types.ACTIONS>();
+        ArrayList<Types.ACTIONS> actions = new ArrayList<Types.ACTIONS> ();
 
-        try {
+        try
+        {
             BufferedReader br = new BufferedReader(new FileReader(actionFile));
 
             //First line should be the sampleRandom seed.
@@ -128,7 +132,8 @@ public class ArcadeMachine {
 
             //The rest are the actions:
             String line = br.readLine();
-            while (line != null) {
+            while(line != null)
+            {
                 Types.ACTIONS nextAction = Types.ACTIONS.fromString(line);
                 actions.add(nextAction);
 
@@ -136,17 +141,18 @@ public class ArcadeMachine {
                 line = br.readLine();
             }
 
-        } catch (Exception e) {
+        }catch(Exception e)
+        {
             e.printStackTrace();
             System.exit(1);
         }
 
         //Assign the actions to the player:
-        ((controllers.replayer.Agent) player).setActions(actions);
+        ((controllers.replayer.Agent)player).setActions(actions);
 
         //Then, (re-)play the game.
         double score = 0.0;
-        if (visuals)
+        if(visuals)
             score = toPlay.playGame(player, seed);
         else
             score = toPlay.runGame(player, seed);
@@ -161,8 +167,7 @@ public class ArcadeMachine {
     /**
      * Reads and launches a game for a bot to be played. It specifies which levels to play and how many times.
      * Filenames for saving actions can be specified. Graphics always off.
-     *
-     * @param game_file   game description file.
+     * @param game_file game description file.
      * @param level_files array of level file names to play.
      * @param level_times how many times each level has to be played.
      * @param actionFiles names of the files where the actions of this player, for this game, should be recorded. Accepts
@@ -170,31 +175,35 @@ public class ArcadeMachine {
      *                    level_files.length*level_times.
      */
     public static void runGames(String game_file, String[] level_files, int level_times,
-                                String agentName, String[] actionFiles) {
+                                String agentName, String[] actionFiles)
+    {
         VGDLFactory.GetInstance().init(); //This always first thing to do.
         VGDLRegistry.GetInstance().init();
 
         boolean recordActions = false;
-        if (actionFiles != null) {
+        if(actionFiles != null)
+        {
             recordActions = true;
-            assert actionFiles.length >= level_files.length * level_times :
+            assert actionFiles.length >= level_files.length*level_times :
                     "runGames (actionFiles.length<level_files.length*level_times): " +
-                            "you must supply an action file for each game instance to be played, or null.";
+                    "you must supply an action file for each game instance to be played, or null.";
         }
 
         StatSummary scores = new StatSummary();
 
         Game toPlay = new VGDLParser().parseGame(game_file);
         int levelIdx = 0;
-        for (String level_file : level_files) {
+        for(String level_file : level_files)
+        {
 
-            for (int i = 0; i < level_times; ++i) {
-                System.out.println(" ** Playing game " + game_file + ", level " + level_file + " (" + (i + 1) + "/" + level_times + ") **");
+            for(int i = 0; i < level_times; ++i)
+            {
+                System.out.println(" ** Playing game " + game_file + ", level " + level_file + " ("+(i+1)+"/"+level_times+") **");
 
                 //build the level in the game.
                 toPlay.buildLevel(level_file);
 
-                String filename = recordActions ? actionFiles[levelIdx * level_times + i] : null;
+                String filename = recordActions ? actionFiles[levelIdx*level_times + i] : null;
 
                 //Warm the game up.
                 ArcadeMachine.warmUp(toPlay, CompetitionParameters.WARMUP_TIME);
@@ -206,14 +215,15 @@ public class ArcadeMachine {
                 AbstractPlayer player = ArcadeMachine.createPlayer(agentName, filename, toPlay.getObservation(), randomSeed);
 
                 double score = -1;
-                if (player == null) {
+                if(player == null)
+                {
                     //Something went wrong in the constructor, controller disqualified
                     toPlay.disqualify();
 
                     //Get the score for the result.
                     score = toPlay.handleResult();
 
-                } else {
+                }else{
 
                     //Then, play the game.
                     score = toPlay.runGame(player, randomSeed);
@@ -222,7 +232,7 @@ public class ArcadeMachine {
                 scores.add(score);
 
                 //Finally, when the game is over, we need to tear the player down.
-                if (player != null) ArcadeMachine.tearPlayerDown(player);
+                if(player != null) ArcadeMachine.tearPlayerDown(player);
 
                 //reset the game.
                 toPlay.reset();
@@ -239,23 +249,24 @@ public class ArcadeMachine {
     /**
      * Creates a player given its name with package. This class calls the constructor of the agent
      * and initializes the action recording procedure.
-     *
      * @param playerName name of the agent to create. It must be of the type "<agentPackage>.Agent".
      * @param actionFile filename of the file where the actions of this player, for this game, should be recorded.
-     * @param so         Initial state of the game to be played by the agent.
+     * @param so Initial state of the game to be played by the agent.
      * @param randomSeed Seed for the sampleRandom generator of the game to be played.
      * @return the player, created and initialized, ready to start playing the game.
      */
-    private static AbstractPlayer createPlayer(String playerName, String actionFile, StateObservation so, int randomSeed) {
+    private static AbstractPlayer createPlayer(String playerName, String actionFile, StateObservation so, int randomSeed)
+    {
         AbstractPlayer player = null;
 
-        try {
+        try{
             //create the controller.
             player = createController(playerName, so);
-            if (player != null)
+            if(player != null)
                 player.setup(actionFile, randomSeed);
 
-        } catch (Exception e) {
+        }catch (Exception e)
+        {
             //This probably happens because controller took too much time to be created.
             e.printStackTrace();
             System.exit(1);
@@ -267,14 +278,15 @@ public class ArcadeMachine {
     /**
      * Creates and initializes a new controller with the given name. Takes into account the initialization time,
      * calling the appropriate constructor with the state observation and time due parameters.
-     *
      * @param playerName Name of the controller to instantiate.
-     * @param so         Initial state of the game to be played by the agent.
+     * @param so Initial state of the game to be played by the agent.
      * @return the player if it could be created, null otherwise.
      */
-    protected static AbstractPlayer createController(String playerName, StateObservation so) throws RuntimeException {
+    protected static AbstractPlayer createController(String playerName, StateObservation so) throws RuntimeException
+    {
         AbstractPlayer player = null;
-        try {
+        try
+        {
             //Get the class and the constructor with arguments (StateObservation, long).
             Class<? extends AbstractPlayer> controllerClass = Class.forName(playerName).asSubclass(AbstractPlayer.class);
             Class[] gameArgClass = new Class[]{StateObservation.class, ElapsedCpuTimer.class};
@@ -285,42 +297,50 @@ public class ArcadeMachine {
             ect.setMaxTimeMillis(CompetitionParameters.INITIALIZATION_TIME);
 
             //Call the constructor with the appropriate parameters.
-            Object[] constructorArgs = new Object[]{so, ect.copy()};
+            Object[] constructorArgs = new Object[] {so, ect.copy()};
             player = (AbstractPlayer) controllerArgsConstructor.newInstance(constructorArgs);
 
             //Check if we returned on time, and act in consequence.
             long timeTaken = ect.elapsedMillis();
-            if (ect.exceededMaxTime()) {
-                long exceeded = -ect.remainingTimeMillis();
+            if(ect.exceededMaxTime())
+            {
+                long exceeded =  - ect.remainingTimeMillis();
                 System.out.println("Controller initialization time out (" + exceeded + ").");
 
                 return null;
-            } else {
+            }
+            else
+            {
                 System.out.println("Controller initialization time: " + timeTaken + " ms.");
             }
 
-            //This code can throw many exceptions (no time related):
+        //This code can throw many exceptions (no time related):
 
-        } catch (NoSuchMethodException e) {
+        }catch(NoSuchMethodException e)
+        {
             e.printStackTrace();
             System.err.println("Constructor " + playerName + "(StateObservation,long) not found in controller class:");
             System.exit(1);
 
-        } catch (ClassNotFoundException e) {
+        }catch(ClassNotFoundException e)
+        {
             System.err.println("Class " + playerName + " not found for the controller:");
             e.printStackTrace();
             System.exit(1);
 
-        } catch (InstantiationException e) {
+        }catch(InstantiationException e)
+        {
             System.err.println("Exception instantiating " + playerName + ":");
             e.printStackTrace();
             System.exit(1);
 
-        } catch (IllegalAccessException e) {
+        }catch(IllegalAccessException e)
+        {
             System.err.println("Illegal access exception when instantiating " + playerName + ":");
             e.printStackTrace();
             System.exit(1);
-        } catch (InvocationTargetException e) {
+        }catch(InvocationTargetException e)
+        {
             System.err.println("Exception calling the constructor " + playerName + "(StateObservation,long):");
             e.printStackTrace();
             System.exit(1);
@@ -332,11 +352,11 @@ public class ArcadeMachine {
     /**
      * This methods takes the game and warms it up. This allows Java to finish the runtime compilation
      * process and optimize the code before the proper game starts.
-     *
-     * @param toPlay  game to be warmed up.
+     * @param toPlay game to be warmed up.
      * @param howLong for how long the warming up process must last (in milliseconds).
      */
-    private static void warmUp(Game toPlay, long howLong) {
+    private static void warmUp(Game toPlay, long howLong)
+    {
         StateObservation stateObs = toPlay.getObservation();
         ElapsedCpuTimer ect = new ElapsedCpuTimer(CompetitionParameters.TIMER_TYPE);
         ect.setMaxTimeMillis(howLong);
@@ -350,18 +370,21 @@ public class ArcadeMachine {
         StatSummary ss2 = new StatSummary();
 
 
-        boolean finish = ect.exceededMaxTime() || (copyStats > CompetitionParameters.WARMUP_CP && advStats > CompetitionParameters.WARMUP_ADV);
+        boolean finish = ect.exceededMaxTime() || (copyStats>CompetitionParameters.WARMUP_CP && advStats>CompetitionParameters.WARMUP_ADV);
 
         //while(!ect.exceededMaxTime())
-        while (!finish) {
-            for (Types.ACTIONS action : actions) {
+        while(!finish)
+        {
+            for (Types.ACTIONS action : actions)
+            {
                 StateObservation stCopy = stateObs.copy();
                 ElapsedCpuTimer ectAdv = new ElapsedCpuTimer();
                 stCopy.advance(action);
                 copyStats++;
                 advStats++;
 
-                if (ect.remainingTimeMillis() < CompetitionParameters.WARMUP_TIME * 0.5) {
+                if( ect.remainingTimeMillis() < CompetitionParameters.WARMUP_TIME*0.5)
+                {
                     ss1.add(ectAdv.elapsedNanos());
                 }
 
@@ -374,20 +397,22 @@ public class ArcadeMachine {
                     stCopy.advance(actionPO);
                     advStats++;
 
-                    if (ect.remainingTimeMillis() < CompetitionParameters.WARMUP_TIME * 0.5) {
+                    if( ect.remainingTimeMillis() < CompetitionParameters.WARMUP_TIME*0.5)
+                    {
                         ss2.add(ectAdv.elapsedNanos());
                     }
                 }
             }
 
-            finish = ect.exceededMaxTime() || (copyStats > CompetitionParameters.WARMUP_CP && advStats > CompetitionParameters.WARMUP_ADV);
+            finish = ect.exceededMaxTime() || (copyStats>CompetitionParameters.WARMUP_CP && advStats>CompetitionParameters.WARMUP_ADV);
 
             //if(VERBOSE)
             //System.out.println("[WARM-UP] Remaining time: " + ect.remainingTimeMillis() +
             //        " ms, copy() calls: " + copyStats + ", advance() calls: " + advStats);
         }
 
-        if (VERBOSE) {
+        if(VERBOSE)
+        {
             System.out.println("[WARM-UP] Finished, copy() calls: " + copyStats + ", advance() calls: " + advStats + ", time (s): " + ect.elapsedSeconds());
             //System.out.println(ss1);
             //System.out.println(ss2);
@@ -402,10 +427,10 @@ public class ArcadeMachine {
     /**
      * Tears the player down. This initiates the saving of actions to file.
      * It should be called when the game played is over.
-     *
      * @param player player to be closed.
      */
-    private static void tearPlayerDown(AbstractPlayer player) {
+    private static void tearPlayerDown(AbstractPlayer player)
+    {
         player.teardown();
     }
 

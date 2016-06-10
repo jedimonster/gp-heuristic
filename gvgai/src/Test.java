@@ -9,11 +9,9 @@ import java.util.Random;
  * Time: 16:29
  * This is a Java port from Tom Schaul's VGDL - https://github.com/schaul/py-vgdl
  */
-public class Test
-{
+public class Test {
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         //Available controllers:
         String sampleRandomController = "controllers.sampleRandom.Agent";
         String sampleOneStepController = "controllers.sampleonesteplookahead.Agent";
@@ -34,14 +32,11 @@ public class Test
         //      "overload", "pacman", "seaquest", "whackamole", "eggomania"};
 
         //CIG 2015 New Training Set Games
-        //String games[] = new String[]{"bait", "boloadventures", "brainman", "chipschallenge",  "modality",
-        //                              "painter", "realportals", "realsokoban", "thecitadel", "zenpuzzle"};
+//        String games[] = new String[]{"bait", "boloadventures", "brainman", "chipschallenge",  "modality",
+//                                      "painter", "realportals", "realsokoban", "thecitadel", "zenpuzzle"};
 
-
-        //CIG 2014 TEST SET / GECCO 2015 VALIDATION SET
-//        String games[] = new String[]{"roguelike", "surround", "catapults", "plants", "plaqueattack",
-//                "jaws", "labyrinth", "boulderchase", "escape", "lemmings"};
-
+        //EXTRA GAMES:
+        //String games[] = new String[]{ "solarfox", "bombuzal" };
 
         //Other settings
         boolean visuals = true;
@@ -49,18 +44,17 @@ public class Test
         int seed = new Random().nextInt();
 
         //Game and level to play
-        int gameIdx = 1;
+        int gameIdx = 9;
         int levelIdx = 0; //level names from 0 to 4 (game_lvlN.txt).
-        String game = gamesPath + games[gameIdx] + ".txt";
-
-        String level1 = gamesPath + games[gameIdx] + "_lvl" + levelIdx +".txt";
+        String game = gamesPath + "brainman" + ".txt";
+        String level1 = gamesPath + "brainman" + "_lvl" + levelIdx + ".txt";
 
         // 1. This starts a game, in a level, played by a human.
         ArcadeMachine.playOneGame(game, level1, recordActionsFile, seed);
 
         // 2. This plays a game in a level by the controller.
-        //ArcadeMachine.runOneGame(game, level1, visuals, sampleMCTSController, recordActionsFile, seed);
-        //ArcadeMachine.runOneGame(game, level1, visuals, tester, recordActionsFile, seed);
+//        ArcadeMachine.runOneGame(game, level1, visuals, sampleMCTSController, recordActionsFile, seed);
+//        ArcadeMachine.runOneGame(game, level1, visuals, sampleOneStepController, recordActionsFile, seed);
 
         // 3. This replays a game from an action file previously recorded
         //String readActionsFile = "actionsFile_aliens_lvl0.txt";  //This example is for

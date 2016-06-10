@@ -125,7 +125,7 @@ public class StateObservationWrapper {
         if (lastAction.equals(Types.ACTIONS.ACTION_USE))
             return 1;
 
-        return 0;
+        return -1;
     }
 
     public double isFacingNPC() {
@@ -137,20 +137,7 @@ public class StateObservationWrapper {
                 return 1;
         }
 
-        return 0;
-    }
-
-    public double countNearVicinityNPCs(@AllowedValues(values = {"1", "2", "4"}) int blocks) {
-        double vicinitySquareDistance = Math.pow(blocks * so.getBlockSize(), 2); // the square distance from a touching npc should be equal to this.
-        List<Observation> npcPositions = flatObservations(so.getNPCPositions(so.getAvatarPosition()));
-        double count = 0;
-
-        for (Observation npcPosition : npcPositions) {
-            if (npcPosition.sqDist <= vicinitySquareDistance)
-                count++;
-        }
-
-        return count;
+        return -1;
     }
 
     public double getAvatarResourcesCount() {
@@ -164,29 +151,10 @@ public class StateObservationWrapper {
         return sum;
     }
 
-
     public double getNPCCount() {
         return (double) flatObservations(so.getNPCPositions()).size();
 
     }
-
-    // game 0 NPCs: category = 3,3 itype = 4,9
-    // game 1 NPCs: category = 3,3 itype = 9,10
-    // game 2 NPCs: category = 3 itype = 4
-//    public Iterable<Observation> getNPCsPositions(
-////            @AllowedValues(values = {"0", "1", "2", "3", "4", "5"}) int category,
-////            @AllowedValues(values = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}) int itype) {
-//            @AllowedValues(values = {"3"}) int category,
-//            @AllowedValues(values = {"4", "9"}) int itype) {
-//        Vector2d avatarPosition = so.getAvatarPosition();
-//
-//        ArrayList<Observation>[] npcPositions = so.getNPCPositions(avatarPosition);
-//        return flatObservations(npcPositions);
-//    }
-
-    // game 0 immovables: category = 4, itype = 2
-    // game 1 immovables: category = 4,4, type = 0,3
-    // game 2 immovables: category = 4,4, type = 0,2
 
 
     public double getImmovableCount() {
@@ -216,11 +184,11 @@ public class StateObservationWrapper {
         return getAStarDistances(filteredPositions, so.getAvatarPosition());
     }
 
-
     public Iterable<Double> getPortalRealDistance() {
         ArrayList<Observation>[] portalsPositions = so.getPortalsPositions();
         return getAStarDistances(flatObservations(portalsPositions), so.getAvatarPosition());
     }
+
 
     public Iterable<Double> getMovableRealDistance() {
         ArrayList<Observation>[] movablePositions = so.getMovablePositions();
@@ -247,6 +215,19 @@ public class StateObservationWrapper {
 
     public Iterable<Double> getNPCHeuristicDistance() {
         return getHeuristicDistances(so.getNPCPositions(), so.getAvatarPosition().mul(1.0 / so.getBlockSize()));
+    }
+
+    public double countNearVicinityNPCs(@AllowedValues(values = {"1", "2", "4"}) int blocks) {
+        double vicinitySquareDistance = Math.pow(blocks * so.getBlockSize(), 2); // the square distance from a touching npc should be equal to this.
+        List<Observation> npcPositions = flatObservations(so.getNPCPositions(so.getAvatarPosition()));
+        double count = 0;
+
+        for (Observation npcPosition : npcPositions) {
+            if (npcPosition.sqDist <= vicinitySquareDistance)
+                count++;
+        }
+
+        return count;
     }
 
     public Iterable<Double> getMovableDistanceFromImmovable(@AllowedValues(values = {"3", "1", "2"}) int immovableIndex) {

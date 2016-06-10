@@ -3,6 +3,7 @@ package ontology.sprites.producer;
 import core.VGDLRegistry;
 import core.VGDLSprite;
 import core.content.SpriteContent;
+import core.game.ForwardModel;
 import core.game.Game;
 import ontology.Types;
 import tools.Vector2d;
@@ -23,7 +24,6 @@ public class SpawnPoint extends SpriteProducer
     public int counter;
     public String stype;
     public int itype;
-    public Vector2d spawnorientation;
 
     public SpawnPoint(){}
 
@@ -47,7 +47,6 @@ public class SpawnPoint extends SpriteProducer
         color = Types.BLACK;
         cooldown = 1;
         is_static = true;
-        spawnorientation = Types.NONE;
     }
 
     public void postProcess()
@@ -63,17 +62,8 @@ public class SpawnPoint extends SpriteProducer
         float rollDie = game.getRandomGenerator().nextFloat();
         if((game.getGameTick() % cooldown == 0) && rollDie < prob)
         {
-            VGDLSprite newSprite = game.addSprite(itype, this.getPosition());
-            if(newSprite != null) {
-                counter++;
-
-                //We set the orientation given by default it this was passed.
-                if(spawnorientation != Types.NONE)
-                    newSprite.orientation = spawnorientation;
-                //If no orientation given, we set the one from the spawner.
-                else if (newSprite.orientation == Types.NONE)
-                    newSprite.orientation = this.orientation;
-            }
+            game.addSprite(itype, this.getPosition());
+            counter++;
         }
 
         super.update(game);
@@ -99,7 +89,6 @@ public class SpawnPoint extends SpriteProducer
         targetSprite.counter = this.counter;
         targetSprite.stype = this.stype;
         targetSprite.itype = this.itype;
-        targetSprite.spawnorientation = this.spawnorientation.copy();
         super.copyTo(targetSprite);
     }
 

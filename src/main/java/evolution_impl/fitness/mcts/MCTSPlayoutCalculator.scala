@@ -6,7 +6,7 @@ import core.game.StateObservation
 import evolution_impl.fitness.PlayoutCalculator
 import evolution_impl.fitness.dummyagent.StateObservationWrapper
 import evolution_impl.gpprograms.base.HeuristicIndividual
-import ontology.Types.ACTIONS
+import ontology.Types.{WINNER, ACTIONS}
 import tools.Utils
 
 import scala.collection.mutable
@@ -19,6 +19,7 @@ trait MCTSPlayoutCalculator extends PlayoutCalculator {
   protected val stateHeuristicScoreMap = new mutable.HashMap[HeuristicNode, Double]()
   final val Epsilon = 1e-6
   final val C = Math.sqrt(2)
+//  final val C = 0.1
 
   var maxHeuristicScore = Double.MinValue
   var minHeuristicScore = Double.MaxValue
@@ -99,7 +100,7 @@ trait MCTSPlayoutCalculator extends PlayoutCalculator {
     var bestAction = 0
     var bestValue = Double.MinValue
 
-    for (i <- 0 to heuristicNode.children.length - 1) {
+    for (i <- heuristicNode.children.indices) {
       val childValue = Random.nextDouble()
       if (childValue > bestValue && heuristicNode.children(i) == null) {
         bestAction = i
@@ -115,6 +116,8 @@ trait MCTSPlayoutCalculator extends PlayoutCalculator {
 
     nextNode
   }
+
+  val HugeNumber: Int = Int.MaxValue / 10
 
   def simulateRollout(heuristicNode: HeuristicNode, heuristicIndividual: HeuristicIndividual, maxDepth: Int): Double = {
     var rollingState = heuristicNode.state.copy
@@ -133,8 +136,8 @@ trait MCTSPlayoutCalculator extends PlayoutCalculator {
     maxHeuristicScore = Math.max(maxHeuristicScore, heuristicScore)
     minHeuristicScore = Math.min(minHeuristicScore, heuristicScore)
 
-    if (rollingState.isGameOver)
-      heuristicScore = -5000
+    if (rollingState.isGameOver && rollingState.getGameWinner != WINNER.PLAYER_WINS)
+      heuristicScore = -HugeNumber
 
     heuristicScore
   }

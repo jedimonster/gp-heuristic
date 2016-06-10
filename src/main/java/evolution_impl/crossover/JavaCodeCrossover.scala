@@ -64,7 +64,7 @@ class JavaCodeCrossover(probability: Double) extends Crossover[JavaCodeIndividua
     val daughter: JavaCodeIndividual = father.duplicate
     var sonMembers = son.ast.getTypes.get(0).getMembers.asScala
     var daughterMembers = son.ast.getTypes.get(0).getMembers.asScala
-    val n = sonMembers.size()
+    val n = sonMembers.size
 
     // get the run() method out of the list - we'll have to recreate it anyway.
 

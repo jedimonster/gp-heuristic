@@ -10,18 +10,27 @@ import tools.ElapsedCpuTimer
   * Created by Itay on 18-Feb-16.
   */
 class Agent(stateObs: StateObservation, elapsedTimer: ElapsedCpuTimer) extends controllers.heauristicGP.Agent(stateObs, elapsedTimer) with MCTSPlayoutCalculator {
-  //  def this(stateObs: StateObservation, elapsedTimer: ElapsedCpuTimer) {
-  //    super(stateObs, elapsedTimer)
-  //  }
   override def act(stateObs: StateObservation, elapsedTimer: ElapsedCpuTimer): ACTIONS = {
     updateSpritesSet(stateObs)
     IndividualHolder.currentState = stateObs.copy
     heuristic.useBestKnownIndividual()
-    val root: HeuristicNode = mcts(heuristic.individual.get, stateObs, 15, 20)
+
+    //    val root: HeuristicNode = mcts(heuristic.individual.get, stateObs, 15, 20)
+    val root = new HeuristicNode(stateObs)
+
+    while (elapsedTimer.remainingTimeMillis() > 0)
+      mctsPlayout(root, heuristic.individual.get, 10)
+
     var mostVisits = Double.MinValue
     var action = -1
     for (i <- root.children.indices) {
-      val childVisits: Double = root.children(i).heuristicScores.sum / root.children(i).heuristicScores.length
+      val childVisits = {
+        if (root.children(i) == null || root.children(i).heuristicScores.isEmpty)
+          0 // todo why can this happen?
+        else
+          root.children(i).heuristicScores.sum / root.children(i).heuristicScores.length
+      }
+
       if (childVisits >= mostVisits) {
         mostVisits = childVisits
         action = i
@@ -29,5 +38,6 @@ class Agent(stateObs: StateObservation, elapsedTimer: ElapsedCpuTimer) extends c
     }
 
     stateObs.getAvailableActions.get(action)
+
   }
 }

@@ -4,7 +4,6 @@ import core.VGDLRegistry;
 import core.VGDLSprite;
 import core.content.InteractionContent;
 import core.game.Game;
-import ontology.Types;
 import ontology.avatar.MovingAvatar;
 import ontology.effects.Effect;
 import ontology.sprites.Resource;
@@ -40,7 +39,7 @@ public class TransformTo extends Effect {
         if(newSprite != null)
         {
             //Orientation
-            if(newSprite.is_oriented && sprite1.is_oriented && newSprite.orientation == Types.NONE)
+            if(newSprite.is_oriented && sprite1.is_oriented)
             {
                 newSprite.orientation = sprite1.orientation;
             }

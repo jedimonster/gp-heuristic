@@ -413,7 +413,7 @@ public abstract class Game
             return;
         }
 
-        factory.parseParameters(content, this);
+        factory.parseParameters(content,this);
     }
 
     /**
@@ -577,7 +577,7 @@ public abstract class Game
         //Execute a game cycle:
         this.tick();                    //update for all entities.
         this.eventHandling();           //handle events such collisions.
-        this.clearAll(fwdModel);        //clear all additional data, including dead sprites.
+        this.clearAll();                //clear all additional data, including dead sprites.
         this.terminationHandling();     //check for game termination.
         this.checkTimeOut();            //Check for end of game by time steps.
 
@@ -927,18 +927,15 @@ public abstract class Game
     /**
      * Deletes all the sprites killed in the previous step. Also, clears the array of collisions
      * from the last step.
-     * @param fm Forward model where we are cleaning sprites.
      */
-    protected void clearAll(ForwardModel fm)
+    protected void clearAll()
     {
         for(VGDLSprite sprite : kill_list)
         {
             int spriteType = sprite.getType();
             this.spriteGroups[spriteType].removeSprite(sprite.spriteID);
-            if(fm != null) {
-                fm.removeSpriteObservation(sprite);
-            }
-
+            if(fwdModel != null)
+                fwdModel.removeSpriteObservation(sprite);
 
             if(sprite.is_avatar && sprite == this.avatar)
                 this.avatar = null;
@@ -1037,28 +1034,6 @@ public abstract class Game
         return spriteGroups[spriteItype].getSpriteIterator();
     }
 
-    /**
-     * Gets an iterator for the collection of sprites for a particular sprite type, AND all subtypes.
-     * @param spriteItype type of the sprite to retrieve.
-     * @return sprite collection of the specified type and subtypes.
-     */
-    public Iterator<VGDLSprite> getSubSpritesGroup(int spriteItype)
-    {
-        //Create a sprite group for all the sprites
-        SpriteGroup allSprites = new SpriteGroup(spriteItype);
-        //Get all the subtypes
-        ArrayList<Integer> allTypes = iSubTypes[spriteItype];
-
-        //Add sprites of this type, and all subtypes.
-        allSprites.addAllSprites(this.getSprites(spriteItype).values());
-        for(Integer itype : allTypes)
-        {
-            allSprites.addAllSprites(this.getSprites(itype).values());
-        }
-
-        //Return the iterator.
-        return allSprites.getSpriteIterator();
-    }
 
     /**
      * Gets the collection of sprites for a particular sprite type.

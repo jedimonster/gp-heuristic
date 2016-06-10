@@ -114,8 +114,6 @@ public class Chaser extends RandomNPC
         double bestDist = Double.MAX_VALUE;
 
         Iterator<VGDLSprite> spriteIt = game.getSpriteGroup(itype);
-        if(spriteIt == null) spriteIt = game.getSubSpritesGroup(itype); //Try subtypes
-
         if(spriteIt != null) while(spriteIt.hasNext())
         {
             VGDLSprite s = spriteIt.next();

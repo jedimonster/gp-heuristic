@@ -23,11 +23,11 @@ public class AgentExecutor {
         System.out.println("Map: " + map);
         System.out.println("level: " + level);
         System.out.println("Player Class: " + playerClassString);
-        System.out.println("Agent Action file: " + action_file);
+        System.out.println("Agent Action file: " + action_file );
 
         int seed = new Random().nextInt();
 
-        double gameScore = ArcadeMachine.runOneGame(map, level, true, playerClassString, action_file, seed);
-        System.out.println(gameScore);
+        double gameScore = ArcadeMachine.runOneGame(map, level, false, playerClassString, action_file, seed);
+        //System.out.println(gameScore);
     }
 }
